@@ -3,6 +3,7 @@
 #   import ssl
 
 from aliyun import aliyun_request
+from functions import function, getValue
 
 
 def timeline(code, day, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
@@ -79,6 +80,24 @@ def stocklist(market, currentPage, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     # appcode = '你自己的AppCode'
     # currentPage = 1
     querys = 'market=' + market + '&page=' + format(currentPage, 'd')
+    bodys = {}
+    url = host + path + '?' + querys
+
+    content = aliyun_request.req(url, appcode)
+    return content
+
+
+def daily_ssd(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    读取每日非正常列表
+    :return:
+    """
+    host = 'https://ali-stock.showapi.com'
+    path = '/stop-start-divide'
+    method = 'GET'
+    # appcode = '你自己的AppCode'
+    date = getValue.get_DateTime()['shortdate']
+    querys = 'date=' + date
     bodys = {}
     url = host + path + '?' + querys
 

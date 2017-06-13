@@ -1,6 +1,7 @@
 import json
 
 from aliyun import aliyun_api
+from functions import getValue
 
 
 def return_date(beginDay, appcode, code='000001', timeType='day'):
@@ -87,3 +88,19 @@ def return_stocklist(appcode):
         return None
 
 
+def return_ssd(appcode):
+    """
+    获取每日非常规的代码列表
+    :param appcode:
+    :return:
+    """
+    try:
+        text = aliyun_api.daily_ssd(appcode)
+        all_dict = json.loads(text)
+        showapi_res_body = all_dict['showapi_res_body']
+        if getValue.get_DateTime()['fulldate'] == showapi_res_body['date']:
+            return showapi_res_body
+        else:
+            return ValueError
+    except:
+        return None
