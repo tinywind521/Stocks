@@ -1,13 +1,14 @@
-import os
-import sys
-import ssl
-import json
-
-from file_io import txt
+# import os
+# import sys
+# import ssl
+# import json
+#
+# from file_io import txt
 from functions import getValue
 
 new_file = 'z:/test/LHB.csv'
 code = '600215'
+code_text = ''
 
 
 f = open(new_file, 'w')
