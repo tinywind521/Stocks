@@ -4,8 +4,9 @@ from aliyun import aliyun_api, QQ_api
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 code = '600215'
-a = getValue.get_CodeLHB(code)
+a = getValue.get_allssdcode(appcode)
 print(a)
+
 # s = function.return_stocklist(appcode)
 
 #
