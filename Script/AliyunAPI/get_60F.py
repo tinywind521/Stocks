@@ -29,9 +29,9 @@ path = 'Z:/Code/code.txt'
 s = txt.txt_read(path)
 codelist = s.splitlines()
 
-for code in codelist:
-    if len(code) == 6:
-        savefile(code)
+for codes in codelist:
+    if len(codes) == 6:
+        savefile(codes)
     else:
         pass
     pass

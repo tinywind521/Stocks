@@ -2,9 +2,10 @@ import urllib.request
 import sys
 import ssl
 
+
 def req(url):
 
-    # try:
+    try:
         request = urllib.request.Request(url)
 #   由于使用了urllib.request，Request需要大写
 #        request.add_header('Authorization', 'APPCODE ' + appcode)
@@ -18,4 +19,5 @@ def req(url):
         else:
             return None
 
-    # except:ValueError
+    except ValueError:
+        return None

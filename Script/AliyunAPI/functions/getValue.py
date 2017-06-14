@@ -36,13 +36,43 @@ def get_allCodelist(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     return allCodelist
 
 
+def get_availableCodeList(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    获取当日需要判断的代码列表
+    :param:
+    :return:
+    """
+    ssdlist = get_allssdcode(appcode)
+    delList = []
+    delList.extend(ssdlist['newStockNetPublishList'])
+    delList.extend(ssdlist['stockholderList'])
+    delList.extend(ssdlist['stopList'])
+    delList.extend(ssdlist['addNewStockNetPublishList'])
+    delList.extend(ssdlist['recoverList'])
+    delList.extend(ssdlist['shareRegistList'])
+    delList.extend(ssdlist['ShareDividendList'])
+    delList.extend(ssdlist['stockAlarmList'])
+    delList.extend(ssdlist['startList'])
+
+    allCodelist = get_allCodelist(appcode)
+    result = [k for k in allCodelist]
+
+    for delCode in delList:
+        # print(delCode)
+        try:
+            result.remove(delCode)
+        except ValueError:
+            pass
+    return result
+
+
 def get_DateTime():
     """
     获取当前日期和时间
     :return:
     """
     timeStamp = time.localtime()
-    DateTime = {}
+    # DateTime = {}
     fulldate = (time.strftime("%Y-%m-%d", timeStamp))
     shortdate = (time.strftime("%Y%m%d", timeStamp))
     fulltime = (time.strftime("%H:%M:%S", timeStamp))
@@ -85,6 +115,11 @@ def get_allssdcode(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
 
 
 def get_CodeLHB(code):
+    """
+    获取指定代码的LHB信息
+    :param code:
+    :return:
+    """
     lhb_list = QQ_api.lhb_code_list(code)
     i = 0
     result = []

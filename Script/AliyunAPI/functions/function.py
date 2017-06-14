@@ -33,7 +33,7 @@ def return_date(beginDay, appcode, code='000001', timeType='day'):
         #         dateList.insert(0, data_element['time'])
         #         #   dateList.append(data_element['time'])
         #     return dateList
-    except:
+    except ValueError:
         return None
 
 
@@ -84,7 +84,7 @@ def return_stocklist(appcode):
         else:
             return ValueError
 
-    except:
+    except ValueError:
         return None
 
 
@@ -102,5 +102,5 @@ def return_ssd(appcode):
             return showapi_res_body
         else:
             return ValueError
-    except:
+    except ValueError:
         return None

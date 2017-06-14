@@ -32,7 +32,13 @@ def realtime(code, beginday, timetype, qtype='bfq', appcode='c7689f18e1484e9faec
     获取K线数据
     :param code:
     :param beginday:
-    :param timetype:
+    :param timetype:    	5 = 5分k线(默认) ，
+                            30 = 30分k线，
+                            60 = 60分k线，
+                            day = 日k线，
+                            week = 周k线，
+                            month = 月k线。
+                            注意港股不支持5分、30分和60分k线。
     :param qtype:
     :param appcode:
     :return:

@@ -24,7 +24,7 @@ def lhb_code_list(code):
                 tempdict[k] = array[i].replace('-', '')
             else:
                 tempdict[k] = array[i]
-            i+=1
+            i += 1
         result.append(tempdict)
 
     return result
@@ -52,7 +52,7 @@ def lhb_code_detail(code, date, title, typeid):
                 tempdict[k] = array[i].replace('-', '')
             else:
                 tempdict[k] = array[i]
-            i+=1
+            i += 1
         result.append(tempdict)
 
     return result

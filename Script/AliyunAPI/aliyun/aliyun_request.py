@@ -2,6 +2,7 @@ import urllib.request
 import sys
 import ssl
 
+
 def req(url, appcode):
 
     try:
@@ -20,4 +21,5 @@ def req(url, appcode):
         else:
             return None
 
-    except:ValueError
+    except ValueError:
+        return None

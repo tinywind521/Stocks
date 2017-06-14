@@ -15,8 +15,8 @@ for filename in os.listdir(root_path):
     s = txt.txt_read(path)
     try:
         all_dict = json.loads(s)
-    except:ValueError
-    pass
+    except ValueError:
+        pass
 
     showapi_res_body = all_dict['showapi_res_body']
     code = showapi_res_body['code']

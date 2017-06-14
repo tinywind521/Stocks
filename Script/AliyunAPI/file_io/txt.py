@@ -2,14 +2,15 @@ import sys
 
 from aliyun import aliyun_api
 
+
 def txt_write(text, path):
     """写入指定路径的文本文档"""
     try:
         f = open(path, 'w')
         f.write(text)
         f.close()
-    except:ValueError
-    pass
+    except ValueError:
+        pass
 
 #    f = open(path, 'w')
 #    f.write(text)
@@ -28,8 +29,8 @@ def txt_read(path):
         else:
             return None
        
-    except:ValueError
-    pass
+    except ValueError:
+        pass
 
 
 # def savefile(code, beginday, timetype, path, appcode):
