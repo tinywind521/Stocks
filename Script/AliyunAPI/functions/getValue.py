@@ -1,6 +1,9 @@
 import time
+import json
+import numpy
 
 from functions import function
+from aliyun import aliyun_api
 from aliyun import QQ_api
 
 
@@ -84,6 +87,16 @@ def get_DateTime():
     DateTime = dict(zip(keys, values))
 
     return DateTime
+
+
+def get_dataList(aliyun_input):
+    """
+    解析aliyun返回值的dataList
+    :param aliyun_input:
+    :return:
+    """
+    dataList = aliyun_input['showapi_res_body']['dataList']
+    return dataList
 
 
 def get_allssdcode(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
