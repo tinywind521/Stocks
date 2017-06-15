@@ -2,6 +2,9 @@
   <dictionary name="Tinywind">
     <words>
       <w>aliyun</w>
+      <w>appcode</w>
+      <w>codelist</w>
+      <w>lastclose</w>
       <w>realtime</w>
       <w>showapi</w>
     </words>

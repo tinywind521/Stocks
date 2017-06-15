@@ -48,14 +48,23 @@ def get_availableCodeList(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     ssdlist = get_allssdcode(appcode)
     delList = []
     delList.extend(ssdlist['newStockNetPublishList'])
-    delList.extend(ssdlist['stockholderList'])
+    #   首发新股网上发行列表
+    # delList.extend(ssdlist['stockholderList'])
+    #   股东大会召开列表
     delList.extend(ssdlist['stopList'])
-    delList.extend(ssdlist['addNewStockNetPublishList'])
+    #   停牌股票列表
+    # delList.extend(ssdlist['addNewStockNetPublishList'])
+    #   增发新股列表
     delList.extend(ssdlist['recoverList'])
-    delList.extend(ssdlist['shareRegistList'])
-    delList.extend(ssdlist['ShareDividendList'])
+    #   复牌股票列表
+    # delList.extend(ssdlist['shareRegistList'])
+    #   分红转增股权登记列表
+    # delList.extend(ssdlist['ShareDividendList'])
+    #   除权除息列表
     delList.extend(ssdlist['stockAlarmList'])
+    #   退市风险警示列表
     delList.extend(ssdlist['startList'])
+    #   新上市股票列表
 
     allCodelist = get_allCodelist(appcode)
     result = [k for k in allCodelist]
@@ -157,8 +166,7 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
     :return:
     """
     try:
-        dateList = get_dateList(beginDay, getLength)
-        aliyun_str = aliyun_api.realtime(code, dateList[0], '60', 'bfq', appcode)
+        aliyun_str = aliyun_api.realtime(code, beginDay, '60', 'bfq', appcode)
         aliyun_dict = json.loads(aliyun_str)
         dataList = get_dataList(aliyun_dict)
         dataList.reverse()
@@ -181,14 +189,18 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
         closeList = []
         for element in realtimeList:
             closeList.append(float(element['close']))
-            # print(element['close'])
+        # print(closeList)
         # closeList.reverse()
+        lastcloseList = [k for k in closeList]
         boll = function.cal_boll(closeList, n, p)
         m = len(boll)
         realtimeList = realtimeList[-m:]
-        # tempList = []
+        lastcloseList = lastcloseList[-m-1:]
+        lastclose = {}
         for i in range(0, m):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            lastclose['lastclose'] = lastcloseList[i]
+            realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
             # print(realtimeList[i])
         # print(realtimeList)
