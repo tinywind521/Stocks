@@ -142,3 +142,56 @@ def get_CodeLHB(code):
         for element in detail:
             result.append(element)
     return result
+
+
+def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    获取指定日期长度的60F,
+    同时计算boll
+    :param p: p常量
+    :param n: 布林计算天数
+    :param code:
+    :param beginDay:
+    :param getLength: = 2n / 4
+    :param appcode:
+    :return:
+    """
+    try:
+        dateList = get_dateList(beginDay, getLength)
+        aliyun_str = aliyun_api.realtime(code, dateList[0], '60', 'bfq', appcode)
+        aliyun_dict = json.loads(aliyun_str)
+        dataList = get_dataList(aliyun_dict)
+        dataList.reverse()
+        realtimeValue = []
+        tempVol = 0
+        tempOpen = ''
+        for element in dataList:
+            if element['minute'][-4:] == '0930':
+                tempVol = int(element['volumn'])
+                tempOpen = element['open']
+            elif element['minute'][-4:] == '1030':
+                realVol = format((int(element['volumn']) + tempVol), 'd')
+                realOpen = tempOpen
+                element['volumn'] = realVol
+                element['open'] = realOpen
+                realtimeValue.append(element)
+            else:
+                realtimeValue.append(element)
+        realtimeList = realtimeValue
+        closeList = []
+        for element in realtimeList:
+            closeList.append(float(element['close']))
+            # print(element['close'])
+        # closeList.reverse()
+        boll = function.cal_boll(closeList, n, p)
+        m = len(boll)
+        realtimeList = realtimeList[-m:]
+        # tempList = []
+        for i in range(0, m):
+            # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            realtimeList[i].update(boll[i])
+            # print(realtimeList[i])
+        # print(realtimeList)
+        return realtimeList
+    except ValueError:
+        return None

@@ -1,4 +1,5 @@
 import json
+import numpy
 
 from aliyun import aliyun_api
 from functions import getValue
@@ -104,3 +105,32 @@ def return_ssd(appcode):
             return ValueError
     except ValueError:
         return None
+
+
+def cal_boll(valueList, n, p):
+    """
+    计算布林三轨
+    :param valueList:
+    :param n:
+    :param p:
+    :return:
+    """
+    # valueList = [float(k) for k in valueList]
+    valueList.reverse()
+    boll = []
+    for value in valueList:
+        boll_dict = {}
+        tempList = valueList[0:n]
+        narray = numpy.array(tempList)
+        mid = numpy.mean(narray)
+        spd = numpy.sqrt(numpy.var(narray))
+        upper = mid + p * spd
+        lower = mid - p * spd
+        boll_dict['mid'] = float(format(mid, '.2f'))
+        boll_dict['upper'] = float(format(upper, '.2f'))
+        boll_dict['lower'] = float(format(lower, '.2f'))
+        # print(boll_dict)
+        boll.insert(0, boll_dict)
+        valueList.pop(0)
+    return boll
+
