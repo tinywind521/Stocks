@@ -7,14 +7,18 @@ import numpy
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 
 # s = function.return_stocklist(appcode)
+
 c = getValue.get_blockList(appcode)
-print(c)
+# print(c)
 
 for ele in c:
     code = ele['code']
+    print(code)
     s = function.return_block_stocks(code, appcode)
     print(s)
-    # print(len(s))
+# s = function.return_block_stocks('hangye_ZB49', appcode)
+# print(s)
+
 
 
 # def ss(string=[]):

@@ -14,7 +14,7 @@ i = 0
 
 i += 1
 # s = getValue.get_60F(code, dateList[0], 10, n)
-s = getValue.get_60F('000762', '20170605', 10, n)
+s = getValue.get_60F('002333', '20170605', 10, n)
 # print(s)
 # op = 0
 # close = 0
@@ -34,6 +34,7 @@ if len(s) == n:
         "判断 mid 已平"
         "N : Negative"
         "P : Passive"
+        """ 这里只算了层级，后面加入差 """
         first_N = []
         second_N = []
         for i in range(0, 8):
@@ -47,8 +48,9 @@ if len(s) == n:
                 if flag:
                     break
             k_list.pop(0)
-        print(k_list)
+        # print(k_list)
         print(first_N)
+        print(len(first_N))
         flag = False
         for i in range(0, 8):
             k_value = k_list[0]
@@ -61,8 +63,9 @@ if len(s) == n:
                 if flag:
                     break
             k_list.pop(0)
-        print(k_list)
+        # print(k_list)
         print(second_N)
+        print(len(second_N))
 
 # print(format(i, '04d') + '\t' + code + '\t' + format(len(s), 'd'))
 
