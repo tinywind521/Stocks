@@ -78,6 +78,43 @@ def get_availableCodeList(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     return result
 
 
+def get_blockList(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    detail_List = []
+    element = {}
+    allBlockDict = function.return_blockList(appcode)
+    allBlockList = allBlockDict['showapi_res_body']['list']
+    # print(allBlockList)
+    # print('\n')
+    for blockDict in allBlockList:
+        # print(blockDict)
+        blockList = blockDict['childList']
+        "'申万行业'"
+        "'概念板块'"
+        "'地域板块'"
+        "'证监会行业'"
+        if blockDict['name'] == '概念板块':
+            # print(blockDict['name']+'\n')
+            for block in blockList:
+                # print(block['name'] + '\t' + block['code'])
+                element = {}
+                element['name'] = block['name']
+                element['code'] = block['code']
+                detail_List.append(element)
+        elif blockDict['name'] == '证监会行业':
+            # print(blockDict['name']+'\n')
+            for block in blockDict['childList']:
+                for blockChild in block['childList']:
+                    # print(blockChild['name'] + '\t' + blockChild['code'])
+                    element = {}
+                    element['name'] = blockChild['name']
+                    element['code'] = blockChild['code']
+                    detail_List.append(element)
+        else:
+            pass
+        # print('\n\n')
+    return detail_List
+
+
 def get_DateTime():
     """
     获取当前日期和时间

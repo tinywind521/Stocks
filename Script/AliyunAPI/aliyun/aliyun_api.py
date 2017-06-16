@@ -109,3 +109,40 @@ def daily_ssd(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
 
     content = aliyun_request.req(url, appcode)
     return content
+
+
+def block_list(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    获取板块列表
+    :return:
+    """
+    host = 'https://ali-stock.showapi.com'
+    path = '/stock-block-list'
+    method = 'GET'
+    # appcode = '你自己的AppCode'
+    querys = ''
+    bodys = {}
+    url = host + path
+
+    content = aliyun_request.req(url, appcode)
+    return content
+
+
+def block_stocks(blockId, currentPage, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    获取板块内指定页数的个股
+    :param blockId:
+    :param currentPage:
+    :param appcode:
+    :return:
+    """
+    host = 'https://ali-stock.showapi.com'
+    path = '/stock-in-block'
+    method = 'GET'
+    # appcode = '你自己的AppCode'
+    querys = 'page=' + format(currentPage, 'd') + '&typeId=' + blockId
+    bodys = {}
+    url = host + path + '?' + querys
+
+    content = aliyun_request.req(url, appcode)
+    return content

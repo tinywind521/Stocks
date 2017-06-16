@@ -2,10 +2,12 @@
   <dictionary name="pc">
     <words>
       <w>allkeys</w>
+      <w>allmarket</w>
       <w>allssd</w>
       <w>getcwd</w>
       <w>narray</w>
       <w>nlist</w>
+      <w>pagebean</w>
       <w>regist</w>
       <w>yybuy</w>
       <w>yyname</w>

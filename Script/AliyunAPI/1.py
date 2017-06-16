@@ -4,26 +4,18 @@ from aliyun import aliyun_api
 import json
 import numpy
 
+appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 
-codeList = getValue.get_availableCodeList()
-dateList = getValue.get_dateList('20170101', 10)
-i = 0
-for code in codeList:
-    i += 1
-    s = getValue.get_60F(code, dateList[0], 10)
-    print(format(i, '04d') + '\t' + code + '\t' + format(len(s), 'd'))
+# s = function.return_stocklist(appcode)
+c = getValue.get_blockList(appcode)
+print(c)
 
+for ele in c:
+    code = ele['code']
+    s = function.return_block_stocks(code, appcode)
+    print(s)
+    # print(len(s))
 
-
-# 前阴连阴，连阴后必须连阳，再阴；双阴必须前低后高
-# 中间的连阳可以假阳
-# 前后都是连阴形态，也要考虑
-# 中轨怎么考虑
-# 找第一组连阴 和 第二组连阴（真阴） 以及中间的阳线
-
-
-
-# print(c)
 
 # def ss(string=[]):
 #     for s in string:
@@ -39,7 +31,7 @@ for code in codeList:
 
 
 
-# 多级路径函数
+# 多级路径引入函数
 
 # import sys
 # import os

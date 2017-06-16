@@ -53,29 +53,39 @@ def return_stocklist(appcode):
             # print(text)
             # 先读一次，获得总page数
             all_dict = json.loads(text)
-            allpages = all_dict['showapi_res_body']['allPages']
-            # texts = ''
-            for currentPage in range(0, allpages):
-                text = aliyun_api.stocklist(market, currentPage + 1, appcode)
-                # texts+= text + '\n'
-                # print(text)
-                all_dict = json.loads(text)
-                showapi_res_body = all_dict['showapi_res_body']
-                newlist = showapi_res_body['contentlist']
-                # print(newlist)
-                exactPage = showapi_res_body['currentPage']
-                # print(format(exactPage, 'd'))
-                if exactPage != (currentPage + 1):
-                    mark = 0
-                    break
-                pagelist = []
-                for newlist_element in newlist:
-                    tempdict = {'market': '', 'name': '', 'code': ''}
-                    tempdict = {k: newlist_element[k] for k in tempdict}
-                    if tempdict['code'][0] in ['0', '3', '6']:
-                        pagelist.append(tempdict)
-                stocklist.extend(pagelist)
-                # print(stocklist)
+            showapi_res_body = all_dict['showapi_res_body']
+            allpages = showapi_res_body['allPages']
+            newlist = showapi_res_body['contentlist']
+            # print(format(exactPage, 'd'))
+            pagelist = []
+            for newlist_element in newlist:
+                tempdict = {'market': '', 'name': '', 'code': ''}
+                tempdict = {k: newlist_element[k] for k in tempdict}
+                if tempdict['code'][0] in ['0', '3', '6']:
+                    pagelist.append(tempdict)
+            stocklist.extend(pagelist)
+            # print(stocklist)
+            if allpages >= 2:
+                for currentPage in range(1, allpages):
+                    text = aliyun_api.stocklist(market, currentPage + 1, appcode)
+                    # print(text)
+                    all_dict = json.loads(text)
+                    showapi_res_body = all_dict['showapi_res_body']
+                    newlist = showapi_res_body['contentlist']
+                    # print(newlist)
+                    exactPage = showapi_res_body['currentPage']
+                    # print(format(exactPage, 'd'))
+                    if exactPage != (currentPage + 1):
+                        mark = 0
+                        break
+                    pagelist = []
+                    for newlist_element in newlist:
+                        tempdict = {'market': '', 'name': '', 'code': ''}
+                        tempdict = {k: newlist_element[k] for k in tempdict}
+                        if tempdict['code'][0] in ['0', '3', '6']:
+                            pagelist.append(tempdict)
+                    stocklist.extend(pagelist)
+                    # print(stocklist)
             if mark != 1:
                 break
         # return_value = [stocklist, texts]
@@ -87,6 +97,14 @@ def return_stocklist(appcode):
 
     except ValueError:
         return None
+
+
+def return_blockList(appcode):
+    text = aliyun_api.block_list(appcode)
+    # print(text)
+    # 先读一次，获得总page数
+    all_dict = json.loads(text)
+    return all_dict
 
 
 def return_ssd(appcode):
@@ -134,3 +152,63 @@ def cal_boll(valueList, n, p):
         valueList.pop(0)
     return boll
 
+
+def return_block_stocks(blockID, appcode):
+    """
+    获取板块内列表
+    :return:
+    """
+    block_stocksList = []
+    block_stocks = {}
+    mark = 1
+    # texts = ''
+    try:
+        text = aliyun_api.block_stocks(blockID, 1, appcode)
+        # print(text)
+        # 先读一次，获得总page数
+        all_dict = json.loads(text)
+        pagebean = all_dict['showapi_res_body']['pagebean']
+        allpages = pagebean['allPages']
+        block_stocks['name'] = pagebean['name']
+        newlist = pagebean['contentlist']
+        # print(newlist)
+        # print(format(exactPage, 'd'))
+        pagelist = []
+        for newlist_element in newlist:
+            # tempdict = {'market': '', 'name': '', 'code': ''}
+            # tempdict = {k: newlist_element[k] for k in tempdict}
+            if newlist_element['code'][0] in ['0', '3', '6']:
+                pagelist.append(newlist_element['code'])
+        block_stocksList.extend(pagelist)
+        # print(allpages)
+        if allpages >= 2:
+            for currentPage in range(1, allpages):
+                text = aliyun_api.block_stocks(blockID, currentPage + 1, appcode)
+                # print(text)
+                all_dict = json.loads(text)
+                pagebean = all_dict['showapi_res_body']['pagebean']
+                newlist = pagebean['contentlist']
+                # print(newlist)
+                exactPage = pagebean['currentPage']
+                # print(format(exactPage, 'd'))
+                if exactPage != (currentPage + 1):
+                    mark = 0
+                    break
+                pagelist = []
+                for newlist_element in newlist:
+                    # tempdict = {'market': '', 'name': '', 'code': ''}
+                    # tempdict = {k: newlist_element[k] for k in tempdict}
+                    if newlist_element['code'][0] in ['0', '3', '6']:
+                        pagelist.append(newlist_element['code'])
+                block_stocksList.extend(pagelist)
+                # print(block_stocksList)
+            # return_value = [stocklist, texts]
+        if mark == 1:
+            block_stocks['block_stocksList'] = block_stocksList
+            return block_stocks
+            # return return_value
+        else:
+            return None
+
+    except ValueError:
+        return None
