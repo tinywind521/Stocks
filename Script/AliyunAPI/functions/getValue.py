@@ -47,24 +47,27 @@ def get_availableCodeList(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     """
     ssdlist = get_allssdcode(appcode)
     delList = []
-    delList.extend(ssdlist['newStockNetPublishList'])
-    #   首发新股网上发行列表
-    # delList.extend(ssdlist['stockholderList'])
-    #   股东大会召开列表
-    delList.extend(ssdlist['stopList'])
-    #   停牌股票列表
-    # delList.extend(ssdlist['addNewStockNetPublishList'])
-    #   增发新股列表
-    delList.extend(ssdlist['recoverList'])
-    #   复牌股票列表
-    # delList.extend(ssdlist['shareRegistList'])
-    #   分红转增股权登记列表
-    # delList.extend(ssdlist['ShareDividendList'])
-    #   除权除息列表
-    delList.extend(ssdlist['stockAlarmList'])
-    #   退市风险警示列表
-    delList.extend(ssdlist['startList'])
-    #   新上市股票列表
+    try:
+        delList.extend(ssdlist['newStockNetPublishList'])
+        #   首发新股网上发行列表
+        # delList.extend(ssdlist['stockholderList'])
+        #   股东大会召开列表
+        delList.extend(ssdlist['stopList'])
+        #   停牌股票列表
+        # delList.extend(ssdlist['addNewStockNetPublishList'])
+        #   增发新股列表
+        delList.extend(ssdlist['recoverList'])
+        #   复牌股票列表
+        # delList.extend(ssdlist['shareRegistList'])
+        #   分红转增股权登记列表
+        # delList.extend(ssdlist['ShareDividendList'])
+        #   除权除息列表
+        delList.extend(ssdlist['stockAlarmList'])
+        #   退市风险警示列表
+        delList.extend(ssdlist['startList'])
+        #   新上市股票列表
+    except KeyError:
+        pass
 
     allCodelist = get_allCodelist(appcode)
     result = [k for k in allCodelist]
@@ -160,7 +163,10 @@ def get_allssdcode(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     startList                       :  上市股票列表
     """
     allssd = function.return_ssd(appcode)
-    allkeys = list(allssd)
+    try:
+        allkeys = list(allssd)
+    except TypeError:
+        allkeys = []
     key = ''
     allssdcode = {}
     for key in allkeys:
