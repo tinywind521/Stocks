@@ -6,16 +6,18 @@ import numpy
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 
+print(getValue.get_60F('000001', '20170618', 1))
+
 # s = function.return_stocklist(appcode)
 
-c = getValue.get_blockList(appcode)
+# c = getValue.get_blockList(appcode)
 # print(c)
-
-for ele in c:
-    code = ele['code']
-    print(code)
-    s = function.return_block_stocks(code, appcode)
-    print(s)
+#
+# for ele in c:
+#     code = ele['code']
+#     print(code)
+#     s = function.return_block_stocks(code, appcode)
+#     print(s)
 # s = function.return_block_stocks('hangye_ZB49', appcode)
 # print(s)
 
