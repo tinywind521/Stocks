@@ -45,9 +45,10 @@ for code in codeList:
             # 过滤掉 板（max、min、open和close都相等） 这种特殊K线
             for i in range(0, 8):
                 k_value = k_list[0]
-                if i >= 4 and not flag:
+                if i >= 2 and not flag:
+                    # 阴线计算到第几根
                     break
-                if (k_value['close'] - k_value['lastclose']) <= 0 and (k_value['close'] - k_value['open']) < 0:
+                if (k_value['close'] - k_value['lastclose']) < 0 and (k_value['close'] - k_value['open']) < 0:
                     first_N.append(k_value)
                     first_close.append(k_value['close'])
                     first_vol.append(k_value['volumn'])
@@ -63,13 +64,13 @@ for code in codeList:
                 k_value = k_list[0]
                 if i >= 4 and not flag:
                     break
-                if (k_value['close'] - k_value['lastclose']) <= 0 and (k_value['close'] - k_value['open']) < 0:
+                if (k_value['close'] - k_value['lastclose']) < 0 and (k_value['close'] - k_value['open']) < 0:
                     second_N.append(k_value)
                     second_close.append(k_value['close'])
                     second_vol.append(k_value['volumn'])
                     flag = True
                 else:
-                    passiveList.append(k_value['close'])
+                    # passiveList.append(k_value['close'])
                     if flag:
                         break
                 k_list.pop(0)
@@ -77,13 +78,8 @@ for code in codeList:
             # first_vol = [k['volumn'] for k in first_N]
             # print(first_vol)
             # print(second_vol)
-    if len(first_N) >= 1 and len(second_N) >= 1:
-        if first_close[0] > second_close[0] and max(first_vol) < max(second_vol):
-            temp1 = passiveList.pop()
-            # 前面一段阴线的前面的阳线
-            temp2 = [k for k in passiveList]
-            # 两段阴线的中间的阳线
-            if temp1 < max(temp2):
+        if len(first_N) >= 1 and len(second_N) >= 1:
+            if first_close[0] > second_close[0] and max(first_vol) < max(second_vol):
                 boll_pos = [d for d in ((k['close'] - k['mid']) for k in s) if d < 0]
                 # k['close'] - k['mid']) for k in s
                 # k 是 列表s的元素，计算字典元素k的close和mid之差，构建成新的列表
