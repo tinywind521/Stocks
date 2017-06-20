@@ -1,6 +1,6 @@
 import sys
 
-from aliyun import aliyun_api
+from http_api import aliyun_api
 
 
 def txt_write(text, path):
