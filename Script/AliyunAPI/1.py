@@ -4,9 +4,20 @@ from aliyun import aliyun_api
 import json
 import numpy
 
-appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
+from stock import Stock
 
-print(getValue.get_60F('000001', '20170618', 1))
+
+appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
+code = '000001'
+ref_List = {'timetype': 'day',
+            'beginDay': '20170101',
+            'getLength': 10,
+            'appcode': appcode}
+
+s = Stock(code, ref_List)
+s.get_KValue()
+print(s.value)
+
 
 # s = function.return_stocklist(appcode)
 
@@ -53,5 +64,3 @@ print(getValue.get_60F('000001', '20170618', 1))
 # print ("Import add_func from module a")
 # print ("Result of 1 plus 2 is: ")
 # print (add_func(1,2))
-
-

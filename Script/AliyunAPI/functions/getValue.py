@@ -250,3 +250,44 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
         return realtimeList
     except ValueError:
         return None
+
+
+def get_dayK_Line(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    获取指定日期长度的60F,
+    同时计算boll
+    :param p: p常量
+    :param n: 布林计算天数
+    :param code:
+    :param beginDay:
+    :param getLength: = 2n / 4
+    :param appcode:
+    :return:
+    """
+    try:
+        aliyun_str = aliyun_api.realtime(code, beginDay, 'day', 'bfq', appcode)
+        aliyun_dict = json.loads(aliyun_str)
+        dataList = get_dataList(aliyun_dict)
+        dataList.reverse()
+        realtimeList = [k for k in dataList]
+        closeList = []
+        for element in realtimeList:
+            closeList.append(float(element['close']))
+        # print(closeList)
+        # closeList.reverse()
+        lastcloseList = [k for k in closeList]
+        boll = function.cal_boll(closeList, n, p)
+        m = len(boll)
+        realtimeList = realtimeList[-m:]
+        lastcloseList = lastcloseList[-m-1:]
+        lastclose = {}
+        for i in range(0, m):
+            # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            lastclose['lastclose'] = lastcloseList[i]
+            realtimeList[i].update(lastclose)
+            realtimeList[i].update(boll[i])
+            # print(realtimeList[i])
+        # print(realtimeList)
+        return realtimeList
+    except ValueError:
+        return None
