@@ -1,7 +1,7 @@
 import json
 import numpy
 
-from aliyun import aliyun_api
+from http_api import aliyun_api
 from functions import getValue
 
 

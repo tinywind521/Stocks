@@ -2,7 +2,7 @@
 #   import sys
 #   import ssl
 
-from aliyun import aliyun_request
+from http_api import aliyun_request
 from functions import function, getValue
 
 
@@ -22,6 +22,7 @@ def timeline(code, day, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     bodys = {}
 #   url = host + path + '?' + querys
     url = host + path + '?' + "code=" + code + '&' + "day=" + day
+    # print(url)
 
     content = aliyun_request.req(url, appcode)
     return content

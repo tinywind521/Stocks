@@ -1,5 +1,5 @@
 import json
-from aliyun import QQ_request
+from http_api import QQ_request
 
 
 def lhb_code_list(code):

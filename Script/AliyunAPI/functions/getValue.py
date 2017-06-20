@@ -3,8 +3,8 @@ import json
 import numpy
 
 from functions import function
-from aliyun import aliyun_api
-from aliyun import QQ_api
+from http_api import aliyun_api
+from http_api import QQ_api
 
 
 def get_dateList(beginDay, getLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):

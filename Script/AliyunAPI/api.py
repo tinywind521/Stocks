@@ -1,6 +1,6 @@
 from functions import function
 from functions import getValue
-from aliyun import aliyun_api, QQ_api
+from http_api import aliyun_api, QQ_api
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 code = '600215'

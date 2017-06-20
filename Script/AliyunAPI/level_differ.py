@@ -93,7 +93,6 @@ for code in codeList:
                 #       format(max(second_vol), 'd') + '\t' + format(max(first_vol), 'd'))
 
 
-
 # 前阴连阴，连阴后必须连阳，再阴；双阴必须前低后高
 # 中间的连阳可以假阳
 # 前后都是连阴形态，也要考虑
