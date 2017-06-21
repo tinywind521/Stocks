@@ -247,6 +247,7 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
             realtimeList[i].update(boll[i])
             # print(realtimeList[i])
         # print(realtimeList)
+        realtimeList = realtimeList[-getLength:]
         return realtimeList
     except ValueError:
         return None
@@ -288,6 +289,7 @@ def get_dayK_Line(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9
             realtimeList[i].update(boll[i])
             # print(realtimeList[i])
         # print(realtimeList)
+        realtimeList = realtimeList[-getLength:]
         return realtimeList
     except ValueError:
         return None

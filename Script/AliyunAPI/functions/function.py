@@ -133,12 +133,12 @@ def cal_boll(valueList, n, p):
     :param p:
     :return:
     """
-    # valueList = [float(k) for k in valueList]
     valueList.reverse()
+    valueTemp = [float(k) for k in valueList]
     boll = []
     for value in valueList:
         boll_dict = {}
-        tempList = valueList[0:n]
+        tempList = valueTemp[0:n]
         narray = numpy.array(tempList)
         mid = numpy.mean(narray)
         spd = numpy.sqrt(numpy.var(narray))
@@ -149,7 +149,7 @@ def cal_boll(valueList, n, p):
         boll_dict['lower'] = float(format(lower, '.2f'))
         # print(boll_dict)
         boll.insert(0, boll_dict)
-        valueList.pop(0)
+        valueTemp.pop(0)
     return boll
 
 
@@ -210,5 +210,33 @@ def return_block_stocks(blockID, appcode):
         else:
             return None
 
+    except ValueError:
+        return None
+
+
+def return_timeline(code, day, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    try:
+        result = {}
+        text = aliyun_api.timeline(code, day, appcode)
+        all_dict = json.loads(text)
+        # print(all_dict)
+        showapi_res_body = all_dict['showapi_res_body']
+        dataList = showapi_res_body['dataList']
+        # print(dataList)
+        for dataElement in dataList:
+            # print(dataElement)
+            result['date'] = dataElement['date']
+            result['lastclose'] = dataElement['yestclose']
+            length = dataElement['count']
+            timeline = dataElement['minuteList']
+            # print(len(timeline))
+            # print(date)
+            if len(timeline) == int(length):
+                result['timeline'] = timeline
+            else:
+                result['timeline'] = None
+                # for ss in timeline:
+                # print(ss)
+            return result
     except ValueError:
         return None
