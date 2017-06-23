@@ -253,7 +253,7 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
         return None
 
 
-def get_dayK_Line(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+def get_dayK(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     """
     获取指定日期长度的60F,
     同时计算boll
@@ -295,7 +295,7 @@ def get_dayK_Line(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9
         return None
 
 
-def get_timeline(code, dayLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+def get_timeLine(code, dayLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     try:
         result = function.return_timeline(code, format(dayLength, 'd'), appcode)
     except ValueError:

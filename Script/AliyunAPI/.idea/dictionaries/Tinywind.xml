@@ -8,7 +8,9 @@
       <w>lastclose</w>
       <w>realtime</w>
       <w>showapi</w>
+      <w>sina</w>
       <w>stocklist</w>
+      <w>timeline</w>
       <w>timetype</w>
       <w>volumn</w>
     </words>

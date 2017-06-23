@@ -6,6 +6,8 @@ class Stock:
     stock 类的测试版
     code: 代码
     ref_list: 包含timetype、beginDay、appcode等在内其他参数字典
+
+    注意：分时数据是逆序，K线数据是顺序。
     """
     def __init__(self, code, ref_List):
         if ref_List is None:
@@ -42,8 +44,8 @@ class Stock:
                 self.Kvalue = getValue.get_60F(self.code, self._ref_list['KbeginDay'],
                                                self._ref_list['KgetLength'])
             elif self._ref_list['KtimeType'] == 'day':
-                self.Kvalue = getValue.get_dayK_Line(self.code, self._ref_list['KbeginDay'],
-                                                     self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_dayK(self.code, self._ref_list['KbeginDay'],
+                                                self._ref_list['KgetLength'])
         except ValueError:
             self.Kvalue = None
 
@@ -115,7 +117,7 @@ class Stock:
         :return: Error return None
         """
         try:
-            self.Tvalue = getValue.get_timeline(self.code,
+            self.Tvalue = getValue.get_timeLine(self.code,
                                                 self._ref_list['TdayLength'])
         except ValueError:
             self.Tvalue = None
@@ -129,7 +131,7 @@ class Stock:
         """
         if self.Tvalue is None:
             self._get_TLine()
-            print(self._ref_list)
+            # print(self._ref_list)
             self.Tvalue = self.Tvalue[0: self._ref_list['TgetLength']]
             return self.Tvalue
         else:
@@ -189,7 +191,7 @@ class Stock:
         :return:
         """
         if self.Kvalue is None:
-            self.get_KLine()
+            self._get_KLine()
         bollmid = self.Kvalue[-1-n]['mid']
         return bollmid
 
@@ -200,7 +202,7 @@ class Stock:
         :return:
         """
         if self.Kvalue is None:
-            self.get_KLine()
+            self._get_KLine()
         bollupper = self.Kvalue[-1-n]['upper']
         return bollupper
 
@@ -211,7 +213,7 @@ class Stock:
         :return:
         """
         if self.Kvalue is None:
-            self.get_KLine()
+            self._get_KLine()
         bolllower = self.Kvalue[-1-n]['lower']
         return bolllower
 

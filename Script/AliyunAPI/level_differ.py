@@ -1,6 +1,6 @@
 from functions import getValue
 from functions import function
-from aliyun import aliyun_api
+from http_api import aliyun_api
 import json
 import numpy
 
