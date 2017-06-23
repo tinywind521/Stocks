@@ -12,8 +12,8 @@ class Stock:
             ref_List = {'KtimeType': '60/day',
                         'KbeginDay': '20170101',
                         'KgetLength': 10,
-                        'TdayLength': 1,
-                        'TdataLength': 242,
+                        'TdayLength': 5,
+                        'TgetLength': 1,
                         'appcode': 'c7689f18e1484e9faec07122cc0b5f9e'}
         self.code = code
         self._ref_list = ref_List
@@ -22,51 +22,30 @@ class Stock:
         # self.value = self.get_KValue()
 
 
-    def get_KLine(self):
+    def get_ref_List(self):
+        return self._ref_list
+
+
+    """
+    无情的分割线
+    下面是K线的函数方法
+    """
+
+
+    def _get_KLine(self):
         """
-        计算各级别的K线
-        :return:
+        获取各级别的K线
+        :return: Error return None
         """
         try:
             if self._ref_list['KtimeType'] == '60':
-                self.Kvalue = getValue.get_60F(self.code, self._ref_list['KbeginDay'], self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_60F(self.code, self._ref_list['KbeginDay'],
+                                               self._ref_list['KgetLength'])
             elif self._ref_list['KtimeType'] == 'day':
-                self.Kvalue = getValue.get_dayK_Line(self.code, self._ref_list['KbeginDay'], self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_dayK_Line(self.code, self._ref_list['KbeginDay'],
+                                                     self._ref_list['KgetLength'])
         except ValueError:
-            pass
-
-
-    def set_KbeginDay(self, beginDay='20170101'):
-        self._ref_list['KbeginDay'] = beginDay
-
-
-    def set_KtimeType(self, timetype='60'):
-        self._ref_list['KtimeType'] = timetype
-
-
-    def set_KgetLength(self, getLength=10):
-        self._ref_list['KgetLength'] = getLength
-
-
-    def get_KtimeType(self):
-        return self._ref_list['KtimeType']
-
-
-    def set_Clear(self):
-        """
-        清空K线序列
-        :return:
-        """
-        self.Kvalue = None
-
-
-    def set_Refresh(self):
-        """
-        刷新K线序列
-        :return:
-        """
-        self.set_Clear()
-        self.get_KValue()
+            self.Kvalue = None
 
 
     def get_KValue(self):
@@ -77,10 +56,131 @@ class Stock:
         """
         if self.Kvalue is None:
             # print('Link Web!')
-            self.get_KLine()
+            self._get_KLine()
             return self.Kvalue
         else:
             return self.Kvalue
+
+
+    def set_KbeginDay(self, KbeginDay='20170101'):
+        self._ref_list['KbeginDay'] = KbeginDay
+
+
+    def set_KtimeType(self, Ktimetype='60'):
+        self._ref_list['KtimeType'] = Ktimetype
+
+
+    def set_KgetLength(self, KgetLength=10):
+        self._ref_list['KgetLength'] = KgetLength
+
+
+    def get_KbeginDay(self):
+        return self._ref_list['KbeginDay']
+
+
+    def get_KtimeType(self):
+        return self._ref_list['KtimeType']
+
+
+    def get_KgetLength(self):
+        return self._ref_list['KgetLength']
+
+
+    def set_KClear(self):
+        """
+        清空K线序列
+        :return:
+        """
+        self.Kvalue = None
+
+
+    def set_KRefresh(self):
+        """
+        刷新K线序列
+        :return:
+        """
+        self.set_KClear()
+        self.get_KValue()
+
+
+    """
+    无情的分割线
+    下面是分时的函数方法
+    """
+
+
+    def _get_TLine(self):
+        """
+        获取分时线
+        :return: Error return None
+        """
+        try:
+            self.Tvalue = getValue.get_timeline(self.code,
+                                                self._ref_list['TdayLength'])
+        except ValueError:
+            self.Tvalue = None
+
+
+    def get_TValue(self):
+        """
+        该函数作用便于多次读取分时数据
+        但不需要多次联网
+        :return:
+        """
+        if self.Tvalue is None:
+            self._get_TLine()
+            print(self._ref_list)
+            self.Tvalue = self.Tvalue[0: self._ref_list['TgetLength']]
+            return self.Tvalue
+        else:
+            if len(self.Tvalue) < self._ref_list['TgetLength']:
+                self._get_TLine()
+                self.Tvalue = self.Tvalue[0: self._ref_list['TgetLength']]
+            else:
+                self.Tvalue = self.Tvalue[0: self._ref_list['TgetLength']]
+            return self.Tvalue
+
+
+    def set_TdayLength(self, TdayLength=5):
+        self._ref_list['TdayLength'] = TdayLength
+
+
+    def set_TgetLength(self, TgetLength=1):
+        if TgetLength > self._ref_list['TdayLength']:
+            self._ref_list['TdayLength'] = self._ref_list['TdayLength']
+        else:
+            self._ref_list['TgetLength'] = TgetLength
+
+
+    def get_TdayLength(self):
+        return self._ref_list['TdayLength']
+
+
+    def get_TgetLength(self):
+        return self._ref_list['TgetLength']
+
+
+    def set_TClear(self):
+        """
+        清空分时序列
+        :return:
+        """
+        self.Tvalue = None
+
+
+    def set_TRefresh(self):
+        """
+        刷新分时序列
+        :return:
+        """
+        self.set_TClear()
+        self.get_TValue()
+
+
+    """
+    无情的分割线
+    下面是布林的函数方法
+    """
 
 
     def boll_mid(self, n=0):
@@ -116,11 +216,3 @@ class Stock:
         return bolllower
 
 
-    def get_TLine(self, code, ref_List):
-        if ref_List is None:
-            ref_List = {'dayLength': 5,
-                        'dataLength': 242,
-                        'appcode': 'c7689f18e1484e9faec07122cc0b5f9e'}
-        self.code = code
-        self._ref_list = ref_List
-        self.value = None

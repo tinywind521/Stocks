@@ -214,9 +214,9 @@ def return_block_stocks(blockID, appcode):
         return None
 
 
-def return_timeline(code, day, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+def return_timeline(code, day, appcode):
     try:
-        result = {}
+        result = []
         text = aliyun_api.timeline(code, day, appcode)
         all_dict = json.loads(text)
         # print(all_dict)
@@ -225,18 +225,21 @@ def return_timeline(code, day, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
         # print(dataList)
         for dataElement in dataList:
             # print(dataElement)
-            result['date'] = dataElement['date']
-            result['lastclose'] = dataElement['yestclose']
-            length = dataElement['count']
+            temp = dict()
+            temp['date'] = dataElement['date']
+            temp['lastclose'] = dataElement['yestclose']
+            # length = dataElement['count']
             timeline = dataElement['minuteList']
             # print(len(timeline))
-            # print(date)
-            if len(timeline) == int(length):
-                result['timeline'] = timeline
-            else:
-                result['timeline'] = None
-                # for ss in timeline:
-                # print(ss)
-            return result
+            # print(length)
+            temp['timeline'] = timeline
+            # if len(timeline) == int(length):
+            #     temp['timeline'] = timeline
+            # else:
+            #     temp['timeline'] = None
+            #     for ss in timeline:
+            #         print(ss)
+            result.append(temp)
+        return result
     except ValueError:
         return None

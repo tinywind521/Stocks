@@ -293,3 +293,12 @@ def get_dayK_Line(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9
         return realtimeList
     except ValueError:
         return None
+
+
+def get_timeline(code, dayLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    try:
+        result = function.return_timeline(code, format(dayLength, 'd'), appcode)
+    except ValueError:
+        return None
+    else:
+        return result

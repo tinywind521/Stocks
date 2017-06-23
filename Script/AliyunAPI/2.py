@@ -8,8 +8,9 @@ import numpy
 
 
 code1 = '600215'
-day1 = '1'
+day1 = 5
 
-s = function.return_timeline(code1, day1)
-print(s)
+s = getValue.get_timeline(code1, day1)
+for k in s:
+    print(k)
 

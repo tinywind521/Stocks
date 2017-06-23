@@ -8,35 +8,42 @@ from stock import Stock
 
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-code1 = '002839'
+code1 = '600215'
 code2 = '000001'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20170101',
             'KgetLength': 10,
-            'TdayLength': 1,
-            'TdataLength': 242,
+            'TdayLength': 5,
+            'TgetLength': 3,
             'appcode': appcode}
 
 s = Stock(code1, ref_List)
-# s2 = Stock(code2, ref_List)
-
+s.get_TValue()
 s.get_KValue()
-print(s.Kvalue)
-print(s.get_KtimeType())
-
-s.set_KtimeType('day')
-s.set_Refresh()
-
-print(s.Kvalue)
+for k in s.Tvalue:
+    print(k)
+print('he he')
 s.get_KValue()
+for k in s.Tvalue:
+    print(k)
+print('he he')
+s.set_TgetLength(1)
+s.get_TValue()
+for k in s.Tvalue:
+    print(k)
+print('he he')
+s.set_TgetLength(2)
+s.get_TValue()
+for k in s.Tvalue:
+    print(k)
+print(s.get_KValue())
 print(s.get_KtimeType())
+print(s.get_TgetLength())
+print(s.get_TdayLength())
+print(s.get_ref_List())
+print(s.get_KgetLength())
+print(s.get_KbeginDay())
 
-# for k in s1.value:
-#     print(k)
-
-print(s.boll_mid())
-print(s.boll_upper())
-print(s.boll_lower())
 
 # s = function.return_stocklist(appcode)
 
@@ -50,21 +57,6 @@ print(s.boll_lower())
 #     print(s)
 # s = function.return_block_stocks('hangye_ZB49', appcode)
 # print(s)
-
-
-
-# def ss(string=[]):
-#     for s in string:
-#         print(s)
-#     return None
-# try:
-#     d = input('Input Reference: ')
-#     dd = list(d)
-#     print(dd)
-#     ss(dd)
-# except:
-#     print('Ref Error!')
-
 
 
 # 多级路径引入函数
