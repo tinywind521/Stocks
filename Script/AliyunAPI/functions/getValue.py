@@ -186,10 +186,21 @@ def get_CodeLHB(code):
     :return:
     """
     lhb_list = QQ_api.lhb_code_list(code)
+    # print(lhb_list)
     i = 0
     result = []
     for f in lhb_list:
         i += 1
+        if int(f['date']) <= 20150101:
+            continue
+        temp = True
+        for temp1 in lhb_list[i:]:
+            if f['code'] == temp1['code'] and f['date'] == temp1['date']:
+                temp = False
+                break
+            temp = True
+        if not temp:
+            continue
         detail = QQ_api.lhb_code_detail(f['code'], f['date'], str(i), f['typeid'])
         for element in detail:
             result.append(element)

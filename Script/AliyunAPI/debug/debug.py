@@ -1,11 +1,19 @@
-s = {'code': '300668', 'name': 'N杰恩', 'bs': 'B', 'no': '3', 'date': '20170619', 'yyname': '华宝证券有限责任公司成都天泰路证券营业部', 'yybuy': '2510.0000', 'yysell': '0.0000'}
+import operator
 
-l = [{'code': '300668', 'name': 'N杰恩', 'bs': 'B', 'no': '1', 'date': '20170619', 'yyname': '东海证券股份有限公司常州通江中路证券营业部', 'yybuy': '118131.0000', 'yysell': '0.0000'},
-     {'code': '300668', 'name': 'N杰恩', 'bs': 'B', 'no': '2', 'date': '20170619', 'yyname': '国信证券股份有限公司深圳振华路证券营业部', 'yybuy': '5522.0000', 'yysell': '0.0000'},
-     {'code': '300668', 'name': 'N杰恩', 'bs': 'S', 'no': '3', 'date': '20170619', 'yyname': '华宝证券有限责任公司成都天泰路证券营业部', 'yybuy': '2510.0000', 'yysell': '0.0000'}]
-
-t = l.index(s)
-print(t)
+result = [1, 2, 3, 4, 5, 1, 2]
+final = []
+for temp1 in result:
+    temp = True
+    for temp2 in final:
+        if operator.eq(temp1, temp2):
+            temp = False
+            print(temp1)
+            print(temp2)
+            break
+        temp = True
+    if temp:
+        final.append(temp1)
+print(final)
 
 # def log(func):
 #     # func 参数传递的值就是 now方法
