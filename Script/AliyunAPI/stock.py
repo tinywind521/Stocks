@@ -6,7 +6,8 @@ class Stock:
     stock 类的测试版
     code: 代码
     ref_list: 包含timetype、beginDay、appcode等在内其他参数字典
-
+    开发者：Q0233
+    最后更新：未完成
     注意：分时数据是逆序，K线数据是顺序。
     """
     def __init__(self, code, ref_List):
@@ -22,6 +23,9 @@ class Stock:
         self.Kvalue = None
         self.Tvalue = None
         # self.value = self.get_KValue()
+        self.Kstatus = {'涨幅': '', '量能': '', '收针': '',
+                        '布林': '', '层级': '', '趋势': '',
+                        '平台': '', '预留': '', '备用': ''}
 
 
     def get_ref_List(self):
@@ -30,10 +34,8 @@ class Stock:
 
     """
     无情的分割线
-    下面是K线的函数方法
+    下面是获取基本K线的函数方法
     """
-
-
     def _get_KLine(self):
         """
         获取各级别的K线
@@ -94,6 +96,7 @@ class Stock:
         :return:
         """
         self.Kvalue = None
+        self.Kstatus = None
 
 
     def set_KRefresh(self):
@@ -109,8 +112,6 @@ class Stock:
     无情的分割线
     下面是分时的函数方法
     """
-
-
     def _get_TLine(self):
         """
         获取分时线
@@ -183,8 +184,6 @@ class Stock:
     无情的分割线
     下面是布林的函数方法
     """
-
-
     def boll_mid(self, n=0):
         """
         直接获得K线Boll数据
@@ -217,4 +216,16 @@ class Stock:
         bolllower = self.Kvalue[-1-n]['lower']
         return bolllower
 
+
+    """
+    华丽的分割线
+    下面是获取K线参数的函数方法
+    """
+    def update_Kstatus(self):
+        if self._ref_list['KtimeType'] == 60:
+            pass
+
+
+    def clear_Kstatus(self):
+        self.Kstatus = None
 

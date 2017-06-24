@@ -18,45 +18,8 @@ ref_List = {'KtimeType': '60',
             'appcode': appcode}
 
 s = Stock(code1, ref_List)
-s.get_TValue()
 s.get_KValue()
-for k in s.Tvalue:
-    print(k)
-print('he he')
-s.get_KValue()
-for k in s.Tvalue:
-    print(k)
-print('he he')
-s.set_TgetLength(1)
-s.get_TValue()
-for k in s.Tvalue:
-    print(k)
-print('he he')
-s.set_TgetLength(2)
-s.get_TValue()
-for k in s.Tvalue:
-    print(k)
-print(s.get_KValue())
-print(s.get_KtimeType())
-print(s.get_TgetLength())
-print(s.get_TdayLength())
-print(s.get_ref_List())
-print(s.get_KgetLength())
-print(s.get_KbeginDay())
-
-
-# s = function.return_stocklist(appcode)
-
-# c = getValue.get_blockList(appcode)
-# print(c)
-#
-# for ele in c:
-#     code = ele['code']
-#     print(code)
-#     s = function.return_block_stocks(code, appcode)
-#     print(s)
-# s = function.return_block_stocks('hangye_ZB49', appcode)
-# print(s)
+print(s.Kvalue)
 
 
 # 多级路径引入函数

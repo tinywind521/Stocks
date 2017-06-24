@@ -7,9 +7,12 @@
       <w>bolllower</w>
       <w>bollmid</w>
       <w>bollupper</w>
+      <w>curpage</w>
+      <w>datas</w>
       <w>getcwd</w>
       <w>kbegin</w>
       <w>kget</w>
+      <w>kstatus</w>
       <w>ktime</w>
       <w>ktimetype</w>
       <w>kvalue</w>
