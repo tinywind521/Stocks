@@ -1,6 +1,7 @@
 import json
 from http_api import QQ_request
 import operator
+import urllib.error
 
 
 def lhb_code_list(code):
@@ -15,10 +16,20 @@ def lhb_code_list(code):
     bodys = {}
     url = host + path + '?' + querys
     result = []
+    QQ_return = None
+    content = {}
     try:
         try:
-            content = json.loads(QQ_request.req(url).partition('=')[2].replace('_', '"').replace(':', '":').replace(';', ''))
-        except ValueError or AttributeError:
+            try:
+                QQ_return = QQ_request.req(url).replace('\n', '')
+            except TimeoutError or urllib.error.URLError:
+                QQ_return = QQ_request.req(url).replace('\n', '')
+            content = json.loads(QQ_return.partition('=')[2].replace('_', '"').replace(':', '":').replace(';', ''))
+        except ValueError or AttributeError or json.decoder.JSONDecodeError or TimeoutError or urllib.error.URLError:
+            print('lhb_code_list Error!')
+            print(url)
+            print(QQ_return)
+            print(content)
             return result
         # keyList = {'curpage', 'pages', 'num'}
         # p = {key: value for key, value in content.items() if key in keyList}
@@ -28,7 +39,11 @@ def lhb_code_list(code):
             if page != 0:
                 querys = 't=' + format((page + 1), 'd') + '&c=' + code
                 url = host + path + '?' + querys
-                content = json.loads(QQ_request.req(url).partition('=')[2].replace('_', '"').replace(':', '":').replace(';', ''))
+                try:
+                    QQ_return = QQ_request.req(url).replace('\n', '')
+                except TimeoutError or urllib.error.URLError:
+                    QQ_return = QQ_request.req(url).replace('\n', '')
+                content = json.loads(QQ_return.partition('=')[2].replace('_', '"').replace(':', '":').replace(';', ''))
             j = 0
             max_j = content['num']
             for array in content['datas']:
@@ -45,8 +60,12 @@ def lhb_code_list(code):
                         tempdict[k] = array[i]
                     i += 1
                 result.append(tempdict)
-    except json.decoder.JSONDecodeError or ValueError or AttributeError:
-        pass
+    except json.decoder.JSONDecodeError or ValueError or AttributeError or TimeoutError or urllib.error.URLError:
+        print('lhb_code_list Error!')
+        print(url)
+        print(QQ_return)
+        print(content)
+        return result
     return result
 
 
@@ -62,8 +81,15 @@ def lhb_code_detail(code, date, title, typeid):
     bodys = {}
     url = host + path + '?' + querys
     result = []
+    QQ_return = None
+    content = {}
     try:
-        content = json.loads(QQ_request.req(url).partition('=')[2].replace('_', '"').replace(':', '":').replace(';', ''))
+        try:
+            QQ_return = QQ_request.req(url).replace('\n', '')
+        except TimeoutError or urllib.error.URLError:
+            QQ_return = QQ_request.req(url).replace('\n', '')
+        # QQ_return = QQ_request.req(url)
+        content = json.loads(QQ_return.partition('=')[2].replace('_', '"').replace(':', '":').replace(';', ''))
         # print(content)
         for array in content['datas']:
             tempdict = {'code': '', 'name': '', 'bs': '', 'no': '', 'date': '', 'yyname': '', 'yybuy': '', 'yysell': ''}
@@ -75,7 +101,11 @@ def lhb_code_detail(code, date, title, typeid):
                     tempdict[k] = array[i]
                 i += 1
             result.append(tempdict)
-    except AttributeError:
+    except json.decoder.JSONDecodeError or ValueError or AttributeError or TimeoutError or urllib.error.URLError:
+        print('lhb_code_detail Error!')
+        print(url)
+        print(QQ_return)
+        print(content)
         return []
     else:
         return result

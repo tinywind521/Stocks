@@ -1,4 +1,5 @@
 import urllib.request
+import urllib.error
 import sys
 import ssl
 
@@ -28,6 +29,7 @@ def req(url, appcode):
         # print(response)
         try:
             content = response.read().decode("utf-8")
+            # print(content)
         except AttributeError:
             content = ''
         if content:

@@ -8,13 +8,43 @@ from functions import getValue
 
 new_file = 'z:/test/LHB.csv'
 
-f = open(new_file, 'w')
-text = 'code, name, date, bs, no, yyname, yybuy, yysell\n'
-f.write(text)
-f.close()
+# f = open(new_file, 'w')
+# text = 'code, name, date, bs, no, yyname, yybuy, yysell\n'
+# f.write(text)
+# f.close()
 
-codelist = getValue.get_allCodelist()
-# codelist = ['301534']
+# codelist = getValue.get_allCodelist()
+codelist = ['002738', '002337', '000716', '000760', '000839', '000768', '000587', '000667',
+            '300104', '300490', '300218', '300059', '000599', '002715', '002102', '300661',
+            '000881', '300247', '300328', '300089', '600608', '600498', '600506', '600403',
+            '600656', '600228', '600800', '600678', '600515', '600890', '600281', '603969',
+            '600203', '600250', '600478', '600155', '603779', '600120', '600967']
+"""
+000716
+000760
+000839
+000587
+600608
+600498
+600506
+600403
+600656
+600228
+600800
+600678
+600515
+600890
+600281
+600203
+600250
+600478
+600155
+600120
+600967
+"""
+# 尚未抓取的部分
+# depart = codelist.index(codelist1[-1])
+# codelist = codelist[(depart + 1):]
 for code in codelist:
     # code = '600215'
     print(code)

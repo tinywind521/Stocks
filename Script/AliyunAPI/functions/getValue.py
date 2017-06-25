@@ -190,6 +190,7 @@ def get_CodeLHB(code):
     i = 0
     result = []
     for f in lhb_list:
+        # print(f)
         i += 1
         if int(f['date']) <= 20150101:
             continue
