@@ -3,24 +3,39 @@ from functions import function
 from http_api import aliyun_api
 import json
 import numpy
+import time
 
 from stock import Stock
 
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-code1 = '600215'
-code2 = '000001'
+code1 = '000510'
+# code2 = '000001'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20170101',
-            'KgetLength': 10,
+            'KgetLength': 30,
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': appcode}
+dateList = getValue.get_dateList(ref_List['KbeginDay'], 2 * ref_List['KgetLength'])
+ref_List['KbeginDay'] = dateList[0]
 
-s = Stock(code1, ref_List)
-s.get_KValue()
-print(s.Kvalue)
+codeList = getValue.get_availableCodeList()
 
+print('start time: ')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print('\n')
+# codeList = ['600100']
+for code in codeList:
+    print(code)
+    s = Stock(code, ref_List)
+    s.get_KValue()
+    # print(s.Kvalue)
+    s.update_Kstatus()
+    # for k in s.Kvalue:
+    #     print(k)
+print('\nend time:')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 # 多级路径引入函数
 

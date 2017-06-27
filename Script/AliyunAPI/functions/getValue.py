@@ -227,17 +227,22 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
         dataList.reverse()
         realtimeValue = []
         tempVol = 0
-        tempOpen = ''
+        tempOpen = None
         for element in dataList:
+            # print(element)
             if element['minute'][-4:] == '0930':
                 tempVol = int(element['volumn'])
                 tempOpen = element['open']
             elif element['minute'][-4:] == '1030':
                 realVol = format((int(element['volumn']) + tempVol), 'd')
-                realOpen = tempOpen
+                if tempOpen:
+                    realOpen = tempOpen
+                else:
+                    realOpen = element['open']
                 element['volumn'] = realVol
                 element['open'] = realOpen
                 realtimeValue.append(element)
+                tempOpen = None
             else:
                 realtimeValue.append(element)
         realtimeList = realtimeValue
@@ -249,12 +254,22 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
         lastcloseList = [k for k in closeList]
         boll = function.cal_boll(closeList, n, p)
         m = len(boll)
-        realtimeList = realtimeList[-m:]
-        lastcloseList = lastcloseList[-m-1:]
+        boll = boll[-m + 1:]
+        realtimeList = realtimeList[-m + 1:]
+        lastcloseList = lastcloseList[-m:]
         lastclose = {}
-        for i in range(0, m):
+        for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
             lastclose['lastclose'] = lastcloseList[i]
+            # print(realtimeList[i])
+            realtimeList[i]['min'] = float(realtimeList[i]['min'])
+            if len(realtimeList[i]['open']) == 0:
+                realtimeList[i]['open'] = 0
+            else:
+                realtimeList[i]['open'] = float(realtimeList[i]['open'])
+            realtimeList[i]['max'] = float(realtimeList[i]['max'])
+            realtimeList[i]['close'] = float(realtimeList[i]['close'])
+            realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
             realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
             # print(realtimeList[i])
@@ -291,12 +306,21 @@ def get_dayK(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec0
         lastcloseList = [k for k in closeList]
         boll = function.cal_boll(closeList, n, p)
         m = len(boll)
-        realtimeList = realtimeList[-m:]
-        lastcloseList = lastcloseList[-m-1:]
+        boll = boll[-m + 1:]
+        realtimeList = realtimeList[-m + 1:]
+        lastcloseList = lastcloseList[-m:]
         lastclose = {}
-        for i in range(0, m):
+        for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
             lastclose['lastclose'] = lastcloseList[i]
+            realtimeList[i]['min'] = float(realtimeList[i]['min'])
+            if len(realtimeList[i]['open']) == 0:
+                realtimeList[i]['open'] = 0
+            else:
+                realtimeList[i]['open'] = float(realtimeList[i]['open'])
+            realtimeList[i]['max'] = float(realtimeList[i]['max'])
+            realtimeList[i]['close'] = float(realtimeList[i]['close'])
+            realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
             realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
             # print(realtimeList[i])

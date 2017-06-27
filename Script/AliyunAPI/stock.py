@@ -1,3 +1,5 @@
+import math
+
 from functions import getValue
 
 
@@ -23,7 +25,7 @@ class Stock:
         self.Kvalue = None
         self.Tvalue = None
         # self.value = self.get_KValue()
-        self.Kstatus = {'涨幅': '', '量能': '', '收针': '',
+        self.Kstatus = {'涨幅': '', '开收': '', '量能': '', '收针': '',
                         '布林': '', '层级': '', '趋势': '',
                         '平台': '', '预留': '', '备用': ''}
 
@@ -222,10 +224,39 @@ class Stock:
     下面是获取K线参数的函数方法
     """
     def update_Kstatus(self):
-        if self._ref_list['KtimeType'] == 60:
-            pass
+        if self.Kvalue:
+            # print(self.Kvalue)
+            i = 0
+            for _Kvalue in self.Kvalue:
+                # print(_Kvalue)
+                self.update_K参数(_Kvalue)
+                _Kvalue.update(self.Kstatus)
+                self.Kvalue[i] = _Kvalue
+                i += 1
 
 
-    def clear_Kstatus(self):
-        self.Kstatus = None
+    # def clear_Kstatus(self):
+    #     self.Kstatus = None
+
+
+    def update_K参数(self, _Kvalue):
+        """
+        按照K线的涨幅、开盘收盘涨幅、收针判断、布林位置、结合收针的量能 归类 量化
+
+        :return:
+        """
+        try:
+            if round(_Kvalue['lastclose'] * 1.1, 2) == _Kvalue['close']:
+                zf = 10
+            elif round(_Kvalue['lastclose'] * 0.9, 2) == _Kvalue['close']:
+                zf = -10
+            else:
+                zf = 100.0000 * (_Kvalue['close'] - _Kvalue['lastclose']) / _Kvalue['lastclose']
+            ks = 100.0000 * (_Kvalue['close'] - _Kvalue['open'] + 0.001) / _Kvalue['lastclose']
+        except ZeroDivisionError:
+            self.Kstatus['涨幅'] = 0
+            self.Kstatus['开收'] = 0
+        else:
+            self.Kstatus['涨幅'] = math.floor(zf)
+            self.Kstatus['开收'] = math.floor(ks)
 
