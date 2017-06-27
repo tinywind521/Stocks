@@ -25,7 +25,7 @@ class Stock:
         self.Kvalue = None
         self.Tvalue = None
         # self.value = self.get_KValue()
-        self.Kstatus = {'涨幅': '', '开收': '', '量能': '', '收针': '',
+        self.Kstatus = {'涨幅': '', '开收': '', '量能': '', '上针': '', '下针': '',
                         '布林': '', '层级': '', '趋势': '',
                         '平台': '', '预留': '', '备用': ''}
 
@@ -242,6 +242,10 @@ class Stock:
     def update_K参数(self, _Kvalue):
         """
         按照K线的涨幅、开盘收盘涨幅、收针判断、布林位置、结合收针的量能 归类 量化
+        zf：涨幅
+        ks：收盘对应开盘的涨幅（基准昨收）
+        sz：上针幅度（基准为振幅）
+        xz：下针幅度（基准为振幅）
 
         :return:
         """
@@ -256,7 +260,20 @@ class Stock:
         except ZeroDivisionError:
             self.Kstatus['涨幅'] = 0
             self.Kstatus['开收'] = 0
+            self.Kstatus['上针'] = 0
+            self.Kstatus['下针'] = 0
         else:
             self.Kstatus['涨幅'] = math.floor(zf)
             self.Kstatus['开收'] = math.floor(ks)
-
+            try:
+                high = max(_Kvalue['open'], _Kvalue['close'])
+                low = min(_Kvalue['open'], _Kvalue['close'])
+                full = _Kvalue['max'] - _Kvalue['min']
+                sz = 100.0000 * (_Kvalue['max'] - high) / full
+                xz = 100.0000 * (low - _Kvalue['min']) / full
+            except ZeroDivisionError:
+                self.Kstatus['上针'] = 0
+                self.Kstatus['下针'] = 0
+            else:
+                self.Kstatus['上针'] = math.floor(sz)
+                self.Kstatus['下针'] = math.floor(xz)

@@ -9,7 +9,7 @@ from stock import Stock
 
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-code1 = '000510'
+code = '000510'
 # code2 = '000001'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20170101',
@@ -20,22 +20,32 @@ ref_List = {'KtimeType': '60',
 dateList = getValue.get_dateList(ref_List['KbeginDay'], 2 * ref_List['KgetLength'])
 ref_List['KbeginDay'] = dateList[0]
 
-codeList = getValue.get_availableCodeList()
-
-print('start time: ')
-print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-print('\n')
+# codeList = getValue.get_availableCodeList()
+#
+# print('start time: ')
+# print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+# print('\n')
 # codeList = ['600100']
-for code in codeList:
-    print(code)
-    s = Stock(code, ref_List)
-    s.get_KValue()
-    # print(s.Kvalue)
-    s.update_Kstatus()
-    # for k in s.Kvalue:
-    #     print(k)
-print('\nend time:')
-print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+# for code in codeList:
+#     print(code)
+#     s = Stock(code, ref_List)
+#     s.get_KValue()
+#     # print(s.Kvalue)
+#     s.update_Kstatus()
+#     # for k in s.Kvalue:
+#     #     print(k)
+# print('\nend time:')
+# print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+print(code)
+s = Stock(code, ref_List)
+s.get_KValue()
+# print(s.Kvalue)
+s.update_Kstatus()
+for k in s.Kvalue:
+    print(k)
+
+
 
 # 多级路径引入函数
 
