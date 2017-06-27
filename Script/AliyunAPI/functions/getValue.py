@@ -239,6 +239,8 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
                     realOpen = tempOpen
                 else:
                     realOpen = element['open']
+                element['min'] = min(realOpen, element['min'])
+                element['max'] = max(realOpen, element['max'])
                 element['volumn'] = realVol
                 element['open'] = realOpen
                 realtimeValue.append(element)

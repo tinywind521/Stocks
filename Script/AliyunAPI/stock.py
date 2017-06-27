@@ -219,6 +219,37 @@ class Stock:
         return bolllower
 
 
+    def boll_position(self, boll_Kvalue):
+        """
+        判断K线所处布林位置。
+        由于目前暂无法定义一线穿多轨的情况，暂时以收盘价位置为准。
+        结果分类：
+        :return:
+        """
+        self.Kstatus['布林'] = 0
+        if boll_Kvalue['close'] > boll_Kvalue['upper']:
+            "大于上轨"
+            self.Kstatus['布林'] = 3
+        elif boll_Kvalue['close'] == boll_Kvalue['upper']:
+            "等于中轨"
+            self.Kstatus['布林'] = 2
+        elif boll_Kvalue['close'] > boll_Kvalue['mid']:
+            "大于中轨"
+            self.Kstatus['布林'] = 1
+        elif boll_Kvalue['close'] == boll_Kvalue['mid']:
+            "等于中轨"
+            self.Kstatus['布林'] = 0
+        elif boll_Kvalue['close'] > boll_Kvalue['lower']:
+            "小于中轨"
+            self.Kstatus['布林'] = -1
+        elif boll_Kvalue['close'] == boll_Kvalue['lower']:
+            "等于下轨"
+            self.Kstatus['布林'] = -2
+        elif boll_Kvalue['close'] < boll_Kvalue['mid']:
+            "小于下轨"
+            self.Kstatus['布林'] = -3
+
+
     """
     华丽的分割线
     下面是获取K线参数的函数方法
@@ -243,37 +274,43 @@ class Stock:
         """
         按照K线的涨幅、开盘收盘涨幅、收针判断、布林位置、结合收针的量能 归类 量化
         zf：涨幅
-        ks：收盘对应开盘的涨幅（基准昨收）
+        ks：收盘对应开盘的涨幅（基准为昨收）
         sz：上针幅度（基准为振幅）
         xz：下针幅度（基准为振幅）
+        gj：布林上下轨距（基准为昨收）
 
         :return:
         """
         try:
-            if round(_Kvalue['lastclose'] * 1.1, 2) == _Kvalue['close']:
-                zf = 10
-            elif round(_Kvalue['lastclose'] * 0.9, 2) == _Kvalue['close']:
-                zf = -10
+            if round(_Kvalue['lastclose'] * 1.10, 2) == _Kvalue['close']:
+                zf = 10.00
+            elif round(_Kvalue['lastclose'] * 0.90, 2) == _Kvalue['close']:
+                zf = -10.00
             else:
-                zf = 100.0000 * (_Kvalue['close'] - _Kvalue['lastclose']) / _Kvalue['lastclose']
-            ks = 100.0000 * (_Kvalue['close'] - _Kvalue['open'] + 0.001) / _Kvalue['lastclose']
+                zf = 100.00 * (_Kvalue['close'] - _Kvalue['lastclose']) / _Kvalue['lastclose']
+            ks = 100.00 * (_Kvalue['close'] - _Kvalue['open'] + 0.001) / _Kvalue['lastclose']
+            gj = 100.00 * (_Kvalue['upper'] - _Kvalue['lower']) / _Kvalue['mid']
         except ZeroDivisionError:
             self.Kstatus['涨幅'] = 0
             self.Kstatus['开收'] = 0
-            self.Kstatus['上针'] = 0
-            self.Kstatus['下针'] = 0
+            self.Kstatus['上针'] = 0.00
+            self.Kstatus['下针'] = 0.00
+            self.Kstatus['轨距'] = 0.00
+            self.Kstatus['布林'] = 0
         else:
             self.Kstatus['涨幅'] = math.floor(zf)
             self.Kstatus['开收'] = math.floor(ks)
+            self.Kstatus['轨距'] = math.floor(gj)
+            self.boll_position(_Kvalue)
             try:
                 high = max(_Kvalue['open'], _Kvalue['close'])
                 low = min(_Kvalue['open'], _Kvalue['close'])
                 full = _Kvalue['max'] - _Kvalue['min']
-                sz = 100.0000 * (_Kvalue['max'] - high) / full
-                xz = 100.0000 * (low - _Kvalue['min']) / full
+                sz = 100.00 * (_Kvalue['max'] - high) / full
+                xz = 100.00 * (low - _Kvalue['min']) / full
             except ZeroDivisionError:
-                self.Kstatus['上针'] = 0
-                self.Kstatus['下针'] = 0
+                self.Kstatus['上针'] = 0.00
+                self.Kstatus['下针'] = 0.00
             else:
                 self.Kstatus['上针'] = math.floor(sz)
                 self.Kstatus['下针'] = math.floor(xz)

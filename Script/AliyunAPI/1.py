@@ -1,5 +1,6 @@
 from functions import getValue
 from functions import function
+from file_io import dict2CSV
 from http_api import aliyun_api
 import json
 import numpy
@@ -42,9 +43,12 @@ s = Stock(code, ref_List)
 s.get_KValue()
 # print(s.Kvalue)
 s.update_Kstatus()
+print(s.Kvalue)
 for k in s.Kvalue:
     print(k)
-
+header = ['min', 'minute', 'open', 'volumn', 'time', 'max', 'close', 'lastclose', 'mid', 'upper', 'lower',
+          '涨幅', '开收', '量能', '上针', '下针', '布林', '轨距', '层级', '趋势', '平台', '预留', '备用']
+dict2CSV.dict2CSV(s.Kvalue, 'Z:\Test\Test.csv', header)
 
 
 # 多级路径引入函数
