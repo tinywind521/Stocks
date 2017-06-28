@@ -51,6 +51,8 @@ for code in codeList:
         code_text = code + '.sh'
     elif code[0] == '0' or code[0] == '3':
         code_text = code + '.sz'
+    else:
+        code_text = ''
 
     Kvalue = []
     for k in s.Kvalue:

@@ -6,8 +6,11 @@
       <w>appcode</w>
       <w>codedict</w>
       <w>codelist</w>
+      <w>dirnames</w>
+      <w>filenames</w>
       <w>lastclose</w>
       <w>realtime</w>
+      <w>rootdir</w>
       <w>showapi</w>
       <w>sina</w>
       <w>stocklist</w>

@@ -18,28 +18,95 @@
       <file leaf-file-name="getValue.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions/getValue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="69">
               <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
               <folding>
-                <element signature="e#806#1036#0" expanded="false" />
-                <element signature="e#1114#2164#0" expanded="false" />
-                <element signature="e#2234#3489#0" expanded="false" />
-                <element signature="e#3516#4037#0" expanded="false" />
-                <element signature="e#4076#4230#0" expanded="false" />
-                <element signature="e#4301#5178#0" expanded="false" />
-                <element signature="e#5208#5886#0" expanded="false" />
+                <marker date="1498648718631" expanded="true" signature="213:734" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="801:1036" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="806:861" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="1109:2164" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="1114:1168" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="1232:1884" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="1299:1387" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="1440:1532" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="1588:1748" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2029:2146" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2229:3489" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2386:2425" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2460:3466" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2639:2950" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2719:2950" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="2993:3411" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="3086:3411" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="3140:3411" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="3425:3466" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="3511:4037" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="3516:3554" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="4071:4230" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="4076:4150" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="4296:5178" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="4301:4771" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="4953:5155" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5017:5155" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5203:5886" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5208:5266" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="5379:5868" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5528:5677" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5602:5653" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5983:8690" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="5988:6171" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="6180:8647" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="6480:7268" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="6558:6650" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="6701:7204" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="7428:7476" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="7769:8540" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="8788:10575" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="8793:8976" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1498648718631" expanded="true" signature="8985:10532" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="9350:9398" ph="..." />
+                <marker date="1498648718631" expanded="true" signature="9691:10425" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="1.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+            <state relative-caret-position="1380">
+              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/stock.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="299" column="13" lean-forward="true" selection-start-line="299" selection-start-column="13" selection-end-line="299" selection-end-column="13" />
               <folding>
-                <element signature="e#1974#1987#0" expanded="false" />
+                <element signature="e#1666#1910#0" expanded="false" />
+                <element signature="e#1972#2011#0" expanded="false" />
+                <element signature="e#2067#2106#0" expanded="false" />
+                <element signature="e#2162#2203#0" expanded="false" />
+                <element signature="e#2243#2277#0" expanded="false" />
+                <element signature="e#2317#2351#0" expanded="false" />
+                <element signature="e#2392#2427#0" expanded="false" />
+                <element signature="e#2464#2566#0" expanded="false" />
+                <element signature="e#2605#2704#0" expanded="false" />
+                <element signature="e#2783#3055#0" expanded="false" />
+                <element signature="e#3092#3676#0" expanded="false" />
+                <element signature="e#3731#3772#0" expanded="false" />
+                <element signature="e#3827#4012#0" expanded="false" />
+                <element signature="e#4053#4088#0" expanded="false" />
+                <element signature="e#4129#4164#0" expanded="false" />
+                <element signature="e#4201#4275#0" expanded="false" />
+                <element signature="e#4314#4413#0" expanded="false" />
+                <element signature="e#4495#4676#0" expanded="false" />
+                <element signature="e#4718#4905#0" expanded="false" />
+                <element signature="e#4947#5134#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,14 +173,15 @@
         <option value="$PROJECT_DIR$/http_api/hkex_api.py" />
         <option value="$PROJECT_DIR$/file_io/dict2CSV.py" />
         <option value="$PROJECT_DIR$/1.py" />
+        <option value="$PROJECT_DIR$/debug/枚举文件夹.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1932" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -150,7 +218,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -249,6 +316,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -276,7 +344,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.1">
+  <component name="RunManager" selected="Python.绘图">
     <configuration default="false" name="1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -290,24 +358,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="AliyunAPI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="数学计算" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/debug" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AliyunAPI" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/debug/数学计算.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -331,24 +381,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="打印时间" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/debug" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AliyunAPI" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/debug/打印时间.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="debug" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -362,6 +394,42 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="AliyunAPI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/debug/debug.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="枚举文件夹" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/debug" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AliyunAPI" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/debug/枚举文件夹.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="绘图" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../日线分时对比行情" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AliyunAPI" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../日线分时对比行情/绘图.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -433,18 +501,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.1" />
-      <item index="1" class="java.lang.String" itemvalue="Python.数学计算" />
-      <item index="2" class="java.lang.String" itemvalue="Python.stock" />
-      <item index="3" class="java.lang.String" itemvalue="Python.打印时间" />
-      <item index="4" class="java.lang.String" itemvalue="Python.debug" />
+      <item index="1" class="java.lang.String" itemvalue="Python.stock" />
+      <item index="2" class="java.lang.String" itemvalue="Python.debug" />
+      <item index="3" class="java.lang.String" itemvalue="Python.枚举文件夹" />
+      <item index="4" class="java.lang.String" itemvalue="Python.绘图" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.1" />
-        <item index="1" class="java.lang.String" itemvalue="Python.debug" />
-        <item index="2" class="java.lang.String" itemvalue="Python.stock" />
-        <item index="3" class="java.lang.String" itemvalue="Python.打印时间" />
-        <item index="4" class="java.lang.String" itemvalue="Python.数学计算" />
+        <item index="0" class="java.lang.String" itemvalue="Python.绘图" />
+        <item index="1" class="java.lang.String" itemvalue="Python.枚举文件夹" />
+        <item index="2" class="java.lang.String" itemvalue="Python.1" />
+        <item index="3" class="java.lang.String" itemvalue="Python.debug" />
+        <item index="4" class="java.lang.String" itemvalue="Python.stock" />
       </list>
     </recent_temporary>
   </component>
@@ -474,12 +542,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15960665" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16132478" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29598308" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="884" y="72" width="456" height="465" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="348" y="122" width="1224" height="811" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -506,8 +575,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/aliyun/aliyun_request.py" />
-    <entry file="file://$PROJECT_DIR$/aliyun/QQ_api.py" />
     <entry file="file://$PROJECT_DIR$/aliyun/aliyun_api.py" />
     <entry file="file://$PROJECT_DIR$/aliyun/sina_request.py" />
     <entry file="file://$PROJECT_DIR$/aliyun/sina_api.py" />
@@ -603,7 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-322">
           <caret line="3735" column="6" lean-forward="false" selection-start-line="3735" selection-start-column="6" selection-end-line="3735" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -621,12 +687,193 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/sina_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/aliyun_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/sina_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="21" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/Python/Lib/csv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_write_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_io/txt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/QQ_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/QQ_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="28" column="56" lean-forward="false" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/Python/Lib/urllib/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="139" column="4" lean-forward="false" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py" />
+    <entry file="file://$PROJECT_DIR$/debug/debug.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="13" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py" />
+    <entry file="file://$PROJECT_DIR$/fromgc/hkex数据.py" />
+    <entry file="file://$PROJECT_DIR$/debug/列表合并字典.py" />
+    <entry file="file://$PROJECT_DIR$/file_io/write_LHB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="54" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <marker date="1498648718631" expanded="true" signature="213:734" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="801:1036" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="806:861" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="1109:2164" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="1114:1168" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="1232:1884" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="1299:1387" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="1440:1532" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="1588:1748" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2029:2146" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2229:3489" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2386:2425" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2460:3466" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2639:2950" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2719:2950" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="2993:3411" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="3086:3411" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="3140:3411" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="3425:3466" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="3511:4037" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="3516:3554" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="4071:4230" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="4076:4150" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="4296:5178" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="4301:4771" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="4953:5155" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5017:5155" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5203:5886" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5208:5266" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="5379:5868" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5528:5677" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5602:5653" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5983:8690" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="5988:6171" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="6180:8647" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="6480:7268" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="6558:6650" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="6701:7204" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="7428:7476" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="7769:8540" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="8788:10575" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="8793:8976" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1498648718631" expanded="true" signature="8985:10532" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="9350:9398" ph="..." />
+            <marker date="1498648718631" expanded="true" signature="9691:10425" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_io/dict2CSV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../日线分时对比行情/绘图.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/枚举文件夹.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4004">
-          <caret line="316" column="0" lean-forward="false" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+        <state relative-caret-position="336">
+          <caret line="299" column="13" lean-forward="true" selection-start-line="299" selection-start-column="13" selection-end-line="299" selection-end-column="13" />
           <folding>
-            <element signature="e#0#11#0" expanded="false" />
             <element signature="e#1666#1910#0" expanded="false" />
             <element signature="e#1972#2011#0" expanded="false" />
             <element signature="e#2067#2106#0" expanded="false" />
@@ -647,194 +894,6 @@
             <element signature="e#4495#4676#0" expanded="false" />
             <element signature="e#4718#4905#0" expanded="false" />
             <element signature="e#4947#5134#0" expanded="false" />
-            <marker date="1498609669224" expanded="true" signature="8176:8177" ph="..." />
-            <marker date="1498609669224" expanded="true" signature="8176:8299" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/sina_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/aliyun_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/sina_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="21" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/Python/Lib/csv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_write_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_io/txt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="12" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#10#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/QQ_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/QQ_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="28" column="56" lean-forward="false" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/Python/Lib/urllib/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="139" column="4" lean-forward="false" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug/debug.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="13" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="e#57#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fromgc/hkex数据.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug/列表合并字典.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_io/write_LHB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="54" selection-end-column="32" />
-          <folding>
-            <element signature="e#748#902#1" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding>
-            <element signature="e#806#1036#0" expanded="false" />
-            <element signature="e#1114#2164#0" expanded="false" />
-            <element signature="e#2234#3489#0" expanded="false" />
-            <element signature="e#3516#4037#0" expanded="false" />
-            <element signature="e#4076#4230#0" expanded="false" />
-            <element signature="e#4301#5178#0" expanded="false" />
-            <element signature="e#5208#5886#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_io/dict2CSV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding>
-            <element signature="e#1974#1987#0" expanded="false" />
           </folding>
         </state>
       </provider>
