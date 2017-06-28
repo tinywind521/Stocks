@@ -10,6 +10,7 @@
       <w>curpage</w>
       <w>datas</w>
       <w>getcwd</w>
+      <w>hkex</w>
       <w>kbegin</w>
       <w>kget</w>
       <w>kstatus</w>
@@ -19,6 +20,7 @@
       <w>narray</w>
       <w>nlist</w>
       <w>pagebean</w>
+      <w>referer</w>
       <w>regist</w>
       <w>ssdlist</w>
       <w>tdata</w>

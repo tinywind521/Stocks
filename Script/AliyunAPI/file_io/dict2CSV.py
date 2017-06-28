@@ -1,11 +1,29 @@
-import csv
+
+def writeHeader(path, headers, method='w+'):
+    try:
+        f = open(path, method)
+        text = ''
+        end = headers.pop()
+        for s in headers:
+            text = text + s + ','
+        text = text + end + '\n'
+        f.write(text)
+        f.close()
+    except ValueError:
+        pass
 
 
-def dict2CSV(rows, path, headers):
-    # headers = []
-    # rows = [{}]
-
-    with open(path, 'w') as f:
-        f_csv = csv.DictWriter(f, headers)
-        f_csv.writeheader()
-        f_csv.writerows(rows)
+def writeRows(path, rows):
+    try:
+        f = open(path, 'a+')
+        for row in rows:
+            text = ''
+            temp = list(row.values())
+            end = temp.pop()
+            for s in temp:
+                text = text + str(s).replace(',', '') + ','
+            text = text + end + '\n'
+            f.write(text)
+        f.close()
+    except ValueError:
+        pass

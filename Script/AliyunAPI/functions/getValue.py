@@ -20,10 +20,13 @@ def get_dateList(beginDay, getLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'
     # appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
     dateList = function.return_date(beginDay, appcode)
     # print(dateList)
-    if getLength < len(dateList):
+    if getLength == 0:
+        return dateList
+    elif getLength < len(dateList):
         dateList = dateList[-getLength:]
-    # print(dateList)
-    return dateList
+        return dateList
+    else:
+        return dateList
 
 
 def get_allCodelist(appcode='c7689f18e1484e9faec07122cc0b5f9e'):

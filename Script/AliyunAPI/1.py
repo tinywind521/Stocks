@@ -12,58 +12,63 @@ from stock import Stock
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 code = '000510'
 # code2 = '000001'
-ref_List = {'KtimeType': '60',
+ref_List = {'KtimeType': 'day',
             'KbeginDay': '20170101',
             'KgetLength': 30,
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': appcode}
-dateList = getValue.get_dateList(ref_List['KbeginDay'], 2 * ref_List['KgetLength'])
+dateList = getValue.get_dateList(ref_List['KbeginDay'], 0)
+print(dateList)
+ref_List['KgetLength'] = len(dateList)
+ref_List['KbeginDay'] = '20160101'
+dateList = getValue.get_dateList(ref_List['KbeginDay'], ref_List['KgetLength'] + 20)
 ref_List['KbeginDay'] = dateList[0]
 
-# codeList = getValue.get_availableCodeList()
-#
-# print('start time: ')
-# print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-# print('\n')
+print(ref_List)
+
+codeList = getValue.get_availableCodeList()
+
+print('start time: ')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print('\n')
 # codeList = ['600100']
-# for code in codeList:
-#     print(code)
-#     s = Stock(code, ref_List)
-#     s.get_KValue()
-#     # print(s.Kvalue)
-#     s.update_Kstatus()
-#     # for k in s.Kvalue:
-#     #     print(k)
-# print('\nend time:')
-# print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-
-print(code)
-s = Stock(code, ref_List)
-s.get_KValue()
-# print(s.Kvalue)
-s.update_Kstatus()
-print(s.Kvalue)
-for k in s.Kvalue:
-    print(k)
-header = ['min', 'minute', 'open', 'volumn', 'time', 'max', 'close', 'lastclose', 'mid', 'upper', 'lower',
+header = ['代码', 'min', 'open', 'volumn', 'time', 'max', 'close', 'lastclose', 'mid', 'upper', 'lower',
           '涨幅', '开收', '量能', '上针', '下针', '布林', '轨距', '层级', '趋势', '平台', '预留', '备用']
-dict2CSV.dict2CSV(s.Kvalue, 'Z:\Test\Test.csv', header)
+# header = ['代码', 'min', 'minute', 'open', 'volumn', 'time', 'max', 'close', 'lastclose', 'mid', 'upper', 'lower',
+#           '涨幅', '开收', '量能', '上针', '下针', '布林', '轨距', '层级', '趋势', '平台', '预留', '备用']
+dict2CSV.writeHeader('Z:\Test\Test.csv', header)
 
+for code in codeList:
+    print(code)
+    s = Stock(code, ref_List)
+    s.get_KValue()
+    # print(s.Kvalue)
+    s.update_Kstatus()
+    # for k in s.Kvalue:
+    #     print(k)
+    if code[0] == '6':
+        code_text = code + '.sh'
+    elif code[0] == '0' or code[0] == '3':
+        code_text = code + '.sz'
 
-# 多级路径引入函数
+    Kvalue = []
+    for k in s.Kvalue:
+        # print(k)
+        temp = {'code': ''}
+        temp['code'] = code_text
+        temp.update(k)
+        Kvalue.append(temp)
+    # print(Kvalue)
+    dict2CSV.writeRows('Z:\Test\Test.csv', Kvalue)
 
-# import sys
-# import os
-# sys.path.append(os.getcwd()+'\\parent\\child')
-#
-# print(sys.path)
-#
-# from a import add_func
-#
-#
-# print (sys.path)
-#
-# print ("Import add_func from module a")
-# print ("Result of 1 plus 2 is: ")
-# print (add_func(1,2))
+print('\nend time:')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+# print(code)
+# s = Stock(code, ref_List)
+# s.get_KValue()
+# # print(s.Kvalue)
+# s.update_Kstatus()
+# # print(s.Kvalue)
+

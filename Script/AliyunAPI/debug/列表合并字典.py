@@ -1,0 +1,1 @@
+dict(zip(list1,list2))
