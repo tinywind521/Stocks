@@ -314,3 +314,41 @@ class Stock:
             else:
                 self.Kstatus['上针'] = math.floor(sz)
                 self.Kstatus['下针'] = math.floor(xz)
+
+
+class YinLineGroup:
+    """
+    连续阴线 类的测试版
+    code: 代码
+    Kvalue:
+    para: 待定参数
+    开发者：Q0233
+    最后更新：未完成
+    注意：分时数据是逆序，K线数据是顺序。
+    # [
+    #     { [ {连续阴线1参数 }, {连续阴线2参数}, {连续阴线3参数}...], {第1组连续阴线的组参数} },
+    #     { [ {连续阴线1参数 }, {连续阴线2参数}, {连续阴线3参数}...], {第2组连续阴线的组参数} },
+    #     ...
+    #     { [ {连续阴线1参数 }, {连续阴线2参数}, {连续阴线3参数}...], {第i组连续阴线的组参数} },
+    # ]
+    """
+
+    def __int__(self, code, Kvalue, para):
+        if para is None:
+            para = {
+
+                    }
+        if Kvalue is None or len(Kvalue) == 0:
+            # Kvalue = Stock.get_KValue()
+            raise ValueError
+        self.code = code
+        self._para = para
+        self.Kvalue = Kvalue
+
+
+    def get_para(self):
+        return self._para
+
+
+
+

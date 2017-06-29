@@ -138,15 +138,20 @@ def cal_boll(valueList, n, p):
     boll = []
     for value in valueList:
         boll_dict = {}
-        tempList = valueTemp[0:n]
-        narray = numpy.array(tempList)
-        mid = numpy.mean(narray)
-        spd = numpy.sqrt(numpy.var(narray))
-        upper = mid + p * spd
-        lower = mid - p * spd
-        boll_dict['mid'] = float(format(mid, '.2f'))
-        boll_dict['upper'] = float(format(upper, '.2f'))
-        boll_dict['lower'] = float(format(lower, '.2f'))
+        if len(valueTemp) >= 20:
+            tempList = valueTemp[0:n]
+            narray = numpy.array(tempList)
+            mid = numpy.mean(narray)
+            spd = numpy.sqrt(numpy.var(narray))
+            upper = mid + p * spd
+            lower = mid - p * spd
+            boll_dict['mid'] = float(format(mid, '.2f'))
+            boll_dict['upper'] = float(format(upper, '.2f'))
+            boll_dict['lower'] = float(format(lower, '.2f'))
+        else:
+            boll_dict['mid'] = 0
+            boll_dict['upper'] = 0
+            boll_dict['lower'] = 0
         # print(boll_dict)
         boll.insert(0, boll_dict)
         valueTemp.pop(0)

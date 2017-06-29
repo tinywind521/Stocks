@@ -2,6 +2,7 @@ import urllib.request
 import urllib.error
 import sys
 import ssl
+import time
 
 
 def req(url, appcode):
@@ -24,8 +25,13 @@ def req(url, appcode):
         # print(response)
         try:
             response = urllib.request.urlopen(request, context=ctx)
-        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError:
-            response = None
+        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError:
+            time.sleep(5)
+            print('Oh,Let me have a rest! 5S!')
+            try:
+                response = urllib.request.urlopen(request, context=ctx)
+            except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError:
+                response = None
         # print(response)
         try:
             content = response.read().decode("utf-8")
