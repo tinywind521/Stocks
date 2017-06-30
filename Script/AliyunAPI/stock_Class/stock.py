@@ -336,7 +336,7 @@ class YYLineGroup:
     （连续）层级差的趋势逆转、趋势加强和趋势释放。
 
     注意反向层级差
-
+    不要怂，就是干！
     """
 
     def __int__(self, code, Kvalue, para):
