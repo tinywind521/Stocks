@@ -15,8 +15,8 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/1.py">
+      <file leaf-file-name="hkex.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hkex.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -28,7 +28,7 @@
       <file leaf-file-name="level_differ.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/level_differ.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
+            <state relative-caret-position="924">
               <caret line="55" column="21" lean-forward="false" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
               <folding />
             </state>
@@ -38,8 +38,8 @@
       <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="338" column="12" lean-forward="false" selection-start-line="338" selection-start-column="12" selection-end-line="338" selection-end-column="12" />
+            <state relative-caret-position="400">
+              <caret line="375" column="0" lean-forward="true" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
               <folding>
                 <element signature="e#950#971#0" expanded="false" />
                 <element signature="e#978#1019#1" expanded="false" />
@@ -70,18 +70,8 @@
                 <element signature="e#6111#6152#1" expanded="false" />
                 <element signature="e#6191#6487#0" expanded="false" />
                 <element signature="e#6487#6513#0" expanded="false" />
-                <element signature="e#6589#8299#0" expanded="false" />
+                <element signature="e#9318#9352#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="debug.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/debug/debug.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -103,8 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/aliyun/QQ_api.py" />
-        <option value="$PROJECT_DIR$/aliyun/QQ_request.py" />
         <option value="$PROJECT_DIR$/file_list.py" />
         <option value="$PROJECT_DIR$/file_write_all.py" />
         <option value="$PROJECT_DIR$/get_60F.py" />
@@ -124,8 +112,6 @@
         <option value="$PROJECT_DIR$/2.py" />
         <option value="$PROJECT_DIR$/3.py" />
         <option value="$PROJECT_DIR$/level_differ.py" />
-        <option value="$PROJECT_DIR$/debug/字典子集.py" />
-        <option value="$PROJECT_DIR$/debug/错误处理示例.py" />
         <option value="$PROJECT_DIR$/http_api/QQ_request.py" />
         <option value="$PROJECT_DIR$/file_io/write_LHB.py" />
         <option value="$PROJECT_DIR$/http_api/QQ_api.py" />
@@ -139,19 +125,25 @@
         <option value="$PROJECT_DIR$/http_api/sina_request.py" />
         <option value="$PROJECT_DIR$/debug/列表合并字典.py" />
         <option value="$PROJECT_DIR$/http_api/hkex_request.py" />
-        <option value="$PROJECT_DIR$/functions/getValue.py" />
         <option value="$PROJECT_DIR$/fromgc/hkex数据.py" />
         <option value="$PROJECT_DIR$/http_api/hkex_api.py" />
         <option value="$PROJECT_DIR$/file_io/dict2CSV.py" />
         <option value="$PROJECT_DIR$/debug/枚举文件夹.py" />
         <option value="$PROJECT_DIR$/functions/function.py" />
-        <option value="$PROJECT_DIR$/1.py" />
         <option value="$PROJECT_DIR$/http_api/aliyun_request.py" />
         <option value="$PROJECT_DIR$/debug/阴线架构.py" />
         <option value="$PROJECT_DIR$/stock_Class/yinLineGroup.py" />
         <option value="$PROJECT_DIR$/hkex.py" />
-        <option value="$PROJECT_DIR$/debug/debug.py" />
+        <option value="$PROJECT_DIR$/debug/错误处理示例.py" />
+        <option value="$PROJECT_DIR$/debug/晕乎乎的工程模式.py" />
         <option value="$PROJECT_DIR$/stock_Class/stock.py" />
+        <option value="$PROJECT_DIR$/debug/抓去并保存K线数据.py" />
+        <option value="$PROJECT_DIR$/1.py" />
+        <option value="$PROJECT_DIR$/debug/字典子集.py" />
+        <option value="$PROJECT_DIR$/functions/getValue.py" />
+        <option value="$PROJECT_DIR$/fromgc/抓取并保存K线数据.py" />
+        <option value="$PROJECT_DIR$/debug/Python 3.x中maketrans和translate用法.py" />
+        <option value="$PROJECT_DIR$/debug/debug.py" />
       </list>
     </option>
   </component>
@@ -195,6 +187,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -308,7 +301,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,13 +308,14 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\fromgc" />
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\stock_Class" />
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\debug" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="Z:\Resources\Stocks\Script\AliyunAPI\aliyun" />
       <recent name="Z:\Resources\Stocks\Script\AliyunAPI" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\stock_Class" />
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\debug" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -351,24 +344,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="AliyunAPI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="stock" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AliyunAPI" />
-      <option name="SCRIPT_NAME" value="Z:\Resources\Stocks\Script\AliyunAPI\stock_Class\stock.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -423,6 +398,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="AliyunAPI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../日线分时对比行情/绘图.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="晕乎乎的工程模式" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/debug" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AliyunAPI" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/debug/晕乎乎的工程模式.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -494,18 +487,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.1" />
-      <item index="1" class="java.lang.String" itemvalue="Python.stock" />
-      <item index="2" class="java.lang.String" itemvalue="Python.debug" />
-      <item index="3" class="java.lang.String" itemvalue="Python.枚举文件夹" />
-      <item index="4" class="java.lang.String" itemvalue="Python.绘图" />
+      <item index="1" class="java.lang.String" itemvalue="Python.debug" />
+      <item index="2" class="java.lang.String" itemvalue="Python.枚举文件夹" />
+      <item index="3" class="java.lang.String" itemvalue="Python.绘图" />
+      <item index="4" class="java.lang.String" itemvalue="Python.晕乎乎的工程模式" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.debug" />
         <item index="1" class="java.lang.String" itemvalue="Python.1" />
-        <item index="2" class="java.lang.String" itemvalue="Python.绘图" />
-        <item index="3" class="java.lang.String" itemvalue="Python.枚举文件夹" />
-        <item index="4" class="java.lang.String" itemvalue="Python.stock" />
+        <item index="2" class="java.lang.String" itemvalue="Python.晕乎乎的工程模式" />
+        <item index="3" class="java.lang.String" itemvalue="Python.绘图" />
+        <item index="4" class="java.lang.String" itemvalue="Python.枚举文件夹" />
       </list>
     </recent_temporary>
   </component>
@@ -537,16 +530,16 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16944024" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17170954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29598308" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="786" y="79" width="553" height="433" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="25" y="79" width="1314" height="571" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869988" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869988" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -567,23 +560,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/Python/pkgs/boto-2.47.0-py36_0/Lib/site-packages/boto/sqs/message.py" />
-    <entry file="file://$PROJECT_DIR$/get_60F.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="29" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fromgc/大梁.py" />
-    <entry file="file://$PROJECT_DIR$/debug/ClearWindow.py" />
     <entry file="file://Z:/Python/Lib/urllib/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -595,14 +571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2">
           <caret line="4950" column="4" lean-forward="false" selection-start-line="4950" selection-start-column="4" selection-end-line="4950" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug/错误处理示例.py" />
-    <entry file="file://$PROJECT_DIR$/debug/字典子集.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -628,8 +596,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/debug/数学计算.py" />
-    <entry file="file://$PROJECT_DIR$/debug/打印时间.py" />
-    <entry file="file://$PROJECT_DIR$/debug/MySQL.py" />
     <entry file="file://$PROJECT_DIR$/file_io/write.py" />
     <entry file="file://$PROJECT_DIR$/file_io/write CSV.py" />
     <entry file="file://$PROJECT_DIR$/file_io/Dict to CSV.py" />
@@ -658,20 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-66">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -726,7 +678,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py" />
     <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py" />
-    <entry file="file://$PROJECT_DIR$/fromgc/hkex数据.py" />
     <entry file="file://$PROJECT_DIR$/debug/列表合并字典.py" />
     <entry file="file://$PROJECT_DIR$/file_io/write_LHB.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -749,21 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/debug/枚举文件夹.py" />
-    <entry file="file://$PROJECT_DIR$/functions/function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="149" column="60" lean-forward="true" selection-start-line="149" selection-start-column="60" selection-end-line="149" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/http_api/aliyun_request.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
@@ -773,7 +709,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/yinLineGroup.py" />
     <entry file="file://$PROJECT_DIR$/debug/阴线架构.py" />
-    <entry file="file://$PROJECT_DIR$/1.py">
+    <entry file="file://$PROJECT_DIR$/stock.py" />
+    <entry file="file://$PROJECT_DIR$/debug/错误处理示例.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="149" column="60" lean-forward="true" selection-start-line="149" selection-start-column="60" selection-end-line="149" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/字典子集.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/MySQL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -781,35 +742,153 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hkex.py" />
+    <entry file="file://$PROJECT_DIR$/debug/input_return.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-106">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/打印时间.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/晕乎乎的工程模式.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/枚举文件夹.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/level_differ.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="55" column="21" lean-forward="false" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-150">
+          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hkex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/抓去并保存K线数据.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="739">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="347" column="4" lean-forward="false" selection-start-line="347" selection-start-column="4" selection-end-line="347" selection-end-column="4" />
+          <folding>
+            <element signature="e#218#734#0" expanded="false" />
+            <element signature="e#806#1036#0" expanded="false" />
+            <element signature="e#1114#2164#0" expanded="false" />
+            <element signature="e#2234#3489#0" expanded="false" />
+            <element signature="e#3516#4037#0" expanded="false" />
+            <element signature="e#4076#4230#0" expanded="false" />
+            <element signature="e#4301#5178#0" expanded="false" />
+            <element signature="e#5208#5886#0" expanded="false" />
+            <element signature="e#5988#8690#0" expanded="false" />
+            <element signature="e#8793#10575#0" expanded="false" />
+            <element signature="e#10661#10821#0" expanded="false" />
+            <element signature="e#10849#11096#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fromgc/抓取并保存K线数据.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fromgc/hkex数据.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/-1047536700/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="3456" column="6" lean-forward="false" selection-start-line="3456" selection-start-column="6" selection-end-line="3456" selection-end-column="6" />
+        <state relative-caret-position="228">
+          <caret line="4989" column="57" lean-forward="true" selection-start-line="4989" selection-start-column="57" selection-end-line="4989" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/Python 3.x中maketrans和translate用法.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="4" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/debug/debug.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stock.py" />
-    <entry file="file://$PROJECT_DIR$/level_differ.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="55" column="21" lean-forward="false" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
+        <state relative-caret-position="220">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="338" column="12" lean-forward="false" selection-start-line="338" selection-start-column="12" selection-end-line="338" selection-end-column="12" />
+        <state relative-caret-position="400">
+          <caret line="375" column="0" lean-forward="true" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
           <folding>
             <element signature="e#950#971#0" expanded="false" />
             <element signature="e#978#1019#1" expanded="false" />
@@ -840,7 +919,7 @@
             <element signature="e#6111#6152#1" expanded="false" />
             <element signature="e#6191#6487#0" expanded="false" />
             <element signature="e#6487#6513#0" expanded="false" />
-            <element signature="e#6589#8299#0" expanded="false" />
+            <element signature="e#9318#9352#0" expanded="false" />
           </folding>
         </state>
       </provider>

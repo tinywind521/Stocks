@@ -316,7 +316,7 @@ class Stock:
                 self.Kstatus['下针'] = math.floor(xz)
 
 
-class YYLineGroup:
+class YYLine:
     """
     连续阴线/阳线 类的测试版
     code: 代码
@@ -339,21 +339,37 @@ class YYLineGroup:
     不要怂，就是干！
     """
 
-    def __int__(self, code, Kvalue, para):
+    def __int__(self, Kvalue, para=None, code=None):
         if para is None:
             para = {
 
                     }
         if Kvalue is None or len(Kvalue) == 0:
             # Kvalue = Stock.get_KValue()
-            raise ValueError
+            raise ValueError('input Kvalue is None!')
         self.code = code
         self._para = para
-        self.Kvalue = Kvalue
+        self._Kvalue = Kvalue
+        self._YYstatus = [{[{}], {}}]
+        # [{[{}], {}}]
+        # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
 
 
     def get_para(self):
         return self._para
+
+
+    # def import_status(self, Kvalue):
+    #     self._Kvalue = Kvalue
+
+
+    def update_status(self):
+        if self._Kvalue is None or len(self._Kvalue) == 0:
+            raise ValueError('self._Kvalue is None!')
+        else:
+            # self._YYstatus = [{[{}], {}}]
+            for Ksingle in self._Kvalue:
+                pass
 
 
 

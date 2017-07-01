@@ -1,9 +1,11 @@
-a = [1, 2, 3]
-a[1:1] = [0, 0, 0]
-try:
-    b = a.index(4)
-except ValueError:
-    b = None
-a.append(4)
-print(a)
+from string import capwords
+a = {'min': 10.7, 'open': 10.72, 'volumn': 62789.0, 'time': '20170630'}
+suba = ['min', 'open']
+b = dict([(key, a[key]) for key in suba])
 print(b)
+
+print(list(a.values()))
+print(list(a.keys()))
+s = ''
+
+a = capwords('a bd def ghijk', ' ')

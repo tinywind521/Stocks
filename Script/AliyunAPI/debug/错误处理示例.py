@@ -12,3 +12,4 @@ else:
 finally:
     """print("finally")"""
 # 继续下面的流程
+raise ValueError('he he!')

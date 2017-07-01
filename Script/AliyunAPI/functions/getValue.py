@@ -343,3 +343,18 @@ def get_timeLine(code, dayLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
         return None
     else:
         return result
+
+
+def add_index(code):
+    """
+    输入6位代码，输出带主板的代码
+    :param code:
+    :return:
+    """
+    if code[0] == '6':
+        code_text = code + '.sh'
+    elif code[0] == '0' or code[0] == '3':
+        code_text = code + '.sz'
+    else:
+        code_text = ''
+    return code_text
