@@ -345,6 +345,7 @@ class YYLine:
     """
 
     def __int__(self, Kvalue, para=None, code=None):
+        self._Kvalue = None
         if para is None:
             para = {
 
@@ -352,9 +353,11 @@ class YYLine:
         if Kvalue is None or len(Kvalue) == 0:
             # Kvalue = Stock.get_KValue()
             raise ValueError('input Kvalue is None!')
+        else:
+            self._cal_index(Kvalue)
         self.code = code
         self._para = para
-        self._Kvalue = Kvalue
+        # self._Kvalue = self.update_status(Kvalue)
         self._YYstatus = [{[{}], {}}]
         # [{[{}], {}}]
         # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
@@ -364,17 +367,32 @@ class YYLine:
         return self._para
 
 
-    # def import_status(self, Kvalue):
-    #     self._Kvalue = Kvalue
+    def get_index(self, Kvalue):
+        """
+        更新K线量化指标
+        :param Kvalue:
+        :return:
+        """
+        self._cal_index(Kvalue)
 
 
-    def update_status(self):
-        if self._Kvalue is None or len(self._Kvalue) == 0:
-            raise ValueError('self._Kvalue is None!')
-        else:
-            # self._YYstatus = [{[{}], {}}]
-            for Ksingle in self._Kvalue:
-                pass
+    def _cal_index(self, Kvalue):
+        """
+        计算K线的量化指标
+
+        主要功能：
+        1、计算结合收针量能、日内交易均价等指标；
+        2、重构新的K线信息列表，并不覆盖原始API数据
+
+        :param Kvalue:
+        :return:
+        """
+        self._Kvalue.clear()
+        for Ksingle in Kvalue:
+            self._Kvalue.append(Ksingle)
+        # return result
+
+
 
 
 
