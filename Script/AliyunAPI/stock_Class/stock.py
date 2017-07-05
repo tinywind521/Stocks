@@ -486,3 +486,12 @@ class Yline:
             if not judge:
                 self._seq_bear.append(self._list_bear[:])
 
+        """
+        未完成的任务：
+        1、找到布林下轨起点；
+        2、根据K线所处布林位置，分层；
+        3、逐层分段计算层级差；
+        4、地量、次地量位置（中上层的近期出现）；
+        
+        """
+
