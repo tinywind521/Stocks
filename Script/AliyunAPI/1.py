@@ -8,7 +8,7 @@ appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 code = '000510'
 # code2 = '000001'
 ref_List = {'KtimeType': 'day',
-            'KbeginDay': '20160701',
+            'KbeginDay': '20160505',
             'KgetLength': 41,
             'TdayLength': 5,
             'TgetLength': 3,

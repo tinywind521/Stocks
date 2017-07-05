@@ -14,8 +14,32 @@ import os
 # s = sina_api.timeline(finalList)
 # print(s)
 # t = s.count('var hq_str')
+class hehe:
+    def __init__(self, temp):
+        self._list_l = []
+        self._list_r = []
+        self._seq_l = []
+        self._seq_r = []
 
-a = 1
-b = a
-a = 2
-print(b)
+        s = 1
+        judge = 1
+        if s == 1:
+            if judge:
+                self._list_l.append(temp)
+            else:
+                s = 2
+                self._seq_l.append(self._list_l[:])
+                self._list_r.clear()
+                self._list_r.append(temp)
+        elif s == 2:
+            if not judge:
+                self._list_r.append(temp)
+            else:
+                s = 1
+                self._seq_r.append(self._list_r[:])
+                self._list_l.clear()
+                self._list_l.append(temp)
+
+        if s:
+            pass
+

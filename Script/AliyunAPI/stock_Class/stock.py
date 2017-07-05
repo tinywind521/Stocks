@@ -316,11 +316,10 @@ class Stock:
                 self.Kstatus['下针'] = math.floor(xz)
 
 
-class YYLine:
+class Yline:
     """
     连续阴线/阳线 类的测试版
-    code: 代码
-    Kvalue:
+    Kvalue: K线
     para: 待定参数
     开发者：Q0233
     最后更新：未完成
@@ -331,34 +330,42 @@ class YYLine:
     #     ...
     #     { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第i组连续K线的组参数} },
     # ]
-
     层级差合并地量形成强支撑（首次力度极强），如果合并趋势线或者中轨等一般支撑，效果明显！！！
     （连续）层级差的趋势逆转、趋势加强和趋势释放。
-
     单根K线目前量化的参数如下：
         1、单日参数：4价，量能，涨幅，布林参数， 还增加了布林位置和结合收针的量能
         2、两日参数：缩量/放量的程度（相对量能比值），缺口宽度
         3、多日参数：是否是层级差，地量或者峰值量
-
     注意反向层级差
     不要怂，就是干！
     """
-
-    def __int__(self, Kvalue, para=None, code=None):
-        self._Kvalue = None
+    def __init__(self, Kvalue, para):
+        self._list_bull = []
+        self._list_bear = []
+        self._seq_bull = []
+        self._seq_bear = []
+        self._paraList = ['time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
+                          'upper', 'mid',  'lower', '涨幅', '开收', '量能', '上针',
+                          '下针', '布林', '轨距', '层级', '趋势', '平台']
+        self.minVol = 0
+        self._YYstatus = None
         if para is None:
-            para = {
+            para = {'收针对量能的影响系数': 0.75,
 
                     }
+            self._para = para
         if Kvalue is None or len(Kvalue) == 0:
             # Kvalue = Stock.get_KValue()
             raise ValueError('input Kvalue is None!')
         else:
+            self._para = para
+            self.Index = None
+
+            """Index 为量化指标"""
             self._cal_index(Kvalue)
-        self.code = code
-        self._para = para
-        # self._Kvalue = self.update_status(Kvalue)
-        self._YYstatus = [{[{}], {}}]
+
+            """minVol 近期地量"""
+
         # [{[{}], {}}]
         # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
 
@@ -367,9 +374,17 @@ class YYLine:
         return self._para
 
 
-    def get_index(self, Kvalue):
+    def get_seq_bull(self):
+        return self._seq_bull
+
+
+    def get_seq_bear(self):
+        return self._seq_bear
+
+
+    def refresh_index(self, Kvalue):
         """
-        更新K线量化指标
+        刷新K线量化指标
         :param Kvalue:
         :return:
         """
@@ -378,22 +393,96 @@ class YYLine:
 
     def _cal_index(self, Kvalue):
         """
-        计算K线的量化指标
+        计算K线的量化指标;
+        划分阴阳序列;
 
         主要功能：
+        在一次遍历中
+
         1、计算结合收针量能、日内交易均价等指标；
         2、重构新的K线信息列表，并不覆盖原始API数据
+
+        3、分组划分阴阳线
 
         :param Kvalue:
         :return:
         """
-        self._Kvalue.clear()
+
+        self._seq_bull.clear()
+        self._seq_bear.clear()
+        self._list_bull.clear()
+        self._list_bear.clear()
+
+        if self.Index:
+            self.Index.clear()
+        self.Index = []
+        s = None
+        judge = None
         for Ksingle in Kvalue:
-            self._Kvalue.append(Ksingle)
-        # return result
+            """计算  收针对量能的影响 """
+            temp = dict([(key, Ksingle[key]) for key in self._paraList])
+            if temp['close'] > temp['open']:
+                temp['量能'] = round(temp['volumn']*(1-self._para.get('收针对量能的影响系数', 1)*temp['上针']/100))
+            else:
+                temp['量能'] = round(temp['volumn']*(1-self._para.get('收针对量能的影响系数', 1)*temp['下针']/100))
 
+            self.Index.append(temp)
 
+            """
+            划分阴阳序列
+            s：是否判断阴阳的标志
+            s = {0: None, 'bull': 1, 'bear': 2}
+            
+            self._list_bull.clear()
+            self._list_bear.clear()
+            """
 
+            if temp['close'] > temp['lastclose']:
+                judge = True
+            elif temp['close'] == temp['lastclose']:
+                if temp['close'] > temp['open']:
+                    judge = True
+                elif temp['close'] <= temp['open']:
+                    judge = False
+                else:
+                    judge = None
+            elif temp['close'] < temp['lastclose']:
+                judge = False
+            else:
+                judge = None
+            if judge is None:
+                raise ValueError('我也不知道为啥judge的值不对!或许是打开方式不对!', judge)
 
-
+            if not s:
+                """not s：未判断"""
+                self.minVol = temp['volumn']
+                if judge:
+                    s = 1
+                else:
+                    s = 2
+            self.minVol = min(temp['volumn'], self.minVol)
+            if s == 1:
+                if judge:
+                    self._list_bull.append(temp)
+                else:
+                    s = 2
+                    self._seq_bull.append(self._list_bull[:])
+                    self._list_bear.clear()
+                    self._list_bear.append(temp)
+            elif s == 2:
+                if not judge:
+                    self._list_bear.append(temp)
+                else:
+                    s = 1
+                    self._seq_bear.append(self._list_bear[:])
+                    self._list_bull.clear()
+                    self._list_bull.append(temp)
+            else:
+                raise ValueError('我也不知道为啥judge的值不对!或许是打开方式不对!', s)
+        if s == 1:
+            if judge:
+                self._seq_bull.append(self._list_bull[:])
+        elif s == 2:
+            if not judge:
+                self._seq_bear.append(self._list_bear[:])
 
