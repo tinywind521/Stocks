@@ -224,30 +224,51 @@ class Stock:
         判断K线所处布林位置。
         由于目前暂无法定义一线穿多轨的情况，暂时以收盘价位置为准。
         结果分类：
+        +4：高于上轨
+        +3：等于上轨
+        +2：中上轨上部空间
+        +1：中上轨下部空间
+        0：等于中轨
+        -1：中下轨上部空间
+        -2：中下轨下部空间
+        -3：等于下轨
+        -4：低于下轨
         :return:
         """
         self.Kstatus['布林'] = 0
+
+        """中上轨上下分层标准"""
+        upper_mid = (boll_Kvalue['upper'] + boll_Kvalue['mid']) / 2
+        """中下轨上下分层标准"""
+        lower_mid = (boll_Kvalue['lower'] + boll_Kvalue['mid']) / 2
+
         if boll_Kvalue['close'] > boll_Kvalue['upper']:
-            "大于上轨"
-            self.Kstatus['布林'] = 3
+            "+4：高于上轨"
+            self.Kstatus['布林'] = +4
         elif boll_Kvalue['close'] == boll_Kvalue['upper']:
-            "等于中轨"
-            self.Kstatus['布林'] = 2
+            "+3：等于上轨"
+            self.Kstatus['布林'] = +3
+        elif boll_Kvalue['close'] > upper_mid:
+            "+2：中上轨上部空间"
+            self.Kstatus['布林'] = +2
         elif boll_Kvalue['close'] > boll_Kvalue['mid']:
-            "大于中轨"
-            self.Kstatus['布林'] = 1
+            "+1：中上轨下部空间"
+            self.Kstatus['布林'] = +1
         elif boll_Kvalue['close'] == boll_Kvalue['mid']:
-            "等于中轨"
+            "0：等于中轨"
             self.Kstatus['布林'] = 0
-        elif boll_Kvalue['close'] > boll_Kvalue['lower']:
-            "小于中轨"
+        elif boll_Kvalue['close'] > lower_mid:
+            "-1：中下轨上部空间"
             self.Kstatus['布林'] = -1
-        elif boll_Kvalue['close'] == boll_Kvalue['lower']:
-            "等于下轨"
+        elif boll_Kvalue['close'] > boll_Kvalue['lower']:
+            "-2：中下轨下部空间"
             self.Kstatus['布林'] = -2
-        elif boll_Kvalue['close'] < boll_Kvalue['mid']:
-            "小于下轨"
+        elif boll_Kvalue['close'] == boll_Kvalue['lower']:
+            "-3：等于下轨"
             self.Kstatus['布林'] = -3
+        elif boll_Kvalue['close'] < boll_Kvalue['lower']:
+            "-4：低于下轨"
+            self.Kstatus['布林'] = -4
 
 
     """
@@ -478,20 +499,28 @@ class Yline:
                     self._list_bull.clear()
                     self._list_bull.append(temp)
             else:
-                raise ValueError('我也不知道为啥judge的值不对!或许是打开方式不对!', s)
+                raise ValueError('我也不知道为啥s的值不对!或许是打开方式不对!', s)
         if s == 1:
             if judge:
                 self._seq_bull.append(self._list_bull[:])
         elif s == 2:
             if not judge:
                 self._seq_bear.append(self._list_bear[:])
+        else:
+            raise ValueError('我也不知道为啥s的值不对!或许是打开方式不对!', s)
+
+
 
         """
         未完成的任务：
-        1、找到布林下轨起点；
-        2、根据K线所处布林位置，分层；
-        3、逐层分段计算层级差；
-        4、地量、次地量位置（中上层的近期出现）；
+        1、找到布林下轨起点:
+            也就是最小的布林分层位置（这个位置就是短期底部）;
+        2、按照K线布林分层，把阴线分段：
+            计算水平，上升和下降层级差，不同的层级差对中间阳线的量能要求不一样
+            （也是就放量和地量的出现需求）
+            例如，高层地量和次地量，中下层的山峰技术形态
+        3、逐层分段计算并审核层级差;
+        4、连续和不连续阴线的分组处理
         
         """
 
