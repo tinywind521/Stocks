@@ -7,7 +7,7 @@ from stock_Class.stock import Stock, Yline
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20160505',
-            'KgetLength': 41,
+            'KgetLength': 51,
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': appcode}
@@ -33,6 +33,11 @@ for code in codeList:
     print('\n下面是阴线起点:')
     for k in y.get_seq_bear():
         print(k)
+
+    print('\n下面是全部K线:')
+    for k in y.get_seq_all():
+        m = [l['time'] for l in k]
+        print(m)
 
     print('\n最小量能：')
     print(y.minVol)

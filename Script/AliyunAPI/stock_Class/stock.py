@@ -25,8 +25,8 @@ class Stock:
         self.Kvalue = None
         self.Tvalue = None
         # self.value = self.get_KValue()
-        self.Kstatus = {'涨幅': '', '开收': '', '量能': '', '上针': '', '下针': '',
-                        '布林': '', '轨距': '', '层级': '', '趋势': '',
+        self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
+                        '布林': 0, '轨距': 0, '层级': '', '趋势': None, '底部': None,
                         '平台': '', '预留': '', '备用': ''}
 
 
@@ -365,9 +365,10 @@ class Yline:
         self._list_bear = []
         self._seq_bull = []
         self._seq_bear = []
+        self._seq = []
         self._paraList = ['time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid',  'lower', '涨幅', '开收', '量能', '上针',
-                          '下针', '布林', '轨距', '层级', '趋势', '平台']
+                          '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
         self.minVol = 0
         self._YYstatus = None
         if para is None:
@@ -403,6 +404,10 @@ class Yline:
         return self._seq_bear
 
 
+    def get_seq_all(self):
+        return self._seq
+
+
     def refresh_index(self, Kvalue):
         """
         刷新K线量化指标
@@ -433,12 +438,16 @@ class Yline:
         self._seq_bear.clear()
         self._list_bull.clear()
         self._list_bear.clear()
+        self._seq.clear()
 
         if self.Index:
             self.Index.clear()
         self.Index = []
         s = None
         judge = None
+        beared = False
+        bottom = False
+        # above_mid = False
         for Ksingle in Kvalue:
             """计算  收针对量能的影响 """
             temp = dict([(key, Ksingle[key]) for key in self._paraList])
@@ -448,10 +457,22 @@ class Yline:
                 temp['量能'] = round(temp['volumn']*(1-self._para.get('收针对量能的影响系数', 1)*temp['下针']/100))
 
             self.Index.append(temp)
+            """
+            布林为基准的底部判断。
+            中下轨的下部空间
+            '布林' <= -2
+            """
+            if temp['布林'] <= -2:
+                temp['底部'] = True
+            else:
+                temp['底部'] = False
 
             """
+            judge：当前K线是阴线还是阳线的标志
+            beared：是否已经出现过阴线的标志
+            
             划分阴阳序列
-            s：是否判断阴阳的标志
+            s：当前序列是阴线还是阳线的标志
             s = {0: None, 'bull': 1, 'bear': 2}
             
             self._list_bull.clear()
@@ -460,19 +481,28 @@ class Yline:
 
             if temp['close'] > temp['lastclose']:
                 judge = True
+                temp['趋势'] = True
             elif temp['close'] == temp['lastclose']:
                 if temp['close'] > temp['open']:
                     judge = True
+                    temp['趋势'] = True
                 elif temp['close'] <= temp['open']:
                     judge = False
+                    temp['趋势'] = False
                 else:
                     judge = None
+                    raise ValueError('我也不知道为啥judge的值不对!或许是打开方式不对!', judge)
             elif temp['close'] < temp['lastclose']:
                 judge = False
+                temp['趋势'] = False
             else:
                 judge = None
-            if judge is None:
                 raise ValueError('我也不知道为啥judge的值不对!或许是打开方式不对!', judge)
+
+            if beared or judge is False:
+                beared = True
+            else:
+                continue
 
             if not s:
                 """not s：未判断"""
@@ -487,7 +517,9 @@ class Yline:
                     self._list_bull.append(temp)
                 else:
                     s = 2
-                    self._seq_bull.append(self._list_bull[:])
+                    t = self._list_bull[:]
+                    self._seq.append(t)
+                    self._seq_bull.append(t)
                     self._list_bear.clear()
                     self._list_bear.append(temp)
             elif s == 2:
@@ -495,21 +527,36 @@ class Yline:
                     self._list_bear.append(temp)
                 else:
                     s = 1
-                    self._seq_bear.append(self._list_bear[:])
+                    t = self._list_bear[:]
+                    self._seq.append(t)
+                    self._seq_bear.append(t)
                     self._list_bull.clear()
                     self._list_bull.append(temp)
             else:
                 raise ValueError('我也不知道为啥s的值不对!或许是打开方式不对!', s)
         if s == 1:
             if judge:
-                self._seq_bull.append(self._list_bull[:])
+                t = self._list_bull[:]
+                self._seq_bull.append(t)
         elif s == 2:
             if not judge:
-                self._seq_bear.append(self._list_bear[:])
+                t = self._list_bear[:]
+                self._seq_bear.append(t)
         else:
             raise ValueError('我也不知道为啥s的值不对!或许是打开方式不对!', s)
+        self._seq.append(t)
 
 
+        """
+        已完成：
+        1、序列以阴线序列开始；
+        2、关于短期/中期底部的判定：
+            首先、布林层面上的下部区间（下轨下层）
+            其次、遇到过程中到了中轨以上，就刷新标志位
+            最后、分析时找到最后一个下部区间
+            注意、连续的bottom则以价格为准
+        3、
+        """
 
         """
         未完成的任务：
