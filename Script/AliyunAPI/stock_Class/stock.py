@@ -448,6 +448,7 @@ class Yline:
         beared = False
         bottom = False
         # above_mid = False
+        t = []
         for Ksingle in Kvalue:
             """计算  收针对量能的影响 """
             temp = dict([(key, Ksingle[key]) for key in self._paraList])
@@ -499,6 +500,9 @@ class Yline:
                 judge = None
                 raise ValueError('我也不知道为啥judge的值不对!或许是打开方式不对!', judge)
 
+            """
+            序列以阴线序列开始
+            """
             if beared or judge is False:
                 beared = True
             else:
@@ -546,17 +550,30 @@ class Yline:
             raise ValueError('我也不知道为啥s的值不对!或许是打开方式不对!', s)
         self._seq.append(t)
 
+        """
+        下面开始分段拆分层级
+        再用一次遍历，同时：
+        1、找到最后一个底部区间，布林层面上的下部区间（下轨下层）；
+            注意、连续的bottom则以价格为准
+            找到最低的阶段性底部
+        2、将阴线序列按照层级拆分开；
+        
+        """
 
         """
-        已完成：
-        1、序列以阴线序列开始；
-        2、关于短期/中期底部的判定：
-            首先、布林层面上的下部区间（下轨下层）
-            其次、遇到过程中到了中轨以上，就刷新标志位
-            最后、分析时找到最后一个下部区间
-            注意、连续的bottom则以价格为准
-        3、
+        上次层级
         """
+        last_level = None
+
+        """
+        上次最低价
+        """
+        last_price = None
+
+        for array in self._seq_bear:
+
+            for element in array:
+                print(element['time'])
 
         """
         未完成的任务：
@@ -568,6 +585,8 @@ class Yline:
             例如，高层地量和次地量，中下层的山峰技术形态
         3、逐层分段计算并审核层级差;
         4、连续和不连续阴线的分组处理
+        
+        5、beta 0.1 暂时不考虑阳线
         
         """
 
