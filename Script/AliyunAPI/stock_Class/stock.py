@@ -27,7 +27,7 @@ class Stock:
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
                         '布林': 0, '轨距': 0, '层级': '', '趋势': None, '底部': None,
-                        '平台': '', '预留': '', '备用': ''}
+                        '平台': '', '序号': 0, '预留': '', '备用': ''}
 
 
     def get_ref_List(self):
@@ -366,7 +366,8 @@ class Yline:
         self._seq_bull = []
         self._seq_bear = []
         self._seq = []
-        self._paraList = ['time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
+        self._levelList = []
+        self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid',  'lower', '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
         self.minVol = 0
@@ -408,6 +409,10 @@ class Yline:
         return self._seq
 
 
+    def get_levelList(self):
+        return self._levelList
+
+
     def refresh_index(self, Kvalue):
         """
         刷新K线量化指标
@@ -439,6 +444,7 @@ class Yline:
         self._list_bull.clear()
         self._list_bear.clear()
         self._seq.clear()
+        self._levelList.clear()
 
         if self.Index:
             self.Index.clear()
@@ -449,6 +455,7 @@ class Yline:
         bottom = False
         # above_mid = False
         t = []
+        num = 0
         for Ksingle in Kvalue:
             """计算  收针对量能的影响 """
             temp = dict([(key, Ksingle[key]) for key in self._paraList])
@@ -507,7 +514,8 @@ class Yline:
                 beared = True
             else:
                 continue
-
+            temp['序号'] = num
+            num += 1
             if not s:
                 """not s：未判断"""
                 self.minVol = temp['volumn']
@@ -566,14 +574,50 @@ class Yline:
         last_level = None
 
         """
-        上次最低价
+        上次最低
         """
         last_price = None
+        level_temp = []
+        for array in self._seq_bear[::-1]:
+            last_level = None
+            for element in array[::-1]:
+                if element['布林'] == last_level:
+                    level_temp.append(element)
+                    pass
+                else:
+                    last_level = element['布林']
+                    if level_temp:
+                        self._levelList.append(level_temp[:])
+                    #     level_temp.clear()
+                    #     level_temp.append(element)
+                    # else:
+                    level_temp.clear()
+                    level_temp.append(element)
+        self._levelList.append(level_temp[:])
 
-        for array in self._seq_bear:
 
-            for element in array:
-                print(element['time'])
+
+
+
+
+
+
+
+
+        """
+        +4：高于上轨
+        +3：等于上轨
+        +2：中上轨上部空间
+        +1：中上轨下部空间
+        0：等于中轨
+        -1：中下轨上部空间
+        -2：中下轨下部空间
+        -3：等于下轨
+        -4：低于下轨
+        """
+
+
+
 
         """
         未完成的任务：
