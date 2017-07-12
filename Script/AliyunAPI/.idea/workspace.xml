@@ -18,8 +18,8 @@
       <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="461" column="28" lean-forward="true" selection-start-line="461" selection-start-column="28" selection-end-line="461" selection-end-column="28" />
+            <state relative-caret-position="-193">
+              <caret line="668" column="0" lean-forward="false" selection-start-line="668" selection-start-column="0" selection-end-line="668" selection-end-column="0" />
               <folding>
                 <element signature="e#63#8903#0" expanded="false" />
                 <element signature="e#966#987#0" expanded="false" />
@@ -47,20 +47,20 @@
                 <element signature="e#5203#6708#0" expanded="false" />
                 <element signature="e#6795#7091#0" expanded="false" />
                 <element signature="e#7193#8903#0" expanded="false" />
-                <element signature="e#10673#10690#0" expanded="false" />
-                <element signature="e#10729#10750#0" expanded="false" />
-                <element signature="e#10789#10810#0" expanded="false" />
-                <element signature="e#10848#10864#0" expanded="false" />
-                <element signature="e#10904#10926#0" expanded="false" />
-                <element signature="e#10974#11078#0" expanded="false" />
-                <element signature="e#11692#11805#1" expanded="false" />
-                <element signature="e#12923#15906#0" expanded="false" />
-                <element signature="e#15938#16027#0" expanded="false" />
-                <element signature="e#16061#16154#0" expanded="false" />
-                <element signature="e#16445#16471#1" expanded="false" />
-                <element signature="e#16533#16559#1" expanded="false" />
-                <element signature="e#16693#17626#0" expanded="false" />
-                <element signature="e#17702#17761#0" expanded="false" />
+                <element signature="e#12980#15963#0" expanded="false" />
+                <element signature="e#15995#16084#0" expanded="false" />
+                <element signature="e#16021#16084#0" expanded="false" />
+                <element signature="e#16118#16211#0" expanded="false" />
+                <element signature="e#16148#16211#0" expanded="false" />
+                <element signature="e#16502#16528#1" expanded="false" />
+                <element signature="e#16590#16616#1" expanded="false" />
+                <element signature="e#16750#17684#0" expanded="false" />
+                <element signature="e#16887#17635#0" expanded="false" />
+                <element signature="e#16939#16990#0" expanded="false" />
+                <element signature="e#17033#17368#0" expanded="false" />
+                <element signature="e#17177#17201#0" expanded="false" />
+                <element signature="e#17593#17635#0" expanded="false" />
+                <element signature="e#17760#17819#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -69,9 +69,11 @@
       <file leaf-file-name="2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="814">
+            <state relative-caret-position="851">
               <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
-              <folding />
+              <folding>
+                <marker date="1499867988702" expanded="true" signature="1136:1137" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,16 +147,16 @@
         <option value="$PROJECT_DIR$/stock_Class/YYline.py" />
         <option value="$PROJECT_DIR$/3.py" />
         <option value="$PROJECT_DIR$/debug/列表中的字典元素排序.py" />
-        <option value="$PROJECT_DIR$/stock_Class/stock.py" />
         <option value="$PROJECT_DIR$/2.py" />
+        <option value="$PROJECT_DIR$/stock_Class/stock.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -517,9 +519,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21028744" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21481876" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29459903" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="0" y="0" width="1366" height="731" />
@@ -544,7 +547,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="82" />
+      <option name="time" value="84" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -798,16 +801,18 @@
     <entry file="file://$PROJECT_DIR$/debug/列表中的字典元素排序.py" />
     <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
+        <state relative-caret-position="851">
           <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
-          <folding />
+          <folding>
+            <marker date="1499867988702" expanded="true" signature="1136:1137" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="461" column="28" lean-forward="true" selection-start-line="461" selection-start-column="28" selection-end-line="461" selection-end-column="28" />
+        <state relative-caret-position="-193">
+          <caret line="668" column="0" lean-forward="false" selection-start-line="668" selection-start-column="0" selection-end-line="668" selection-end-column="0" />
           <folding>
             <element signature="e#63#8903#0" expanded="false" />
             <element signature="e#966#987#0" expanded="false" />
@@ -835,20 +840,20 @@
             <element signature="e#5203#6708#0" expanded="false" />
             <element signature="e#6795#7091#0" expanded="false" />
             <element signature="e#7193#8903#0" expanded="false" />
-            <element signature="e#10673#10690#0" expanded="false" />
-            <element signature="e#10729#10750#0" expanded="false" />
-            <element signature="e#10789#10810#0" expanded="false" />
-            <element signature="e#10848#10864#0" expanded="false" />
-            <element signature="e#10904#10926#0" expanded="false" />
-            <element signature="e#10974#11078#0" expanded="false" />
-            <element signature="e#11692#11805#1" expanded="false" />
-            <element signature="e#12923#15906#0" expanded="false" />
-            <element signature="e#15938#16027#0" expanded="false" />
-            <element signature="e#16061#16154#0" expanded="false" />
-            <element signature="e#16445#16471#1" expanded="false" />
-            <element signature="e#16533#16559#1" expanded="false" />
-            <element signature="e#16693#17626#0" expanded="false" />
-            <element signature="e#17702#17761#0" expanded="false" />
+            <element signature="e#12980#15963#0" expanded="false" />
+            <element signature="e#15995#16084#0" expanded="false" />
+            <element signature="e#16021#16084#0" expanded="false" />
+            <element signature="e#16118#16211#0" expanded="false" />
+            <element signature="e#16148#16211#0" expanded="false" />
+            <element signature="e#16502#16528#1" expanded="false" />
+            <element signature="e#16590#16616#1" expanded="false" />
+            <element signature="e#16750#17684#0" expanded="false" />
+            <element signature="e#16887#17635#0" expanded="false" />
+            <element signature="e#16939#16990#0" expanded="false" />
+            <element signature="e#17033#17368#0" expanded="false" />
+            <element signature="e#17177#17201#0" expanded="false" />
+            <element signature="e#17593#17635#0" expanded="false" />
+            <element signature="e#17760#17819#0" expanded="false" />
           </folding>
         </state>
       </provider>
