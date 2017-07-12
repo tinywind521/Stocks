@@ -7,13 +7,13 @@ from stock_Class.stock import Stock, Yline
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20160505',
-            'KgetLength': 51,
+            'KgetLength': 61,
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': appcode}
 
 
-codeList = ['002246']
+codeList = ['600215']
 
 
 for code in codeList:
@@ -32,10 +32,10 @@ for code in codeList:
     # for k in t:
     #     print(k)
 
-    # print('\n下面是阴线起点:')
-    # for k in y.get_seq_bear():
-    #     m = [(l['time'], l['序号']) for l in k]
-    #     print(m)
+    print('\n下面是阴线起点:')
+    for k in y.get_seq_bear():
+        m = [(l['time'], l['序号']) for l in k]
+        print(m)
 
     # print('\n下面是全部K线:')
     # for k in y.get_seq_all():
@@ -49,5 +49,7 @@ for code in codeList:
 
     print('\n最小量能：')
     print(y.minVol)
+
+    # print(y._YY_VolumnList)
 
 

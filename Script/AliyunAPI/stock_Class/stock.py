@@ -367,14 +367,17 @@ class Yline:
         self._seq_bear = []
         self._seq = []
         self._levelList = []
+        self._tempBearList = []
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid',  'lower', '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
+
+        """minVol 近期地量"""
         self.minVol = 0
-        self._YYstatus = None
+        self._YY_VolumnList = None
         if para is None:
             para = {'收针对量能的影响系数': 0.75,
-
+                    '评分初值': 100
                     }
             self._para = para
         if Kvalue is None or len(Kvalue) == 0:
@@ -383,11 +386,11 @@ class Yline:
         else:
             self._para = para
             self.Index = None
+            self.status = self._para['评分初值']
 
             """Index 为量化指标"""
             self._cal_index(Kvalue)
 
-            """minVol 近期地量"""
 
         # [{[{}], {}}]
         # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
@@ -422,6 +425,51 @@ class Yline:
         self._cal_index(Kvalue)
 
 
+    """
+    先用0/1，建立连乘打分机制，
+    根据后续使用情况，0/1 --> 0.90~1.10的连乘机制
+    """
+    def _index_cont_bear(self):
+        """
+        把连续阴线分成前面n根和最后一根，判断最后一根
+        k倍率
+        条件：
+            1、不是最大量能；
+            2、小于前期阴线平均值；
+        :return:
+        """
+        k = 1.25
+        lastBear = self._tempBearList.pop(0)
+        preBearList = [l['量能'] for l in self._tempBearList]
+        if lastBear['量能'] < k * max(preBearList) and lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
+            self.status *= 1
+        else:
+            self.status *= 0
+
+
+    def _index_rise_level(self, head, rear):
+        """
+        上升层级差，中间必有阳线，阳线放量（两侧阴线最大值的k倍率）
+        :param head:
+        :param rear:
+        :return:
+        """
+        k = 2
+        midBullList = self._YY_VolumnList[(head[-1]['序号'] + 1):rear[0]['序号']]
+        if k * self._YY_VolumnList[rear[0]['序号']] <= max(midBullList):
+            self.status *= 1
+        else:
+            self.status *= 0
+
+
+    def _index_fall_level(self):
+        pass
+
+
+    def _index_hori_level(self):
+        pass
+
+
     def _cal_index(self, Kvalue):
         """
         计算K线的量化指标;
@@ -445,6 +493,7 @@ class Yline:
         self._list_bear.clear()
         self._seq.clear()
         self._levelList.clear()
+        self.status = self._para['评分初值']
 
         if self.Index:
             self.Index.clear()
@@ -452,10 +501,14 @@ class Yline:
         s = None
         judge = None
         beared = False
-        bottom = False
-        # above_mid = False
+        # bottom = False
         t = []
         num = 0
+
+        """
+        1、计算  收针对量能的影响 
+        2、分割阴阳线，重新构建序列
+        """
         for Ksingle in Kvalue:
             """计算  收针对量能的影响 """
             temp = dict([(key, Ksingle[key]) for key in self._paraList])
@@ -464,7 +517,6 @@ class Yline:
             else:
                 temp['量能'] = round(temp['volumn']*(1-self._para.get('收针对量能的影响系数', 1)*temp['下针']/100))
 
-            self.Index.append(temp)
             """
             布林为基准的底部判断。
             中下轨的下部空间
@@ -516,6 +568,7 @@ class Yline:
                 continue
             temp['序号'] = num
             num += 1
+            self.Index.append(temp)
             if not s:
                 """not s：未判断"""
                 self.minVol = temp['volumn']
@@ -565,21 +618,25 @@ class Yline:
             注意、连续的bottom则以价格为准
             找到最低的阶段性底部
         2、将阴线序列按照层级拆分开；
-        
         """
 
         """
-        上次层级
+        层级
         """
-        last_level = None
+        # last_level = None
+        low_level = 100
 
         """
-        上次最低
+        最低
         """
-        last_price = None
+        # last_price = None
+        min_price = 0.00
+
         level_temp = []
         for array in self._seq_bear[::-1]:
             last_level = None
+            breakMark = None
+            # element = {'布林': 0}
             for element in array[::-1]:
                 if element['布林'] == last_level:
                     level_temp.append(element)
@@ -593,25 +650,30 @@ class Yline:
                     # else:
                     level_temp.clear()
                     level_temp.append(element)
-        self._levelList.append(level_temp[:])
-
+                low_level = min(low_level, element['布林'])
+                min_price = min(min_price, element['close'])
+                if low_level <= -2 < element['布林'] and min_price < element['close']:
+                    breakMark = True
+                    break
+            if breakMark:
+                break
+        endArray = level_temp[:]
+        if len(endArray) > 1:
+            endArray.pop()
+            self._levelList.append(endArray)
+        else:
+            pass
 
         """
         目标：
-        找到符合形态的
-        
-        +1：中上轨下部空间
-        0：等于中轨
-        -1：中下轨上部空间
-        
+        1、找到符合形态的
+            +1：中上轨下部空间
+            0：等于中轨
+            -1：中下轨上部空间
+        2、上升层级中间阳线必须放量，绝对放量！！！
+        3、下降层级后的3根K线内（含阴线组内阴线）必须出地量同层，或者放量上层！
         """
-
-
-        """
-        上升层级中间阳线必须放量，绝对放量！！！
-        下降层级后的3根K线内（含阴线组内阴线）必须出地量同层，或者放量上层！
-        """
-
+        self._YY_VolumnList = [l['量能'] for l in self.Index]
 
         """
         +4：高于上轨
