@@ -37,10 +37,10 @@ for code in codeList:
         m = [(l['time'], l['序号']) for l in k]
         print(m)
 
-    # print('\n下面是全部K线:')
-    # for k in y.get_seq_all():
-    #     m = [(l['time'], l['序号'], l['底部']) for l in k]
-    #     print(m)
+    print('\n下面是全部K线:')
+    for k in y.get_seq_all():
+        m = [(l['time'], l['序号'], l['底部']) for l in k]
+        print(m)
 
     print('\n阴线分段分层：')
     for k in y.get_levelList():
@@ -50,6 +50,8 @@ for code in codeList:
     print('\n最小量能：')
     print(y.minVol)
 
-    # print(y._YY_VolumnList)
+    print(len(y._YY_VolumnList))
+    print(y._YY_VolumnList)
+
 
 

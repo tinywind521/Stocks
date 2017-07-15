@@ -370,7 +370,8 @@ class Yline:
         self._seq_bear = []
         self._seq = []
         self._levelList = []
-        self._tempBearList = []
+        self._head = []
+        self._rear = []
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid',  'lower', '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
@@ -429,7 +430,7 @@ class Yline:
 
 
     """
-    先用0/1，建立连乘打分机制，
+    先用0/1，建立连乘评分机制，
     根据后续使用情况，0/1 --> 0.90~1.10的连乘机制
     """
     def _index_cont_bear(self):
@@ -442,38 +443,87 @@ class Yline:
         :return:
         """
         k = 1.25
-        lastBear = self._tempBearList.pop(0)
-        preBearList = [l['量能'] for l in self._tempBearList]
-        if lastBear['量能'] < k * max(preBearList) and lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
+        lastBear = self._head.pop(-1)
+        preBearList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        # if lastBear['量能'] < k * max(preBearList) and lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
+        """ 满足2必然满足1 """
+        if lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
             self.status *= 1
         else:
             self.status *= 0
 
 
-    def _index_rise_level(self, head, rear):
+    def _index_rise_level(self):
         """
         上升层级差，中间必有阳线，阳线放量（两侧阴线最大值的k倍率）
 
         注意：
         初版暂时没考虑涨停的情况，观察一下效果，后续修改
 
-        :param head:
-        :param rear:
         :return:
         """
         k = 2
-        midBullList = self._YY_VolumnList[(head[-1]['序号'] + 1):rear[0]['序号']]
-        if k * self._YY_VolumnList[rear[0]['序号']] <= max(midBullList):
+        midBullList = self._YY_VolumnList[(self._head[-1]['序号'] + 1):self._rear[0]['序号']]
+        if k * self._YY_VolumnList[self._rear[0]['序号']] <= max(midBullList):
             self.status *= 1
         else:
             self.status *= 0
 
 
     def _index_fall_level(self):
-        pass
+        """
+        下降层级差，
+        1、序号连续：
+            不是连续的最后一根，就先不判断，如果是连续阴线的最后一根，则：
+            1、后面超量阳线，"阳包阴"，
+            2、两根内量能减半，
+
+        2、序号不连续：
+            中间阳线暂不处理，后面阴线必须缩量
+        :return:
+        """
+        if self._head[-1]['序号'] + 1 == self._rear[0]['序号']:
+            """
+            序号连续
+            
+            先判断是不是阶段性的最后一根
+            条件：
+            1、后面超量阳线，"阳包阴"，
+            2、两根内量能减半，
+            """
+
+            self.status *= 1
+        elif self._head[-1]['序号'] + 1 < self._rear[0]['序号']:
+            """
+            序号不连续
+            
+            条件：
+            1、平均值相对缩量；
+            2、最后一根相对缩量；
+            """
+            k = 1.25
+            headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+            rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+            if (sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList) and
+                    k * headVolList[-1] >= rearVolList[-1]):
+                self.status *= 1
+            else:
+                self.status *= 0
+        else:
+            pass
+            self.status *= 1
 
 
     def _index_hori_level(self):
+        """
+        水平层级差
+
+        前后最大值必须相对缩量，
+        同时，平均值缩量，
+        或者，最小值缩量
+
+        :return:
+        """
         pass
 
 
