@@ -404,18 +404,30 @@ class Yline:
         return self._para
 
 
+    """
+    获取阳线层级总列表
+    """
     def get_seq_bull(self):
         return self._seq_bull
 
 
+    """
+    获取阴线层级总列表
+    """
     def get_seq_bear(self):
         return self._seq_bear
 
 
+    """
+    获取阴阳层级总列表
+    """
     def get_seq_all(self):
         return self._seq
 
 
+    """
+    获取层级列表
+    """
     def get_levelList(self):
         return self._levelList
 
