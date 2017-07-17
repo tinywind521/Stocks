@@ -13,7 +13,7 @@ ref_List = {'KtimeType': '60',
             'appcode': appcode}
 
 
-codeList = ['600215']
+codeList = ['601998']
 
 
 for code in codeList:
@@ -23,7 +23,8 @@ for code in codeList:
     #     print(i)
     s.update_Kstatus()
     y = Yline(s.Kvalue, None)
-    # for h in y.Index:
+    # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
+    # for h in m:
     #     print(h)
 
     print(code)
@@ -32,15 +33,15 @@ for code in codeList:
     # for k in t:
     #     print(k)
 
-    print('\n下面是阴线起点:')
-    for k in y.get_seq_bear():
-        m = [(l['time'], l['序号']) for l in k]
-        print(m)
+    # print('\n下面是阴线起点:')
+    # for k in y.get_seq_bear():
+    #     m = [(l['time'], l['序号']) for l in k]
+    #     print(m)
 
-    print('\n下面是全部K线:')
-    for k in y.get_seq_all():
-        m = [(l['time'], l['序号'], l['底部']) for l in k]
-        print(m)
+    # print('\n下面是全部K线:')
+    # for k in y.get_seq_all():
+    #     m = [(l['time'], l['序号'], l['底部']) for l in k]
+    #     print(m)
 
     print('\n阴线分段分层：')
     for k in y.get_levelList():
@@ -50,8 +51,6 @@ for code in codeList:
     print('\n最小量能：')
     print(y.minVol)
 
-    print(len(y._YY_VolumnList))
-    print(y._YY_VolumnList)
 
 
 

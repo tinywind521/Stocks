@@ -403,13 +403,11 @@ class Yline:
     def get_para(self):
         return self._para
 
-
     """
     获取阳线层级总列表
     """
     def get_seq_bull(self):
         return self._seq_bull
-
 
     """
     获取阴线层级总列表
@@ -417,13 +415,11 @@ class Yline:
     def get_seq_bear(self):
         return self._seq_bear
 
-
     """
     获取阴阳层级总列表
     """
     def get_seq_all(self):
         return self._seq
-
 
     """
     获取层级列表
@@ -431,7 +427,9 @@ class Yline:
     def get_levelList(self):
         return self._levelList
 
-
+    """
+    刷新K线量化指标
+    """
     def refresh_index(self, Kvalue):
         """
         刷新K线量化指标
@@ -459,10 +457,10 @@ class Yline:
         preBearList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         # if lastBear['量能'] < k * max(preBearList) and lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
         """ 满足2必然满足1 """
-        if lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
-            self.status *= 1
-        else:
+        if lastBear['量能'] > k * (sum(preBearList) / len(preBearList)):
             self.status *= 0
+        else:
+            self.status *= 1
 
 
     def _index_rise_level(self):
@@ -474,12 +472,12 @@ class Yline:
 
         :return:
         """
-        k = 2
+        k = 1
         midBullList = self._YY_VolumnList[(self._head[-1]['序号'] + 1):self._rear[0]['序号']]
-        if k * self._YY_VolumnList[self._rear[0]['序号']] <= max(midBullList):
-            self.status *= 1
-        else:
+        if k * self._YY_VolumnList[self._rear[0]['序号']] > max(midBullList):
             self.status *= 0
+        else:
+            self.status *= 1
 
 
     def _index_fall_level(self):
@@ -501,10 +499,22 @@ class Yline:
             先判断是不是阶段性的最后一根
             条件：
             1、后面超量阳线，"阳包阴"，
-            2、两根内量能减半，
+            2、两根内量能缩量，
             """
-
-            self.status *= 1
+            # print('序号连续')
+            k = 2
+            if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
+                self.status *= 1
+            else:
+                "阳包阴"
+                if (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > abs(self._rear[-1]['涨幅'])) and (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] > self._rear[-1]['量能']):
+                    self.status *= 1
+                elif k * self.Index[(self._rear[-1]['序号'] + 1)]['量能'] < self._rear[-1]['量能']:
+                    self.status *= 1
+                elif (k * self.Index[(self._rear[-1]['序号'] + 2)]['量能'] < self._rear[-1]['量能']) and (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > 0):
+                    self.status *= 1
+                else:
+                    self.status *= 0
         elif self._head[-1]['序号'] + 1 < self._rear[0]['序号']:
             """
             序号不连续
@@ -513,16 +523,18 @@ class Yline:
             1、平均值相对缩量；
             2、最后一根相对缩量；
             """
+            # print('序号不连续')
             k = 1.25
             headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
             rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+            # print((sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList)))
+            # print(k * max(headVolList) >= rearVolList[-1])
             if (sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList) and
-                    k * headVolList[-1] >= rearVolList[-1]):
+                    k * max(headVolList) >= rearVolList[-1]):
                 self.status *= 1
             else:
                 self.status *= 0
         else:
-            pass
             self.status *= 1
 
 
@@ -536,7 +548,14 @@ class Yline:
 
         :return:
         """
-        pass
+        headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+        if sum(headVolList) / len(headVolList) > sum(rearVolList) / len(rearVolList):
+            self.status *= 1
+        elif min(headVolList) > min(rearVolList):
+            self.status *= 1
+        else:
+            self.status *= 0
 
 
     def _cal_index(self, Kvalue):
@@ -612,10 +631,10 @@ class Yline:
                 judge = True
                 temp['趋势'] = True
             elif temp['close'] == temp['lastclose']:
-                if temp['close'] > temp['open']:
+                if temp['close'] >= temp['open']:
                     judge = True
                     temp['趋势'] = True
-                elif temp['close'] <= temp['open']:
+                elif temp['close'] < temp['open']:
                     judge = False
                     temp['趋势'] = False
                 else:
@@ -699,12 +718,12 @@ class Yline:
         最低
         """
         # last_price = None
-        min_price = 0.00
+        min_price = 100000.00
 
         level_temp = []
+        last_level = None
+        breakMark = None
         for array in self._seq_bear[::-1]:
-            last_level = None
-            breakMark = None
             # element = {'布林': 0}
             for element in array[::-1]:
                 if element['布林'] == last_level:
@@ -721,7 +740,7 @@ class Yline:
                     level_temp.append(element)
                 low_level = min(low_level, element['布林'])
                 min_price = min(min_price, element['close'])
-                if low_level <= -2 < element['布林'] and min_price < element['close']:
+                if low_level <= -2 < element['布林'] and min_price <= element['close']:
                     breakMark = True
                     break
 
@@ -733,6 +752,8 @@ class Yline:
             self._levelList.append(endArray)
         else:
             pass
+        if self._levelList[-1][-1]['布林'] > self._levelList[-2][-1]['布林']:
+            self._levelList.pop()
 
         """
         功能：
@@ -744,6 +765,35 @@ class Yline:
         3、下降层级后的3根K线内（含阴线组内阴线）必须出地量同层，或者放量上层！
         """
         self._YY_VolumnList = [l['量能'] for l in self.Index]
+        self._levelList.reverse()
+        for i in self._levelList:
+            if len(i) > 1:
+                i.reverse()
+        for i in range(len(self._levelList) - 1):
+            if self.status == 0:
+                break
+            self._head = self._levelList[i][:]
+            self._rear = self._levelList[i + 1][:]
+            print(self._head[0]['time'])
+            print(self._rear[0]['time'])
+            if len(self._levelList[i]) > 1:
+                self._index_cont_bear()
+                # print(self._head)
+                print('连续阴线，结果：' + str(self.status))
+            if self.status == 100:
+                if self._head[0]['布林'] > self._rear[0]['布林']:
+                    self._index_fall_level()
+                    print('下降层级，结果：' + str(self.status))
+                elif self._head[0]['布林'] == self._rear[0]['布林']:
+                    self._index_hori_level()
+                    print('水平层级，结果：' + str(self.status))
+                elif self._head[0]['布林'] < self._rear[0]['布林']:
+                    self._index_rise_level()
+                    print('上升层级，结果：' + str(self.status))
+                else:
+                    break
+        print('最终结果：' + str(self.status))
+
 
         """
         +4：高于上轨
