@@ -452,9 +452,11 @@ class Yline:
             2、小于前期阴线平均值；
         :return:
         """
-        k = 1.25
+        k = 1.5
         lastBear = self._head.pop(-1)
+        # print(lastBear)
         preBearList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        # print(preBearList)
         # if lastBear['量能'] < k * max(preBearList) and lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
         """ 满足2必然满足1 """
         if lastBear['量能'] > k * (sum(preBearList) / len(preBearList)):
@@ -497,13 +499,25 @@ class Yline:
             序号连续
             
             先判断是不是阶段性的最后一根
+            
             条件：
             1、后面超量阳线，"阳包阴"，
             2、两根内量能缩量，
+            3、本身就极度缩量，
             """
             # print('序号连续')
             k = 2
+            headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+            # print(self._head)
+            # print(headVolList)
+            rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+            # print(self._rear)
+            # print(rearVolList)
             if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
+                self.status *= 1
+            elif sum(headVolList) / len(headVolList) > k * sum(rearVolList) / len(rearVolList):
+                self.status *= 1
+            elif max(headVolList) > k * max(rearVolList):
                 self.status *= 1
             else:
                 "阳包阴"
@@ -551,11 +565,11 @@ class Yline:
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
         if sum(headVolList) / len(headVolList) > sum(rearVolList) / len(rearVolList):
-            self.status *= 1
+            self.status *= 1.5
         elif min(headVolList) > min(rearVolList):
-            self.status *= 1
+            self.status *= 1.5
         else:
-            self.status *= 0
+            self.status *= 0.75
 
 
     def _cal_index(self, Kvalue):
@@ -721,14 +735,17 @@ class Yline:
         min_price = 100000.00
 
         level_temp = []
-        last_level = None
+        # last_level = None
         breakMark = None
         for array in self._seq_bear[::-1]:
             # element = {'布林': 0}
+            last_level = None
             for element in array[::-1]:
+                if low_level <= -2 < element['布林'] and min_price <= element['close']:
+                    breakMark = True
+                    break
                 if element['布林'] == last_level:
                     level_temp.append(element)
-                    pass
                 else:
                     last_level = element['布林']
                     if level_temp:
@@ -740,19 +757,17 @@ class Yline:
                     level_temp.append(element)
                 low_level = min(low_level, element['布林'])
                 min_price = min(min_price, element['close'])
-                if low_level <= -2 < element['布林'] and min_price <= element['close']:
-                    breakMark = True
-                    break
-
             if breakMark:
                 break
-        endArray = level_temp[:]
-        if len(endArray) > 1:
-            endArray.pop()
-            self._levelList.append(endArray)
-        else:
-            pass
-        if self._levelList[-1][-1]['布林'] > self._levelList[-2][-1]['布林']:
+        # endArray = level_temp[:]
+        # if len(endArray) > 1:
+        #     endArray.pop()
+        #     self._levelList.append(endArray)
+        # else:
+        #     pass
+        # for i in self._levelList:
+        #     print(i)
+        if self._levelList[-1][-1]['布林'] >= self._levelList[-2][-1]['布林']:
             self._levelList.pop()
 
         """
@@ -776,6 +791,10 @@ class Yline:
             self._rear = self._levelList[i + 1][:]
             print(self._head[0]['time'])
             print(self._rear[0]['time'])
+
+            """
+            先不判断连续阴线
+            """
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
