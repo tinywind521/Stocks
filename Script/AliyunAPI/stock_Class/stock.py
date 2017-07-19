@@ -452,17 +452,19 @@ class Yline:
             2、小于前期阴线平均值；
         :return:
         """
-        k = 1.5
+        # k = 1.5
         lastBear = self._head.pop(-1)
         # print(lastBear)
         preBearList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         # print(preBearList)
-        # if lastBear['量能'] < k * max(preBearList) and lastBear['量能'] <= k * (sum(preBearList) / len(preBearList)):
-        """ 满足2必然满足1 """
-        if lastBear['量能'] > k * (sum(preBearList) / len(preBearList)):
-            self.status *= 0
-        else:
-            self.status *= 1
+        # """ 满足2必然满足1 """
+        # if lastBear['量能'] > k * (sum(preBearList) / len(preBearList)):
+        #     self.status *= 0
+        # else:
+        #     self.status *= 1
+        """连续阴线缩量占比系数"""
+        k = 0.1
+        self.status *= k * ((sum(preBearList) / len(preBearList)) / lastBear['量能'] - 1) + 1
 
 
     def _index_rise_level(self):
@@ -474,13 +476,36 @@ class Yline:
 
         :return:
         """
-        k = 1
+        """上升层级差缩量占比系数"""
+        """中间阳线"""
+        k1 = 0.16
+        """前后阴线"""
+        k2 = 0.12
+        headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        # print(self._head)
+        # print(headVolList)
+        rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+        # print(self._rear)
+        # print(rearVolList
         midBullList = self._YY_VolumnList[(self._head[-1]['序号'] + 1):self._rear[0]['序号']]
-        if k * self._YY_VolumnList[self._rear[0]['序号']] > max(midBullList):
-            self.status *= 0
-        else:
+        # if k * self._YY_VolumnList[self._rear[0]['序号']] > max(midBullList):
+        #     self.status *= 0
+        # else:
+        #     self.status *= 1
+        try:
+            if self._YY_VolumnList[self._rear[0]['序号']] != 0:
+                self.status *= k1 * (max(midBullList) / self._YY_VolumnList[self._rear[0]['序号']] - 1) + 1
+            else:
+                self.status *= 1
+        except ValueError:
             self.status *= 1
-
+        try:
+            if len(headVolList) != 0 and len(rearVolList) != 0 and sum(rearVolList) != 0:
+                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+            else:
+                self.status *= 1
+        except ValueError:
+            self.status *= 1
 
     def _index_fall_level(self):
         """
@@ -562,15 +587,32 @@ class Yline:
 
         :return:
         """
+        # headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        # rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+        # if sum(headVolList) / len(headVolList) > sum(rearVolList) / len(rearVolList):
+        #     self.status *= 1.5
+        # elif min(headVolList) > min(rearVolList):
+        #     self.status *= 1.5
+        # else:
+        #     self.status *= 0.75
+        """水平层级差缩量占比系数"""
+        """中间阳线"""
+        k1 = 0.05
+        """前后阴线"""
+        k2 = 0.1
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        # print(self._head)
+        # print(headVolList)
         rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
-        if sum(headVolList) / len(headVolList) > sum(rearVolList) / len(rearVolList):
-            self.status *= 1.5
-        elif min(headVolList) > min(rearVolList):
-            self.status *= 1.5
-        else:
-            self.status *= 0.75
-
+        # print(self._rear)
+        # print(rearVolList
+        midBullList = self._YY_VolumnList[(self._head[-1]['序号'] + 1):self._rear[0]['序号']]
+        # if k * self._YY_VolumnList[self._rear[0]['序号']] > max(midBullList):
+        #     self.status *= 0
+        # else:
+        #     self.status *= 1
+        self.status *= k1 * (max(midBullList) / self._YY_VolumnList[self._rear[0]['序号']] - 1) + 1
+        self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
 
     def _cal_index(self, Kvalue):
         """
@@ -767,8 +809,11 @@ class Yline:
         #     pass
         # for i in self._levelList:
         #     print(i)
-        if self._levelList[-1][-1]['布林'] >= self._levelList[-2][-1]['布林']:
-            self._levelList.pop()
+        try:
+            if self._levelList[-1][-1]['布林'] >= self._levelList[-2][-1]['布林']:
+                self._levelList.pop()
+        except IndexError:
+            pass
 
         """
         功能：
@@ -789,8 +834,8 @@ class Yline:
                 break
             self._head = self._levelList[i][:]
             self._rear = self._levelList[i + 1][:]
-            print(self._head[0]['time'])
-            print(self._rear[0]['time'])
+            # print(self._head[0]['time'])
+            # print(self._rear[0]['time'])
 
             """
             先不判断连续阴线
@@ -798,20 +843,20 @@ class Yline:
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
-                print('连续阴线，结果：' + str(self.status))
-            if self.status == 100:
+                # print('连续阴线，结果：' + str(self.status))
+            if self.status >= 0:
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     self._index_fall_level()
-                    print('下降层级，结果：' + str(self.status))
+                    # print('下降层级，结果：' + str(self.status))
                 elif self._head[0]['布林'] == self._rear[0]['布林']:
                     self._index_hori_level()
-                    print('水平层级，结果：' + str(self.status))
+                    # print('水平层级，结果：' + str(self.status))
                 elif self._head[0]['布林'] < self._rear[0]['布林']:
                     self._index_rise_level()
-                    print('上升层级，结果：' + str(self.status))
+                    # print('上升层级，结果：' + str(self.status))
                 else:
                     break
-        print('最终结果：' + str(self.status))
+        # print('最终结果：' + str(self.status))
 
 
         """
