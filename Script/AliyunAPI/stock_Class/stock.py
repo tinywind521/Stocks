@@ -857,6 +857,7 @@ class Yline:
                 else:
                     break
         # print('最终结果：' + str(self.status))
+        for 注意底部起来的连续阳线。
 
 
         """
