@@ -463,7 +463,7 @@ class Yline:
         # else:
         #     self.status *= 1
         """连续阴线缩量占比系数"""
-        k = 0.1
+        k = 0.10
         self.status *= k * ((sum(preBearList) / len(preBearList)) / lastBear['量能'] - 1) + 1
 
 
@@ -478,9 +478,9 @@ class Yline:
         """
         """上升层级差缩量占比系数"""
         """中间阳线"""
-        k1 = 0.16
+        k1 = 0.15
         """前后阴线"""
-        k2 = 0.12
+        k2 = 0.11
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         # print(self._head)
         # print(headVolList)
@@ -501,7 +501,8 @@ class Yline:
             self.status *= 1
         try:
             if len(headVolList) != 0 and len(rearVolList) != 0 and sum(rearVolList) != 0:
-                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1)\
+                               + 1
             else:
                 self.status *= 1
         except ValueError:
@@ -531,13 +532,15 @@ class Yline:
             3、本身就极度缩量，
             """
             # print('序号连续')
-            k = 2
+            """缩量情况系数"""
+            k = 0.12
             headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
             # print(self._head)
             # print(headVolList)
             rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
             # print(self._rear)
             # print(rearVolList)
+            """先判断是不是阶段性的最后一根"""
             if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
                 self.status *= 1
             elif sum(headVolList) / len(headVolList) > k * sum(rearVolList) / len(rearVolList):
@@ -546,11 +549,13 @@ class Yline:
                 self.status *= 1
             else:
                 "阳包阴"
-                if (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > abs(self._rear[-1]['涨幅'])) and (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] > self._rear[-1]['量能']):
+                if (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > abs(self._rear[-1]['涨幅'])) \
+                        and (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] > self._rear[-1]['量能']):
                     self.status *= 1
                 elif k * self.Index[(self._rear[-1]['序号'] + 1)]['量能'] < self._rear[-1]['量能']:
                     self.status *= 1
-                elif (k * self.Index[(self._rear[-1]['序号'] + 2)]['量能'] < self._rear[-1]['量能']) and (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > 0):
+                elif (k * self.Index[(self._rear[-1]['序号'] + 2)]['量能'] < self._rear[-1]['量能']) \
+                        and (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > 0):
                     self.status *= 1
                 else:
                     self.status *= 0
@@ -563,16 +568,15 @@ class Yline:
             2、最后一根相对缩量；
             """
             # print('序号不连续')
-            k = 1.25
+            """缩量情况系数"""
+            k = 0.125
             headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
             rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
             # print((sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList)))
             # print(k * max(headVolList) >= rearVolList[-1])
-            if (sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList) and
-                    k * max(headVolList) >= rearVolList[-1]):
-                self.status *= 1
-            else:
-                self.status *= 0
+            p1 = (sum(headVolList)/len(headVolList)) / (sum(rearVolList)/len(rearVolList)) - 1
+            p2 = max(headVolList) / rearVolList[-1] - 1
+            self.status *= k * (p1 + p2) / 2 + 1
         else:
             self.status *= 1
 
@@ -857,7 +861,9 @@ class Yline:
                 else:
                     break
         # print('最终结果：' + str(self.status))
-        for 注意底部起来的连续阳线。
+        # for
+        #     1、注意底部起来的连续阳线；
+        #     2、阴线数量占比；
 
 
         """
