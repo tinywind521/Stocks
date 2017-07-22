@@ -381,7 +381,9 @@ class Yline:
         self._YY_VolumnList = None
         if para is None:
             para = {'收针对量能的影响系数': 0.75,
-                    '评分初值': 100
+                    '评分初值': 100,
+                    '以下是层级差中用到的系数': 0,
+
                     }
             self._para = para
         if Kvalue is None or len(Kvalue) == 0:
@@ -452,7 +454,6 @@ class Yline:
             2、小于前期阴线平均值；
         :return:
         """
-        # k = 1.5
         lastBear = self._head.pop(-1)
         # print(lastBear)
         preBearList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
@@ -520,6 +521,13 @@ class Yline:
             中间阳线暂不处理，后面阴线必须缩量
         :return:
         """
+        headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+        # print(self._head)
+        # print(headVolList)
+        rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+        # print(self._rear)
+        # print(rearVolList)
+
         if self._head[-1]['序号'] + 1 == self._rear[0]['序号']:
             """
             序号连续
@@ -533,32 +541,30 @@ class Yline:
             """
             # print('序号连续')
             """缩量情况系数"""
-            k = 0.12
-            headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
-            # print(self._head)
-            # print(headVolList)
-            rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
-            # print(self._rear)
-            # print(rearVolList)
+            k1 = 0.05
+
             """先判断是不是阶段性的最后一根"""
             if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
                 self.status *= 1
-            elif sum(headVolList) / len(headVolList) > k * sum(rearVolList) / len(rearVolList):
-                self.status *= 1
-            elif max(headVolList) > k * max(rearVolList):
-                self.status *= 1
             else:
-                "阳包阴"
-                if (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > abs(self._rear[-1]['涨幅'])) \
-                        and (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] > self._rear[-1]['量能']):
-                    self.status *= 1
-                elif k * self.Index[(self._rear[-1]['序号'] + 1)]['量能'] < self._rear[-1]['量能']:
-                    self.status *= 1
-                elif (k * self.Index[(self._rear[-1]['序号'] + 2)]['量能'] < self._rear[-1]['量能']) \
-                        and (self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] > 0):
-                    self.status *= 1
+                self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+                self.status *= k1 * (max(headVolList) / max(rearVolList) - 1) + 1
+
+                """出现阳包阴时的放量系数"""
+                k2 = 0.02
+                """未出现阳包阴时的放量系数"""
+                k3 = 0.02
+                if self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] >= abs(self._rear[-1]['涨幅']):
+                    "判定阳包阴"
+                    self.status *= k2 * (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
+                elif self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] < abs(self._rear[-1]['涨幅']):
+                    if self.Index[(self._rear[-1]['序号'] + 2)]['涨幅'] <= 0:
+                        self.status *= k3 * (self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
+                    else:
+                        self.status *= k3 * (2 * self._rear[-1]['量能'] / (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
                 else:
-                    self.status *= 0
+                    self.status *= 1
+
         elif self._head[-1]['序号'] + 1 < self._rear[0]['序号']:
             """
             序号不连续
@@ -570,10 +576,10 @@ class Yline:
             # print('序号不连续')
             """缩量情况系数"""
             k = 0.125
-            headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
-            rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
-            # print((sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList)))
-            # print(k * max(headVolList) >= rearVolList[-1])
+            # headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
+            # rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
+            # # print((sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList)))
+            # # print(k * max(headVolList) >= rearVolList[-1])
             p1 = (sum(headVolList)/len(headVolList)) / (sum(rearVolList)/len(rearVolList)) - 1
             p2 = max(headVolList) / rearVolList[-1] - 1
             self.status *= k * (p1 + p2) / 2 + 1
@@ -847,50 +853,33 @@ class Yline:
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
-                # print('连续阴线，结果：' + str(self.status))
+                print('连续阴线，结果：' + str(self.status))
             if self.status >= 0:
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     self._index_fall_level()
-                    # print('下降层级，结果：' + str(self.status))
+                    print('下降层级，结果：' + str(self.status))
                 elif self._head[0]['布林'] == self._rear[0]['布林']:
                     self._index_hori_level()
-                    # print('水平层级，结果：' + str(self.status))
+                    print('水平层级，结果：' + str(self.status))
                 elif self._head[0]['布林'] < self._rear[0]['布林']:
                     self._index_rise_level()
-                    # print('上升层级，结果：' + str(self.status))
+                    print('上升层级，结果：' + str(self.status))
                 else:
                     break
-        # print('最终结果：' + str(self.status))
+        print('最终结果：' + str(self.status))
         # for
         #     1、注意底部起来的连续阳线；
         #     2、阴线数量占比；
-
-
-        """
-        +4：高于上轨
-        +3：等于上轨
-        +2：中上轨上部空间
-        +1：中上轨下部空间
-        0：等于中轨
-        -1：中下轨上部空间
-        -2：中下轨下部空间
-        -3：等于下轨
-        -4：低于下轨
-        """
+        #     3、统计各类层级差在 布林上下空间的 数量；
 
 
         """
         未完成的任务：
-        1、找到布林下轨起点:
-            也就是最小的布林分层位置（这个位置就是短期底部）;
         2、按照K线布林分层，把阴线分段：
             计算水平，上升和下降层级差，不同的层级差对中间阳线的量能要求不一样
             （也是就放量和地量的出现需求）
+            
             例如，高层地量和次地量，中下层的山峰技术形态
-        3、逐层分段计算并审核层级差;
-        4、连续和不连续阴线的分组处理
-        
-        5、beta 0.1 暂时不考虑阳线
         
         6、U型反弓：
             1、三条轨道都要进入一个反弓状态；

@@ -5,7 +5,7 @@ from functions import getValue
 from stock_Class.stock import Stock, Yline
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-ref_List = {'KtimeType': '60',
+ref_List = {'KtimeType': 'day',
             'KbeginDay': '20160505',
             'KgetLength': 61,
             'TdayLength': 5,
@@ -13,7 +13,10 @@ ref_List = {'KtimeType': '60',
             'appcode': appcode}
 
 
-codeList = ['601998']
+codeList = ['002695']
+# 601998
+# 300506
+# 002695
 # codeList = getValue.get_allCodelist()
 
 result = []
@@ -25,7 +28,8 @@ for code in codeList:
     # for i in s.Kvalue:
     #     print(i)
     s.update_Kstatus()
-    y = Yline(s.Kvalue, None)
+    # print(s.Kvalue[0:-12])
+    y = Yline(s.Kvalue[0:-10], None)
     # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
     # for h in m:
     #     print(h)
@@ -46,10 +50,10 @@ for code in codeList:
     #     m = [(l['time'], l['序号'], l['底部']) for l in k]
     #     print(m)
 
-    print('\n阴线分段分层：')
-    for k in y.get_levelList():
-        m = [(l['time'], l['序号']) for l in k]
-        print(m)
+    # print('\n阴线分段分层：')
+    # for k in y.get_levelList():
+    #     m = [(l['time'], l['序号']) for l in k]
+    #     print(m)
 
     # print('\n最小量能：')
     # print(y.minVol)
