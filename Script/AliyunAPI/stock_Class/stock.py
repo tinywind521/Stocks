@@ -364,6 +364,17 @@ class Yline:
     不要怂，就是干！
     """
     def __init__(self, Kvalue, para):
+        """
+        初始化
+        :param Kvalue:
+        :param para:
+        """
+        """统计阴线和阳线数量"""
+        self._bull_lenth = 0
+        self._bear_lenth = 0
+        self._all_lenth = 0
+
+        """计算层级差用到的序列变量"""
         self._list_bull = []
         self._list_bear = []
         self._seq_bull = []
@@ -641,6 +652,10 @@ class Yline:
         :return:
         """
 
+        self._bull_lenth = 0
+        self._bear_lenth = 0
+        self._all_lenth = 0
+
         self._seq_bull.clear()
         self._seq_bear.clear()
         self._list_bull.clear()
@@ -793,6 +808,7 @@ class Yline:
             # element = {'布林': 0}
             last_level = None
             for element in array[::-1]:
+                self._bull_lenth += 1
                 if low_level <= -2 < element['布林'] and min_price <= element['close']:
                     breakMark = True
                     break
@@ -853,20 +869,21 @@ class Yline:
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
-                print('连续阴线，结果：' + str(self.status))
+                print('连续阴线，结果：' + format(self.status, '0.3f'))
             if self.status >= 0:
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     self._index_fall_level()
-                    print('下降层级，结果：' + str(self.status))
+                    print('下降层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] == self._rear[0]['布林']:
                     self._index_hori_level()
-                    print('水平层级，结果：' + str(self.status))
+                    print('水平层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] < self._rear[0]['布林']:
                     self._index_rise_level()
-                    print('上升层级，结果：' + str(self.status))
+                    print('上升层级，结果：' + format(self.status, '0.3f'))
                 else:
                     break
-        print('最终结果：' + str(self.status))
+        print('阳线占比：' + format(100 * (self._bull_lenth / self._all_lenth), '0.3f'))
+        print('最终结果：' + format(self.status, '0.3f'))
         # for
         #     1、注意底部起来的连续阳线；
         #     2、阴线数量占比；
