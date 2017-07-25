@@ -51,10 +51,10 @@ for code in codeList:
     #     m = [(l['time'], l['序号'], l['底部']) for l in k]
     #     print(m)
 
-    # print('\n阴线分段分层：')
-    # for k in y.get_levelList():
-    #     m = [(l['time'], l['序号']) for l in k]
-    #     print(m)
+    print('\n阴线分段分层：')
+    for k in y.get_levelList():
+        m = [(l['time'], l['序号']) for l in k]
+        print(m)
 
     # print('\n最小量能：')
     # print(y.minVol)

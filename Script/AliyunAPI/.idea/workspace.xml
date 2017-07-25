@@ -18,8 +18,8 @@
       <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="810" column="16" lean-forward="false" selection-start-line="810" selection-start-column="16" selection-end-line="810" selection-end-column="16" />
+            <state relative-caret-position="333">
+              <caret line="903" column="12" lean-forward="true" selection-start-line="903" selection-start-column="12" selection-end-line="903" selection-end-column="12" />
               <folding>
                 <element signature="e#63#8903#0" expanded="false" />
                 <element signature="e#966#987#0" expanded="false" />
@@ -64,9 +64,9 @@
                 <element signature="e#17502#17521#0" expanded="false" />
                 <element signature="e#17649#17668#0" expanded="false" />
                 <element signature="e#17795#17864#0" expanded="false" />
-                <element signature="e#23417#23441#0" expanded="false" />
-                <element signature="e#23784#23810#0" expanded="false" />
-                <element signature="e#24784#24814#0" expanded="false" />
+                <element signature="e#23379#23403#0" expanded="false" />
+                <element signature="e#23746#23772#0" expanded="false" />
+                <element signature="e#25112#25142#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -75,8 +75,8 @@
       <file leaf-file-name="2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+            <state relative-caret-position="-621">
+              <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
               <folding>
                 <element signature="e#571#591#0" expanded="false" />
               </folding>
@@ -154,8 +154,8 @@
         <option value="$PROJECT_DIR$/debug/列表中的字典元素排序.py" />
         <option value="$PROJECT_DIR$/3.py" />
         <option value="$PROJECT_DIR$/debug/debug.py" />
-        <option value="$PROJECT_DIR$/2.py" />
         <option value="$PROJECT_DIR$/stock_Class/stock.py" />
+        <option value="$PROJECT_DIR$/2.py" />
       </list>
     </option>
   </component>
@@ -198,6 +198,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -255,7 +256,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -322,24 +322,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="绘图" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../日线分时对比行情" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AliyunAPI" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../日线分时对比行情/绘图.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="晕乎乎的工程模式" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -371,6 +353,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="AliyunAPI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="hkex" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AliyunAPI" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hkex.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -443,17 +443,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.1" />
       <item index="1" class="java.lang.String" itemvalue="Python.debug" />
-      <item index="2" class="java.lang.String" itemvalue="Python.绘图" />
-      <item index="3" class="java.lang.String" itemvalue="Python.晕乎乎的工程模式" />
-      <item index="4" class="java.lang.String" itemvalue="Python.2" />
+      <item index="2" class="java.lang.String" itemvalue="Python.晕乎乎的工程模式" />
+      <item index="3" class="java.lang.String" itemvalue="Python.2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.hkex" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.2" />
-        <item index="1" class="java.lang.String" itemvalue="Python.debug" />
-        <item index="2" class="java.lang.String" itemvalue="Python.1" />
-        <item index="3" class="java.lang.String" itemvalue="Python.晕乎乎的工程模式" />
-        <item index="4" class="java.lang.String" itemvalue="Python.绘图" />
+        <item index="1" class="java.lang.String" itemvalue="Python.hkex" />
+        <item index="2" class="java.lang.String" itemvalue="Python.debug" />
+        <item index="3" class="java.lang.String" itemvalue="Python.1" />
+        <item index="4" class="java.lang.String" itemvalue="Python.晕乎乎的工程模式" />
       </list>
     </recent_temporary>
   </component>
@@ -485,7 +485,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1370" height="735" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26030535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26412213" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29459903" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="0" y="0" width="1366" height="728" />
@@ -610,8 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py" />
-    <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py" />
     <entry file="file://$PROJECT_DIR$/debug/列表合并字典.py" />
     <entry file="file://$PROJECT_DIR$/file_io/write_LHB.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -703,13 +701,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hkex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/file_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -768,10 +759,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2.py">
+    <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-924">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hkex.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <caret line="11" column="15" lean-forward="true" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-621">
+          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
           <folding>
             <element signature="e#571#591#0" expanded="false" />
           </folding>
@@ -780,8 +797,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="810" column="16" lean-forward="false" selection-start-line="810" selection-start-column="16" selection-end-line="810" selection-end-column="16" />
+        <state relative-caret-position="333">
+          <caret line="903" column="12" lean-forward="true" selection-start-line="903" selection-start-column="12" selection-end-line="903" selection-end-column="12" />
           <folding>
             <element signature="e#63#8903#0" expanded="false" />
             <element signature="e#966#987#0" expanded="false" />
@@ -826,9 +843,9 @@
             <element signature="e#17502#17521#0" expanded="false" />
             <element signature="e#17649#17668#0" expanded="false" />
             <element signature="e#17795#17864#0" expanded="false" />
-            <element signature="e#23417#23441#0" expanded="false" />
-            <element signature="e#23784#23810#0" expanded="false" />
-            <element signature="e#24784#24814#0" expanded="false" />
+            <element signature="e#23379#23403#0" expanded="false" />
+            <element signature="e#23746#23772#0" expanded="false" />
+            <element signature="e#25112#25142#0" expanded="false" />
           </folding>
         </state>
       </provider>

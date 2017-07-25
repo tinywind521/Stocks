@@ -808,7 +808,6 @@ class Yline:
             # element = {'布林': 0}
             last_level = None
             for element in array[::-1]:
-                self._bull_lenth += 1
                 if low_level <= -2 < element['布林'] and min_price <= element['close']:
                     breakMark = True
                     break
@@ -837,10 +836,17 @@ class Yline:
         #     print(i)
         try:
             if self._levelList[-1][-1]['布林'] >= self._levelList[-2][-1]['布林']:
-                self._levelList.pop()
+                temp = self._levelList.pop()
+                self._bull_lenth -= len(temp)
         except IndexError:
             pass
 
+        self._bear_lenth = sum(len(l) for l in self._levelList)
+        self._all_lenth = self._seq[-1][-1]['序号'] - self._levelList[-1][-1]['序号'] + 1
+        self._bull_lenth = self._all_lenth - self._bear_lenth
+        # print(self._all_lenth)
+        # print(self._bull_lenth)
+        # print(self._bear_lenth)
         """
         功能：
         1、找到符合层级形态的
