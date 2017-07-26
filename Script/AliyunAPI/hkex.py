@@ -12,7 +12,7 @@ for date in dateList:
     result = []
     for row in exp1.findall(s):
         value = []
-        d = {}
+        # d = {}
         for col in exp2.findall(row):
             value.append(col.replace('\r\n                                ', '')
                          .replace('\r\n                            ', ''))
@@ -30,7 +30,7 @@ for date in dateList:
     result = []
     for row in exp1.findall(s):
         value = []
-        d = {}
+        # d = {}
         for col in exp2.findall(row):
             value.append(col.replace('\r\n                                ', '')
                          .replace('\r\n                            ', ''))
