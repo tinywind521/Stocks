@@ -13,7 +13,7 @@ ref_List = {'KtimeType': '60',
             'appcode': appcode}
 
 
-codeList = ['000837']
+codeList = ['300506']
 # 000837
 # 601998
 # 300506

@@ -391,7 +391,8 @@ class Yline:
         self.minVol = 0
         self._YY_VolumnList = None
         if para is None:
-            para = {'收针对量能的影响系数': 0.75,
+            para = {
+                    '收针对量能的影响系数': 0.75,
                     '评分初值': 100,
                     '以下是层级差中用到的系数': 0,
 
@@ -841,8 +842,14 @@ class Yline:
         except IndexError:
             pass
 
+        # print(self._seq)
+        # print(self._levelList)
         self._bear_lenth = sum(len(l) for l in self._levelList)
-        self._all_lenth = self._seq[-1][-1]['序号'] - self._levelList[-1][-1]['序号'] + 1
+        if self._levelList:
+            _levelList = self._levelList[-1][-1]['序号']
+        else:
+            _levelList = 0
+        self._all_lenth = self._seq[-1][-1]['序号'] - _levelList + 1
         self._bull_lenth = self._all_lenth - self._bear_lenth
         # print(self._all_lenth)
         # print(self._bull_lenth)
@@ -872,27 +879,32 @@ class Yline:
             """
             先不判断连续阴线
             """
+            "是否打印"
+            _setPrint = 1
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
-                print('连续阴线，结果：' + format(self.status, '0.3f'))
+                if _setPrint:
+                    print('连续阴线，结果：' + format(self.status, '0.3f'))
             if self.status >= 0:
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     self._index_fall_level()
-                    print('下降层级，结果：' + format(self.status, '0.3f'))
+                    if _setPrint:
+                        print('下降层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] == self._rear[0]['布林']:
                     self._index_hori_level()
-                    print('水平层级，结果：' + format(self.status, '0.3f'))
+                    if _setPrint:
+                        print('水平层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] < self._rear[0]['布林']:
                     self._index_rise_level()
-                    print('上升层级，结果：' + format(self.status, '0.3f'))
+                    if _setPrint:
+                        print('上升层级，结果：' + format(self.status, '0.3f'))
                 else:
                     break
         print('阳线占比：' + format(100 * (self._bull_lenth / self._all_lenth), '0.3f'))
         print('最终结果：' + format(self.status, '0.3f'))
         # for
         #     1、注意底部起来的连续阳线；
-        #     2、阴线数量占比；
         #     3、统计各类层级差在 布林上下空间的 数量；
 
 
