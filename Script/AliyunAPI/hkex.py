@@ -4,6 +4,9 @@ from functions import getValue
 import re
 
 dateList = getValue.get_dateList('20170317', 0)
+beginDate = input("Please input begin date (like, 20170101): ")
+dateList = dateList[dateList.index(beginDate):]
+print(dateList)
 for date in dateList:
     s = hkex_api.hkex(date, 'sz')
     exp1 = re.compile('(?isu)<tr class="row[^>]*>(.*?)</tr>')
