@@ -363,6 +363,7 @@ class Yline:
     注意反向层级差
     不要怂，就是干！
     """
+
     def __init__(self, Kvalue, para):
         """
         初始化
@@ -390,6 +391,7 @@ class Yline:
         """minVol 近期地量"""
         self.minVol = 0
         self._YY_VolumnList = None
+        self._setPrint = 0
         if para is None:
             para = {
                     '收针对量能的影响系数': 0.75,
@@ -556,26 +558,29 @@ class Yline:
             k1 = 0.05
 
             """先判断是不是阶段性的最后一根"""
-            if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
-                self.status *= 1
-            else:
-                self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
-                self.status *= k1 * (max(headVolList) / max(rearVolList) - 1) + 1
-
-                """出现阳包阴时的放量系数"""
-                k2 = 0.02
-                """未出现阳包阴时的放量系数"""
-                k3 = 0.02
-                if self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] >= abs(self._rear[-1]['涨幅']):
-                    "判定阳包阴"
-                    self.status *= k2 * (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
-                elif self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] < abs(self._rear[-1]['涨幅']):
-                    if self.Index[(self._rear[-1]['序号'] + 2)]['涨幅'] <= 0:
-                        self.status *= k3 * (self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
-                    else:
-                        self.status *= k3 * (2 * self._rear[-1]['量能'] / (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
-                else:
+            try:
+                if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
                     self.status *= 1
+                else:
+                    self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+                    self.status *= k1 * (max(headVolList) / max(rearVolList) - 1) + 1
+
+                    """出现阳包阴时的放量系数"""
+                    k2 = 0.02
+                    """未出现阳包阴时的放量系数"""
+                    k3 = 0.02
+                    if self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] >= abs(self._rear[-1]['涨幅']):
+                        "判定阳包阴"
+                        self.status *= k2 * (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
+                    elif self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] < abs(self._rear[-1]['涨幅']):
+                        if self.Index[(self._rear[-1]['序号'] + 2)]['涨幅'] <= 0:
+                            self.status *= k3 * (self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
+                        else:
+                            self.status *= k3 * (2 * self._rear[-1]['量能'] / (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
+                    else:
+                        self.status *= 1
+            except IndexError:
+                self.status *= 1
 
         elif self._head[-1]['序号'] + 1 < self._rear[0]['序号']:
             """
@@ -880,29 +885,30 @@ class Yline:
             先不判断连续阴线
             """
             "是否打印"
-            _setPrint = 1
+
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
-                if _setPrint:
+                if self._setPrint:
                     print('连续阴线，结果：' + format(self.status, '0.3f'))
             if self.status >= 0:
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     self._index_fall_level()
-                    if _setPrint:
+                    if self._setPrint:
                         print('下降层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] == self._rear[0]['布林']:
                     self._index_hori_level()
-                    if _setPrint:
+                    if self._setPrint:
                         print('水平层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] < self._rear[0]['布林']:
                     self._index_rise_level()
-                    if _setPrint:
+                    if self._setPrint:
                         print('上升层级，结果：' + format(self.status, '0.3f'))
                 else:
                     break
-        print('阳线占比：' + format(100 * (self._bull_lenth / self._all_lenth), '0.3f'))
-        print('最终结果：' + format(self.status, '0.3f'))
+        if self._setPrint:
+            print('阳线占比：' + format(100 * (self._bull_lenth / self._all_lenth), '0.3f'))
+            print('最终结果：' + format(self.status, '0.3f'))
         # for
         #     1、注意底部起来的连续阳线；
         #     3、统计各类层级差在 布林上下空间的 数量；

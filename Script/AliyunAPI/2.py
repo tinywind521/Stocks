@@ -18,7 +18,7 @@ codeList = ['300506']
 # 601998
 # 300506
 # 002695
-# codeList = getValue.get_allCodelist()
+codeList = getValue.get_allCodelist()
 
 result = []
 temp = {'code': '', 'value': 0}
@@ -30,7 +30,10 @@ for code in codeList:
     #     print(i)
     s.update_Kstatus()
     # print(s.Kvalue[0:-12])
-    y = Yline(s.Kvalue, None)
+    try:
+        y = Yline(s.Kvalue, None)
+    except ValueError:
+        continue
     # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
     # for h in m:
     #     print(h)
@@ -51,10 +54,10 @@ for code in codeList:
     #     m = [(l['time'], l['序号'], l['底部']) for l in k]
     #     print(m)
 
-    print('\n阴线分段分层：')
-    for k in y.get_levelList():
-        m = [(l['time'], l['序号']) for l in k]
-        print(m)
+    # print('\n阴线分段分层：')
+    # for k in y.get_levelList():
+    #     m = [(l['time'], l['序号']) for l in k]
+    #     print(m)
 
     # print('\n最小量能：')
     # print(y.minVol)
@@ -63,4 +66,7 @@ for code in codeList:
     print(temp)
     result.append(temp)
 
+for i in result:
+    print(i['code'], end='  ')
+    print(i['value'])
 
