@@ -1,7 +1,8 @@
 import json
 import numpy
+import time
 
-from http_api import aliyun_api
+from http_api import aliyun_api, showapi_api
 from functions import getValue
 
 
@@ -49,7 +50,7 @@ def return_stocklist(appcode):
     # texts = ''
     try:
         for market in allmarket:
-            text = aliyun_api.stocklist(market, 1, appcode)
+            text = showapi_api.stocklist(market, 1, appcode)
             # print(text)
             # 先读一次，获得总page数
             all_dict = json.loads(text)
@@ -67,14 +68,14 @@ def return_stocklist(appcode):
             # print(stocklist)
             if allpages >= 2:
                 for currentPage in range(1, allpages):
-                    text = aliyun_api.stocklist(market, currentPage + 1, appcode)
+                    text = showapi_api.stocklist(market, currentPage + 1, appcode)
                     # print(text)
                     all_dict = json.loads(text)
                     showapi_res_body = all_dict['showapi_res_body']
                     newlist = showapi_res_body['contentlist']
                     # print(newlist)
                     exactPage = showapi_res_body['currentPage']
-                    # print(format(exactPage, 'd'))
+                    print(format(exactPage, 'd'))
                     if exactPage != (currentPage + 1):
                         mark = 0
                         break

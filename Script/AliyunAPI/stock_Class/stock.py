@@ -19,7 +19,8 @@ class Stock:
                         'KgetLength': 10,
                         'TdayLength': 5,
                         'TgetLength': 1,
-                        'appcode': 'c7689f18e1484e9faec07122cc0b5f9e'}
+                        'appcode': 'c7689f18e1484e9faec07122cc0b5f9e',
+                        'showapi_code': '6a09e5fe3e724252b35d571a0b715baa'}
         self.code = code
         self._ref_list = ref_List
         self.Kvalue = None
@@ -45,11 +46,11 @@ class Stock:
         """
         try:
             if self._ref_list['KtimeType'] == '60':
-                self.Kvalue = getValue.get_60F(self.code, self._ref_list['KbeginDay'],
-                                               self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_60F_showapi(self.code, self._ref_list['KbeginDay'],
+                                                       self._ref_list['KgetLength'])
             elif self._ref_list['KtimeType'] == 'day':
-                self.Kvalue = getValue.get_dayK(self.code, self._ref_list['KbeginDay'],
-                                                self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_dayK_showapi(self.code, self._ref_list['KbeginDay'],
+                                                        self._ref_list['KgetLength'])
         except ValueError:
             self.Kvalue = None
 
@@ -311,7 +312,7 @@ class Stock:
                 zf = 100.00 * (_Kvalue['close'] - _Kvalue['lastclose']) / _Kvalue['lastclose']
             ks = 100.00 * (_Kvalue['close'] - _Kvalue['open'] + 0.001) / _Kvalue['lastclose']
             gj = 100.00 * (_Kvalue['upper'] - _Kvalue['lower']) / _Kvalue['mid']
-        except ZeroDivisionError:
+        except ZeroDivisionError or KeyError:
             self.Kstatus['涨幅'] = 0
             self.Kstatus['开收'] = 0
             self.Kstatus['上针'] = 0.00
@@ -329,7 +330,7 @@ class Stock:
                 full = _Kvalue['max'] - _Kvalue['min']
                 sz = 100.00 * (_Kvalue['max'] - high) / full
                 xz = 100.00 * (low - _Kvalue['min']) / full
-            except ZeroDivisionError:
+            except ZeroDivisionError or KeyError:
                 self.Kstatus['上针'] = 0.00
                 self.Kstatus['下针'] = 0.00
             else:

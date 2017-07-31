@@ -6,14 +6,14 @@ from stock_Class.stock import Stock, Yline
 
 appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 ref_List = {'KtimeType': '60',
-            'KbeginDay': '20160505',
+            'KbeginDay': '20170501',
             'KgetLength': 61,
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': appcode}
 
 
-codeList = ['300506']
+# codeList = ['300080']
 # 000837
 # 601998
 # 300506
@@ -24,6 +24,7 @@ result = []
 temp = {'code': '', 'value': 0}
 
 for code in codeList:
+    print(code)
     s = Stock(code, ref_List)
     s.get_KValue()
     # for i in s.Kvalue:

@@ -4,6 +4,7 @@ import numpy
 
 from functions import function
 from http_api import aliyun_api
+from http_api import showapi_api
 from http_api import QQ_api
 
 
@@ -29,7 +30,7 @@ def get_dateList(beginDay, getLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'
         return dateList
 
 
-def get_allCodelist(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+def get_allCodelist(appcode='6a09e5fe3e724252b35d571a0b715baa'):
     """
     获取当日总表
     :param appcode:
@@ -285,6 +286,80 @@ def get_60F(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07
         return None
 
 
+def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724252b35d571a0b715baa'):
+    """
+    获取指定日期长度的60F,
+    同时计算boll
+    :param p: p常量
+    :param n: 布林计算天数
+    :param code:
+    :param beginDay:
+    :param getLength: = 2n / 4
+    :param appcode:
+    :return:
+    """
+    try:
+        showapi_str = showapi_api.realtime(code, beginDay, '60', 'bfq', appcode)
+        showapi_dict = json.loads(showapi_str)
+        dataList = get_dataList(showapi_dict)
+        dataList.reverse()
+        realtimeValue = []
+        tempVol = 0
+        tempOpen = None
+        for element in dataList:
+            # print(element)
+            if element['minute'][-4:] == '0930':
+                tempVol = int(element['volumn'])
+                tempOpen = element['open']
+            elif element['minute'][-4:] == '1030':
+                realVol = format((int(element['volumn']) + tempVol), 'd')
+                if tempOpen:
+                    realOpen = tempOpen
+                else:
+                    realOpen = element['open']
+                element['min'] = min(realOpen, element['min'])
+                element['max'] = max(realOpen, element['max'])
+                element['volumn'] = realVol
+                element['open'] = realOpen
+                realtimeValue.append(element)
+                tempOpen = None
+            else:
+                realtimeValue.append(element)
+        realtimeList = realtimeValue
+        closeList = []
+        for element in realtimeList:
+            closeList.append(float(element['close']))
+        # print(closeList)
+        # closeList.reverse()
+        lastcloseList = [k for k in closeList]
+        boll = function.cal_boll(closeList, n, p)
+        m = len(boll)
+        boll = boll[-m + 1:]
+        realtimeList = realtimeList[-m + 1:]
+        lastcloseList = lastcloseList[-m:]
+        lastclose = {}
+        for i in range(0, m - 1):
+            # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            lastclose['lastclose'] = lastcloseList[i]
+            # print(realtimeList[i])
+            realtimeList[i]['min'] = float(realtimeList[i]['min'])
+            if len(realtimeList[i]['open']) == 0:
+                realtimeList[i]['open'] = 0
+            else:
+                realtimeList[i]['open'] = float(realtimeList[i]['open'])
+            realtimeList[i]['max'] = float(realtimeList[i]['max'])
+            realtimeList[i]['close'] = float(realtimeList[i]['close'])
+            realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
+            realtimeList[i].update(lastclose)
+            realtimeList[i].update(boll[i])
+            # print(realtimeList[i])
+        # print(realtimeList)
+        realtimeList = realtimeList[-getLength:]
+        return realtimeList
+    except ValueError:
+        return None
+
+
 def get_dayK(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     """
     获取指定日期长度的60F,
@@ -301,6 +376,57 @@ def get_dayK(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec0
         aliyun_str = aliyun_api.realtime(code, beginDay, 'day', 'bfq', appcode)
         aliyun_dict = json.loads(aliyun_str)
         dataList = get_dataList(aliyun_dict)
+        dataList.reverse()
+        realtimeList = [k for k in dataList]
+        closeList = []
+        for element in realtimeList:
+            closeList.append(float(element['close']))
+        # print(closeList)
+        # closeList.reverse()
+        lastcloseList = [k for k in closeList]
+        boll = function.cal_boll(closeList, n, p)
+        m = len(boll)
+        boll = boll[-m + 1:]
+        realtimeList = realtimeList[-m + 1:]
+        lastcloseList = lastcloseList[-m:]
+        lastclose = {}
+        for i in range(0, m - 1):
+            # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            lastclose['lastclose'] = lastcloseList[i]
+            realtimeList[i]['min'] = float(realtimeList[i]['min'])
+            if len(realtimeList[i]['open']) == 0:
+                realtimeList[i]['open'] = 0
+            else:
+                realtimeList[i]['open'] = float(realtimeList[i]['open'])
+            realtimeList[i]['max'] = float(realtimeList[i]['max'])
+            realtimeList[i]['close'] = float(realtimeList[i]['close'])
+            realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
+            realtimeList[i].update(lastclose)
+            realtimeList[i].update(boll[i])
+            # print(realtimeList[i])
+        # print(realtimeList)
+        realtimeList = realtimeList[-getLength:]
+        return realtimeList
+    except ValueError:
+        return None
+
+
+def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724252b35d571a0b715baa'):
+    """
+    获取指定日期长度的60F,
+    同时计算boll
+    :param p: p常量
+    :param n: 布林计算天数
+    :param code:
+    :param beginDay:
+    :param getLength: = 2n / 4
+    :param appcode:
+    :return:
+    """
+    try:
+        showapi_str = showapi_api.realtime(code, beginDay, 'day', 'bfq', appcode)
+        showapi_dict = json.loads(showapi_str)
+        dataList = get_dataList(showapi_dict)
         dataList.reverse()
         realtimeList = [k for k in dataList]
         closeList = []
