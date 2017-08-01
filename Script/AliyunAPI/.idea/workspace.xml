@@ -17,7 +17,7 @@
       <file leaf-file-name="stock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1056">
+            <state relative-caret-position="1794">
               <caret line="412" column="35" lean-forward="false" selection-start-line="412" selection-start-column="35" selection-end-line="412" selection-end-column="35" />
               <folding>
                 <element signature="e#63#9039#0" expanded="false" />
@@ -64,7 +64,7 @@
       <file leaf-file-name="2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
+            <state relative-caret-position="23">
               <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
                 <element signature="e#766#829#0" expanded="false" />
@@ -76,8 +76,8 @@
       <file leaf-file-name="showapi_request.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http_api/showapi_request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+            <state relative-caret-position="897">
+              <caret line="60" column="60" lean-forward="false" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
               <folding>
                 <element signature="e#12#33#0" expanded="true" />
                 <element signature="e#145#169#0" expanded="false" />
@@ -90,7 +90,7 @@
       <file leaf-file-name="showapi_api.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http_api/showapi_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="1242">
               <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
               <folding>
                 <element signature="e#1708#2139#0" expanded="false" />
@@ -102,7 +102,7 @@
       <file leaf-file-name="getValue.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions/getValue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="1219">
               <caret line="301" column="34" lean-forward="false" selection-start-line="301" selection-start-column="34" selection-end-line="301" selection-end-column="34" />
               <folding>
                 <element signature="e#251#767#0" expanded="false" />
@@ -203,8 +203,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1932" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -240,8 +240,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,6 +251,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -475,12 +475,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2980333" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30448717" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2944079" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="64" y="114" width="708" height="490" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
@@ -494,6 +493,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -721,27 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="301" column="34" lean-forward="false" selection-start-line="301" selection-start-column="34" selection-end-line="301" selection-end-column="34" />
-          <folding>
-            <element signature="e#251#767#0" expanded="false" />
-            <element signature="e#1147#2197#0" expanded="false" />
-            <element signature="e#2267#3522#0" expanded="false" />
-            <element signature="e#3549#4070#0" expanded="false" />
-            <element signature="e#4106#4254#0" expanded="false" />
-            <element signature="e#4325#5202#0" expanded="false" />
-            <element signature="e#5232#5910#0" expanded="false" />
-            <element signature="e#6012#8714#0" expanded="false" />
-            <element signature="e#12290#14072#0" expanded="false" />
-            <element signature="e#14183#15970#0" expanded="false" />
-            <element signature="e#16056#16216#0" expanded="false" />
-            <element signature="e#16244#16491#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Z:/Python/Lib/http/client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -793,7 +772,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/http_api/showapi_api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="1242">
           <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
           <folding>
             <element signature="e#1708#2139#0" expanded="false" />
@@ -803,7 +782,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1056">
+        <state relative-caret-position="1794">
           <caret line="412" column="35" lean-forward="false" selection-start-line="412" selection-start-column="35" selection-end-line="412" selection-end-column="35" />
           <folding>
             <element signature="e#63#9039#0" expanded="false" />
@@ -848,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/http_api/showapi_request.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+        <state relative-caret-position="897">
+          <caret line="60" column="60" lean-forward="false" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
           <folding>
             <element signature="e#12#33#0" expanded="true" />
             <element signature="e#145#169#0" expanded="false" />
@@ -862,13 +841,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1219">
+          <caret line="301" column="34" lean-forward="false" selection-start-line="301" selection-start-column="34" selection-end-line="301" selection-end-column="34" />
+          <folding>
+            <element signature="e#251#767#0" expanded="false" />
+            <element signature="e#1147#2197#0" expanded="false" />
+            <element signature="e#2267#3522#0" expanded="false" />
+            <element signature="e#3549#4070#0" expanded="false" />
+            <element signature="e#4106#4254#0" expanded="false" />
+            <element signature="e#4325#5202#0" expanded="false" />
+            <element signature="e#5232#5910#0" expanded="false" />
+            <element signature="e#6012#8714#0" expanded="false" />
+            <element signature="e#12290#14072#0" expanded="false" />
+            <element signature="e#14183#15970#0" expanded="false" />
+            <element signature="e#16056#16216#0" expanded="false" />
+            <element signature="e#16244#16491#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
+        <state relative-caret-position="23">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="e#766#829#0" expanded="false" />
