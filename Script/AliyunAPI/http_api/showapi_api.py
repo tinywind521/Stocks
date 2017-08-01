@@ -54,7 +54,7 @@ def realtime(code, beginday, timetype, qtype='bfq', appcode='6a09e5fe3e724252b35
     bodys = {}
     url = host + path + '?' + querys
 
-    content = showapi_request.req(url)
+    content = showapi_request.req(url, 0.1)
     return content
 
 
@@ -95,7 +95,7 @@ def stocklist(market, currentPage, appcode='6a09e5fe3e724252b35d571a0b715baa'):
     bodys = {}
     url = host + path + '?' + querys
     # print(format(currentPage, 'd'))
-    content = showapi_request.req(url)
+    content = showapi_request.req(url, 1)
     return content
 
 

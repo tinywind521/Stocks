@@ -513,7 +513,7 @@ class Yline:
                 self.status *= k1 * (max(midBullList) / self._YY_VolumnList[self._rear[0]['序号']] - 1) + 1
             else:
                 self.status *= 1
-        except ValueError:
+        except ValueError or ZeroDivisionError:
             self.status *= 1
         try:
             if len(headVolList) != 0 and len(rearVolList) != 0 and sum(rearVolList) != 0:
@@ -521,8 +521,9 @@ class Yline:
                                + 1
             else:
                 self.status *= 1
-        except ValueError:
+        except ValueError or ZeroDivisionError:
             self.status *= 1
+
 
     def _index_fall_level(self):
         """
@@ -598,9 +599,12 @@ class Yline:
             # rearVolList = self._YY_VolumnList[self._rear[0]['序号']:(self._rear[-1]['序号'] + 1)]
             # # print((sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList)))
             # # print(k * max(headVolList) >= rearVolList[-1])
-            p1 = (sum(headVolList)/len(headVolList)) / (sum(rearVolList)/len(rearVolList)) - 1
-            p2 = max(headVolList) / rearVolList[-1] - 1
-            self.status *= k * (p1 + p2) / 2 + 1
+            try:
+                p1 = (sum(headVolList)/len(headVolList)) / (sum(rearVolList)/len(rearVolList)) - 1
+                p2 = max(headVolList) / rearVolList[-1] - 1
+                self.status *= k * (p1 + p2) / 2 + 1
+            except ZeroDivisionError:
+                self.status *= 1
         else:
             self.status *= 1
 
@@ -639,8 +643,12 @@ class Yline:
         #     self.status *= 0
         # else:
         #     self.status *= 1
-        self.status *= k1 * (max(midBullList) / self._YY_VolumnList[self._rear[0]['序号']] - 1) + 1
-        self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+        try:
+            self.status *= k1 * (max(midBullList) / self._YY_VolumnList[self._rear[0]['序号']] - 1) + 1
+            self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+        except ZeroDivisionError:
+            self.status *= 1
+
 
     def _cal_index(self, Kvalue):
         """

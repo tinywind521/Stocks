@@ -19,6 +19,7 @@ def req(url):
             temp = response.read()
             content = temp.decode("GBK")
             # print(content)
+            response.close()
             if content:
                 return content
             else:
@@ -38,6 +39,7 @@ def req(url):
                 temp = response.read()
                 content = temp.decode("GBK")
                 # print(content)
+                response.close()
                 if content:
                     return content
                 else:

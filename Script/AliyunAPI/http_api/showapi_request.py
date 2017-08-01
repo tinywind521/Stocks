@@ -32,42 +32,40 @@ import time
 # print('json_res data is:', json_res)
 
 
-def req(url):
+def req(url, sleepTime=0.2):
     """
     aliyun API
+    :param sleepTime:
     :param url:
     :return:
     """
-    try:
-        url.encode('utf-8')
-        # print(url)
-        socket.setdefaulttimeout(30)
-        content = None
+
+    url.encode('utf-8')
+    # print(url)
+    socket.setdefaulttimeout(20)
+    # or socket.timeout
+    content = None
+    for i in range(5):
         try:
-            request = urllib.request.Request(url)
-            response = urllib.request.urlopen(request)
-            content = response.read().decode("utf-8")
-        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError \
-                or socket.timeout or AttributeError:
-            time.sleep(15)
-            print('Oh,Let me have a rest! 5S!')
             try:
                 request = urllib.request.Request(url)
-                response = urllib.request.urlopen(request)
+                h = request.headers
+                response = urllib.request.urlopen(request, timeout=20)
+                # print(response)
+                # response = urllib.request.urlopen(request)
+                time.sleep(0.1)
                 content = response.read().decode("utf-8")
-            except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError \
-                    or socket.timeout or AttributeError:
-                response = None
-        # print(response)
-        # try:
-        #     content = response.read().decode("utf-8")
-        #     # print(content)
-        # except AttributeError or socket.timeout:
-        #     content = ''
-        if content:
-            time.sleep(1)
-            return content
-        else:
-            return ''
-    except ValueError:
-        return None
+                response.close()
+                break
+            except BaseException or socket.error or OSError:
+                print(h)
+                return ''
+        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError \
+                or OSError or AttributeError or KeyError or ValueError:
+            time.sleep(5)
+            print('Oh,Let me have a rest! 5S!')
+    if content:
+        time.sleep(sleepTime)
+        return content
+    else:
+        return ''

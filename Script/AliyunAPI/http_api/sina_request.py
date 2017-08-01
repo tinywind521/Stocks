@@ -29,6 +29,7 @@ def req(url):
         # print(response)
         try:
             content = response.read().decode("gb2312")
+            response.close()
         except AttributeError:
             content = ''
         if content:

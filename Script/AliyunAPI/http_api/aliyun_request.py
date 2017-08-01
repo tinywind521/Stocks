@@ -35,6 +35,7 @@ def req(url, appcode):
         # print(response)
         try:
             content = response.read().decode("utf-8")
+            response.close()
             # print(content)
         except AttributeError:
             content = ''

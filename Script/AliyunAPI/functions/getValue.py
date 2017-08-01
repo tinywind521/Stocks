@@ -142,13 +142,13 @@ def get_DateTime():
     return DateTime
 
 
-def get_dataList(aliyun_input):
+def get_dataList(api_input):
     """
     解析aliyun返回值的dataList
-    :param aliyun_input:
+    :param api_input:
     :return:
     """
-    dataList = aliyun_input['showapi_res_body']['dataList']
+    dataList = api_input['showapi_res_body']['dataList']
     return dataList
 
 
@@ -301,6 +301,20 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
     try:
         showapi_str = showapi_api.realtime(code, beginDay, '60', 'bfq', appcode)
         showapi_dict = json.loads(showapi_str)
+        for i in range(10):
+            try:
+                if showapi_dict['showapi_res_body']['ret_code'] != 0:
+                    print('Oh,Let me have a rest! 10S!')
+                    time.sleep(10)
+                else:
+                    break
+                showapi_str = showapi_api.realtime(code, beginDay, '60', 'bfq', appcode)
+                showapi_dict = json.loads(showapi_str)
+            except KeyError:
+                print('Oh,Let me have a rest! 10S!')
+                time.sleep(10)
+                showapi_str = showapi_api.realtime(code, beginDay, '60', 'bfq', appcode)
+                showapi_dict = json.loads(showapi_str)
         dataList = get_dataList(showapi_dict)
         dataList.reverse()
         realtimeValue = []

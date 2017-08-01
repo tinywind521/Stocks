@@ -55,9 +55,26 @@ def return_stocklist(appcode):
             # 先读一次，获得总page数
             all_dict = json.loads(text)
             showapi_res_body = all_dict['showapi_res_body']
+            # print(showapi_res_body)
+            for i in range(10):
+                try:
+                    if showapi_res_body['maxResult'] != 50:
+                        print('Oh,Let me have a rest! 10S!')
+                        time.sleep(10)
+                    else:
+                        break
+                    text = showapi_api.stocklist(market, 1, appcode)
+                    all_dict = json.loads(text)
+                    showapi_res_body = all_dict['showapi_res_body']
+                except KeyError:
+                    print('Oh,Let me have a rest! 10S!')
+                    time.sleep(10)
+                    text = showapi_api.stocklist(market, 1, appcode)
+                    all_dict = json.loads(text)
+                    showapi_res_body = all_dict['showapi_res_body']
             allpages = showapi_res_body['allPages']
             newlist = showapi_res_body['contentlist']
-            # print(format(exactPage, 'd'))
+            print(format(allpages, 'd'))
             pagelist = []
             for newlist_element in newlist:
                 tempdict = {'market': '', 'name': '', 'code': ''}
@@ -72,6 +89,23 @@ def return_stocklist(appcode):
                     # print(text)
                     all_dict = json.loads(text)
                     showapi_res_body = all_dict['showapi_res_body']
+                    # print(showapi_res_body['maxResult'])
+                    for i in range(10):
+                        try:
+                            if showapi_res_body['maxResult'] != 50:
+                                print('Oh,Let me have a rest! 10S!')
+                                time.sleep(10)
+                            else:
+                                break
+                            text = showapi_api.stocklist(market, currentPage + 1, appcode)
+                            all_dict = json.loads(text)
+                            showapi_res_body = all_dict['showapi_res_body']
+                        except KeyError:
+                            print('Oh,Let me have a rest! 10S!')
+                            time.sleep(10)
+                            text = showapi_api.stocklist(market, currentPage + 1, appcode)
+                            all_dict = json.loads(text)
+                            showapi_res_body = all_dict['showapi_res_body']
                     newlist = showapi_res_body['contentlist']
                     # print(newlist)
                     exactPage = showapi_res_body['currentPage']

@@ -63,6 +63,7 @@ def req(url, data, referer=None, **headers):
         #     response = None
         # print(response)
         content = response.read().decode("utf-8")
+        response.close()
         if content:
             return content
         else:
