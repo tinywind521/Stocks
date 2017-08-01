@@ -564,8 +564,14 @@ class Yline:
                 if self.Index[self._rear[-1]['序号'] + 1]['布林'] < self._rear[0]['布林']:
                     self.status *= 1
                 else:
-                    self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
-                    self.status *= k1 * (max(headVolList) / max(rearVolList) - 1) + 1
+                    try:
+                        if len(rearVolList) >= 1 and:
+                            self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+                            self.status *= k1 * (max(headVolList) / max(rearVolList) - 1) + 1
+                        else:
+                            self.status *= 1
+                    except IndexError or ZeroDivisionError:
+                        self.status *= 1
 
                     """出现阳包阴时的放量系数"""
                     k2 = 0.02
@@ -573,15 +579,24 @@ class Yline:
                     k3 = 0.02
                     if self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] >= abs(self._rear[-1]['涨幅']):
                         "判定阳包阴"
-                        self.status *= k2 * (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
+                        try:
+                            self.status *= k2 * (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
+                        except IndexError or ZeroDivisionError:
+                            self.status *= 1
                     elif self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] < abs(self._rear[-1]['涨幅']):
                         if self.Index[(self._rear[-1]['序号'] + 2)]['涨幅'] <= 0:
-                            self.status *= k3 * (self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
+                            try:
+                                self.status *= k3 * (self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
+                            except IndexError or ZeroDivisionError:
+                                self.status *= 1
                         else:
-                            self.status *= k3 * (2 * self._rear[-1]['量能'] / (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
+                            try:
+                                self.status *= k3 * (2 * self._rear[-1]['量能'] / (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
+                            except IndexError or ZeroDivisionError:
+                                self.status *= 1
                     else:
                         self.status *= 1
-            except IndexError:
+            except IndexError or ZeroDivisionError:
                 self.status *= 1
 
         elif self._head[-1]['序号'] + 1 < self._rear[0]['序号']:

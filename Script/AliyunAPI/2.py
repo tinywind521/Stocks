@@ -24,7 +24,7 @@ result = []
 temp = {'code': '', 'value': 0}
 
 for code in codeList:
-    print(code)
+    # print(code)
     s = Stock(code, ref_List)
     s.get_KValue()
     # for i in s.Kvalue:
