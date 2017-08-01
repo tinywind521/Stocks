@@ -47,6 +47,7 @@ def req(url, sleepTime=0.2):
     content = None
     for i in range(5):
         try:
+            h = None
             try:
                 request = urllib.request.Request(url)
                 h = request.headers

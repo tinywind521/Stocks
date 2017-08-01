@@ -282,7 +282,7 @@ class Stock:
             i = 0
             for _Kvalue in self.Kvalue:
                 # print(_Kvalue)
-                self.update_K参数(_Kvalue)
+                self.update_Kpara(_Kvalue)
                 _Kvalue.update(self.Kstatus)
                 self.Kvalue[i] = _Kvalue
                 i += 1
@@ -292,7 +292,7 @@ class Stock:
     #     self.Kstatus = None
 
 
-    def update_K参数(self, _Kvalue):
+    def update_Kpara(self, _Kvalue):
         """
         按照K线的涨幅、开盘收盘涨幅、收针判断、布林位置、结合收针的量能 归类 量化
         zf：涨幅
