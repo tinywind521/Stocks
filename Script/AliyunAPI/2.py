@@ -7,7 +7,7 @@ from stock_Class.stock import Stock, Yline
 
 aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
-
+tempPath = 'z:/test/codeList.txt'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20170701',
             'KgetLength': 61,
@@ -17,11 +17,27 @@ ref_List = {'KtimeType': '60',
 
 beginDate = input('Please input K begin date (ex.20170101): ')
 getLength = input('Please input K getLength (ex.61): ')
+
+if getLength:
+    ref_List['KgetLength'] = getLength
+else:
+    ref_List['KgetLength'] = 61
+
+dateList = getValue.get_dateList('20170101', 50)
+
 if len(beginDate) == 8:
     ref_List['KbeginDay'] = beginDate
-debuger = 0
+elif not beginDate:
+    if ref_List['KtimeType'] == '60':
+        ref_List['KbeginDay'] = dateList[-int(ref_List['KgetLength'] / 4) - 1]
+    elif ref_List['KtimeType'] == 'day':
+        ref_List['KbeginDay'] = dateList[-int(ref_List['KgetLength']) - 1]
+    else:
+        ref_List['KbeginDay'] = '20170101'
+else:
+    pass
 
-tempPath = 'z:/test/codeList.txt'
+debuger = 0
 
 if debuger:
     codeList = ['603860']
@@ -51,6 +67,7 @@ temp = {'code': '', 'value': 0}
 
 for code in codeList:
     print(code)
+    temp = {'code': '', 'value': 0}
     s = Stock(code, ref_List)
     s.get_KValue()
     # print(s.Kvalue)
@@ -94,8 +111,15 @@ for code in codeList:
     temp['value'] = y.status
     print(temp)
     result.append(temp)
+    del temp
 
 for i in result:
-    print(i['code'], end='  ')
+    print(i['code'], end='\t')
     print(i['value'])
 
+"""
+1、区分阳线占比的权重
+2、上轨以上不超过2次
+3、收在上轨以下，中下轨上部空间以上
+4、
+"""

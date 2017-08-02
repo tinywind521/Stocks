@@ -47,10 +47,8 @@ def req(url, sleepTime=0.2):
     content = None
     for i in range(5):
         try:
-            h = None
             try:
                 request = urllib.request.Request(url)
-                h = request.headers
                 response = urllib.request.urlopen(request, timeout=20)
                 # print(response)
                 # response = urllib.request.urlopen(request)
@@ -59,7 +57,7 @@ def req(url, sleepTime=0.2):
                 response.close()
                 break
             except BaseException or socket.error or OSError:
-                print(h)
+                print(url)
                 return ''
         except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError \
                 or OSError or AttributeError or KeyError or ValueError:
