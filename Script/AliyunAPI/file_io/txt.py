@@ -32,17 +32,3 @@ def txt_read(path):
     except ValueError:
         pass
 
-
-# def savefile(code, beginday, timetype, path, appcode):
-    #   beginday = '20170101'
-    #   code = input("Please enter code:")
-    #   beginDay = input("Please enter beginDay:")
-    #   timeType = input("Please enter beginDay:")
-    #   timetype = '60'
-    #   path = input("Please enter path:")
-    #   path = tkinter.filedialog.askopenfilename(title='选择一个文件', filetypes=[('所有文件','.*'),('文本文件','.txt')])
-    #   path = 'Z:/Test/60F/' + code + '.txt'
-    #   appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-#    qtype = 'bfq'
-#    text = aliyun_api.realtime(code, beginday, timetype, qtype, appcode)
-#   txt_write(text, path)

@@ -58,11 +58,13 @@ def req(url, data, referer=None, **headers):
         # try:
         # postBody =
         params = postBody.encode(encoding='UTF8')
+        # print(params)
         response = urllib.request.urlopen(request, params)
         # except urllib.error.HTTPError or urllib.error.URLError or TimeoutError:
         #     response = None
         # print(response)
         content = response.read().decode("utf-8")
+        # print(content)
         response.close()
         if content:
             return content

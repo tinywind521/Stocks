@@ -134,7 +134,7 @@ def block_list(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     return content
 
 
-def block_stocks(blockId, currentPage, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+def block_stocks(blockId, currentPage, appcode='6a09e5fe3e724252b35d571a0b715baa'):
     """
     获取板块内指定页数的个股
     :param blockId:
@@ -142,13 +142,16 @@ def block_stocks(blockId, currentPage, appcode='c7689f18e1484e9faec07122cc0b5f9e
     :param appcode:
     :return:
     """
-    host = 'https://ali-stock.showapi.com'
-    path = '/stock-in-block'
+    host = 'http://route.showapi.com'
+    path = '/131-59'
     method = 'GET'
     # appcode = '你自己的AppCode'
-    querys = 'page=' + format(currentPage, 'd') + '&typeId=' + blockId
+    showapi_appid = '31351'
+    querys = 'showapi_appid=' + showapi_appid + '&showapi_sign=' + appcode + \
+             '&typeId=' + blockId + '&page=' + format(currentPage, 'd')
     bodys = {}
     url = host + path + '?' + querys
+    # print(url)
 
-    content = aliyun_request.req(url, appcode)
+    content = showapi_request.req(url, 0.1)
     return content

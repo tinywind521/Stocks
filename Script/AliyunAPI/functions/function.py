@@ -16,7 +16,7 @@ def return_date(beginDay, appcode, code='000001', timeType='day'):
     :return: dateList
     """
     try:
-        text = aliyun_api.mainindex(code, beginDay, timeType, appcode)
+        text = showapi_api.mainindex(code, beginDay, timeType, appcode)
         all_dict = json.loads(text)
         dataList = all_dict['showapi_res_body']['dataList']
         dateList = []
@@ -109,7 +109,7 @@ def return_stocklist(appcode):
                     newlist = showapi_res_body['contentlist']
                     # print(newlist)
                     exactPage = showapi_res_body['currentPage']
-                    print(format(exactPage, 'd'))
+                    print(format(allpages - exactPage, 'd'))
                     if exactPage != (currentPage + 1):
                         mark = 0
                         break
@@ -137,6 +137,14 @@ def return_stocklist(appcode):
 def return_blockList(appcode):
     text = aliyun_api.block_list(appcode)
     # print(text)
+    # 先读一次，获得总page数
+    all_dict = json.loads(text)
+    return all_dict
+
+
+def return_blockList_showapi(appcode):
+    text = showapi_api.block_list(appcode)
+    print(text)
     # 先读一次，获得总page数
     all_dict = json.loads(text)
     return all_dict
@@ -203,12 +211,27 @@ def return_block_stocks(blockID, appcode):
     mark = 1
     # texts = ''
     try:
-        text = aliyun_api.block_stocks(blockID, 1, appcode)
+        text = showapi_api.block_stocks(blockID, 1, appcode)
         # print(text)
         # 先读一次，获得总page数
         all_dict = json.loads(text)
+        for i in range(10):
+            try:
+                if all_dict['showapi_res_body']['ret_code'] != 0:
+                    print('Oh,Let me have a rest! 10S!')
+                    time.sleep(10)
+                else:
+                    break
+                text = showapi_api.block_stocks(blockID, 1, appcode)
+                all_dict = json.loads(text)
+            except KeyError:
+                print('Oh,Let me have a rest! 10S!')
+                time.sleep(10)
+                text = showapi_api.block_stocks(blockID, 1, appcode)
+                all_dict = json.loads(text)
         pagebean = all_dict['showapi_res_body']['pagebean']
         allpages = pagebean['allPages']
+        # print(pagebean['allNum'])
         block_stocks['name'] = pagebean['name']
         newlist = pagebean['contentlist']
         # print(newlist)
@@ -223,9 +246,23 @@ def return_block_stocks(blockID, appcode):
         # print(allpages)
         if allpages >= 2:
             for currentPage in range(1, allpages):
-                text = aliyun_api.block_stocks(blockID, currentPage + 1, appcode)
+                text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
                 # print(text)
                 all_dict = json.loads(text)
+                for i in range(10):
+                    try:
+                        if all_dict['showapi_res_body']['ret_code'] != 0:
+                            print('Oh,Let me have a rest! 10S!')
+                            time.sleep(10)
+                        else:
+                            break
+                        text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
+                        all_dict = json.loads(text)
+                    except KeyError:
+                        print('Oh,Let me have a rest! 10S!')
+                        time.sleep(10)
+                        text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
+                        all_dict = json.loads(text)
                 pagebean = all_dict['showapi_res_body']['pagebean']
                 newlist = pagebean['contentlist']
                 # print(newlist)

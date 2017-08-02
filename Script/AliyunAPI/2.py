@@ -1,35 +1,63 @@
 import time
+import os
 
-from file_io import dict2CSV
+from file_io import txt
 from functions import getValue
 from stock_Class.stock import Stock, Yline
 
-appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
+aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
+showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
+
 ref_List = {'KtimeType': '60',
-            'KbeginDay': '20170501',
+            'KbeginDay': '20170701',
             'KgetLength': 61,
             'TdayLength': 5,
             'TgetLength': 3,
-            'appcode': appcode}
+            'appcode': aliyun_appcode}
 
+beginDate = input('Please input K begin date (ex.20170101): ')
+getLength = input('Please input K getLength (ex.61): ')
+if len(beginDate) == 8:
+    ref_List['KbeginDay'] = beginDate
+debuger = 0
 
-# codeList = ['300080']
-# 000837
-# 601998
-# 300506
-# 002695
-codeList = getValue.get_allCodelist()
+tempPath = 'z:/test/codeList.txt'
+
+if debuger:
+    codeList = ['603860']
+    # 000837
+    # 601998
+    # 300506
+    # 002695
+else:
+    if os.path.exists(tempPath):
+        print('file is exist.')
+        f = open(tempPath, 'r')
+        text = f.read()
+        f.close()
+        codeList = text.splitlines()
+    else:
+        print('file is not exist.')
+        codeList = getValue.get_allCodelist()
+        text = ''
+        for code in codeList:
+            text += code + '\n'
+        txt.txt_write(text, tempPath)
+
 
 result = []
 temp = {'code': '', 'value': 0}
+# print(codeList)
 
 for code in codeList:
-    # print(code)
+    print(code)
     s = Stock(code, ref_List)
     s.get_KValue()
+    # print(s.Kvalue)
     # for i in s.Kvalue:
     #     print(i)
     s.update_Kstatus()
+    # print(s.Kvalue)
     # print(s.Kvalue[0:-12])
     try:
         y = Yline(s.Kvalue, None)

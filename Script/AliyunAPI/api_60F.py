@@ -6,7 +6,7 @@
 #   import tkinter.filedialog
 #   import json
 
-from aliyun import aliyun_api
+from http_api import aliyun_api
 from file_io import txt
 
 code = input("Please enter code:")

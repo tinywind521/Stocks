@@ -2,6 +2,8 @@ from http_api import hkex_api
 from file_io import dict2CSV
 from functions import getValue
 import re
+import socket
+socket.setdefaulttimeout(None)
 
 dateList = getValue.get_dateList('20170317', 0)
 beginDate = input("Please input begin date (like, 20170317): ")

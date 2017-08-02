@@ -10,7 +10,10 @@
       <w>bollmid</w>
       <w>bollupper</w>
       <w>curpage</w>
+      <w>cursorclass</w>
       <w>datas</w>
+      <w>dbname</w>
+      <w>debuger</w>
       <w>getcwd</w>
       <w>hkex</w>
       <w>hori</w>
@@ -21,9 +24,11 @@
       <w>ktime</w>
       <w>ktimetype</w>
       <w>kvalue</w>
+      <w>lastrowid</w>
       <w>narray</w>
       <w>nlist</w>
       <w>pagebean</w>
+      <w>pymysql</w>
       <w>referer</w>
       <w>regist</w>
       <w>setdefaulttimeout</w>

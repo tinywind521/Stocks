@@ -122,6 +122,58 @@ def get_blockList(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     return detail_List
 
 
+def get_blockList_showapi(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+    """
+    仍旧使用的是旧的aliyun api
+    :param appcode: 6a09e5fe3e724252b35d571a0b715baa
+    :return:
+    """
+    detail_List = []
+    element = {}
+    allBlockDict = function.return_blockList_showapi(appcode)
+    allBlockList = allBlockDict['showapi_res_body']['list']
+    # print(allBlockList)
+    # print('\n')
+    for blockDict in allBlockList:
+        # print(blockDict)
+        blockList = blockDict['childList']
+        "'申万行业'"
+        "'概念板块'"
+        "'地域板块'"
+        "'证监会行业'"
+        if blockDict['name'] == '概念板块':
+            # print(blockDict['name']+'\n')
+            for block in blockList:
+                # print(block['name'] + '\t' + block['code'])
+                element = {}
+                element['name'] = block['name']
+                element['code'] = block['code']
+                detail_List.append(element)
+        elif blockDict['name'] == '证监会行业':
+            # print(blockDict['name']+'\n')
+            for block in blockDict['childList']:
+                for blockChild in block['childList']:
+                    # print(blockChild['name'] + '\t' + blockChild['code'])
+                    element = {}
+                    element['name'] = blockChild['name']
+                    element['code'] = blockChild['code']
+                    detail_List.append(element)
+        else:
+            pass
+            # print('\n\n')
+    return detail_List
+
+
+def get_blockStocks_showapi(blockCode, appcode='6a09e5fe3e724252b35d571a0b715baa'):
+    """
+    获取板块内个股列表信息
+    :param blockCode:
+    :param appcode:
+    :return:
+    """
+    return function.return_block_stocks(blockCode, appcode)
+
+
 def get_DateTime():
     """
     获取当前日期和时间
@@ -352,6 +404,18 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
         realtimeList = realtimeList[-m + 1:]
         lastcloseList = lastcloseList[-m:]
         lastclose = {}
+        if m == 1:
+            lastclose['lastclose'] = float(realtimeList[0]['open'])
+            realtimeList[0]['min'] = float(realtimeList[0]['min'])
+            if len(realtimeList[0]['open']) == 0:
+                realtimeList[0]['open'] = 0
+            else:
+                realtimeList[0]['open'] = float(realtimeList[0]['open'])
+            realtimeList[0]['max'] = float(realtimeList[0]['max'])
+            realtimeList[0]['close'] = float(realtimeList[0]['close'])
+            realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
+            realtimeList[0].update(lastclose)
+            realtimeList[0].update(boll[0])
         for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
             lastclose['lastclose'] = lastcloseList[i]
@@ -440,6 +504,20 @@ def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e72
     try:
         showapi_str = showapi_api.realtime(code, beginDay, 'day', 'bfq', appcode)
         showapi_dict = json.loads(showapi_str)
+        for i in range(10):
+            try:
+                if showapi_dict['showapi_res_body']['ret_code'] != 0:
+                    print('Oh,Let me have a rest! 10S!')
+                    time.sleep(10)
+                else:
+                    break
+                showapi_str = showapi_api.realtime(code, beginDay, 'day', 'bfq', appcode)
+                showapi_dict = json.loads(showapi_str)
+            except KeyError:
+                print('Oh,Let me have a rest! 10S!')
+                time.sleep(10)
+                showapi_str = showapi_api.realtime(code, beginDay, 'day', 'bfq', appcode)
+                showapi_dict = json.loads(showapi_str)
         dataList = get_dataList(showapi_dict)
         dataList.reverse()
         realtimeList = [k for k in dataList]
@@ -451,10 +529,23 @@ def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e72
         lastcloseList = [k for k in closeList]
         boll = function.cal_boll(closeList, n, p)
         m = len(boll)
+        # print(m)
         boll = boll[-m + 1:]
         realtimeList = realtimeList[-m + 1:]
         lastcloseList = lastcloseList[-m:]
         lastclose = {}
+        if m == 1:
+            lastclose['lastclose'] = float(realtimeList[0]['open'])
+            realtimeList[0]['min'] = float(realtimeList[0]['min'])
+            if len(realtimeList[0]['open']) == 0:
+                realtimeList[0]['open'] = 0
+            else:
+                realtimeList[0]['open'] = float(realtimeList[0]['open'])
+            realtimeList[0]['max'] = float(realtimeList[0]['max'])
+            realtimeList[0]['close'] = float(realtimeList[0]['close'])
+            realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
+            realtimeList[0].update(lastclose)
+            realtimeList[0].update(boll[0])
         for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
             lastclose['lastclose'] = lastcloseList[i]

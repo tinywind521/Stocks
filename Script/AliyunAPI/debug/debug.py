@@ -1,10 +1,3 @@
-if 1 == 0:
-    pass
-else:
-    if 1 == 0:
-        pass
-    else:
-        if 1 == 1:
-            print('ah!')
-        else:
-            print('haha')
+a = eval(input('a'))
+b = 1
+print(a+b)

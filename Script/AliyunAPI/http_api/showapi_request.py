@@ -54,7 +54,7 @@ def req(url, sleepTime=0.2):
                 response = urllib.request.urlopen(request, timeout=20)
                 # print(response)
                 # response = urllib.request.urlopen(request)
-                time.sleep(0.1)
+                # time.sleep(0.1)
                 content = response.read().decode("utf-8")
                 response.close()
                 break
