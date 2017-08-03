@@ -1,9 +1,6 @@
-#   import urllib.request
-#   import sys
-#   import ssl
+import time
 
 from http_api import hkex_request
-from functions import function, getValue
 
 
 def hkex(date, index):
@@ -18,20 +15,21 @@ def hkex(date, index):
     Referer = 'http://www.hkexnews.hk/sdw/search/mutualmarket_c.aspx?t=' + index
     # path = '/timeline'
     method = 'GET'
-    bodys = {'__VIEWSTATE': 'NbjyN0qT%2Bs6TAkkRZX2Xq2DY4Cj%2BMucdH8BIprboyRv2OjeFEjj%2BikaecTF8wZ%2F%2F1exwHz6Ar1ysWWzFydDaem8A7YcTPQwOEkdG4KlY%2Bt1nVEfwYi6VV5XaSIeAjRpwGcpYYwssdCaCnuq8zeodFzzw4y%2FT8vfgGWBBC86K4bB%2FQnM1Q%2FY2xJmX%2BMmpD8yzw6c8Kg%3D%3D',
+    bodys = {'__VIEWSTATE': 'onZZDwBRCYdbXKyKg497ArWTTn1CmhmBjj27%2FdsrM6HNek5itqJOsCeN02776VyFDH%2F5al9cL91EofyTlpTzhILdCmCCeHzDRlXS2HM1QP97%2B4ZPJdUKhWfgbGIKswICw%2BCvzgrlWGtR8fSuTnp%2BGftjStSZucGQwbhbXtTC0bdM3EKnm5hf%2FgVTZkVzF5rCAazMeA%3D%3D',
              '__VIEWSTATEGENERATOR': 'EC4ACD6F',
-             '__EVENTVALIDATION': 'tjnxSRuWaTZ4s5VyGZn%2BAHLf5GwczctSd0HvyKkwSptbzumTFpT3DblXGPf%2Bz1VdkBLV9HocIcb0jqmdm2Q2DRczgjaPq0k6uBTY4zgC1fDXR9MxdyqZUbErVS%2Fev4xOnulMEq4mi27oY3CVquYkwD%2FiIMMAXI%2FxHuggx1W1TAjKL7%2FAB7nbtZgHfSXFYV8wSAvdjCH9Mcq2slKuheEFpsYPkvAfHxTHDW7Jd7NJGXz%2BXq8%2B7OvzZi5x0wv6KO2qi30YlBLDJsp6MVDPY%2B1E61NCjeOKqVt6d59cCNRLKK%2BffBlVDlqYpLu%2Fjgl91PkkhA0WorfUO7Gh%2F0kIZRsWuJ62EABkl21qa7tHsLxa%2B%2BwP9573x66B%2FjLMxeV%2BfyF4HaKzrxQ%2BQsy%2F7PrAWv868UC3%2BVA2m7SCkutsOTraCXvJj3K20i2NQxabA8n4BHoSN%2B23gGidzGhXSiBCPbH0n06Cb9lZHkcFZ4HGBRjyyuFZ5YwKpyb%2FcHrI5Y0VsGYResCwDlchj3CMfBy7ZXwZJ%2BV6KInF03fjjTCbDchJnARf7JKVGqdjMT2My1fJKfgpINUPuvXl2u1keuTjjGTl5BVAtJDTvy%2B5zrotvyexfOk8xroduhYRrgVKHb1M4QDnm7WxLHhyLtzV5b8C%2ByTBP%2B3fB50O5Ymj%2BWx%2FTTjYde%2B%2BNyhKhXb6tIIKJv25ILNEIUuHr2ht0FAY1glYkHyU1NBeSyWrFiEm9ganQ5kbSuvsqyeTV3qveApgtqMRnw8vZwQhJlAnuEPOVJDvQsu9kswNdYilFCzM2KBcGcDYiaXO6wnTp3IPUWU10oJ9y6jRvLxkdCmzRB2L1Ini4otYRkziy%2FvQcA2zR3Sa%2BzV3GbQgMhVyu6JvaUv4JxrbKmzw3avlmtuBRPKjE1t6lFx8UAAOl2T2qdU8HU%2FOoChxkkjgUVdDYj6AkTWBvpotGEmZ2byHRqRCZL2mkf20OWMfXgN%2Fpt2%2FXkp0gFbKudsRoyTHaV115Mv99jyCTWChlkKOdbw6PR2zFaKGpcgZiCI3MEvmn6J%2BBfjpxAa8U9qqU6j98d%2Brrp4rNE557Nq8yrZHUGKE9Ho3BugoUHztRvUQrHSICUBPrfzZvV5M3oXjfYcO5tl1l35zh9KnUTJDCAyJ0svAQkLA%2FMiIRZCFzT160OB%2FTes%3D',
-             'today': '20170628',
+             '__EVENTVALIDATION': 'B8c%2BhcQ6GFYUzBV%2F403wBajaTt7GUYy%2FTHlO12E%2FMwCyt3Jt6Iv8DWDc2KeFNd6Fpa%2BCgqrBNiOJ8jEtkXJTshoSotb%2FJ5xlS0ZJ0ULttyOnf3dI3Axmr8weh1nrAbYQJGG5URVWp8V27h5R%2BVD3%2BosZyXhTKrYQ2GFy8bhUdAlcfpAF1WEW6DFygZAOmrqGTsAFoaeQt%2F%2FDOxLlZ7ZAtUQw3x6AqBOH%2FieCvmbavg6bwh9GQGwza4qFwjAH0UEDcxCz%2FvRaF4lCJQgQq53w4PRm%2BlTURbA4kVttL3UZy%2B09zqh%2F1NJmK5cU1fRlvsO6SlpKhOupzXQXfd9rwVMlxTMoDB6Wz5A551oRKC0SWfjUWRLNEYcDH8a8BibVvJcCEoSAyncPt9IALjVT9SSgev0pFVSMxtxHU17kDdhIe6WtYEWDJNjjlrhFDuUVdjFke5u51pArdN4B4WlwPmSzviBOk3m3YaJEXAPQS4m1mAu6RF0POampgKbAEl4GCTxV%2FrRevVSEsjZwpyVAqkdzTqu6Eotz48hlb5B2mYSdEpCrsG7QgHre0lIOsN1K%2Bb6LUQYfTE4y6s55zjTAFYPdEmDY5ZmICnYo9kC9Msk2M8wQvddnQpprJc6GybmJBMaTZJEG58dYaObzW2qgI3hYCyPV%2BtpTF0GUQtaxIFxS9qJJ3v1POf2rdmkY1vfkK%2F2Rq7A3HkgtUj%2B2%2FhAYE7q7%2B%2FWza%2FZd4yWbUfv20hR9AqTW1LdhnN2dV4RbQ%2FkR1DQQgoHV4PDtfek0DJ55b5SNc88j%2FYtQjR0QpIRkg0CL2mpcxSE52eK%2BZ9Qit8%2FYDogg7e6t5Xahp9NMBa2jcwKJn0uxVK1k7X%2BH8FzVakuri06zvuPtbVt%2Bw%2BHNa7NalArtgLcshdmg2d91kPxdE3F4%2BS9CdBmi4x4%2BHf%2B4GdvExF6saYAtheifj7Pk8r8CykQDvatbREaYNEJjz5W7dltwKVIg5rSZOAXsbYobEmadhbMEzesy2Km4la%2FF%2Fly%2F4LQEUyvufltmvxfFhS5%2BDi1bwde9lmlegkOGeqlHxkK0MAhcU4f3WRoAvHzpo6Y9vFaiDPHIX8tFeP9Mt%2F5VFlY38yUwMyfHVh9CZqCS%2Bt9mNvcWIIRPdugsH9hDdV3k4tD840DNoq9AhcIuW2CSNXrGiPCODio%3D',
+             'today': '20170317',
              'sortBy': '',
              'alertMsg': '',
              'ddlShareholdingDay': date[6:8],
              'ddlShareholdingMonth': date[4:6],
              'ddlShareholdingYear': date[0:4],
-             'btnSearch.x': '37',
-             'btnSearch.y': '6',
+             'btnSearch.x': '24',
+             'btnSearch.y': '4',
              }
 
     url = host
 
     content = hkex_request.req(url, bodys, Referer)
+    time.sleep(1)
     return content

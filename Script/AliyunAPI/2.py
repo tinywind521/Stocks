@@ -15,32 +15,40 @@ ref_List = {'KtimeType': '60',
             'TgetLength': 3,
             'appcode': aliyun_appcode}
 
+KtimeType = eval(input('Please input K time type (ex.0 = 60, 1 = day): '))
 beginDate = input('Please input K begin date (ex.20170101): ')
-getLength = input('Please input K getLength (ex.61): ')
+dateLenth = eval(input('Please input K download lenth (ex.200): '))
+getLength = eval(input('Please input K display lenth (ex.61): '))
+
+if KtimeType == 1:
+    ref_List['KtimeType'] = 'day'
+else:
+    ref_List['KtimeType'] = '60'
 
 if getLength:
     ref_List['KgetLength'] = getLength
 else:
     ref_List['KgetLength'] = 61
 
-dateList = getValue.get_dateList('20170101', 50)
-
 if len(beginDate) == 8:
     ref_List['KbeginDay'] = beginDate
 elif not beginDate:
     if ref_List['KtimeType'] == '60':
-        ref_List['KbeginDay'] = dateList[-int(ref_List['KgetLength'] / 4) - 1]
+        dateList = getValue.get_dateList('20170101', 50)
+        ref_List['KbeginDay'] = dateList[-int(dateLenth / 4) - 1]
     elif ref_List['KtimeType'] == 'day':
-        ref_List['KbeginDay'] = dateList[-int(ref_List['KgetLength']) - 1]
+        dateList = getValue.get_dateList('20150101', 400)
+        ref_List['KbeginDay'] = dateList[-int(dateLenth) - 1]
     else:
         ref_List['KbeginDay'] = '20170101'
 else:
     pass
 
-debuger = 0
+print(ref_List)
+debuger = 1
 
 if debuger:
-    codeList = ['603860']
+    codeList = ['600519']
     # 000837
     # 601998
     # 300506
@@ -74,6 +82,8 @@ for code in codeList:
     # for i in s.Kvalue:
     #     print(i)
     s.update_Kstatus()
+    # for i in s.Kvalue:
+    #     print(i)
     # print(s.Kvalue)
     # print(s.Kvalue[0:-12])
     try:

@@ -201,6 +201,40 @@ def cal_boll(valueList, n, p):
     return boll
 
 
+def cal_boll_144(valueList, n=144, p=2):
+    """
+    计算144布林三轨
+    :param valueList:
+    :param n:
+    :param p:
+    :return:
+    """
+    valueList.reverse()
+    valueTemp = [float(k) for k in valueList]
+    boll = []
+    for value in valueList:
+        boll_dict = {}
+        if len(valueTemp) >= 144:
+            tempList = valueTemp[0:n]
+            narray = numpy.array(tempList)
+            mid = numpy.mean(narray)
+            spd = numpy.sqrt(numpy.var(narray))
+            upper = mid + p * spd
+            lower = mid - p * spd
+            boll_dict['mid144'] = float(format(mid, '.2f'))
+            boll_dict['upper144'] = float(format(upper, '.2f'))
+            boll_dict['lower144'] = float(format(lower, '.2f'))
+        else:
+            boll_dict['mid144'] = 0
+            boll_dict['upper144'] = 0
+            boll_dict['lower144'] = 0
+        # print(boll_dict)
+        boll.insert(0, boll_dict)
+        valueTemp.pop(0)
+    return boll
+
+
+
 def return_block_stocks(blockID, appcode):
     """
     获取板块内列表

@@ -398,9 +398,17 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
         # print(closeList)
         # closeList.reverse()
         lastcloseList = [k for k in closeList]
-        boll = function.cal_boll(closeList, n, p)
+        boll = function.cal_boll(closeList[:], n, p)
+        boll144 = function.cal_boll_144(closeList[:])
         m = len(boll)
+        n = len(boll144)
+        m = min(m, n)
+        # print('m len(boll) = ', end='')
+        # print(m)
+        # print('n len(boll144) = ', end='')
+        # print(n)
         boll = boll[-m + 1:]
+        boll144 = boll144[-m + 1:]
         realtimeList = realtimeList[-m + 1:]
         lastcloseList = lastcloseList[-m:]
         lastclose = {}
@@ -416,10 +424,10 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
             realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
             realtimeList[0].update(lastclose)
             realtimeList[0].update(boll[0])
+            realtimeList[0].update(boll144[0])
         for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
             lastclose['lastclose'] = lastcloseList[i]
-            # print(realtimeList[i])
             realtimeList[i]['min'] = float(realtimeList[i]['min'])
             if len(realtimeList[i]['open']) == 0:
                 realtimeList[i]['open'] = 0
@@ -430,6 +438,7 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
             realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
             realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
+            realtimeList[i].update(boll144[i])
             # print(realtimeList[i])
         # print(realtimeList)
         realtimeList = realtimeList[-getLength:]
@@ -527,10 +536,17 @@ def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e72
         # print(closeList)
         # closeList.reverse()
         lastcloseList = [k for k in closeList]
-        boll = function.cal_boll(closeList, n, p)
+        boll = function.cal_boll(closeList[:], n, p)
+        boll144 = function.cal_boll_144(closeList[:])
         m = len(boll)
+        n = len(boll144)
+        m = min(m, n)
+        # print('m len(boll) = ', end='')
         # print(m)
+        # print('n len(boll144) = ', end='')
+        # print(n)
         boll = boll[-m + 1:]
+        boll144 = boll144[-m + 1:]
         realtimeList = realtimeList[-m + 1:]
         lastcloseList = lastcloseList[-m:]
         lastclose = {}
@@ -546,6 +562,7 @@ def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e72
             realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
             realtimeList[0].update(lastclose)
             realtimeList[0].update(boll[0])
+            realtimeList[0].update(boll144[0])
         for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
             lastclose['lastclose'] = lastcloseList[i]
@@ -559,6 +576,7 @@ def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e72
             realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
             realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
+            realtimeList[i].update(boll144[i])
             # print(realtimeList[i])
         # print(realtimeList)
         realtimeList = realtimeList[-getLength:]

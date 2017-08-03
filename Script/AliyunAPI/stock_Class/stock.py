@@ -1,6 +1,6 @@
 import math
 
-from functions import getValue
+from functions import getValue, function
 
 
 class Stock:
@@ -20,7 +20,9 @@ class Stock:
                         'TdayLength': 5,
                         'TgetLength': 1,
                         'appcode': 'c7689f18e1484e9faec07122cc0b5f9e',
-                        'showapi_code': '6a09e5fe3e724252b35d571a0b715baa'}
+                        'showapi_code': '6a09e5fe3e724252b35d571a0b715baa',
+                        'need144': 0,
+                        }
         self.code = code
         self._ref_list = ref_List
         self.Kvalue = None
@@ -386,7 +388,8 @@ class Yline:
         self._head = []
         self._rear = []
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
-                          'upper', 'mid',  'lower', '涨幅', '开收', '量能', '上针',
+                          'upper', 'mid',  'lower', 'upper144', 'mid144',  'lower144',
+                          '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
 
         """minVol 近期地量"""
