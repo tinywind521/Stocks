@@ -31,5 +31,5 @@ def hkex(date, index):
     url = host
 
     content = hkex_request.req(url, bodys, Referer)
-    time.sleep(1)
+    # time.sleep(1)
     return content

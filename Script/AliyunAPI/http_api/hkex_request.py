@@ -23,13 +23,15 @@ def req(url, data, referer=None, **headers):
                                'keep-alive')
             while True:
                 try:
-                    response = urllib.request.urlopen(request, timeout=5)
+                    response = urllib.request.urlopen(request)
+                    response.close()
+                    responseHeader = dict(response.info().items())
+                    cookie = responseHeader['Set-Cookie']
+                    ContentLength = int(responseHeader['Content-Length'])
+                    # response.close()
                     break
-                except socket.timeout:
+                except socket.timeout or urllib.error:
                     pass
-            responseHeader = dict(response.info().items())
-            cookie = responseHeader['Set-Cookie']
-            ContentLength = int(responseHeader['Content-Length'])
             # time.sleep(0.1)
             # print(cookie)
 
@@ -73,13 +75,17 @@ def req(url, data, referer=None, **headers):
             # time.sleep(0.1)
             # print(params)
 
-            request = urllib.request.Request(url)
-            response = urllib.request.urlopen(request, params, timeout=15)
-            content = response.read().decode("utf-8")
+            while True:
+                try:
+                    request = urllib.request.Request(url)
+                    response = urllib.request.urlopen(request, params, timeout=5)
+                    content = response.read().decode("utf-8")
+                    response.close()
+                    break
+                except socket.timeout or urllib.error:
+                    pass
             # content = requests.get(url).text
             # print(content)
-
-            response.close()
 
             if content:
                 return content
@@ -87,5 +93,5 @@ def req(url, data, referer=None, **headers):
                 return ''
         except ValueError:
             return None
-        except socket.timeout:
+        except socket.timeout or urllib.error:
             pass
