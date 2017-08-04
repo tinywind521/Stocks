@@ -387,6 +387,15 @@ class Yline:
         self._levelList = []
         self._head = []
         self._rear = []
+        self._lastLevelName = None
+        self._lastLevelResult = 0.00
+
+        """计算结果和形态结果"""
+        self.bull_por = 0.00
+        self.patternResult = None
+
+
+        """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid',  'lower', 'upper144', 'mid144',  'lower144',
                           '涨幅', '开收', '量能', '上针',
@@ -472,6 +481,7 @@ class Yline:
             2、小于前期阴线平均值；
         :return:
         """
+        beginStatus = self.status
         lastBear = self._head.pop(-1)
         # print(lastBear)
         preBearList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
@@ -487,6 +497,7 @@ class Yline:
             self.status *= k * ((sum(preBearList) / len(preBearList)) / lastBear['量能'] - 1) + 1
         except ZeroDivisionError:
             self.status *= 1
+        self._lastLevelResult = self.status / beginStatus
 
 
     def _index_rise_level(self):
@@ -503,6 +514,8 @@ class Yline:
         k1 = 0.15
         """前后阴线"""
         k2 = 0.11
+
+        beginStatus = self.status
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         # print(self._head)
         # print(headVolList)
@@ -529,6 +542,7 @@ class Yline:
                 self.status *= 1
         except ValueError or ZeroDivisionError:
             self.status *= 1
+        self._lastLevelResult = self.status / beginStatus
 
 
     def _index_fall_level(self):
@@ -543,6 +557,8 @@ class Yline:
             中间阳线暂不处理，后面阴线必须缩量
         :return:
         """
+
+        beginStatus = self.status
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         # print(self._head)
         # print(headVolList)
@@ -651,6 +667,7 @@ class Yline:
                 self.status *= 1
         else:
             self.status *= 1
+        self._lastLevelResult = self.status / beginStatus
 
 
     def _index_hori_level(self):
@@ -676,6 +693,8 @@ class Yline:
         k1 = 0.05
         """前后阴线"""
         k2 = 0.1
+
+        beginStatus = self.status
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
         # print(self._head)
         # print(headVolList)
@@ -695,6 +714,7 @@ class Yline:
             self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
         except ZeroDivisionError:
             self.status *= 1
+        self._lastLevelResult = self.status / beginStatus
 
 
     def _cal_index(self, Kvalue):
@@ -717,6 +737,8 @@ class Yline:
         self._bull_lenth = 0
         self._bear_lenth = 0
         self._all_lenth = 0
+        self.bull_por = -0.001
+        self.patternResult = {}
 
         self._seq_bull.clear()
         self._seq_bear.clear()
@@ -942,12 +964,17 @@ class Yline:
             """
             "是否打印"
 
+            breakMark = None
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
                 # print(self._head)
                 if self._setPrint:
                     print('连续阴线，结果：' + format(self.status, '0.3f'))
             if self.status >= 0:
+
+                self._lastLevelName = ''
+                self._lastLevelResult = 1
+
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     self._index_fall_level()
                     if self._setPrint:
@@ -961,14 +988,18 @@ class Yline:
                     if self._setPrint:
                         print('上升层级，结果：' + format(self.status, '0.3f'))
                 else:
-                    break
+                    breakMark = True
+            if breakMark:
+                break
+
+        """ 阳线占比 """
+        self.bull_por = 100 * (self._bull_lenth / self._all_lenth)
         if self._setPrint:
-            print('阳线占比：' + format(100 * (self._bull_lenth / self._all_lenth), '0.3f'))
+            print('阳线占比：' + format(self.bull_por, '0.3f'))
             print('最终结果：' + format(self.status, '0.3f'))
-        # for
+
         #     1、注意底部起来的连续阳线；
         #     3、统计各类层级差在 布林上下空间的 数量；
-
 
         """
         未完成的任务：
@@ -986,3 +1017,47 @@ class Yline:
             
         """
 
+
+    def cal_patternResult(self):
+        """
+        计算各种形态结果
+        :return:
+        """
+        self._pattern_001_144BollUpper20BollUpside()
+
+
+    def _pattern_001_144BollUpper20BollUpside(self):
+        """
+        形态001：
+        144上轨穿 20布林的上部区间 K线近中轨
+
+        过滤标准：
+        1、144上柜在20布林上部空间，靠上不靠下，中间位置最好
+        2、打出技术形态优先
+        3、20日三轨上扬初期，第一第二个回调为佳
+            我现在的方法是，摸一次中上轨上部区间，再回到中上轨下部区间及以下，算回调。
+        4、k线尽量回在中轨附近
+        5、k线最好在144上轨下
+        6、最近有较好涨幅优先
+            20日三轨上扬初期，开始计算，10天
+
+        :return:
+        """
+
+        patternResult = {'序号': '001',
+                         '名称': '144上轨穿 20布林的上部区间 K线近中轨',
+                         '近期层级类型': None,
+                         '层级差得分': 0,
+                         '回调次数': 0,
+                         'K线位于20布林位置': None,
+                         'K线位于144布林位置': None,
+                         '近期最大涨幅': 0,
+                         }
+        print(self._seq[-1])
+
+        self.patternResult['001_144BollUpper20BollUpside'] = patternResult
+
+"""
+144BollUpper20BollUpside
+7、k线直接到达下轨，坐轨就打
+"""

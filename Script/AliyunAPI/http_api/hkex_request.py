@@ -23,7 +23,7 @@ def req(url, data, referer=None, **headers):
                                'keep-alive')
             while True:
                 try:
-                    response = urllib.request.urlopen(request)
+                    response = urllib.request.urlopen(request, timeout=2)
                     response.close()
                     responseHeader = dict(response.info().items())
                     cookie = responseHeader['Set-Cookie']

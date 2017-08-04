@@ -44,7 +44,7 @@ elif not beginDate:
 else:
     pass
 
-print(ref_List)
+# print(ref_List)
 debuger = 1
 
 if debuger:
@@ -70,7 +70,7 @@ else:
 
 
 result = []
-temp = {'code': '', 'value': 0}
+temp = {'code': '', 'value': 0, 'result': {}}
 # print(codeList)
 
 for code in codeList:
@@ -117,15 +117,18 @@ for code in codeList:
 
     # print('\n最小量能：')
     # print(y.minVol)
+    y.cal_patternResult()
     temp['code'] = code
     temp['value'] = y.status
+    temp['result'] = y.patternResult
     print(temp)
     result.append(temp)
     del temp
 
 for i in result:
     print(i['code'], end='\t')
-    print(i['value'])
+    print(i['value'], end='\t')
+    print(i['result'])
 
 """
 1、区分阳线占比的权重
@@ -133,3 +136,4 @@ for i in result:
 3、收在上轨以下，中下轨上部空间以上
 4、
 """
+
