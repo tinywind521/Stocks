@@ -121,13 +121,13 @@ for code in codeList:
     temp['code'] = code
     temp['value'] = y.status
     temp['result'] = y.patternResult
-    print(temp)
+    # print(temp)
     result.append(temp)
     del temp
 
 for i in result:
     print(i['code'], end='\t')
-    print(i['value'], end='\t')
+    print(i['value'])
     print(i['result'])
 
 """

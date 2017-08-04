@@ -12,6 +12,7 @@ class Stock:
     最后更新：未完成
     注意：分时数据是逆序，K线数据是顺序。
     """
+
     def __init__(self, code, ref_List):
         if ref_List is None:
             ref_List = {'KtimeType': '60/day',
@@ -32,15 +33,14 @@ class Stock:
                         '布林': 0, '轨距': 0, '层级': '', '趋势': None, '底部': None,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
-
     def get_ref_List(self):
         return self._ref_list
-
 
     """
     无情的分割线
     下面是获取基本K线的函数方法
     """
+
     def _get_KLine(self):
         """
         获取各级别的K线
@@ -56,7 +56,6 @@ class Stock:
         except ValueError:
             self.Kvalue = None
 
-
     def get_KValue(self):
         """
         该函数作用便于多次读取K线数据
@@ -70,30 +69,23 @@ class Stock:
         else:
             return self.Kvalue
 
-
     def set_KbeginDay(self, KbeginDay='20170101'):
         self._ref_list['KbeginDay'] = KbeginDay
-
 
     def set_KtimeType(self, Ktimetype='60'):
         self._ref_list['KtimeType'] = Ktimetype
 
-
     def set_KgetLength(self, KgetLength=10):
         self._ref_list['KgetLength'] = KgetLength
-
 
     def get_KbeginDay(self):
         return self._ref_list['KbeginDay']
 
-
     def get_KtimeType(self):
         return self._ref_list['KtimeType']
 
-
     def get_KgetLength(self):
         return self._ref_list['KgetLength']
-
 
     def set_KClear(self):
         """
@@ -103,7 +95,6 @@ class Stock:
         self.Kvalue = None
         self.Kstatus = None
 
-
     def set_KRefresh(self):
         """
         刷新K线序列
@@ -112,11 +103,11 @@ class Stock:
         self.set_KClear()
         self.get_KValue()
 
-
     """
     无情的分割线
     下面是分时的函数方法
     """
+
     def _get_TLine(self):
         """
         获取分时线
@@ -127,7 +118,6 @@ class Stock:
                                                 self._ref_list['TdayLength'])
         except ValueError:
             self.Tvalue = None
-
 
     def get_TValue(self):
         """
@@ -148,10 +138,8 @@ class Stock:
                 self.Tvalue = self.Tvalue[0: self._ref_list['TgetLength']]
             return self.Tvalue
 
-
     def set_TdayLength(self, TdayLength=5):
         self._ref_list['TdayLength'] = TdayLength
-
 
     def set_TgetLength(self, TgetLength=1):
         if TgetLength > self._ref_list['TdayLength']:
@@ -159,14 +147,11 @@ class Stock:
         else:
             self._ref_list['TgetLength'] = TgetLength
 
-
     def get_TdayLength(self):
         return self._ref_list['TdayLength']
 
-
     def get_TgetLength(self):
         return self._ref_list['TgetLength']
-
 
     def set_TClear(self):
         """
@@ -174,7 +159,6 @@ class Stock:
         :return:
         """
         self.Tvalue = None
-
 
     def set_TRefresh(self):
         """
@@ -184,11 +168,11 @@ class Stock:
         self.set_TClear()
         self.get_TValue()
 
-
     """
     无情的分割线
     下面是布林的函数方法
     """
+
     def boll_mid(self, n=0):
         """
         直接获得K线Boll数据
@@ -196,9 +180,8 @@ class Stock:
         """
         if self.Kvalue is None:
             self._get_KLine()
-        bollmid = self.Kvalue[-1-n]['mid']
+        bollmid = self.Kvalue[-1 - n]['mid']
         return bollmid
-
 
     def boll_upper(self, n=0):
         """
@@ -207,9 +190,8 @@ class Stock:
         """
         if self.Kvalue is None:
             self._get_KLine()
-        bollupper = self.Kvalue[-1-n]['upper']
+        bollupper = self.Kvalue[-1 - n]['upper']
         return bollupper
-
 
     def boll_lower(self, n=0):
         """
@@ -218,9 +200,8 @@ class Stock:
         """
         if self.Kvalue is None:
             self._get_KLine()
-        bolllower = self.Kvalue[-1-n]['lower']
+        bolllower = self.Kvalue[-1 - n]['lower']
         return bolllower
-
 
     def boll_position(self, boll_Kvalue):
         """
@@ -273,11 +254,11 @@ class Stock:
             "-4：低于下轨"
             self.Kstatus['布林'] = -4
 
-
     """
     华丽的分割线
     下面是获取K线参数的函数方法
     """
+
     def update_Kstatus(self):
         if self.Kvalue:
             # print(self.Kvalue)
@@ -288,7 +269,6 @@ class Stock:
                 _Kvalue.update(self.Kstatus)
                 self.Kvalue[i] = _Kvalue
                 i += 1
-
 
     # def clear_Kstatus(self):
     #     self.Kstatus = None
@@ -374,9 +354,9 @@ class Yline:
         :param para:
         """
         """统计阴线和阳线数量"""
-        self._bull_lenth = 0
-        self._bear_lenth = 0
-        self._all_lenth = 0
+        self._bull_length = 0
+        self._bear_length = 0
+        self._all_length = 0
 
         """计算层级差用到的序列变量"""
         self._list_bull = []
@@ -394,10 +374,9 @@ class Yline:
         self.bull_por = 0.00
         self.patternResult = None
 
-
         """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
-                          'upper', 'mid',  'lower', 'upper144', 'mid144',  'lower144',
+                          'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144',
                           '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
 
@@ -407,11 +386,11 @@ class Yline:
         self._setPrint = 0
         if para is None:
             para = {
-                    '收针对量能的影响系数': 0.75,
-                    '评分初值': 100,
-                    '以下是层级差中用到的系数': 0,
+                '收针对量能的影响系数': 0.75,
+                '评分初值': 100,
+                '以下是层级差中用到的系数': 0,
 
-                    }
+            }
             self._para = para
         if Kvalue is None or len(Kvalue) == 0:
             # Kvalue = Stock.get_KValue()
@@ -425,9 +404,8 @@ class Yline:
             self._cal_index(Kvalue)
 
 
-        # [{[{}], {}}]
-        # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
-
+            # [{[{}], {}}]
+            # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
 
     def get_para(self):
         return self._para
@@ -435,30 +413,35 @@ class Yline:
     """
     获取阳线层级总列表
     """
+
     def get_seq_bull(self):
         return self._seq_bull
 
     """
     获取阴线层级总列表
     """
+
     def get_seq_bear(self):
         return self._seq_bear
 
     """
     获取阴阳层级总列表
     """
+
     def get_seq_all(self):
         return self._seq
 
     """
     获取层级列表
     """
+
     def get_levelList(self):
         return self._levelList
 
     """
     刷新K线量化指标
     """
+
     def refresh_index(self, Kvalue):
         """
         刷新K线量化指标
@@ -467,11 +450,11 @@ class Yline:
         """
         self._cal_index(Kvalue)
 
-
     """
     先用0/1，建立连乘评分机制，
     根据后续使用情况，0/1 --> 0.90~1.10的连乘机制
     """
+
     def _index_cont_bear(self):
         """
         把连续阴线分成前面n根和最后一根，判断最后一根
@@ -498,7 +481,6 @@ class Yline:
         except ZeroDivisionError:
             self.status *= 1
         self._lastLevelResult = self.status / beginStatus
-
 
     def _index_rise_level(self):
         """
@@ -536,14 +518,13 @@ class Yline:
             self.status *= 1
         try:
             if len(headVolList) != 0 and len(rearVolList) != 0 and sum(rearVolList) != 0:
-                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1)\
+                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) \
                                + 1
             else:
                 self.status *= 1
         except ValueError or ZeroDivisionError:
             self.status *= 1
         self._lastLevelResult = self.status / beginStatus
-
 
     def _index_fall_level(self):
         """
@@ -584,7 +565,8 @@ class Yline:
                 # print(headVolList)
                 # print(rearVolList)
                 if sum(headVolList) and len(headVolList) and sum(rearVolList) and len(rearVolList):
-                    self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+                    self.status *= k1 * (
+                        sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
                 else:
                     self.status *= 1
             except IndexError or ZeroDivisionError:
@@ -597,7 +579,8 @@ class Yline:
                     try:
                         try:
                             if sum(headVolList) and len(headVolList) and sum(rearVolList) and len(rearVolList):
-                                self.status *= k1 * (sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
+                                self.status *= k1 * (
+                                    sum(headVolList) / len(headVolList) / (sum(rearVolList) / len(rearVolList)) - 1) + 1
                             else:
                                 self.status *= 1
                         except IndexError or ZeroDivisionError:
@@ -619,22 +602,27 @@ class Yline:
                     if self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] >= abs(self._rear[-1]['涨幅']):
                         "判定阳包阴"
                         try:
-                            self.status *= k2 * (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
+                            self.status *= k2 * (
+                                self.Index[(self._rear[-1]['序号'] + 1)]['量能'] / self._rear[-1]['量能'] - 1) + 1
                         except IndexError or ZeroDivisionError:
                             self.status *= 1
                     elif self.Index[(self._rear[-1]['序号'] + 1)]['涨幅'] < abs(self._rear[-1]['涨幅']):
                         if self.Index[(self._rear[-1]['序号'] + 2)]['涨幅'] <= 0:
                             try:
                                 if self.Index[(self._rear[-1]['序号'] + 1)]['量能']:
-                                    self.status *= k3 * (self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
+                                    self.status *= k3 * (
+                                        self._rear[-1]['量能'] / self.Index[(self._rear[-1]['序号'] + 1)]['量能'] - 1) + 1
                                 else:
                                     self.status *= 1
                             except IndexError or ZeroDivisionError:
                                 self.status *= 1
                         else:
                             try:
-                                if self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']:
-                                    self.status *= k3 * (2 * self._rear[-1]['量能'] / (self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
+                                if self.Index[(self._rear[-1]['序号'] + 1)]['量能'] + \
+                                        self.Index[(self._rear[-1]['序号'] + 2)]['量能']:
+                                    self.status *= k3 * (2 * self._rear[-1]['量能'] / (
+                                        self.Index[(self._rear[-1]['序号'] + 1)]['量能'] +
+                                        self.Index[(self._rear[-1]['序号'] + 2)]['量能']) - 1) + 1
                                 else:
                                     self.status *= 1
                             except IndexError or ZeroDivisionError:
@@ -660,7 +648,7 @@ class Yline:
             # # print((sum(headVolList)/len(headVolList) >= sum(rearVolList)/len(rearVolList)))
             # # print(k * max(headVolList) >= rearVolList[-1])
             try:
-                p1 = (sum(headVolList)/len(headVolList)) / (sum(rearVolList)/len(rearVolList)) - 1
+                p1 = (sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1
                 p2 = max(headVolList) / rearVolList[-1] - 1
                 self.status *= k * (p1 + p2) / 2 + 1
             except ZeroDivisionError:
@@ -668,7 +656,6 @@ class Yline:
         else:
             self.status *= 1
         self._lastLevelResult = self.status / beginStatus
-
 
     def _index_hori_level(self):
         """
@@ -716,7 +703,6 @@ class Yline:
             self.status *= 1
         self._lastLevelResult = self.status / beginStatus
 
-
     def _cal_index(self, Kvalue):
         """
         计算K线的量化指标;
@@ -734,9 +720,9 @@ class Yline:
         :return:
         """
 
-        self._bull_lenth = 0
-        self._bear_lenth = 0
-        self._all_lenth = 0
+        self._bull_length = 0
+        self._bear_length = 0
+        self._all_length = 0
         self.bull_por = -0.001
         self.patternResult = {}
 
@@ -766,9 +752,9 @@ class Yline:
             """计算  收针对量能的影响 """
             temp = dict([(key, Ksingle[key]) for key in self._paraList])
             if temp['close'] > temp['open']:
-                temp['量能'] = round(temp['volumn']*(1-self._para.get('收针对量能的影响系数', 1)*temp['上针']/100))
+                temp['量能'] = round(temp['volumn'] * (1 - self._para.get('收针对量能的影响系数', 1) * temp['上针'] / 100))
             else:
-                temp['量能'] = round(temp['volumn']*(1-self._para.get('收针对量能的影响系数', 1)*temp['下针']/100))
+                temp['量能'] = round(temp['volumn'] * (1 - self._para.get('收针对量能的影响系数', 1) * temp['下针'] / 100))
 
             """
             布林为基准的底部判断。
@@ -901,7 +887,7 @@ class Yline:
                     last_level = element['布林']
                     if level_temp:
                         self._levelList.append(level_temp[:])
-                    #     level_temp.clear()
+                    # level_temp.clear()
                     #     level_temp.append(element)
                     # else:
                     level_temp.clear()
@@ -921,22 +907,22 @@ class Yline:
         try:
             if self._levelList[-1][-1]['布林'] >= self._levelList[-2][-1]['布林']:
                 temp = self._levelList.pop()
-                self._bull_lenth -= len(temp)
+                self._bull_length -= len(temp)
         except IndexError:
             pass
 
         # print(self._seq)
         # print(self._levelList)
-        self._bear_lenth = sum(len(l) for l in self._levelList)
+        self._bear_length = sum(len(l) for l in self._levelList)
         if self._levelList:
             _levelList = self._levelList[-1][-1]['序号']
         else:
             _levelList = 0
-        self._all_lenth = self._seq[-1][-1]['序号'] - _levelList + 1
-        self._bull_lenth = self._all_lenth - self._bear_lenth
-        # print(self._all_lenth)
-        # print(self._bull_lenth)
-        # print(self._bear_lenth)
+        self._all_length = self._seq[-1][-1]['序号'] - _levelList + 1
+        self._bull_length = self._all_length - self._bear_length
+        # print(self._all_length)
+        # print(self._bull_length)
+        # print(self._bear_length)
         """
         功能：
         1、找到符合层级形态的
@@ -993,12 +979,12 @@ class Yline:
                 break
 
         """ 阳线占比 """
-        self.bull_por = 100 * (self._bull_lenth / self._all_lenth)
+        self.bull_por = 100 * (self._bull_length / self._all_length)
         if self._setPrint:
             print('阳线占比：' + format(self.bull_por, '0.3f'))
             print('最终结果：' + format(self.status, '0.3f'))
 
-        #     1、注意底部起来的连续阳线；
+        # 1、注意底部起来的连续阳线；
         #     3、统计各类层级差在 布林上下空间的 数量；
 
         """
@@ -1017,14 +1003,12 @@ class Yline:
             
         """
 
-
     def cal_patternResult(self):
         """
         计算各种形态结果
         :return:
         """
         self._pattern_001_144BollUpper20BollUpside()
-
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
@@ -1043,9 +1027,10 @@ class Yline:
 
         :return:
         """
-
+        # 'upper' , 'mid' , 'lower' , 'upper144' 5, 'mid144' , 'lower144' ,
         patternResult = {'序号': '001',
                          '名称': '144上轨穿 20布林的上部区间 K线近中轨',
+                         '结果': 0,
                          '近期层级类型': None,
                          '层级差得分': 0,
                          '回调次数': 0,
@@ -1053,9 +1038,17 @@ class Yline:
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
                          }
-        print(self._seq[-1])
+        upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
+        if self.Index[-1]['mid'] <= self.Index[-1]['upper144'] <= self.Index[-1]['upper'] and \
+            self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= \
+                max(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid:
+            patternResult['结果'] = 1
+        else:
+            self.patternResult['001_144BollUpper20BollUpside'] = patternResult
+            return
 
         self.patternResult['001_144BollUpper20BollUpside'] = patternResult
+
 
 """
 144BollUpper20BollUpside
