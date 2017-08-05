@@ -45,7 +45,7 @@ else:
     pass
 
 # print(ref_List)
-debuger = 1
+debuger = 0
 
 if debuger:
     codeList = ['600519']
@@ -126,9 +126,10 @@ for code in codeList:
     del temp
 
 for i in result:
-    print(i['code'], end='\t')
-    print(i['value'])
-    print(i['result'])
+    if i['result']['001_144BollUpper20BollUpside']['结果'] == 1:
+        print(i['code'], end='\t')
+        print(i['value'])
+        print(i['result'])
 
 """
 1、区分阳线占比的权重

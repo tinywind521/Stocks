@@ -32,7 +32,7 @@ import time
 # print('json_res data is:', json_res)
 
 
-def req(url, sleepTime=0.2):
+def req(url, sleepTime=0.1):
     """
     aliyun API
     :param sleepTime:

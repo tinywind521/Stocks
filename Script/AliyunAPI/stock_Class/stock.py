@@ -30,7 +30,7 @@ class Stock:
         self.Tvalue = None
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
-                        '布林': 0, '轨距': 0, '层级': '', '趋势': None, '底部': None,
+                        '布林': 0, '144布林': 0, '轨距': 0, '层级': '', '趋势': None, '底部': None,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
     def get_ref_List(self):
@@ -219,6 +219,7 @@ class Stock:
         -4：低于下轨
         :return:
         """
+
         self.Kstatus['布林'] = 0
 
         """中上轨上下分层标准"""
@@ -253,6 +254,46 @@ class Stock:
         elif boll_Kvalue['close'] < boll_Kvalue['lower']:
             "-4：低于下轨"
             self.Kstatus['布林'] = -4
+        else:
+            pass
+
+        self.Kstatus['144布林'] = 0
+
+        """中上轨上下分层标准"""
+        upper144_mid144 = (boll_Kvalue['upper144'] + boll_Kvalue['mid144']) / 2
+        """中下轨上下分层标准"""
+        lower144_mid144 = (boll_Kvalue['lower144'] + boll_Kvalue['mid144']) / 2
+
+        if boll_Kvalue['close'] > boll_Kvalue['upper144']:
+            "+4：高于上轨"
+            self.Kstatus['144布林'] = +4
+        elif boll_Kvalue['close'] == boll_Kvalue['upper144']:
+            "+3：等于上轨"
+            self.Kstatus['144布林'] = +3
+        elif boll_Kvalue['close'] > upper144_mid144:
+            "+2：中上轨上部空间"
+            self.Kstatus['144布林'] = +2
+        elif boll_Kvalue['close'] > boll_Kvalue['mid144']:
+            "+1：中上轨下部空间"
+            self.Kstatus['144布林'] = +1
+        elif boll_Kvalue['close'] == boll_Kvalue['mid144']:
+            "0：等于中轨"
+            self.Kstatus['144布林'] = 0
+        elif boll_Kvalue['close'] > lower144_mid144:
+            "-1：中下轨上部空间"
+            self.Kstatus['144布林'] = -1
+        elif boll_Kvalue['close'] > boll_Kvalue['lower144']:
+            "-2：中下轨下部空间"
+            self.Kstatus['144布林'] = -2
+        elif boll_Kvalue['close'] == boll_Kvalue['lower144']:
+            "-3：等于下轨"
+            self.Kstatus['144布林'] = -3
+        elif boll_Kvalue['close'] < boll_Kvalue['lower144']:
+            "-4：低于下轨"
+            self.Kstatus['144布林'] = -4
+        else:
+            pass
+        # print(self.Kstatus)
 
     """
     华丽的分割线
@@ -301,6 +342,7 @@ class Stock:
             self.Kstatus['下针'] = 0.00
             self.Kstatus['轨距'] = 0.00
             self.Kstatus['布林'] = 0
+            self.Kstatus['144布林'] = 0
         else:
             self.Kstatus['涨幅'] = math.floor(zf)
             self.Kstatus['开收'] = math.floor(ks)
@@ -369,16 +411,20 @@ class Yline:
         self._rear = []
         self._lastLevelName = None
         self._lastLevelResult = 0.00
+        self._fallTimes = 0
+
+        self.levelTimes = None
 
         """计算结果和形态结果"""
         self.bull_por = 0.00
         self.patternResult = None
+        self.maxChange = None
 
         """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144',
                           '涨幅', '开收', '量能', '上针',
-                          '下针', '布林', '底部', '轨距', '层级', '趋势', '平台']
+                          '下针', '布林', '144布林', '底部', '轨距', '层级', '趋势', '平台']
 
         """minVol 近期地量"""
         self.minVol = 0
@@ -495,7 +541,7 @@ class Yline:
         """中间阳线"""
         k1 = 0.15
         """前后阴线"""
-        k2 = 0.11
+        k2 = 0.10
 
         beginStatus = self.status
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
@@ -518,7 +564,7 @@ class Yline:
             self.status *= 1
         try:
             if len(headVolList) != 0 and len(rearVolList) != 0 and sum(rearVolList) != 0:
-                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1) \
+                self.status *= k2 * ((sum(headVolList) / len(headVolList)) / (sum(rearVolList) / len(rearVolList)) - 1)\
                                + 1
             else:
                 self.status *= 1
@@ -679,7 +725,7 @@ class Yline:
         """中间阳线"""
         k1 = 0.05
         """前后阴线"""
-        k2 = 0.1
+        k2 = 0.15
 
         beginStatus = self.status
         headVolList = self._YY_VolumnList[self._head[0]['序号']:(self._head[-1]['序号'] + 1)]
@@ -725,6 +771,9 @@ class Yline:
         self._all_length = 0
         self.bull_por = -0.001
         self.patternResult = {}
+        self.maxChange = 0
+        self._fallTimes = 0
+        self.levelTimes = {'riseLevel': 0, 'horiLevel': 0, 'fallLevel': 0}
 
         self._seq_bull.clear()
         self._seq_bear.clear()
@@ -807,6 +856,7 @@ class Yline:
                 continue
             temp['序号'] = num
             num += 1
+            self.maxChange = max(self.maxChange, temp['涨幅'])
             self.Index.append(temp)
             if not s:
                 """not s：未判断"""
@@ -945,11 +995,18 @@ class Yline:
             # print(self._head[0]['time'])
             # print(self._rear[0]['time'])
 
+            upSideMark = None
+            if upSideMark:
+                pass
+            elif self._head[0]['布林'] >= 2:
+                upSideMark = True
+            else:
+                upSideMark = False
+
             """
             先不判断连续阴线
             """
-            "是否打印"
-
+            "self._setPrint 是否打印"
             breakMark = None
             if len(self._levelList[i]) > 1:
                 self._index_cont_bear()
@@ -957,20 +1014,26 @@ class Yline:
                 if self._setPrint:
                     print('连续阴线，结果：' + format(self.status, '0.3f'))
             if self.status >= 0:
-
                 self._lastLevelName = ''
                 self._lastLevelResult = 1
-
                 if self._head[0]['布林'] > self._rear[0]['布林']:
+                    if upSideMark:
+                        self._fallTimes += 1
                     self._index_fall_level()
+                    self._lastLevelName = '下降层级'
+                    self.levelTimes['riseLevel'] += 1
                     if self._setPrint:
                         print('下降层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] == self._rear[0]['布林']:
                     self._index_hori_level()
+                    self._lastLevelName = '水平层级'
+                    self.levelTimes['horiLevel'] += 1
                     if self._setPrint:
                         print('水平层级，结果：' + format(self.status, '0.3f'))
                 elif self._head[0]['布林'] < self._rear[0]['布林']:
                     self._index_rise_level()
+                    self._lastLevelName = '上升层级'
+                    self.levelTimes['fallLevel'] += 1
                     if self._setPrint:
                         print('上升层级，结果：' + format(self.status, '0.3f'))
                 else:
@@ -985,7 +1048,6 @@ class Yline:
             print('最终结果：' + format(self.status, '0.3f'))
 
         # 1、注意底部起来的连续阳线；
-        #     3、统计各类层级差在 布林上下空间的 数量；
 
         """
         未完成的任务：
@@ -1027,7 +1089,7 @@ class Yline:
 
         :return:
         """
-        # 'upper' , 'mid' , 'lower' , 'upper144' 5, 'mid144' , 'lower144' ,
+        # print(self.Index[-1])
         patternResult = {'序号': '001',
                          '名称': '144上轨穿 20布林的上部区间 K线近中轨',
                          '结果': 0,
@@ -1039,14 +1101,20 @@ class Yline:
                          '近期最大涨幅': 0,
                          }
         upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if self.Index[-1]['mid'] <= self.Index[-1]['upper144'] <= self.Index[-1]['upper'] and \
-            self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= \
-                max(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid:
+        if (self.Index[-1]['mid'] <= self.Index[-1]['upper144'] <= self.Index[-1]['upper']) and \
+                (self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid):
             patternResult['结果'] = 1
         else:
             self.patternResult['001_144BollUpper20BollUpside'] = patternResult
             return
-
+        # print(self.Index[-1])
+        patternResult['近期层级类型'] = self._lastLevelName
+        patternResult['层级差得分'] = self._lastLevelResult
+        patternResult['回调次数'] = self._fallTimes
+        patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
+        patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
+        patternResult['近期最大涨幅'] = self.maxChange
+        # print(patternResult)
         self.patternResult['001_144BollUpper20BollUpside'] = patternResult
 
 
