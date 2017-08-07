@@ -3,9 +3,9 @@ __author__ = 'djstava@gmail.com'
 
 import sys
 
-from PyQt5.QtWidgets import QApplication , QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
-from firstPyQt5 import *
+from gui.firstPyQt5.firstPyQt5 import Ui_mainWindow
 
 if __name__ == '__main__':
     '''

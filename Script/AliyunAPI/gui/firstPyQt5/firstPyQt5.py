@@ -8,29 +8,33 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_mainWindow(object):
+    def __init__(self):
+        mainWindow = None
+        self.statusbar = QtWidgets.QStatusBar(mainWindow)
+        self.menubar = QtWidgets.QMenuBar(mainWindow)
+        self.centralwidget = QtWidgets.QWidget(mainWindow)
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+
     def setupUi(self, mainWindow):
         mainWindow.setObjectName("mainWindow")
         mainWindow.resize(631, 600)
-        self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(250, 130, 131, 61))
         font = QtGui.QFont()
         font.setPointSize(22)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         mainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(mainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 631, 22))
         self.menubar.setObjectName("menubar")
         mainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(mainWindow)
         self.statusbar.setObjectName("statusbar")
         mainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(mainWindow)
-        self.pushButton.clicked.connect(self.firtPyQt5_button_click)
+        self.pushButton.clicked.connect(self.firstPyQt5_button_click)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
     def retranslateUi(self, mainWindow):
@@ -39,5 +43,5 @@ class Ui_mainWindow(object):
         self.pushButton.setText(_translate("mainWindow", "点我弹框"))
 
 
-    def firtPyQt5_button_click(self):
-        QtWidgets.QMessageBox.information(self.pushButton,"标题","这是第一个PyQt5 GUI程序")
+    def firstPyQt5_button_click(self):
+        QtWidgets.QMessageBox.information(self.pushButton, "标题", "这是第一个PyQt5 GUI程序")
