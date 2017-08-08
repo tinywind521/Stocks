@@ -234,7 +234,6 @@ def cal_boll_144(valueList, n=144, p=2):
     return boll
 
 
-
 def return_block_stocks(blockID, appcode):
     """
     获取板块内列表
