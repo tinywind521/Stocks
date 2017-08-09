@@ -221,7 +221,7 @@ for code in codeList:
     result60.append(temp)
     del temp
 
-print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,,,,,')
+print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,')
 for i in result:
     # if i['result']['001_144BollUpper20BollUpside']['结果'] == 1:
     print(i['code'], end=',')
@@ -235,9 +235,31 @@ for i in result:
     # print(i['result']['001_144BollUpper20BollUpside']['回调次数'], end=',')
     print('')
 
-print('代码,60F层级得分')
+allBlockCode = getValue.get_blockList_showapi()
+allBlockList = []
+for BlockList in allBlockCode:
+    BlockListReturn = getValue.get_blockStocks_showapi(BlockList['code'])
+    if BlockListReturn:
+        allBlockList.append(BlockListReturn)
+
+BlockResult = {}
 for i in result60:
-    print(i['code'], end=',')
-    print(format(i['value'], '.3f'), end=',')
-    print('')
+    code = i['code']
+    for BlockList in allBlockList:
+        if code in BlockList['block_stocksList']:
+            if BlockList['name'] in BlockResult:
+                BlockResult[BlockList['name']] += 1
+            else:
+                BlockResult[BlockList['name']] = 1
+
+BlockResultKeys = sorted(list(BlockResult.keys()))
+
+for key in BlockResultKeys:
+    print(key, ',', BlockResult[key])
+
+# print('代码,60F层级得分')
+# for i in result60:
+#     print(i['code'], end=',')
+#     print(format(i['value'], '.3f'), end=',')
+#     print('')
 

@@ -164,7 +164,7 @@ def get_blockList_showapi(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     return detail_List
 
 
-def get_blockStocks_showapi(blockCode, appcode='6a09e5fe3e724252b35d571a0b715baa'):
+def get_blockStocks_showapi(blockCode: object, appcode: object = '6a09e5fe3e724252b35d571a0b715baa') -> object:
     """
     获取板块内个股列表信息
     :param blockCode:

@@ -144,7 +144,7 @@ def return_blockList(appcode):
 
 def return_blockList_showapi(appcode):
     text = showapi_api.block_list(appcode)
-    print(text)
+    # print(text)
     # 先读一次，获得总page数
     all_dict = json.loads(text)
     return all_dict
@@ -264,55 +264,58 @@ def return_block_stocks(blockID, appcode):
                 all_dict = json.loads(text)
         pagebean = all_dict['showapi_res_body']['pagebean']
         allpages = pagebean['allPages']
-        # print(pagebean['allNum'])
-        block_stocks['name'] = pagebean['name']
-        newlist = pagebean['contentlist']
-        # print(newlist)
-        # print(format(exactPage, 'd'))
-        pagelist = []
-        for newlist_element in newlist:
-            # tempdict = {'market': '', 'name': '', 'code': ''}
-            # tempdict = {k: newlist_element[k] for k in tempdict}
-            if newlist_element['code'][0] in ['0', '3', '6']:
-                pagelist.append(newlist_element['code'])
-        block_stocksList.extend(pagelist)
-        # print(allpages)
-        if allpages >= 2:
-            for currentPage in range(1, allpages):
-                text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
-                # print(text)
-                all_dict = json.loads(text)
-                for i in range(10):
-                    try:
-                        if all_dict['showapi_res_body']['ret_code'] != 0:
+        if allpages:
+            # print(pagebean)
+            block_stocks['name'] = pagebean['name']
+            newlist = pagebean['contentlist']
+            # print(newlist)
+            # print(format(exactPage, 'd'))
+            pagelist = []
+            for newlist_element in newlist:
+                # tempdict = {'market': '', 'name': '', 'code': ''}
+                # tempdict = {k: newlist_element[k] for k in tempdict}
+                if newlist_element['code'][0] in ['0', '3', '6']:
+                    pagelist.append(newlist_element['code'])
+            block_stocksList.extend(pagelist)
+            # print(allpages)
+            if allpages >= 2:
+                for currentPage in range(1, allpages):
+                    text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
+                    # print(text)
+                    all_dict = json.loads(text)
+                    for i in range(10):
+                        try:
+                            if all_dict['showapi_res_body']['ret_code'] != 0:
+                                print('Oh,Let me have a rest! 10S!')
+                                time.sleep(10)
+                            else:
+                                break
+                            text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
+                            all_dict = json.loads(text)
+                        except KeyError:
                             print('Oh,Let me have a rest! 10S!')
                             time.sleep(10)
-                        else:
-                            break
-                        text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
-                        all_dict = json.loads(text)
-                    except KeyError:
-                        print('Oh,Let me have a rest! 10S!')
-                        time.sleep(10)
-                        text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
-                        all_dict = json.loads(text)
-                pagebean = all_dict['showapi_res_body']['pagebean']
-                newlist = pagebean['contentlist']
-                # print(newlist)
-                exactPage = pagebean['currentPage']
-                # print(format(exactPage, 'd'))
-                if exactPage != (currentPage + 1):
-                    mark = 0
-                    break
-                pagelist = []
-                for newlist_element in newlist:
-                    # tempdict = {'market': '', 'name': '', 'code': ''}
-                    # tempdict = {k: newlist_element[k] for k in tempdict}
-                    if newlist_element['code'][0] in ['0', '3', '6']:
-                        pagelist.append(newlist_element['code'])
-                block_stocksList.extend(pagelist)
-                # print(block_stocksList)
-            # return_value = [stocklist, texts]
+                            text = showapi_api.block_stocks(blockID, currentPage + 1, appcode)
+                            all_dict = json.loads(text)
+                    pagebean = all_dict['showapi_res_body']['pagebean']
+                    newlist = pagebean['contentlist']
+                    # print(newlist)
+                    exactPage = pagebean['currentPage']
+                    # print(format(exactPage, 'd'))
+                    if exactPage != (currentPage + 1):
+                        mark = 0
+                        break
+                    pagelist = []
+                    for newlist_element in newlist:
+                        # tempdict = {'market': '', 'name': '', 'code': ''}
+                        # tempdict = {k: newlist_element[k] for k in tempdict}
+                        if newlist_element['code'][0] in ['0', '3', '6']:
+                            pagelist.append(newlist_element['code'])
+                    block_stocksList.extend(pagelist)
+                    # print(block_stocksList)
+                # return_value = [stocklist, texts]
+        else:
+            mark = 0
         if mark == 1:
             block_stocks['block_stocksList'] = block_stocksList
             return block_stocks
