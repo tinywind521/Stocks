@@ -52,7 +52,7 @@ else:
     pass
 
 # print(ref_List)
-debuger = 1
+debuger = 0
 
 if debuger:
     codeList = ['600362', '002460']
@@ -103,7 +103,7 @@ for code in codeList:
     #     print(i)
     # print(s.Kvalue)
     # print(s.Kvalue[0:-12])
-    print(s.Kvalue)
+    # print(s.Kvalue)
     try:
         y = Yline(s.Kvalue, None)
     except ValueError:
@@ -269,9 +269,18 @@ BlockResult.update(BlockResultGN)
 for key in BlockResultKeys:
     print(key, ',', BlockResult[key])
 
-# print('代码,60F层级得分')
-# for i in result60:
-#     print(i['code'], end=',')
-#     print(format(i['value'], '.3f'), end=',')
-#     print('')
+"""
+1、/001文件夹和文件的存在性；
+2、板块代码每周刷新一次；
+3、261同学的相对路径问题；
+4、文件整合；
+5、添加名称显示
+
+"""
+
+print('代码,60F层级得分')
+for i in result60:
+    print(i['code'], end=',')
+    print(format(i['value'], '.3f'), end=',')
+    print('')
 

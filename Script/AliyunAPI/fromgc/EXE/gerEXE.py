@@ -1,0 +1,1 @@
+# python pyinstaller.py -F your.py
