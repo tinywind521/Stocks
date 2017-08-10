@@ -1,5 +1,6 @@
 import time
 import os
+import json
 
 from file_io import txt
 from functions import getValue
@@ -51,10 +52,10 @@ else:
     pass
 
 # print(ref_List)
-debuger = 0
+debuger = 1
 
 if debuger:
-    codeList = ['600519']
+    codeList = ['600362', '002460']
     # 000837
     # 601998
     # 300506
@@ -87,6 +88,7 @@ else:
 result = []
 temp = {'code': '', 'value': 0, 'result': {}}
 # print(codeList)
+NameList = {}
 
 for code in codeList:
     print(code)
@@ -101,6 +103,7 @@ for code in codeList:
     #     print(i)
     # print(s.Kvalue)
     # print(s.Kvalue[0:-12])
+    print(s.Kvalue)
     try:
         y = Yline(s.Kvalue, None)
     except ValueError:
@@ -170,60 +173,23 @@ temp = {'code': '', 'value': 0, 'result': {}}
 
 for code in codeList:
     print(code)
-    temp = {'code': '', 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}}}
-    s = Stock(code, ref_List)
-    s.get_KValue()
-    # print(s.Kvalue)
-    # for i in s.Kvalue:
-    #     print(i)
-    s.update_Kstatus()
-    # for i in s.Kvalue:
-    #     print(i)
-    # print(s.Kvalue)
-    # print(s.Kvalue[0:-12])
-    try:
-        y = Yline(s.Kvalue, None)
-    except ValueError:
-        continue
-    # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
-    # for h in m:
-    #     print(h)
-
-    # print(code)
-    # print('下面是阳线起点：')
-    # t = y.get_list_bull()
-    # for k in t:
-    #     print(k)
-
-    # print('\n下面是阴线起点:')
-    # for k in y._list_bull():
-    #     m = [(l['time'], l['序号']) for l in k]
-    #     print(m)
-
-    # print('\n下面是全部K线:')
-    # for k in y.get_seq_all():
-    #     m = [(l['time'], l['序号'], l['底部']) for l in k]
-    #     print(m)
-
-    # print('\n阴线分段分层：')
-    # for k in y.get_levelList():
-    #     m = [(l['time'], l['序号']) for l in k]
-    #     print(m)
-
-    # print('\n最小量能：')
-    # print(y.minVol)
-    # y.cal_patternResult()
-    temp['code'] = code
-    temp['value'] = y.status
-    # temp['result'] = y.patternResult
-    # print(temp)
-    # if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
+    temp = {'code': code, 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}, }}
+    # s = Stock(code, ref_List)
+    # s.get_KValue()
+    # s.update_Kstatus()
+    # try:
+    #     y = Yline(s.Kvalue, None)
+    # except ValueError:
+    #     continue
+    # temp['code'] = code
+    # temp['value'] = y.status
     result60.append(temp)
     del temp
 
+finalResult = {}
+tempNum = 0
 print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,')
 for i in result:
-    # if i['result']['001_144BollUpper20BollUpside']['结果'] == 1:
     print(i['code'], end=',')
     print(format(i['value'], '.3f'), end=',')
     print(i['result']['001_144BollUpper20BollUpside']['近期层级类型'], end=',')
@@ -232,8 +198,20 @@ for i in result:
     print(i['result']['001_144BollUpper20BollUpside']['K线位于20布林位置'], end=',')
     print(i['result']['001_144BollUpper20BollUpside']['K线位于144布林位置'], end=',')
     print(i['result']['001_144BollUpper20BollUpside']['近期最大涨幅'], end=',')
-    # print(i['result']['001_144BollUpper20BollUpside']['回调次数'], end=',')
     print('')
+    for j in list(i['result'].keys()):
+        if i['result'][j]['名称'] in finalResult.keys():
+            # finalResult[i['result'][j]['名称']].append(i['code'])
+            pass
+        else:
+            tempNum += 1
+            finalResult[i['result'][j]['名称']] = format(tempNum, '03d')
+
+
+# 写入 JSON 数据
+outputRootPath = 'Z:/Test'
+with open(outputRootPath + '/strategy.json', 'w+') as f:
+    json.dump(finalResult, f)
 
 allBlockCode = getValue.get_blockList_showapi()
 allBlockList = []
@@ -242,18 +220,52 @@ for BlockList in allBlockCode:
     if BlockListReturn:
         allBlockList.append(BlockListReturn)
 
-BlockResult = {}
+BlockResultHY = {'codeList': [], }.clear()
+BlockResultGN = {'codeList': [], }.clear()
+
 for i in result60:
     code = i['code']
     for BlockList in allBlockList:
         if code in BlockList['block_stocksList']:
-            if BlockList['name'] in BlockResult:
-                BlockResult[BlockList['name']] += 1
+            if BlockList['name'].find('证监会行业') != -1:
+                print(BlockList)
+                if BlockResultHY is None:
+                    BlockResultHY = dict.fromkeys([BlockList['name']])
+                    BlockResultHY[BlockList['name']] = [code]
+                elif BlockList['name'] in BlockResultHY:
+                    # BlockResultHY[BlockList['name']] += 1
+                    BlockResultHY[BlockList['name']].append(code)
+                else:
+                    # BlockResultHY[BlockList['name']] = 1
+                    BlockResultHY[BlockList['name']] = [code]
+            elif BlockList['name'].find('概念板块') != -1:
+                if BlockResultGN is None:
+                    BlockResultGN = dict.fromkeys([BlockList['name']])
+                    BlockResultGN[BlockList['name']] = [code]
+                elif BlockList['name'] in BlockResultGN:
+                    # BlockResultGN[BlockList['name']] += 1
+                    BlockResultGN[BlockList['name']].append(code)
+                else:
+                    # BlockResultGN[BlockList['name']] = 1
+                    BlockResultGN[BlockList['name']] = [code]
             else:
-                BlockResult[BlockList['name']] = 1
+                pass
 
-BlockResultKeys = sorted(list(BlockResult.keys()))
+hyList = list(BlockResultHY.keys())
+# print(hyList)
+gnList = list(BlockResultGN.keys())
+# print(gnList)
+allList = list(hyList + gnList)
+BlockResultKeys = sorted(allList)
 
+# 写入 JSON 数据
+with open(outputRootPath + '/001/BlockResultHY.json', 'w+') as f:
+    json.dump(BlockResultHY, f)
+with open(outputRootPath + '/001/BlockResultGN.json', 'w+') as f:
+    json.dump(BlockResultGN, f)
+
+BlockResult = BlockResultHY
+BlockResult.update(BlockResultGN)
 for key in BlockResultKeys:
     print(key, ',', BlockResult[key])
 

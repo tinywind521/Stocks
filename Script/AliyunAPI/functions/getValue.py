@@ -145,19 +145,26 @@ def get_blockList_showapi(appcode='c7689f18e1484e9faec07122cc0b5f9e'):
             # print(blockDict['name']+'\n')
             for block in blockList:
                 # print(block['name'] + '\t' + block['code'])
-                element = {}
-                element['name'] = block['name']
-                element['code'] = block['code']
+                element = {'name': block['name'], 'code': block['code']}
                 detail_List.append(element)
+                del element
         elif blockDict['name'] == '证监会行业':
             # print(blockDict['name']+'\n')
+            # print(blockDict)
             for block in blockDict['childList']:
                 for blockChild in block['childList']:
                     # print(blockChild['name'] + '\t' + blockChild['code'])
-                    element = {}
-                    element['name'] = blockChild['name']
-                    element['code'] = blockChild['code']
+                    element = {'name': blockChild['name'], 'code': blockChild['code']}
                     detail_List.append(element)
+                    del element
+        # elif blockDict['name'] == '申万行业':
+        #     # print(blockDict)
+        #     # for block in blockDict['childList']:
+        #     for blockChild in blockDict['childList']:
+        #         # print(blockChild['name'] + '\t' + blockChild['code'])
+        #         element = {'name': blockChild['name'], 'code': blockChild['code']}
+        #         detail_List.append(element)
+        #         del element
         else:
             pass
             # print('\n\n')
