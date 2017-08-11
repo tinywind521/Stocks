@@ -215,7 +215,9 @@ outputRootPath = 'Z:/Test'
 path = outputRootPath + '/strategy.json'
 jsonFiles.Write(path, finalResult)
 
-if needBlockRefresh == '1':
+outputRootPath = 'Z:/Test'
+path = outputRootPath + '/allBlockList.json'
+if needBlockRefresh == '1' or not os.path.exists(path):
     print('Refreshing blockList...')
     allBlockCode = getValue.get_blockList_showapi()
     allBlockList = []
@@ -224,8 +226,6 @@ if needBlockRefresh == '1':
         if BlockListReturn:
             allBlockList.append(BlockListReturn)
     # 写入 JSON 数据
-    outputRootPath = 'Z:/Test'
-    path = outputRootPath + '/allBlockList.json'
     jsonFiles.Write(path, allBlockList)
 else:
     pass
