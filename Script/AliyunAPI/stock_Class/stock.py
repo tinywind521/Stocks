@@ -1118,6 +1118,45 @@ class Yline:
         self.patternResult['001_144BollUpper20BollUpside'] = patternResult
 
 
+    def _pattern_100_20BollAnd144BollFirstWave(self):
+        """
+        形态100：
+        4B打法的底部20布林和144布林的一次启动
+
+        过滤标准：
+        1、
+
+        :return:
+        """
+        # print(self.Index[-1])
+        patternResult = {'序号': '100',
+                         '名称': '4B打法的底部20布林和144布林的一次启动',
+                         '结果': 0,
+                         '近期层级类型': None,
+                         '层级差得分': 0,
+                         '回调次数': 0,
+                         'K线位于20布林位置': None,
+                         'K线位于144布林位置': None,
+                         '近期最大涨幅': 0,
+                         }
+        upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
+        if (self.Index[-1]['mid'] <= self.Index[-1]['upper144'] <= self.Index[-1]['upper']) and \
+                (self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid):
+            patternResult['结果'] = 1
+        else:
+            self.patternResult['001_144BollUpper20BollUpside'] = patternResult
+            return
+        # print(self.Index[-1])
+        patternResult['近期层级类型'] = self._lastLevelName
+        patternResult['层级差得分'] = self._lastLevelResult
+        patternResult['回调次数'] = self._fallTimes
+        patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
+        patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
+        patternResult['近期最大涨幅'] = self.maxChange
+        # print(patternResult)
+        self.patternResult['001_144BollUpper20BollUpside'] = patternResult
+
+
 """
 144BollUpper20BollUpside
 7、k线直接到达下轨，坐轨就打

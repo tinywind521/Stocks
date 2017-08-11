@@ -2,7 +2,7 @@ import time
 import os
 import json
 
-from file_io import txt
+from file_io import txt, jsonFiles
 from functions import getValue
 from stock_Class.stock import Stock, Yline
 
@@ -25,7 +25,8 @@ KtimeType = 1
 beginDate = ''
 dateLenth = 160
 getLength = 61
-needRefresh = input('Want to refresh codeList? (1/0): ')
+needCodeRefresh = input('Want to refresh codeList? (1/0): ')
+needBlockRefresh = input('Want to refresh blockList? (1/0): ')
 
 if KtimeType == 1:
     ref_List['KtimeType'] = 'day'
@@ -63,7 +64,7 @@ if debuger:
 else:
 
     if os.path.exists(tempPath):
-        if needRefresh == '1':
+        if needCodeRefresh == '1':
             print('refreshing...')
             codeList = getValue.get_allCodelist()
             text = ''
@@ -210,15 +211,27 @@ for i in result:
 
 # 写入 JSON 数据
 outputRootPath = 'Z:/Test'
-with open(outputRootPath + '/strategy.json', 'w+') as f:
-    json.dump(finalResult, f)
 
-allBlockCode = getValue.get_blockList_showapi()
-allBlockList = []
-for BlockList in allBlockCode:
-    BlockListReturn = getValue.get_blockStocks_showapi(BlockList['code'])
-    if BlockListReturn:
-        allBlockList.append(BlockListReturn)
+path = outputRootPath + '/strategy.json'
+jsonFiles.Write(path, finalResult)
+
+if needBlockRefresh == '1':
+    print('Refreshing blockList...')
+    allBlockCode = getValue.get_blockList_showapi()
+    allBlockList = []
+    for BlockList in allBlockCode:
+        BlockListReturn = getValue.get_blockStocks_showapi(BlockList['code'])
+        if BlockListReturn:
+            allBlockList.append(BlockListReturn)
+    # 写入 JSON 数据
+    outputRootPath = 'Z:/Test'
+    path = outputRootPath + '/allBlockList.json'
+    jsonFiles.Write(path, allBlockList)
+else:
+    pass
+
+path = outputRootPath + '/allBlockList.json'
+allBlockList = jsonFiles.Read(path)
 
 BlockResultHY = {'codeList': [], }.clear()
 BlockResultGN = {'codeList': [], }.clear()
@@ -250,28 +263,33 @@ for i in result60:
                     BlockResultGN[BlockList['name']] = [code]
             else:
                 pass
+try:
+    hyList = list(BlockResultHY.keys())
+    # print(hyList)
+    gnList = list(BlockResultGN.keys())
+    # print(gnList)
+    allList = list(hyList + gnList)
+    BlockResultKeys = sorted(allList)
 
-hyList = list(BlockResultHY.keys())
-# print(hyList)
-gnList = list(BlockResultGN.keys())
-# print(gnList)
-allList = list(hyList + gnList)
-BlockResultKeys = sorted(allList)
+    # 写入 JSON 数据
 
-# 写入 JSON 数据
-with open(outputRootPath + '/001/BlockResultHY.json', 'w+') as f:
-    json.dump(BlockResultHY, f)
-with open(outputRootPath + '/001/BlockResultGN.json', 'w+') as f:
-    json.dump(BlockResultGN, f)
+    path = outputRootPath + '/001/BlockResultHY.json'
+    jsonFiles.Write(path, BlockResultHY)
 
-BlockResult = BlockResultHY
-BlockResult.update(BlockResultGN)
-for key in BlockResultKeys:
-    print(key, ',', BlockResult[key])
+    path = outputRootPath + '/001/BlockResultGN.json'
+    jsonFiles.Write(path, BlockResultGN)
+
+    BlockResult = BlockResultHY
+    BlockResult.update(BlockResultGN)
+    for key in BlockResultKeys:
+        print(key, ',', BlockResult[key])
+except AttributeError:
+    pass
+
 
 """
 1、/001文件夹和文件的存在性；
-2、板块代码每周刷新一次；
+
 3、261同学的相对路径问题；
 4、文件整合；
 5、添加名称显示

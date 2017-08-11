@@ -1,8 +1,13 @@
 import json
+import os
 
 
 # 写入JSON数据
-def jsonWrite(path, data):
+def Write(path, data):
+    if os.path.isdir(os.path.split(path)[0]):
+        pass
+    else:
+        os.makedirs(os.path.split(path)[0])
     if data:
         with open(path, 'w+') as f:
             json.dump(data, f)
@@ -11,7 +16,7 @@ def jsonWrite(path, data):
 
 
 # 读取JSON数据
-def jsonRead(path):
+def Read(path):
     if path:
         with open(path, 'r') as f:
             data = json.load(f)

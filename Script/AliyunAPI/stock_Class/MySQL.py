@@ -106,6 +106,7 @@ class MySQL:
         # self.db = dbname
 
 
+    # 内部方法，初始化连接
     def __init_conn(self):
         try:
             conn = pymysql.connect(**self.config)
@@ -114,17 +115,20 @@ class MySQL:
         self.__conn = conn
 
 
+    # 内部方法，初始化cursor
     def __init_cursor(self):
         if self.__conn:
             self.__cursor = self.__conn.cursor(pymysql.cursors.DictCursor)
 
 
+    # 方法，关闭并复位连接
     def close(self):
         if self.__conn:
             self.__conn.close()
             self.__conn = None
 
-    # 专门处理select 语句
+
+    # 专门处理select语句
     def execSQL(self, sql, args=None):
         try:
             if self.__conn is None:
@@ -142,7 +146,7 @@ class MySQL:
                 self.close()
 
 
-    # 专门处理dml语句 delete，update，insert
+    # 专门处理dml语句 delete，update，insert和replace
     def execTXSQL(self, sql, args=None):
         try:
             if self.__conn is None:
@@ -184,8 +188,8 @@ class MySQL:
             if self.__conn:
                 self.close()
 
-    # 适用于需要获取插入记录的主键自增id
 
+    # 适用于需要获取插入记录的主键自增id
     def getLastRowID(self):
         return self.lastrowid
 
@@ -198,36 +202,3 @@ class MySQL:
     # MySQL_Utils初始化的实例销毁之后，自动提交
     def __del__(self):
         self.commit()
-
-
-config = {
-            'host': 'localhost',
-            'port': 3306,
-            'user': 'root',
-            'password': 'star2249',
-            'db': 'stocks',
-            'charset': 'utf8',
-            'cursorclass': pymysql.cursors.DictCursor,
-         }
-
-mySQL = MySQL(config)
-try:
-    sql_exp = 'select * from hkex where to_days(gdate) >= (select to_days(gdate) from hkex group by gdate desc limit 4,1);'
-    result = mySQL.execSQL(sql_exp)
-    # path = 'z:/Test/mySQL_Result.txt'
-    # try:
-    #     f = open(path, 'w')
-    #     for i in result:
-    #         f.write(str(i) + '\n')
-    #     f.close()
-    # except ValueError:
-    #     pass
-
-    print(result[0])
-    print(result[0]['gdate'])
-    print(result[0]['posVol'] + 1)
-
-except pymysql.err.OperationalError as e:
-    print(e)
-
-mySQL.close()

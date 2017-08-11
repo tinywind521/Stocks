@@ -30,10 +30,10 @@ class MyWindow(QtWidgets.QWidget, Ui_Form):
     def __init__(self):
         super(MyWindow, self).__init__()
         self.setupUi(self)
-        # self.outputRootPath = 'Z:/Test'
-        self.outputRootPath = 'D:/Test'
+        self.outputRootPath = 'Z:/Test'
+        # self.outputRootPath = 'D:/Test'
         self.clPath = self.outputRootPath + '/strategy.json'
-        self.clRead = jsonFiles.jsonRead(self.clPath)
+        self.clRead = jsonFiles.Read(self.clPath)
         self.clList = list(self.clRead.keys())
         self.selectHY_Row = -1
         self.selectGN_Row = -1
@@ -64,9 +64,8 @@ class MyWindow(QtWidgets.QWidget, Ui_Form):
         self.clStr = self.clRead[self.clList[self.clWidget.currentRow()]]
 
         self.gnPath = self.outputRootPath + '/' + self.clStr + '/BlockResultGN.json'
-        self.gnRead = jsonFiles.jsonRead(self.gnPath)
+        self.gnRead = jsonFiles.Read(self.gnPath)
         self.gnList = list(self.gnRead.keys())
-        # self.gnWidget.clear()
         for i in range(0, len(self.gnList)):
             item = QtWidgets.QListWidgetItem()
             self.gnWidget.addItem(item)
@@ -74,9 +73,8 @@ class MyWindow(QtWidgets.QWidget, Ui_Form):
             self.gnWidget.item(i).setText(myAlign(self.gnList[i].split('>')[-1], 21) + '(' + format(len(self.gnRead[self.gnList[i]]), '03d') + ')')
 
         self.hyPath = self.outputRootPath + '/' + self.clStr + '/BlockResultHY.json'
-        self.hyRead = jsonFiles.jsonRead(self.hyPath)
+        self.hyRead = jsonFiles.Read(self.hyPath)
         self.hyList = list(self.hyRead.keys())
-        # self.hyWidget.clear()
         for i in range(0, len(self.hyList)):
             item = QtWidgets.QListWidgetItem()
             self.hyWidget.addItem(item)
