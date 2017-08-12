@@ -96,6 +96,7 @@ class MySQL:
         self.__cursor = None
         self.lastrowid = None
         self.rows_affected = 0
+        self.dbReturn = None
         # self.connect_timeout = connect_timeout
         # self.ip = ip
         # self.port = port
@@ -131,6 +132,7 @@ class MySQL:
     # 专门处理select语句
     def execSQL(self, sql, args=None):
         try:
+            self.dbReturn = None
             if self.__conn is None:
                 self.__init_conn()
                 self.__init_cursor()
@@ -138,6 +140,7 @@ class MySQL:
             self.__cursor.execute(sql, args)
             self.rows_affected = self.__cursor.rowcount
             results = self.__cursor.fetchall()
+            self.dbReturn = results
             return results
         except pymysql.Error as er:
             raise pymysql.Error(er)

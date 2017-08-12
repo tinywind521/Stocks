@@ -1,10 +1,12 @@
 import time
 import os
 import json
+import pymysql
 
 from file_io import txt, jsonFiles
 from functions import getValue
 from stock_Class.stock import Stock, Yline
+from stock_Class.MySQL import MySQL
 
 aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
@@ -27,6 +29,7 @@ dateLenth = 160
 getLength = 61
 needCodeRefresh = input('Want to refresh codeList? (1/0): ')
 needBlockRefresh = input('Want to refresh blockList? (1/0): ')
+needNameRefresh = input('Want to refresh nameList? (1/0): ')
 
 if KtimeType == 1:
     ref_List['KtimeType'] = 'day'
@@ -215,7 +218,7 @@ outputRootPath = 'Z:/Test'
 path = outputRootPath + '/strategy.json'
 jsonFiles.Write(path, finalResult)
 
-outputRootPath = 'Z:/Test'
+# allBlockList
 path = outputRootPath + '/allBlockList.json'
 if needBlockRefresh == '1' or not os.path.exists(path):
     print('Refreshing blockList...')
@@ -227,6 +230,32 @@ if needBlockRefresh == '1' or not os.path.exists(path):
             allBlockList.append(BlockListReturn)
     # 写入 JSON 数据
     jsonFiles.Write(path, allBlockList)
+else:
+    pass
+
+# allNameList
+stocks_config = {
+    'host': 'localhost',
+    'port': 3306,
+    'user': 'root',
+    'password': 'star2249',
+    'db': 'stocks',
+    'charset': 'utf8',
+    'cursorclass': pymysql.cursors.DictCursor,
+}
+
+# sDB for stocksDatabase
+sDB = MySQL(stocks_config)
+sql = 'select gid, name from pandc'
+sDB.execSQL(sql)
+nameList = {}
+for i in sDB.dbReturn:
+    nameList[i['gid'].split('.')[0]] = i['name']
+
+path = outputRootPath + '/allNameList.json'
+if needNameRefresh == '1' or not os.path.exists(path):
+    # 写入 JSON 数据
+    jsonFiles.Write(path, nameList)
 else:
     pass
 
@@ -246,20 +275,16 @@ for i in result60:
                     BlockResultHY = dict.fromkeys([BlockList['name']])
                     BlockResultHY[BlockList['name']] = [code]
                 elif BlockList['name'] in BlockResultHY:
-                    # BlockResultHY[BlockList['name']] += 1
                     BlockResultHY[BlockList['name']].append(code)
                 else:
-                    # BlockResultHY[BlockList['name']] = 1
                     BlockResultHY[BlockList['name']] = [code]
             elif BlockList['name'].find('概念板块') != -1:
                 if BlockResultGN is None:
                     BlockResultGN = dict.fromkeys([BlockList['name']])
                     BlockResultGN[BlockList['name']] = [code]
                 elif BlockList['name'] in BlockResultGN:
-                    # BlockResultGN[BlockList['name']] += 1
                     BlockResultGN[BlockList['name']].append(code)
                 else:
-                    # BlockResultGN[BlockList['name']] = 1
                     BlockResultGN[BlockList['name']] = [code]
             else:
                 pass
@@ -289,10 +314,7 @@ except AttributeError:
 
 """
 1、/001文件夹和文件的存在性；
-
 3、261同学的相对路径问题；
-4、文件整合；
-5、添加名称显示
 
 """
 

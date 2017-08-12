@@ -1,21 +1,15 @@
-import time
-import os
-import json
+import pandas as pd
+import numpy as np
+import matplotlib
 
-from file_io import txt, jsonFiles
-from functions import getValue
-from stock_Class.stock import Stock, Yline
+from matplotlib import pyplot as plt
+import seaborn as sns
 
-allBlockCode = getValue.get_blockList_showapi()
-allBlockList = []
-for BlockList in allBlockCode:
-    BlockListReturn = getValue.get_blockStocks_showapi(BlockList['code'])
-    if BlockListReturn:
-        allBlockList.append(BlockListReturn)
+ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
+ts = ts.cumsum()
 
-# 写入 JSON 数据
-outputRootPath = 'Z:/Test'
-path = outputRootPath + '/allBlockList.json'
-jsonFiles.Write(path, allBlockList)
-
-allBlockList = jsonFiles.Read(path)
+df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index,
+                  columns=['A', 'B', 'C', 'D'])
+df = df.cumsum()
+df.plot()
+plt.legend(loc='best')

@@ -1071,6 +1071,7 @@ class Yline:
         :return:
         """
         self._pattern_001_144BollUpper20BollUpside()
+        # self._pattern_100_20BollAnd144BollFirstWave()
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
@@ -1125,6 +1126,10 @@ class Yline:
 
         过滤标准：
         1、
+
+        日线，20、144
+        60F，20、144
+        一次启动关系，先确认
 
         :return:
         """

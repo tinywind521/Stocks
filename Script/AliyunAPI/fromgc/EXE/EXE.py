@@ -39,8 +39,11 @@ class MyWindow(QtWidgets.QWidget, Ui_Form):
         self.selectGN_Row = -1
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionMode(QAbstractItemView.NoSelection)
+        nameListPath = self.outputRootPath + '/allNameList.json'
+        self.nameList = jsonFiles.Read(nameListPath)
+        self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
 
-        # 定义槽函数
+    # 定义槽函数
     def reload(self):
         self.clWidget.clear()
         for i in range(0, len(self.clList)):
@@ -95,10 +98,15 @@ class MyWindow(QtWidgets.QWidget, Ui_Form):
                 newItem = QTableWidgetItem(element)
                 newItem.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
                 self.tableWidget.setItem(i, 0, newItem)
-                newItem = QTableWidgetItem(" ")
+                try:
+                    newItem = QTableWidgetItem(self.nameList[element])
+                except KeyError:
+                    newItem = QTableWidgetItem('')
                 newItem.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
                 self.tableWidget.setItem(i, 1, newItem)
                 i += 1
+                newItem = QTableWidgetItem(format(i, '02d'))
+                self.tableWidget.setVerticalHeaderItem(i-1, newItem)
 
     def selectGN(self):
         self.selectHY_Row = -1
@@ -111,10 +119,15 @@ class MyWindow(QtWidgets.QWidget, Ui_Form):
                 newItem = QTableWidgetItem(element)
                 newItem.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
                 self.tableWidget.setItem(i, 0, newItem)
-                newItem = QTableWidgetItem(" ")
+                try:
+                    newItem = QTableWidgetItem(self.nameList[element])
+                except KeyError:
+                    newItem = QTableWidgetItem('')
                 newItem.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
                 self.tableWidget.setItem(i, 1, newItem)
                 i += 1
+                newItem = QTableWidgetItem(format(i, '02d'))
+                self.tableWidget.setVerticalHeaderItem(i-1, newItem)
 
 app = QtWidgets.QApplication(sys.argv)
 window = MyWindow()
