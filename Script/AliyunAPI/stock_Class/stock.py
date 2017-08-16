@@ -1093,11 +1093,11 @@ class Yline:
         计算各种形态结果
         :return:
         """
-        self._pattern_001_144BollUpper20BollUpside()
+        self.pattern_001_144BollUpper20BollUpside()
         # self._pattern_100_20BollAnd144BollFirstWave()
-        self._pattern_101_20BollDayAnd60fDoubleB3()
+        # self._pattern_101_20BollDayAnd60fDoubleB3()
 
-    def _pattern_001_144BollUpper20BollUpside(self):
+    def pattern_001_144BollUpper20BollUpside(self):
         """
         形态001：
         144上轨穿 20布林的上部区间 K线近中轨
@@ -1143,7 +1143,7 @@ class Yline:
         self.patternResult['001_144BollUpper20BollUpside'] = patternResult
 
 
-    def _pattern_100_20BollAnd144BollFirstWave(self):
+    def pattern_100_20BollAnd144BollFirstWave(self):
         """
         形态100：
         4B打法的底部20布林和144布林的一次启动
@@ -1186,7 +1186,7 @@ class Yline:
         self.patternResult['100_20BollAnd144BollFirstWave'] = patternResult
 
 
-    def _pattern_101_20BollDayAnd60fDoubleB3(self):
+    def pattern_101_20BollDayAnd60fDoubleB3(self):
         """
         形态101：
         20布林day和60F双B3
@@ -1195,8 +1195,11 @@ class Yline:
         1、20布林day和60F双B3（上半空间下部）
             关键触发条件
 
-        2、首次 布林位置>=0 之后，下降次数<=2，到达更高层级时重置次数
+        2、首次 布林位置>= -1 之后，下降次数<=2，到达更高层级时重置次数
+            day和60F布林位置 均>= -1 至少一个 >=1
             下降层级次数<=5次
+            近期层级类型 60F上
+            近期层级差必须有效
 
         3、统计阳线占比、各类层级差次数
 
@@ -1204,6 +1207,14 @@ class Yline:
         60F，20
         一次启动关系，先确认
 
+        具体实现：
+            先计算日线，
+            1、布林位置>= -1
+            2、下降层级次数<=5次
+            3、阳线优势
+            4、列出 层级和层级差次数
+
+            再计算60F，
         :return:
         """
         # print(self.Index[-1])
@@ -1216,13 +1227,31 @@ class Yline:
                          'K线位于20布林位置': None,
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
+                         '阳线占比': 0,
+                         '层级和层级差次数':
+                             {
+                                 'riseLevel': 0,
+                                 'riseResult': 0,
+                                 'horiLevel': 0,
+                                 'horiResult': 0,
+                                 'fallLevel': 0,
+                                 'fallResult': 0,
+                             }
                          }
+        # """层级和成功的层级差次数"""
+        # self.levelTimes = {'riseLevel': 0,
+        #                    'riseResult': 0,
+        #                    'horiLevel': 0,
+        #                    'horiResult': 0,
+        #                    'fallLevel': 0,
+        #                    'fallResult': 0,
+        #                    }
         upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
         if (self.Index[-1]['mid'] <= self.Index[-1]['upper144'] <= self.Index[-1]['upper']) and \
                 (self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid):
             patternResult['结果'] = 1
         else:
-            self.patternResult['100_20BollAnd144BollFirstWave'] = patternResult
+            self.patternResult['101_20BollDayAnd60fDoubleB3'] = patternResult
             return
         # print(self.Index[-1])
         patternResult['近期层级类型'] = self._lastLevelName
@@ -1232,7 +1261,7 @@ class Yline:
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
         # print(patternResult)
-        self.patternResult['100_20BollAnd144BollFirstWave'] = patternResult
+        self.patternResult['101_20BollDayAnd60fDoubleB3'] = patternResult
 
 
 """
