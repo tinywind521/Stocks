@@ -89,7 +89,7 @@ else:
         txt.txt_write(text, tempPath)
 
 
-result = []
+result_001 = []
 temp = {'code': '', 'value': 0, 'result': {}}
 # print(codeList)
 NameList = {}
@@ -145,10 +145,10 @@ for code in codeList:
     temp['result'] = y.patternResult
     # print(temp)
     if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
-        result.append(temp)
+        result_001.append(temp)
     del temp
 
-codeList = [k['code'] for k in result]
+codeList = [k['code'] for k in result_001]
 
 ref_List = {'KtimeType': '60',
             'KbeginDay': '',
@@ -193,7 +193,7 @@ for code in codeList:
 finalResult = {}
 tempNum = 0
 print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,')
-for i in result:
+for i in result_001:
     print(i['code'], end=',')
     print(format(i['value'], '.3f'), end=',')
     print(i['result']['001_144BollUpper20BollUpside']['近期层级类型'], end=',')
