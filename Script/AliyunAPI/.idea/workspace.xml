@@ -17,8 +17,8 @@
       <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="1216" column="19" lean-forward="false" selection-start-line="1216" selection-start-column="19" selection-end-line="1216" selection-end-column="19" />
+            <state relative-caret-position="180">
+              <caret line="1212" column="42" lean-forward="false" selection-start-line="1212" selection-start-column="42" selection-end-line="1212" selection-end-column="42" />
               <folding>
                 <element signature="e#73#10576#0" expanded="false" />
                 <element signature="e#1128#1149#0" expanded="false" />
@@ -67,7 +67,7 @@
                 <element signature="e#30482#30507#0" expanded="false" />
                 <element signature="e#34587#36238#0" expanded="false" />
                 <element signature="e#36302#37837#0" expanded="false" />
-                <element signature="e#39280#39299#0" expanded="false" />
+                <element signature="e#39299#39318#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -76,7 +76,7 @@
       <file leaf-file-name="2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3768">
+            <state relative-caret-position="939">
               <caret line="319" column="0" lean-forward="false" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -225,7 +225,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -242,6 +241,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -470,7 +470,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24093817" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24360341" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2944079" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -850,7 +850,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3768">
+        <state relative-caret-position="939">
           <caret line="319" column="0" lean-forward="false" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -866,8 +866,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="1216" column="19" lean-forward="false" selection-start-line="1216" selection-start-column="19" selection-end-line="1216" selection-end-column="19" />
+        <state relative-caret-position="180">
+          <caret line="1212" column="42" lean-forward="false" selection-start-line="1212" selection-start-column="42" selection-end-line="1212" selection-end-column="42" />
           <folding>
             <element signature="e#73#10576#0" expanded="false" />
             <element signature="e#1128#1149#0" expanded="false" />
@@ -916,7 +916,7 @@
             <element signature="e#30482#30507#0" expanded="false" />
             <element signature="e#34587#36238#0" expanded="false" />
             <element signature="e#36302#37837#0" expanded="false" />
-            <element signature="e#39280#39299#0" expanded="false" />
+            <element signature="e#39299#39318#0" expanded="false" />
           </folding>
         </state>
       </provider>
