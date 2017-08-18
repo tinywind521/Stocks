@@ -412,6 +412,7 @@ class Yline:
         self._lastLevelName = None
         self._lastLevelResult = 0.00
         self._fallTimes = 0
+        self._raised = None
         self._highestLevel = -10
 
         self.levelTimes = None
@@ -453,6 +454,19 @@ class Yline:
 
             # [{[{}], {}}]
             # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
+
+
+    def get_bull_length(self):
+        return self._bull_length
+
+
+    def get_bear_length(self):
+        return self._bear_length
+
+
+    def get_all_length(self):
+        return self._all_length
+
 
     def get_para(self):
         return self._para
@@ -773,6 +787,7 @@ class Yline:
         self.bull_por = -0.001
         self.patternResult = {}
         self.maxChange = 0
+        self._raised = False
         self._fallTimes = 0
 
         """近期最高层级"""
@@ -1013,6 +1028,7 @@ class Yline:
                 if self._head[0]['布林'] > self._highestLevel:
                     self._highestLevel = self._head[0]['布林']
                     self._fallTimes = 0
+                    self._raised = False
             elif self._head[0]['布林'] >= 2:
                 upSideMark = True
             else:
@@ -1035,7 +1051,9 @@ class Yline:
                 self._lastLevelResult = 1
                 if self._head[0]['布林'] > self._rear[0]['布林']:
                     if upSideMark:
-                        self._fallTimes += 1
+                        if self._raised:
+                            self._fallTimes += 1
+                            self._raised = False
                     self._index_fall_level()
                     self._lastLevelName = '下降层级'
                     self.levelTimes['riseLevel'] += 1
@@ -1055,6 +1073,8 @@ class Yline:
                     self._index_rise_level()
                     self._lastLevelName = '上升层级'
                     self.levelTimes['fallLevel'] += 1
+                    if upSideMark:
+                        self._raised = True
                     if self._lastLevelResult >= 1:
                         self.levelTimes['fallResult'] += 1
                     if self._setPrint:
@@ -1088,16 +1108,16 @@ class Yline:
             
         """
 
-    def cal_patternResult(self):
+    def cal_patternResult(self, KtimeType='day'):
         """
         计算各种形态结果
         :return:
         """
-        self.pattern_001_144BollUpper20BollUpside()
+        self._pattern_001_144BollUpper20BollUpside()
         # self._pattern_100_20BollAnd144BollFirstWave()
-        # self._pattern_101_20BollDayAnd60fDoubleB3()
+        self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
-    def pattern_001_144BollUpper20BollUpside(self):
+    def _pattern_001_144BollUpper20BollUpside(self):
         """
         形态001：
         144上轨穿 20布林的上部区间 K线近中轨
@@ -1134,7 +1154,7 @@ class Yline:
             return
         # print(self.Index[-1])
         patternResult['近期层级类型'] = self._lastLevelName
-        patternResult['层级差得分'] = self._lastLevelResult
+        patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
@@ -1143,7 +1163,7 @@ class Yline:
         self.patternResult['001_144BollUpper20BollUpside'] = patternResult
 
 
-    def pattern_100_20BollAnd144BollFirstWave(self):
+    def _pattern_100_20BollAnd144BollFirstWave(self):
         """
         形态100：
         4B打法的底部20布林和144布林的一次启动
@@ -1177,7 +1197,7 @@ class Yline:
             return
         # print(self.Index[-1])
         patternResult['近期层级类型'] = self._lastLevelName
-        patternResult['层级差得分'] = self._lastLevelResult
+        patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
@@ -1186,13 +1206,22 @@ class Yline:
         self.patternResult['100_20BollAnd144BollFirstWave'] = patternResult
 
 
-    def pattern_101_20BollDayAnd60fDoubleB3(self):
+    def _pattern_101_20BollDayAnd60fDoubleB3(self, KtimeType):
+        if KtimeType == 'day':
+            self._pattern_101_20BollDay4B()
+        elif KtimeType == '60':
+            pass
+        else:
+            raise ValueError("KtimeType输入值不正确! 输入值为：", str(KtimeType))
+
+
+    def _pattern_101_20BollDay4B(self):
         """
         形态101：
         20布林day和60F双B3
 
         过滤标准：
-        1、20布林day和60F双B3（上半空间下部）
+        1、20布林day和60F双上半空间下部
             关键触发条件
 
         2、首次 布林位置>= -1 之后，下降次数<=2，到达更高层级时重置次数
@@ -1219,7 +1248,7 @@ class Yline:
         """
         # print(self.Index[-1])
         patternResult = {'序号': '101',
-                         '名称': '20布林day和60F双B3',
+                         '名称': '20布林day的4B打法',
                          '结果': 0,
                          '近期层级类型': None,
                          '层级差得分': 0,
@@ -1228,6 +1257,12 @@ class Yline:
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
                          '阳线占比': 0,
+                         'K线概况':
+                             {
+                                 '阳线数': 0,
+                                 '阴线数': 0,
+                                 '总数': 0,
+                             },
                          '层级和层级差次数':
                              {
                                  'riseLevel': 0,
@@ -1251,17 +1286,17 @@ class Yline:
                 (self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid):
             patternResult['结果'] = 1
         else:
-            self.patternResult['101_20BollDayAnd60fDoubleB3'] = patternResult
+            self.patternResult['101_20BollDay4B'] = patternResult
             return
         # print(self.Index[-1])
         patternResult['近期层级类型'] = self._lastLevelName
-        patternResult['层级差得分'] = self._lastLevelResult
+        patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
         # print(patternResult)
-        self.patternResult['101_20BollDayAnd60fDoubleB3'] = patternResult
+        self.patternResult['101_20BollDay4B'] = patternResult
 
 
 """

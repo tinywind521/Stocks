@@ -22,7 +22,7 @@ ref_List = {'KtimeType': '60',
 # beginDate = input('Please input K begin date (ex.20170101): ')
 # dateLenth = eval(input('Please input K download lenth (ex.200): '))
 # getLength = eval(input('Please input K display lenth (ex.61): '))
-
+"""前期参数设定"""
 KtimeType = 1
 beginDate = ''
 dateLenth = 160
@@ -55,8 +55,9 @@ elif not beginDate:
 else:
     pass
 
+"""获取code列表"""
 # print(ref_List)
-debuger = 0
+debuger = 1
 
 if debuger:
     codeList = ['600362', '002460']
@@ -88,7 +89,7 @@ else:
             text += code + '\n'
         txt.txt_write(text, tempPath)
 
-
+"""开始计算日线"""
 result_001 = []
 temp = {'code': '', 'value': 0, 'result': {}}
 # print(codeList)
@@ -118,15 +119,15 @@ for code in codeList:
 
     # print(code)
     # print('下面是阳线起点：')
-    # t = y.get_list_bull()
+    # t = y.get_seq_bull()
     # for k in t:
     #     print(k)
-
+    #
     # print('\n下面是阴线起点:')
-    # for k in y._list_bull():
+    # for k in y.get_seq_bear():
     #     m = [(l['time'], l['序号']) for l in k]
     #     print(m)
-
+    #
     # print('\n下面是全部K线:')
     # for k in y.get_seq_all():
     #     m = [(l['time'], l['序号'], l['底部']) for l in k]
@@ -139,7 +140,7 @@ for code in codeList:
 
     # print('\n最小量能：')
     # print(y.minVol)
-    y.cal_patternResult()
+    y.cal_patternResult(ref_List['KtimeType'])
     temp['code'] = code
     temp['value'] = y.status
     temp['result'] = y.patternResult
@@ -147,6 +148,13 @@ for code in codeList:
     if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
         result_001.append(temp)
     del temp
+    # print(y.get_all_length())
+    # print(y.get_bear_length())
+    # print(y.get_bull_length())
+    # print(y.levelTimes)
+    for m in y.patternResult:
+        print(m, end=': ')
+        print(y.patternResult[m])
 
 codeList = [k['code'] for k in result_001]
 
@@ -185,8 +193,10 @@ for code in codeList:
     #     y = Yline(s.Kvalue, None)
     # except ValueError:
     #     continue
+    # y.cal_patternResult(ref_List['KtimeType'])
     # temp['code'] = code
     # temp['value'] = y.status
+    # temp['result'] = y.patternResult
     result60.append(temp)
     del temp
 
@@ -270,7 +280,7 @@ for i in result60:
     for BlockList in allBlockList:
         if code in BlockList['block_stocksList']:
             if BlockList['name'].find('证监会行业') != -1:
-                print(BlockList)
+                # print(BlockList)
                 if BlockResultHY is None:
                     BlockResultHY = dict.fromkeys([BlockList['name']])
                     BlockResultHY[BlockList['name']] = [code]
