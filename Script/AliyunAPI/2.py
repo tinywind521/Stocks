@@ -57,7 +57,7 @@ else:
 
 """获取code列表"""
 # print(ref_List)
-debuger = 1
+debuger = 0
 
 if debuger:
     codeList = ['600362', '002460']
@@ -152,9 +152,9 @@ for code in codeList:
     # print(y.get_bear_length())
     # print(y.get_bull_length())
     # print(y.levelTimes)
-    for m in y.patternResult:
-        print(m, end=': ')
-        print(y.patternResult[m])
+    # for m in y.patternResult:
+    #     print(m, end=': ')
+    #     print(y.patternResult[m])
 
 codeList = [k['code'] for k in result_001]
 

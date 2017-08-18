@@ -1115,7 +1115,7 @@ class Yline:
         """
         self._pattern_001_144BollUpper20BollUpside()
         # self._pattern_100_20BollAnd144BollFirstWave()
-        self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
+        # self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
