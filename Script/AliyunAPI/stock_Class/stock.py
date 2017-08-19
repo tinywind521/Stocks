@@ -1115,7 +1115,7 @@ class Yline:
         """
         self._pattern_001_144BollUpper20BollUpside()
         # self._pattern_100_20BollAnd144BollFirstWave()
-        # self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
+        self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
@@ -1208,9 +1208,11 @@ class Yline:
 
     def _pattern_101_20BollDayAnd60fDoubleB3(self, KtimeType):
         if KtimeType == 'day':
+            # print(KtimeType)
             self._pattern_101_20BollDay4B()
         elif KtimeType == '60':
-            pass
+            # print(KtimeType)
+            self._pattern_101_20Boll60F4B()
         else:
             raise ValueError("KtimeType输入值不正确! 输入值为：", str(KtimeType))
 
@@ -1239,7 +1241,7 @@ class Yline:
         具体实现：
             先计算日线，
             1、布林位置>= -1
-            2、下降层级次数<=5次 （上升后 再 计算，一共计算到两次）
+            2、回调次数<= 2（上升后再计算，一共计算到两次）备选下降层级次数<=5次
             3、阳线优势
             4、列出 层级和层级差次数
 
@@ -1281,9 +1283,8 @@ class Yline:
         #                    'fallLevel': 0,
         #                    'fallResult': 0,
         #                    }
-        upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if (self.Index[-1]['mid'] <= self.Index[-1]['upper144'] <= self.Index[-1]['upper']) and \
-                (self.Index[-1]['mid'] < min(self.Index[-1]['open'], self.Index[-1]['close']) <= upper_mid):
+        # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
+        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 2:
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
@@ -1295,9 +1296,101 @@ class Yline:
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
+        patternResult['阳线占比'] = round(self.bull_por, 3)
+        patternResult['K线概况']['阳线数'] = self.get_bull_length()
+        patternResult['K线概况']['阴线数'] = self.get_bear_length()
+        patternResult['K线概况']['总数'] = self.get_all_length()
+        patternResult['层级和层级差次数'] = self.levelTimes
         # print(patternResult)
         self.patternResult['101_20BollDay4B'] = patternResult
 
+
+    def _pattern_101_20Boll60F4B(self):
+        """
+        形态101：
+        20布林day和60F双B3
+
+        过滤标准：
+        1、20布林day和60F双上半空间下部
+            关键触发条件
+
+        2、首次 布林位置>= -1 之后，下降次数<=2，到达更高层级时重置次数
+            day和60F布林位置 均>= -1 至少一个 >=1
+            下降层级次数<=5次
+            近期层级类型 60F上
+            近期层级差必须有效
+
+        3、统计阳线占比、各类层级差次数
+
+        日线，20
+        60F，20
+        一次启动关系，先确认
+
+        具体实现：
+            先计算日线，
+            1、布林位置>= -1
+            2、回调次数<= 2（上升后再计算，一共计算到两次）备选下降层级次数<=5次
+            3、阳线优势
+            4、列出 层级和层级差次数
+
+            再计算60F，
+        :return:
+        """
+        # print(self.Index[-1])
+        patternResult = {'序号': '101',
+                         '名称': '20布林60F的4B打法',
+                         '结果': 0,
+                         '近期层级类型': None,
+                         '层级差得分': 0,
+                         '回调次数': 0,
+                         'K线位于20布林位置': None,
+                         'K线位于144布林位置': None,
+                         '近期最大涨幅': 0,
+                         '阳线占比': 0,
+                         'K线概况':
+                             {
+                                 '阳线数': 0,
+                                 '阴线数': 0,
+                                 '总数': 0,
+                             },
+                         '层级和层级差次数':
+                             {
+                                 'riseLevel': 0,
+                                 'riseResult': 0,
+                                 'horiLevel': 0,
+                                 'horiResult': 0,
+                                 'fallLevel': 0,
+                                 'fallResult': 0,
+                             }
+                         }
+        # """层级和成功的层级差次数"""
+        # self.levelTimes = {'riseLevel': 0,
+        #                    'riseResult': 0,
+        #                    'horiLevel': 0,
+        #                    'horiResult': 0,
+        #                    'fallLevel': 0,
+        #                    'fallResult': 0,
+        #                    }
+        # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
+        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 2:
+            patternResult['结果'] = 1
+        else:
+            self.patternResult['101_20Boll60F4B'] = patternResult
+            return
+        # print(self.Index[-1])
+        patternResult['近期层级类型'] = self._lastLevelName
+        patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
+        patternResult['回调次数'] = self._fallTimes
+        patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
+        patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
+        patternResult['近期最大涨幅'] = self.maxChange
+        patternResult['阳线占比'] = round(self.bull_por, 3)
+        patternResult['K线概况']['阳线数'] = self.get_bull_length()
+        patternResult['K线概况']['阴线数'] = self.get_bear_length()
+        patternResult['K线概况']['总数'] = self.get_all_length()
+        patternResult['层级和层级差次数'] = self.levelTimes
+        # print(patternResult)
+        self.patternResult['101_20Boll60F4B'] = patternResult
 
 """
 144BollUpper20BollUpside

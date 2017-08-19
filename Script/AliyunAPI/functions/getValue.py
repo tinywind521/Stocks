@@ -359,6 +359,7 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
     """
     try:
         showapi_str = showapi_api.realtime(code, beginDay, '60', 'bfq', appcode)
+        # print(showapi_str)
         showapi_dict = json.loads(showapi_str)
         for i in range(10):
             try:
@@ -378,27 +379,26 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
         dataList.reverse()
         realtimeValue = []
         tempVol = 0
-        tempOpen = None
-        for element in dataList:
-            # print(element)
+        tempOpen = 0
+        for element in dataList[:]:
             if element['minute'][-4:] == '0930':
-                tempVol = int(element['volumn'])
-                tempOpen = element['open']
+                tempVol = float(element['volumn'])
+                tempOpen = float(element['open'])
             elif element['minute'][-4:] == '1030':
-                realVol = format((int(element['volumn']) + tempVol), 'd')
+                realVol = format((float(element['volumn']) + tempVol), 'f')
                 if tempOpen:
                     realOpen = tempOpen
                 else:
-                    realOpen = element['open']
-                element['min'] = min(realOpen, element['min'])
-                element['max'] = max(realOpen, element['max'])
+                    realOpen = float(element['open'])
+                element['min'] = format(min(realOpen, float(element['min'])), 'f')
+                element['max'] = format(max(realOpen, float(element['max'])), 'f')
                 element['volumn'] = realVol
-                element['open'] = realOpen
+                element['open'] = format(realOpen, 'f')
                 realtimeValue.append(element)
-                tempOpen = None
+                tempOpen = 0
             else:
                 realtimeValue.append(element)
-        realtimeList = realtimeValue
+        realtimeList = [k for k in realtimeValue]
         closeList = []
         for element in realtimeList:
             closeList.append(float(element['close']))

@@ -90,7 +90,11 @@ else:
         txt.txt_write(text, tempPath)
 
 """开始计算日线"""
-result_001 = []
+result = {
+            '001': [],
+            '101': [],
+        }
+
 temp = {'code': '', 'value': 0, 'result': {}}
 # print(codeList)
 NameList = {}
@@ -146,17 +150,22 @@ for code in codeList:
     temp['result'] = y.patternResult
     # print(temp)
     if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
-        result_001.append(temp)
+        result['001'].append(temp)
+    if temp['result']['101_20BollDay4B']['结果'] == 1:
+        result['101'].append(temp)
     del temp
     # print(y.get_all_length())
     # print(y.get_bear_length())
     # print(y.get_bull_length())
     # print(y.levelTimes)
     # for m in y.patternResult:
-    #     print(m, end=': ')
-    #     print(y.patternResult[m])
+    #     for n in y.patternResult[m]:
+    #         print(n, end=': ')
+    #         print(y.patternResult[m][n])
 
-codeList = [k['code'] for k in result_001]
+# print(result['101'])
+codeList = [k['code'] for k in result['101']]
+# print(codeList)
 
 ref_List = {'KtimeType': '60',
             'KbeginDay': '',
@@ -182,28 +191,34 @@ else:
 result60 = []
 temp = {'code': '', 'value': 0, 'result': {}}
 # print(codeList)
+# print(ref_List)
 
 for code in codeList:
     print(code)
     temp = {'code': code, 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}, }}
-    # s = Stock(code, ref_List)
-    # s.get_KValue()
-    # s.update_Kstatus()
-    # try:
-    #     y = Yline(s.Kvalue, None)
-    # except ValueError:
-    #     continue
-    # y.cal_patternResult(ref_List['KtimeType'])
-    # temp['code'] = code
-    # temp['value'] = y.status
-    # temp['result'] = y.patternResult
+    s = Stock(code, ref_List)
+    s.get_KValue()
+    # print(s.Kvalue)
+    s.update_Kstatus()
+    try:
+        y = Yline(s.Kvalue, None)
+    except ValueError:
+        continue
+    y.cal_patternResult(ref_List['KtimeType'])
+    temp['code'] = code
+    temp['value'] = y.status
+    temp['result'] = y.patternResult
     result60.append(temp)
     del temp
+    for m in y.patternResult:
+        for n in y.patternResult[m]:
+            print(n, end=': ')
+            print(y.patternResult[m][n])
 
 finalResult = {}
 tempNum = 0
 print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,')
-for i in result_001:
+for i in result['001']:
     print(i['code'], end=',')
     print(format(i['value'], '.3f'), end=',')
     print(i['result']['001_144BollUpper20BollUpside']['近期层级类型'], end=',')
