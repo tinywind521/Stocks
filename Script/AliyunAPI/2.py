@@ -41,19 +41,7 @@ if getLength:
 else:
     ref_List['KgetLength'] = 61
 
-if len(beginDate) == 8:
-    ref_List['KbeginDay'] = beginDate
-elif not beginDate:
-    if ref_List['KtimeType'] == '60':
-        dateList = getValue.get_dateList('20170101', 50)
-        ref_List['KbeginDay'] = dateList[-int(dateLenth / 4) - 1]
-    elif ref_List['KtimeType'] == 'day':
-        dateList = getValue.get_dateList('20150101', 400)
-        ref_List['KbeginDay'] = dateList[-int(dateLenth) - 1]
-    else:
-        ref_List['KbeginDay'] = '20170101'
-else:
-    pass
+ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
 
 """获取code列表"""
 # print(ref_List)
@@ -146,7 +134,7 @@ for code in codeList:
     # print(y.minVol)
     y.cal_patternResult(ref_List['KtimeType'])
     temp['code'] = code
-    temp['value'] = y.status
+    temp['value'] = round(y.status, 3)
     temp['result'] = y.patternResult
     # print(temp)
     if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
@@ -162,9 +150,8 @@ for code in codeList:
     #     for n in y.patternResult[m]:
     #         print(n, end=': ')
     #         print(y.patternResult[m][n])
-
 # print(result['101'])
-codeList = [k['code'] for k in result['101']]
+# codeList = [k['code'] for k in result['101']]
 # print(codeList)
 
 ref_List = {'KtimeType': '60',
@@ -174,28 +161,17 @@ ref_List = {'KtimeType': '60',
             'TgetLength': 3,
             'appcode': aliyun_appcode}
 
-if len(beginDate) == 8:
-    ref_List['KbeginDay'] = beginDate
-elif not beginDate:
-    if ref_List['KtimeType'] == '60':
-        dateList = getValue.get_dateList('20170101', 50)
-        ref_List['KbeginDay'] = dateList[-int(dateLenth / 4) - 1]
-    elif ref_List['KtimeType'] == 'day':
-        dateList = getValue.get_dateList('20150101', 400)
-        ref_List['KbeginDay'] = dateList[-int(dateLenth) - 1]
-    else:
-        ref_List['KbeginDay'] = '20170101'
-else:
-    pass
+ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
 
-result60 = []
-temp = {'code': '', 'value': 0, 'result': {}}
-# print(codeList)
-# print(ref_List)
+result60 = {
+                '001': [],
+                '101': [],
+            }
+temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {}}
 
-for code in codeList:
-    print(code)
-    temp = {'code': code, 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}, }}
+for element in result['101']:
+    print(element['code'])
+    temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
     s = Stock(code, ref_List)
     s.get_KValue()
     # print(s.Kvalue)
@@ -205,16 +181,28 @@ for code in codeList:
     except ValueError:
         continue
     y.cal_patternResult(ref_List['KtimeType'])
-    temp['code'] = code
-    temp['value'] = y.status
-    temp['result'] = y.patternResult
-    result60.append(temp)
+    temp['code'] = element['code']
+    temp['valueDay'] = element['value']
+    temp['value60F'] = round(y.status, 3)
+    # print(element['result'])
+    # print({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
+    if y.patternResult:
+        tempdict = element['result']
+        tempdict.update({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
+        temp['result'] = tempdict
+    else:
+        temp['result']['101_20Boll60F4B']['结果'] = 0
+    if temp['result']['101_20Boll60F4B']['结果'] == 1:
+        if temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or \
+                        temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1:
+            result60['101'].append(temp)
+        # for m in y.patternResult:
+        #     for n in y.patternResult[m]:
+        #         print(n, end=': ')
+        #         print(y.patternResult[m][n])
     del temp
-    for m in y.patternResult:
-        for n in y.patternResult[m]:
-            print(n, end=': ')
-            print(y.patternResult[m][n])
 
+print('\n')
 finalResult = {}
 tempNum = 0
 print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,')
@@ -236,6 +224,7 @@ for i in result['001']:
             tempNum += 1
             finalResult[i['result'][j]['名称']] = format(tempNum, '03d')
 
+print('\n')
 
 # 写入 JSON 数据
 outputRootPath = 'Z:/Test'
@@ -290,7 +279,7 @@ allBlockList = jsonFiles.Read(path)
 BlockResultHY = {'codeList': [], }.clear()
 BlockResultGN = {'codeList': [], }.clear()
 
-for i in result60:
+for i in result['001']:
     code = i['code']
     for BlockList in allBlockList:
         if code in BlockList['block_stocksList']:
@@ -345,9 +334,13 @@ except AttributeError:
 
 """
 
-print('代码,60F层级得分')
-for i in result60:
-    print(i['code'], end=',')
-    print(format(i['value'], '.3f'), end=',')
-    print('')
+# print('代码,60F层级得分')
+print('\n')
+print('形态101：')
+for i in result60['101']:
+    # print(i['code'], end=',\t')
+    # print(format(i['value'], '.3f'), end=',\t')
+    print(i['code'])
+    # print(i['result']['101_20BollDay4B'])
+    # print(i['result']['101_20Boll60F4B'])
 

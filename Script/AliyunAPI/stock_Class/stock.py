@@ -989,6 +989,7 @@ class Yline:
             pass
 
         # print(self._seq)
+        # print(self._seq_bear)
         # print(self._levelList)
         self._bear_length = sum(len(l) for l in self._levelList)
         if self._levelList:

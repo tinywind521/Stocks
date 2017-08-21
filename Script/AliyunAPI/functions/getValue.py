@@ -30,6 +30,23 @@ def get_dateList(beginDay, getLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'
         return dateList
 
 
+def get_beginDate(ref_List, dateLenth, beginDate=''):
+    if len(beginDate) == 8:
+        ref_List['KbeginDay'] = beginDate
+    elif not beginDate:
+        if ref_List['KtimeType'] == '60':
+            dateList = get_dateList('20170101', 50)
+            ref_List['KbeginDay'] = dateList[-int(dateLenth / 4) - 1]
+        elif ref_List['KtimeType'] == 'day':
+            dateList = get_dateList('20150101', 400)
+            ref_List['KbeginDay'] = dateList[-int(dateLenth) - 1]
+        else:
+            ref_List['KbeginDay'] = '20170101'
+    else:
+        pass
+    return ref_List
+
+
 def get_allCodelist(appcode='6a09e5fe3e724252b35d571a0b715baa'):
     """
     获取当日总表
