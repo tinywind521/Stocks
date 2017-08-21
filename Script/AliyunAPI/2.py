@@ -101,47 +101,50 @@ for code in codeList:
     # print(s.Kvalue)
     # print(s.Kvalue[0:-12])
     # print(s.Kvalue)
-    try:
-        y = Yline(s.Kvalue, None)
-    except ValueError:
-        continue
-    # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
-    # for h in m:
-    #     print(h)
+    if len(s.Kvalue) >= 5:
+        try:
+            y = Yline(s.Kvalue, None)
+        except ValueError:
+            continue
+        # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
+        # for h in m:
+        #     print(h)
 
-    # print(code)
-    # print('下面是阳线起点：')
-    # t = y.get_seq_bull()
-    # for k in t:
-    #     print(k)
-    #
-    # print('\n下面是阴线起点:')
-    # for k in y.get_seq_bear():
-    #     m = [(l['time'], l['序号']) for l in k]
-    #     print(m)
-    #
-    # print('\n下面是全部K线:')
-    # for k in y.get_seq_all():
-    #     m = [(l['time'], l['序号'], l['底部']) for l in k]
-    #     print(m)
+        # print(code)
+        # print('下面是阳线起点：')
+        # t = y.get_seq_bull()
+        # for k in t:
+        #     print(k)
+        #
+        # print('\n下面是阴线起点:')
+        # for k in y.get_seq_bear():
+        #     m = [(l['time'], l['序号']) for l in k]
+        #     print(m)
+        #
+        # print('\n下面是全部K线:')
+        # for k in y.get_seq_all():
+        #     m = [(l['time'], l['序号'], l['底部']) for l in k]
+        #     print(m)
 
-    # print('\n阴线分段分层：')
-    # for k in y.get_levelList():
-    #     m = [(l['time'], l['序号']) for l in k]
-    #     print(m)
+        # print('\n阴线分段分层：')
+        # for k in y.get_levelList():
+        #     m = [(l['time'], l['序号']) for l in k]
+        #     print(m)
 
-    # print('\n最小量能：')
-    # print(y.minVol)
-    y.cal_patternResult(ref_List['KtimeType'])
-    temp['code'] = code
-    temp['value'] = round(y.status, 3)
-    temp['result'] = y.patternResult
-    # print(temp)
-    if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
-        result['001'].append(temp)
-    if temp['result']['101_20BollDay4B']['结果'] == 1:
-        result['101'].append(temp)
-    del temp
+        # print('\n最小量能：')
+        # print(y.minVol)
+        y.cal_patternResult(ref_List['KtimeType'])
+        temp['code'] = code
+        temp['value'] = round(y.status, 3)
+        temp['result'] = y.patternResult
+        # print(temp)
+        if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
+            result['001'].append(temp)
+        if temp['result']['101_20BollDay4B']['结果'] == 1:
+            result['101'].append(temp)
+        del temp
+    else:
+        pass
     # print(y.get_all_length())
     # print(y.get_bear_length())
     # print(y.get_bull_length())
@@ -176,31 +179,34 @@ for element in result['101']:
     s.get_KValue()
     # print(s.Kvalue)
     s.update_Kstatus()
-    try:
-        y = Yline(s.Kvalue, None)
-    except ValueError:
-        continue
-    y.cal_patternResult(ref_List['KtimeType'])
-    temp['code'] = element['code']
-    temp['valueDay'] = element['value']
-    temp['value60F'] = round(y.status, 3)
-    # print(element['result'])
-    # print({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
-    if y.patternResult:
-        tempdict = element['result']
-        tempdict.update({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
-        temp['result'] = tempdict
+    if len(s.Kvalue) >= 5:
+        try:
+            y = Yline(s.Kvalue, None)
+        except ValueError:
+            continue
+        y.cal_patternResult(ref_List['KtimeType'])
+        temp['code'] = element['code']
+        temp['valueDay'] = element['value']
+        temp['value60F'] = round(y.status, 3)
+        # print(element['result'])
+        # print({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
+        if y.patternResult:
+            tempdict = element['result']
+            tempdict.update({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
+            temp['result'] = tempdict
+        else:
+            temp['result']['101_20Boll60F4B']['结果'] = 0
+        if temp['result']['101_20Boll60F4B']['结果'] == 1:
+            if 2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or \
+                            2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1:
+                result60['101'].append(temp)
+            # for m in y.patternResult:
+            #     for n in y.patternResult[m]:
+            #         print(n, end=': ')
+            #         print(y.patternResult[m][n])
+        del temp
     else:
-        temp['result']['101_20Boll60F4B']['结果'] = 0
-    if temp['result']['101_20Boll60F4B']['结果'] == 1:
-        if temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or \
-                        temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1:
-            result60['101'].append(temp)
-        # for m in y.patternResult:
-        #     for n in y.patternResult[m]:
-        #         print(n, end=': ')
-        #         print(y.patternResult[m][n])
-    del temp
+        pass
 
 print('\n')
 finalResult = {}

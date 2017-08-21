@@ -416,6 +416,8 @@ class Yline:
         self._highestLevel = -10
 
         self.levelTimes = None
+        self._lastFirstK = None
+        self._lastSecondK = None
 
         """计算结果和形态结果"""
         self.bull_por = 0.00
@@ -789,6 +791,8 @@ class Yline:
         self.maxChange = 0
         self._raised = False
         self._fallTimes = 0
+        self._lastFirstK = Kvalue[-1]
+        self._lastSecondK = Kvalue[-2]
 
         """近期最高层级"""
         self._highestLevel = -10
@@ -1118,6 +1122,7 @@ class Yline:
         # self._pattern_100_20BollAnd144BollFirstWave()
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
+
     def _pattern_001_144BollUpper20BollUpside(self):
         """
         形态001：
@@ -1285,7 +1290,8 @@ class Yline:
         #                    'fallResult': 0,
         #                    }
         # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 2:
+        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1 \
+                and 1.0025 * self._lastFirstK['mid'] >= self._lastSecondK['mid']:
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
@@ -1373,7 +1379,8 @@ class Yline:
         #                    'fallResult': 0,
         #                    }
         # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 2:
+        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1 \
+                and 1.0025 * self._lastFirstK['mid'] >= self._lastSecondK['mid']:
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
@@ -1394,6 +1401,8 @@ class Yline:
         self.patternResult['101_20Boll60F4B'] = patternResult
 
 """
+中轨必须至少一个是上行的。
+
 144BollUpper20BollUpside
 7、k线直接到达下轨，坐轨就打
 """
