@@ -2,6 +2,7 @@ import time
 import os
 import json
 import pymysql
+import time
 
 from file_io import txt, jsonFiles
 from functions import getValue
@@ -45,11 +46,7 @@ if getLength:
 else:
     ref_List['KgetLength'] = 61
 
-# ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
-
 """获取code列表"""
-# print(ref_List)
-# debuger = 0
 
 if debuger:
     codeList = ['002603', '002460']
@@ -88,23 +85,20 @@ result = {
         }
 
 temp = {'code': '', 'value': 0, 'result': {}}
-# print(codeList)
 NameList = {}
 
 for code in codeList:
     print(code)
     temp = {'code': '', 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}}}
     s = Stock(code, ref_List)
-    s.get_KValue()
-    # # print(s.Kvalue)
-    # for i in s.Kvalue:
-    #     print(i)
-    s.update_Kstatus()
-    # for i in s.Kvalue:
-    #     print(i)
-    # print(s.Kvalue)
-    # print(s.Kvalue[0:-12])
-    # print(s.Kvalue)
+    while True:
+        try:
+            s.get_KValue()
+            s.update_Kstatus()
+            len(s.Kvalue)
+            break
+        except TypeError:
+            time.sleep(5)
     if len(s.Kvalue) >= 5:
         try:
             y = Yline(s.Kvalue, None)
@@ -157,10 +151,6 @@ for code in codeList:
     #     for n in y.patternResult[m]:
     #         print(n, end=': ')
     #         print(y.patternResult[m][n])
-# print(result['101'])
-# codeList = [k['code'] for k in result['101']]
-# print(codeList)
-
 ref_List = {'KtimeType': '60',
             'KbeginDay': '',
             'KallLength': 160,
@@ -168,7 +158,6 @@ ref_List = {'KtimeType': '60',
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': aliyun_appcode}
-
 ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
 
 result60 = {
@@ -181,9 +170,14 @@ for element in result['101']:
     print(element['code'])
     temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
     s = Stock(element['code'], ref_List)
-    s.get_KValue()
-    # print(s.Kvalue)
-    s.update_Kstatus()
+    while True:
+        try:
+            s.get_KValue()
+            s.update_Kstatus()
+            len(s.Kvalue)
+            break
+        except TypeError:
+            time.sleep(5)
     if len(s.Kvalue) >= 5:
         try:
             y = Yline(s.Kvalue, None)
@@ -201,16 +195,19 @@ for element in result['101']:
             temp['result'] = tempdict
         else:
             temp['result']['101_20Boll60F4B']['结果'] = 0
-        print(temp['result']['101_20Boll60F4B'])
         if temp['result']['101_20Boll60F4B']['结果'] == 1:
             if (2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or
                 2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1) and \
-                    (temp['result']['101_20BollDay4B']['中轨状态'] >= 0 or temp['result']['101_20Boll60F4B']['中轨状态'] >= 0) \
-                    and temp['result']['101_20Boll60F4B']['阳线占比'] > 50 \
-                    and temp['result']['101_20Boll60F4B']['层级差得分'] >= 100:
-                result60['101'].append(temp)
+                    (temp['result']['101_20BollDay4B']['中轨状态'] >= 0 or temp['result']['101_20Boll60F4B']['中轨状态'] >= 0):
 
                 """阳线占比 > 75% 无视层级差"""
+                """阳线占比 > 50% 判断层级差"""
+                if temp['result']['101_20Boll60F4B']['阳线占比'] > 75:
+                    result60['101'].append(temp)
+                elif temp['result']['101_20Boll60F4B']['阳线占比'] > 50 and temp['result']['101_20Boll60F4B']['层级差得分'] >= 98:
+                    result60['101'].append(temp)
+                else:
+                    pass
             # for m in y.patternResult:
             #     for n in y.patternResult[m]:
             #         print(n, end=': ')
