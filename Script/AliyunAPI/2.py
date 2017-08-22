@@ -202,6 +202,7 @@ for element in result['101']:
 
                 """阳线占比 > 75% 无视层级差"""
                 """阳线占比 > 50% 判断层级差"""
+                """布林斜率"""
                 if temp['result']['101_20Boll60F4B']['阳线占比'] > 75:
                     result60['101'].append(temp)
                 elif temp['result']['101_20Boll60F4B']['阳线占比'] > 50 and temp['result']['101_20Boll60F4B']['层级差得分'] >= 98:
