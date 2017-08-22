@@ -13,6 +13,7 @@ showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
 tempPath = 'z:/test/codeList.txt'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20170701',
+            'KallLength': 160,
             'KgetLength': 61,
             'TdayLength': 5,
             'TgetLength': 3,
@@ -27,9 +28,12 @@ KtimeType = 1
 beginDate = ''
 dateLenth = 160
 getLength = 61
+debuger = input('Want to debuger? (1/0): ')
 needCodeRefresh = input('Want to refresh codeList? (1/0): ')
 needBlockRefresh = input('Want to refresh blockList? (1/0): ')
 needNameRefresh = input('Want to refresh nameList? (1/0): ')
+
+ref_List['KallLength'] = dateLenth
 
 if KtimeType == 1:
     ref_List['KtimeType'] = 'day'
@@ -41,14 +45,14 @@ if getLength:
 else:
     ref_List['KgetLength'] = 61
 
-ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
+# ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
 
 """获取code列表"""
 # print(ref_List)
-debuger = 0
+# debuger = 0
 
 if debuger:
-    codeList = ['600362', '002460']
+    codeList = ['002603', '002460']
     # 000837
     # 601998
     # 300506
@@ -92,7 +96,7 @@ for code in codeList:
     temp = {'code': '', 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}}}
     s = Stock(code, ref_List)
     s.get_KValue()
-    # print(s.Kvalue)
+    # # print(s.Kvalue)
     # for i in s.Kvalue:
     #     print(i)
     s.update_Kstatus()
@@ -159,6 +163,7 @@ for code in codeList:
 
 ref_List = {'KtimeType': '60',
             'KbeginDay': '',
+            'KallLength': 160,
             'KgetLength': 61,
             'TdayLength': 5,
             'TgetLength': 3,
@@ -175,7 +180,7 @@ temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {}}
 for element in result['101']:
     print(element['code'])
     temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
-    s = Stock(code, ref_List)
+    s = Stock(element['code'], ref_List)
     s.get_KValue()
     # print(s.Kvalue)
     s.update_Kstatus()
@@ -196,10 +201,16 @@ for element in result['101']:
             temp['result'] = tempdict
         else:
             temp['result']['101_20Boll60F4B']['结果'] = 0
+        print(temp['result']['101_20Boll60F4B'])
         if temp['result']['101_20Boll60F4B']['结果'] == 1:
-            if 2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or \
-                            2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1:
+            if (2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or
+                2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1) and \
+                    (temp['result']['101_20BollDay4B']['中轨状态'] >= 0 or temp['result']['101_20Boll60F4B']['中轨状态'] >= 0) \
+                    and temp['result']['101_20Boll60F4B']['阳线占比'] > 50 \
+                    and temp['result']['101_20Boll60F4B']['层级差得分'] >= 100:
                 result60['101'].append(temp)
+
+                """阳线占比 > 75% 无视层级差"""
             # for m in y.patternResult:
             #     for n in y.patternResult[m]:
             #         print(n, end=': ')

@@ -17,6 +17,7 @@
       <w>getcwd</w>
       <w>hkex</w>
       <w>hori</w>
+      <w>kall</w>
       <w>kbegin</w>
       <w>kget</w>
       <w>kpara</w>
@@ -29,6 +30,7 @@
       <w>nlist</w>
       <w>pagebean</w>
       <w>pymysql</w>
+      <w>qtimq</w>
       <w>referer</w>
       <w>regist</w>
       <w>retranslate</w>

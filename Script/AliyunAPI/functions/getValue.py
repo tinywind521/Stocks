@@ -6,6 +6,7 @@ from functions import function
 from http_api import aliyun_api
 from http_api import showapi_api
 from http_api import QQ_api
+from http_api import qtimq_api
 
 
 def get_dateList(beginDay, getLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
@@ -471,6 +472,135 @@ def get_60F_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e724
         return None
 
 
+def get_60F_qtimq(code, allLength, getLength, n=20, p=2):
+    """
+    获取指定日期长度的60F,
+    同时计算boll
+    :param allLength:
+    :param p: p常量
+    :param n: 布林计算天数
+    :param code:
+    :param getLength: = 2n / 4
+    :return:
+    """
+    try:
+        if len(code) == 6:
+            if code[0] == '6':
+                code = 'sh' + code
+            elif code[0] == '0' or code[0] == '3':
+                code = 'sz' + code
+        elif len(code) == 8:
+            code = code
+        else:
+            raise ValueError('Invalid code:', code)
+
+        api_str = qtimq_api.realtime(code, allLength, '60')
+        # print(showapi_str)
+        api_dict = json.loads(api_str)
+        for i in range(10):
+            try:
+                if api_dict['code'] != 0 or api_dict['msg'] != '':
+                    print('Oh,Let me have a rest! 10S!')
+                    time.sleep(10)
+                else:
+                    break
+                api_str = qtimq_api.realtime(code, allLength, '60')
+                api_dict = json.loads(api_str)
+            except KeyError:
+                print('Oh,Let me have a rest! 10S!')
+                time.sleep(10)
+                api_str = qtimq_api.realtime(code, allLength, '60')
+                api_dict = json.loads(api_str)
+
+        dataList = api_dict['data'][code]['m60']
+        dataList.reverse()
+        realtimeValue = []
+        # tempVol = 0
+        # tempOpen = 0
+        for element in dataList[:]:
+            # if element['minute'][-4:] == '0930':
+            #     tempVol = float(element['volumn'])
+            #     tempOpen = float(element['open'])
+            # elif element['minute'][-4:] == '1030':
+            #     realVol = format((float(element['volumn']) + tempVol), 'f')
+            #     if tempOpen:
+            #         realOpen = tempOpen
+            #     else:
+            #         realOpen = float(element['open'])
+            #     element['min'] = format(min(realOpen, float(element['min'])), 'f')
+            #     element['max'] = format(max(realOpen, float(element['max'])), 'f')
+            #     element['volumn'] = realVol
+            #     element['open'] = format(realOpen, 'f')
+            #     realtimeValue.append(element)
+            #     tempOpen = 0
+            # else:
+            #     realtimeValue.append(element)
+            tempDict = {
+                            'time': element[0],
+                            'minute': element[0],
+                            'open': element[1],
+                            'close': element[2],
+                            'max': element[3],
+                            'min': element[4],
+                            'volumn': element[5],
+                        }
+            realtimeValue.append(tempDict)
+        realtimeList = realtimeValue[:]
+        closeList = []
+        for element in realtimeList:
+            closeList.append(float(element['close']))
+        # print(closeList)
+        # closeList.reverse()
+        lastcloseList = closeList[:]
+        boll = function.cal_boll(closeList[:], n, p)
+        boll144 = function.cal_boll_144(closeList[:])
+        m = len(boll)
+        n = len(boll144)
+        m = min(m, n)
+        # print('m len(boll) = ', end='')
+        # print(m)
+        # print('n len(boll144) = ', end='')
+        # print(n)
+        boll = boll[-m + 1:]
+        boll144 = boll144[-m + 1:]
+        realtimeList = realtimeList[-m + 1:]
+        lastcloseList = lastcloseList[-m:]
+        lastclose = {}
+        if m == 1:
+            lastclose['lastclose'] = float(realtimeList[0]['open'])
+            realtimeList[0]['min'] = float(realtimeList[0]['min'])
+            if len(realtimeList[0]['open']) == 0:
+                realtimeList[0]['open'] = 0
+            else:
+                realtimeList[0]['open'] = float(realtimeList[0]['open'])
+            realtimeList[0]['max'] = float(realtimeList[0]['max'])
+            realtimeList[0]['close'] = float(realtimeList[0]['close'])
+            realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
+            realtimeList[0].update(lastclose)
+            realtimeList[0].update(boll[0])
+            realtimeList[0].update(boll144[0])
+        for i in range(0, m - 1):
+            # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            lastclose['lastclose'] = lastcloseList[i]
+            realtimeList[i]['min'] = float(realtimeList[i]['min'])
+            if len(realtimeList[i]['open']) == 0:
+                realtimeList[i]['open'] = 0
+            else:
+                realtimeList[i]['open'] = float(realtimeList[i]['open'])
+            realtimeList[i]['max'] = float(realtimeList[i]['max'])
+            realtimeList[i]['close'] = float(realtimeList[i]['close'])
+            realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
+            realtimeList[i].update(lastclose)
+            realtimeList[i].update(boll[i])
+            realtimeList[i].update(boll144[i])
+            # print(realtimeList[i])
+        # print(realtimeList)
+        realtimeList = realtimeList[-getLength:]
+        return realtimeList
+    except ValueError:
+        return None
+
+
 def get_dayK(code, beginDay, getLength, n=20, p=2, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
     """
     获取指定日期长度的60F,
@@ -560,6 +690,131 @@ def get_dayK_showapi(code, beginDay, getLength, n=20, p=2, appcode='6a09e5fe3e72
         # print(closeList)
         # closeList.reverse()
         lastcloseList = [k for k in closeList]
+        boll = function.cal_boll(closeList[:], n, p)
+        boll144 = function.cal_boll_144(closeList[:])
+        m = len(boll)
+        n = len(boll144)
+        m = min(m, n)
+        # print('m len(boll) = ', end='')
+        # print(m)
+        # print('n len(boll144) = ', end='')
+        # print(n)
+        boll = boll[-m + 1:]
+        boll144 = boll144[-m + 1:]
+        realtimeList = realtimeList[-m + 1:]
+        lastcloseList = lastcloseList[-m:]
+        lastclose = {}
+        if m == 1:
+            lastclose['lastclose'] = float(realtimeList[0]['open'])
+            realtimeList[0]['min'] = float(realtimeList[0]['min'])
+            if len(realtimeList[0]['open']) == 0:
+                realtimeList[0]['open'] = 0
+            else:
+                realtimeList[0]['open'] = float(realtimeList[0]['open'])
+            realtimeList[0]['max'] = float(realtimeList[0]['max'])
+            realtimeList[0]['close'] = float(realtimeList[0]['close'])
+            realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
+            realtimeList[0].update(lastclose)
+            realtimeList[0].update(boll[0])
+            realtimeList[0].update(boll144[0])
+        for i in range(0, m - 1):
+            # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
+            lastclose['lastclose'] = lastcloseList[i]
+            realtimeList[i]['min'] = float(realtimeList[i]['min'])
+            if len(realtimeList[i]['open']) == 0:
+                realtimeList[i]['open'] = 0
+            else:
+                realtimeList[i]['open'] = float(realtimeList[i]['open'])
+            realtimeList[i]['max'] = float(realtimeList[i]['max'])
+            realtimeList[i]['close'] = float(realtimeList[i]['close'])
+            realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
+            realtimeList[i].update(lastclose)
+            realtimeList[i].update(boll[i])
+            realtimeList[i].update(boll144[i])
+            # print(realtimeList[i])
+        # print(realtimeList)
+        realtimeList = realtimeList[-getLength:]
+        return realtimeList
+    except ValueError:
+        return None
+
+
+def get_dayK_qtimq(code, allLength, getLength, n=20, p=2):
+    """
+    获取指定日期长度的60F,
+    同时计算boll
+    :param allLength:
+    :param p: p常量
+    :param n: 布林计算天数
+    :param code:
+    :param getLength: = 2n / 4
+    :return:
+    """
+    try:
+        if len(code) == 6:
+            if code[0] == '6':
+                code = 'sh' + code
+            elif code[0] == '0' or code[0] == '3':
+                code = 'sz' + code
+        elif len(code) == 8:
+            code = code
+        else:
+            raise ValueError('Invalid code:', code)
+
+        api_str = qtimq_api.realtime(code, allLength, 'day')
+        api_dict = json.loads(api_str)
+        for i in range(10):
+            try:
+                if api_dict['code'] != 0 or api_dict['msg'] != '':
+                    print('Oh,Let me have a rest! 10S!')
+                    time.sleep(10)
+                else:
+                    break
+                api_str = qtimq_api.realtime(code, allLength, 'day')
+                api_dict = json.loads(api_str)
+            except KeyError:
+                print('Oh,Let me have a rest! 10S!')
+                time.sleep(10)
+                api_str = qtimq_api.realtime(code, allLength, 'day')
+                api_dict = json.loads(api_str)
+
+        dataList = api_dict['data'][code]['day']
+        # dataList.reverse()
+        realtimeValue = []
+        for element in dataList[:]:
+            # if element['minute'][-4:] == '0930':
+            #     tempVol = float(element['volumn'])
+            #     tempOpen = float(element['open'])
+            # elif element['minute'][-4:] == '1030':
+            #     realVol = format((float(element['volumn']) + tempVol), 'f')
+            #     if tempOpen:
+            #         realOpen = tempOpen
+            #     else:
+            #         realOpen = float(element['open'])
+            #     element['min'] = format(min(realOpen, float(element['min'])), 'f')
+            #     element['max'] = format(max(realOpen, float(element['max'])), 'f')
+            #     element['volumn'] = realVol
+            #     element['open'] = format(realOpen, 'f')
+            #     realtimeValue.append(element)
+            #     tempOpen = 0
+            # else:
+            #     realtimeValue.append(element)
+            tempDict = {
+                'time': element[0].replace('-', ''),
+                'open': element[1],
+                'close': element[2],
+                'max': element[3],
+                'min': element[4],
+                'volumn': element[5],
+            }
+            realtimeValue.append(tempDict)
+        realtimeList = realtimeValue[:]
+        closeList = []
+        for element in realtimeList:
+            closeList.append(float(element['close']))
+        # print(closeList)
+        # closeList.reverse()
+        lastcloseList = closeList[:]
         boll = function.cal_boll(closeList[:], n, p)
         boll144 = function.cal_boll_144(closeList[:])
         m = len(boll)

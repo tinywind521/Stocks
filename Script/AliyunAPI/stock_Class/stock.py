@@ -17,6 +17,7 @@ class Stock:
         if ref_List is None:
             ref_List = {'KtimeType': '60/day',
                         'KbeginDay': '20170101',
+                        'KallLength': 160,
                         'KgetLength': 10,
                         'TdayLength': 5,
                         'TgetLength': 1,
@@ -48,13 +49,21 @@ class Stock:
         """
         try:
             if self._ref_list['KtimeType'] == '60':
-                self.Kvalue = getValue.get_60F_showapi(self.code, self._ref_list['KbeginDay'],
-                                                       self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                     self._ref_list['KgetLength'])
             elif self._ref_list['KtimeType'] == 'day':
-                self.Kvalue = getValue.get_dayK_showapi(self.code, self._ref_list['KbeginDay'],
-                                                        self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                      self._ref_list['KgetLength'])
         except ValueError:
-            self.Kvalue = None
+            try:
+                if self._ref_list['KtimeType'] == '60':
+                    self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                         self._ref_list['KgetLength'])
+                elif self._ref_list['KtimeType'] == 'day':
+                    self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                          self._ref_list['KgetLength'])
+            except ValueError:
+                self.Kvalue = None
 
     def get_KValue(self):
         """
@@ -457,18 +466,14 @@ class Yline:
             # [{[{}], {}}]
             # { [ {连续K线1参数 }, {连续K线2参数}, {连续K线3参数}...], {第2组连续K线的组参数} },
 
-
     def get_bull_length(self):
         return self._bull_length
-
 
     def get_bear_length(self):
         return self._bear_length
 
-
     def get_all_length(self):
         return self._all_length
-
 
     def get_para(self):
         return self._para
@@ -476,35 +481,30 @@ class Yline:
     """
     获取阳线层级总列表
     """
-
     def get_seq_bull(self):
         return self._seq_bull
 
     """
     获取阴线层级总列表
     """
-
     def get_seq_bear(self):
         return self._seq_bear
 
     """
     获取阴阳层级总列表
     """
-
     def get_seq_all(self):
         return self._seq
 
     """
     获取层级列表
     """
-
     def get_levelList(self):
         return self._levelList
 
     """
     刷新K线量化指标
     """
-
     def refresh_index(self, Kvalue):
         """
         刷新K线量化指标
@@ -517,7 +517,6 @@ class Yline:
     先用0/1，建立连乘评分机制，
     根据后续使用情况，0/1 --> 0.90~1.10的连乘机制
     """
-
     def _index_cont_bear(self):
         """
         把连续阴线分成前面n根和最后一根，判断最后一根
@@ -1122,7 +1121,6 @@ class Yline:
         # self._pattern_100_20BollAnd144BollFirstWave()
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
-
     def _pattern_001_144BollUpper20BollUpside(self):
         """
         形态001：
@@ -1168,7 +1166,6 @@ class Yline:
         # print(patternResult)
         self.patternResult['001_144BollUpper20BollUpside'] = patternResult
 
-
     def _pattern_100_20BollAnd144BollFirstWave(self):
         """
         形态100：
@@ -1211,8 +1208,9 @@ class Yline:
         # print(patternResult)
         self.patternResult['100_20BollAnd144BollFirstWave'] = patternResult
 
-
     def _pattern_101_20BollDayAnd60fDoubleB3(self, KtimeType):
+        # print(self._lastFirstK)
+        # print(self._lastSecondK)
         if KtimeType == 'day':
             # print(KtimeType)
             self._pattern_101_20BollDay4B()
@@ -1221,7 +1219,6 @@ class Yline:
             self._pattern_101_20Boll60F4B()
         else:
             raise ValueError("KtimeType输入值不正确! 输入值为：", str(KtimeType))
-
 
     def _pattern_101_20BollDay4B(self):
         """
@@ -1262,6 +1259,7 @@ class Yline:
                          '层级差得分': 0,
                          '回调次数': 0,
                          'K线位于20布林位置': None,
+                         '中轨状态': 0,
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
                          '阳线占比': 0,
@@ -1290,13 +1288,16 @@ class Yline:
         #                    'fallResult': 0,
         #                    }
         # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1 \
-                and 1.0025 * self._lastFirstK['mid'] >= self._lastSecondK['mid']:
+        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1:
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
             return
         # print(self.Index[-1])
+        if self._lastFirstK['mid'] > self._lastSecondK['mid']:
+            patternResult['中轨状态'] = 1
+        if self._lastFirstK['mid'] < self._lastSecondK['mid']:
+            patternResult['中轨状态'] = -1
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes
@@ -1310,7 +1311,6 @@ class Yline:
         patternResult['层级和层级差次数'] = self.levelTimes
         # print(patternResult)
         self.patternResult['101_20BollDay4B'] = patternResult
-
 
     def _pattern_101_20Boll60F4B(self):
         """
@@ -1351,6 +1351,7 @@ class Yline:
                          '层级差得分': 0,
                          '回调次数': 0,
                          'K线位于20布林位置': None,
+                         '中轨状态': 0,
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
                          '阳线占比': 0,
@@ -1379,13 +1380,16 @@ class Yline:
         #                    'fallResult': 0,
         #                    }
         # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1 \
-                and 1.0025 * self._lastFirstK['mid'] >= self._lastSecondK['mid']:
+        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1:
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return
         # print(self.Index[-1])
+        if self._lastFirstK['mid'] > self._lastSecondK['mid']:
+            patternResult['中轨状态'] = 1
+        if self._lastFirstK['mid'] < self._lastSecondK['mid']:
+            patternResult['中轨状态'] = -1
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes

@@ -1,15 +1,25 @@
-import pandas as pd
-import numpy as np
-import matplotlib
+from http_api import qtimq_api
+from http_api import qtimq_request
+from functions import getValue
 
-from matplotlib import pyplot as plt
-import seaborn as sns
+import json
+import os
 
-ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
-ts = ts.cumsum()
 
-df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index,
-                  columns=['A', 'B', 'C', 'D'])
-df = df.cumsum()
-df.plot()
-plt.legend(loc='best')
+tempPath = 'z:/test/codeList.txt'
+codeList = []
+if os.path.exists(tempPath):
+    f = open(tempPath, 'r')
+    text = f.read()
+    f.close()
+    codeList = text.splitlines()
+
+i = 0
+for code in codeList:
+    i += 1
+
+    showapi_dict = getValue.get_dayK_qtimq(code, 160, 61)
+    print(showapi_dict)
+    print(code, end='\t')
+    print(i)
+    # print(showapi_dict['data'][code]['m60'])
