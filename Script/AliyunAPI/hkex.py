@@ -3,11 +3,34 @@ from file_io import dict2CSV
 from functions import getValue
 import re
 import socket
+import pymysql
 
-socket.setdefaulttimeout(None)
+from stock_Class.MySQL import MySQL
+
+beginDate = input("Please input begin date (like, 20170317): ")
+
+if not beginDate:
+    stocks_config = {
+        'host': 'localhost',
+        'port': 3306,
+        'user': 'root',
+        'password': 'star2249',
+        'db': 'stocks',
+        'charset': 'utf8',
+        'cursorclass': pymysql.cursors.DictCursor,
+    }
+
+    sDB = MySQL(stocks_config)
+    sql = 'select gdate from hkex where to_days(gdate) >=' \
+          ' (select to_days(gdate) from hkex group by gdate ' \
+          'desc limit 4,1) group by gdate;'
+    sDB.execSQL(sql)
+    beginDate = sDB.dbReturn[-1]['gdate'].isoformat()
+    beginDate = beginDate[0:4] + beginDate[5:7] + beginDate[8:]
 
 dateList = getValue.get_dateList('20170317', 0)
-beginDate = input("Please input begin date (like, 20170317): ")
+
+socket.setdefaulttimeout(None)
 
 if len(beginDate) >= 6:
     dateList = dateList[dateList.index(beginDate):]

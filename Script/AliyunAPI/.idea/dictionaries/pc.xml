@@ -14,6 +14,7 @@
       <w>datas</w>
       <w>dbname</w>
       <w>debuger</w>
+      <w>gdate</w>
       <w>getcwd</w>
       <w>hkex</w>
       <w>hori</w>
@@ -29,6 +30,7 @@
       <w>narray</w>
       <w>nlist</w>
       <w>pagebean</w>
+      <w>pandc</w>
       <w>pymysql</w>
       <w>qtimq</w>
       <w>referer</w>
