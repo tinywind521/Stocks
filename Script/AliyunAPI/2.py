@@ -1,11 +1,8 @@
-import time
 import os
-import json
 import pymysql
 import time
-
 from file_io import txt, jsonFiles
-from functions import getValue
+from functions import getValue, function
 from stock_Class.stock import Stock, Yline
 from stock_Class.MySQL import MySQL
 
@@ -20,10 +17,6 @@ ref_List = {'KtimeType': '60',
             'TgetLength': 3,
             'appcode': aliyun_appcode}
 
-# KtimeType = eval(input('Please input K time type (ex.0 = 60, 1 = day): '))
-# beginDate = input('Please input K begin date (ex.20170101): ')
-# dateLenth = eval(input('Please input K download lenth (ex.200): '))
-# getLength = eval(input('Please input K display lenth (ex.61): '))
 """前期参数设定"""
 KtimeType = 1
 beginDate = ''
@@ -47,7 +40,6 @@ else:
     ref_List['KgetLength'] = 61
 
 """获取code列表"""
-
 if debuger:
     codeList = ['002603', '002460']
     # 000837
@@ -87,8 +79,12 @@ result = {
 temp = {'code': '', 'value': 0, 'result': {}}
 NameList = {}
 
+i = 0
+length = len(codeList)
 for code in codeList:
-    print(code)
+    # print(code)
+    i += 1
+    function.view_bar(i, length, code)
     temp = {'code': '', 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}}}
     s = Stock(code, ref_List)
     while True:
@@ -104,33 +100,6 @@ for code in codeList:
             y = Yline(s.Kvalue, None)
         except ValueError:
             continue
-        # m = [(l['time'], l['序号'], l['布林'], l['量能']) for l in y.Index]
-        # for h in m:
-        #     print(h)
-
-        # print(code)
-        # print('下面是阳线起点：')
-        # t = y.get_seq_bull()
-        # for k in t:
-        #     print(k)
-        #
-        # print('\n下面是阴线起点:')
-        # for k in y.get_seq_bear():
-        #     m = [(l['time'], l['序号']) for l in k]
-        #     print(m)
-        #
-        # print('\n下面是全部K线:')
-        # for k in y.get_seq_all():
-        #     m = [(l['time'], l['序号'], l['底部']) for l in k]
-        #     print(m)
-
-        # print('\n阴线分段分层：')
-        # for k in y.get_levelList():
-        #     m = [(l['time'], l['序号']) for l in k]
-        #     print(m)
-
-        # print('\n最小量能：')
-        # print(y.minVol)
         y.cal_patternResult(ref_List['KtimeType'])
         temp['code'] = code
         temp['value'] = round(y.status, 3)
@@ -143,14 +112,8 @@ for code in codeList:
         del temp
     else:
         pass
-    # print(y.get_all_length())
-    # print(y.get_bear_length())
-    # print(y.get_bull_length())
-    # print(y.levelTimes)
-    # for m in y.patternResult:
-    #     for n in y.patternResult[m]:
-    #         print(n, end=': ')
-    #         print(y.patternResult[m][n])
+print()
+
 ref_List = {'KtimeType': '60',
             'KbeginDay': '',
             'KallLength': 160,
@@ -166,8 +129,12 @@ result60 = {
             }
 temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {}}
 
+i = 0
+length = len(result['101'])
 for element in result['101']:
-    print(element['code'])
+    # print(element['code'])
+    i += 1
+    function.view_bar(i, length, code)
     temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
     s = Stock(element['code'], ref_List)
     while True:
@@ -199,31 +166,18 @@ for element in result['101']:
             if (2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or
                 2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1) and \
                     (temp['result']['101_20BollDay4B']['中轨状态'] >= 0 or temp['result']['101_20Boll60F4B']['中轨状态'] >= 0):
-
-                """阳线占比 > 75% 无视层级差"""
-                """阳线占比 > 50% 判断层级差"""
-                """布林斜率"""
-
-                """最近一次层级差 是上升或者水平或者None（不能是下降）"""
-                """可以是第二次调整"""
-                """必须叠加倍量"""
-
                 """
-                1、考虑如何添加下轨的二次启动形态
+                布林斜率？
+                必须叠加倍量
                 2、K线判断起点是布林位置的最低值，上一次破下轨？61个周期内（考虑周期长度加长？）
-                3、强上攻形态，上轨支撑-。-！
+                阳线占比与层级差
                 """
-
-                if temp['result']['101_20Boll60F4B']['阳线占比'] > 75:
+                if temp['result']['101_20Boll60F4B']['阳线占比'] >= 50:
                     result60['101'].append(temp)
-                elif temp['result']['101_20Boll60F4B']['阳线占比'] > 50 and temp['result']['101_20Boll60F4B']['层级差得分'] >= 98:
+                elif temp['result']['101_20Boll60F4B']['阳线占比'] >= 25 and temp['result']['101_20Boll60F4B']['层级差得分'] >= 80:
                     result60['101'].append(temp)
                 else:
                     pass
-            # for m in y.patternResult:
-            #     for n in y.patternResult[m]:
-            #         print(n, end=': ')
-            #         print(y.patternResult[m][n])
         del temp
     else:
         pass
@@ -346,27 +300,21 @@ try:
 
     BlockResult = BlockResultHY
     BlockResult.update(BlockResultGN)
-    for key in BlockResultKeys:
-        print(key, ',', BlockResult[key])
+    # for key in BlockResultKeys:
+    #     print(key, ',', BlockResult[key])
 except AttributeError:
     pass
-
-
-"""
-1、/001文件夹和文件的存在性；
-3、261同学的相对路径问题；
-
-1、20 B3（上半空间下部） 、144 >=3 首次 开始统计下降层级差 V U次数 <=2
-
-"""
 
 # print('代码,60F层级得分')
 print('\n')
 print('形态101：')
 for i in result60['101']:
-    # print(i['code'], end=',\t')
-    # print(format(i['value'], '.3f'), end=',\t')
     print(i['code'])
-    # print(i['result']['101_20BollDay4B'])
-    # print(i['result']['101_20Boll60F4B'])
-
+    if i['code'][0] == '6':
+        code = i['code'] + '.SH'
+    elif i['code'][0] == '0' or i['code'][0] == '3':
+        code = i['code'] + '.SZ'
+    else:
+        pass
+    sql = "replace dailypreselect1 SET gid='" + i['code'] + "';"
+    sDB.execTXSQL(sql)

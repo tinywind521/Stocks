@@ -1,6 +1,7 @@
 import json
 import numpy
 import time
+import sys
 
 from http_api import aliyun_api, showapi_api
 from functions import getValue
@@ -356,3 +357,14 @@ def return_timeline(code, day, appcode):
         return result
     except ValueError:
         return None
+
+
+def view_bar(num, total, codeIn):
+    rate = num / total
+    rate_num = rate * 100
+    flow = int(rate_num)
+    r = '\r[%s%s] %2.2f%% %d/%d %s' % ("|"*flow, " "*(100-flow), rate_num, num, total, codeIn,)
+    sys.stdout.write(r)
+    sys.stdout.flush()
+
+

@@ -1242,13 +1242,11 @@ class Yline:
         一次启动关系，先确认
 
         具体实现：
-            先计算日线，
             1、布林位置>= -1
             2、回调次数<= 2（上升后再计算，一共计算到两次）备选下降层级次数<=5次
             3、阳线优势
             4、列出 层级和层级差次数
-
-            再计算60F，
+            5、日线添加强上攻形态，上轨支撑
         :return:
         """
         # print(self.Index[-1])
@@ -1288,7 +1286,7 @@ class Yline:
         #                    'fallResult': 0,
         #                    }
         # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1:
+        if self.Index[-1]['布林'] >= -1 and self._fallTimes <= 2:
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
@@ -1334,13 +1332,11 @@ class Yline:
         一次启动关系，先确认
 
         具体实现：
-            先计算日线，
-            1、布林位置>= -1
-            2、回调次数<= 2（上升后再计算，一共计算到两次）备选下降层级次数<=5次
+            1、布林位置>= -2
+            2、回调次数<= 1（上升后再计算，一共计算到两次）备选下降层级次数<=5次
             3、阳线优势
             4、列出 层级和层级差次数
-
-            再计算60F，
+            5、近期不是下降层级
         :return:
         """
         # print(self.Index[-1])
@@ -1380,7 +1376,7 @@ class Yline:
         #                    'fallResult': 0,
         #                    }
         # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 > self.Index[-1]['布林'] >= -1 and self._fallTimes <= 1:
+        if 3 >= self.Index[-1]['布林'] >= -2 and self._fallTimes <= 1 and self._lastLevelName != '下降层级':
             patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
