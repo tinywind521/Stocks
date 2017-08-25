@@ -13,6 +13,7 @@ def hello(request):
                         '<p>Hello world ! </p>' \
                         '<p>Hello fromgc ! </p>' \
                         '<br>' \
+                        '<img alt="" src="http://image.sinajs.cn/newchart/min/n/sh000001.gif"></img>' \
                         '<img alt="" src="http://image.sinajs.cn/newchart/daily/n/sh000001.gif"></img>' \
                   '</body>' \
                   '</html>'
