@@ -28,11 +28,11 @@ def req(url, sleepTime=0.1):
                 content = response.read().decode("utf-8")
                 response.close()
                 break
-            except BaseException or socket.error or OSError:
+            except (BaseException, socket.error, OSError):
                 print(url)
                 return ''
-        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError \
-                or OSError or AttributeError or KeyError or ValueError:
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionAbortedError,
+                OSError, AttributeError, KeyError, ValueError):
             time.sleep(5)
             print('Oh,Let me have a rest! 5S!')
     if content:

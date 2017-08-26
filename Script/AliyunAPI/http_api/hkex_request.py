@@ -82,7 +82,7 @@ def req(url, data, referer=None, **headers):
                     content = response.read().decode("utf-8")
                     response.close()
                     break
-                except socket.timeout or urllib.error:
+                except (socket.timeout, urllib.error):
                     pass
             # content = requests.get(url).text
             # print(content)
@@ -93,5 +93,5 @@ def req(url, data, referer=None, **headers):
                 return ''
         except ValueError:
             return None
-        except socket.timeout or urllib.error:
+        except (socket.timeout, urllib.error):
             pass

@@ -25,12 +25,12 @@ def req(url, appcode):
         # print(response)
         try:
             response = urllib.request.urlopen(request, context=ctx)
-        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError:
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionAbortedError):
             time.sleep(5)
             print('Oh,Let me have a rest! 5S!')
             try:
                 response = urllib.request.urlopen(request, context=ctx)
-            except urllib.error.HTTPError or urllib.error.URLError or TimeoutError or ConnectionAbortedError:
+            except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionAbortedError):
                 response = None
         # print(response)
         try:

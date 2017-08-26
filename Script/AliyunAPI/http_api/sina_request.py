@@ -24,7 +24,7 @@ def req(url):
         # print(response)
         try:
             response = urllib.request.urlopen(request, context=ctx)
-        except urllib.error.HTTPError or urllib.error.URLError or TimeoutError:
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError):
             response = None
         # print(response)
         try:

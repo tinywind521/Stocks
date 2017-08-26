@@ -1277,17 +1277,14 @@ class Yline:
                                  'fallResult': 0,
                              }
                          }
-        # """层级和成功的层级差次数"""
-        # self.levelTimes = {'riseLevel': 0,
-        #                    'riseResult': 0,
-        #                    'horiLevel': 0,
-        #                    'horiResult': 0,
-        #                    'fallLevel': 0,
-        #                    'fallResult': 0,
-        #                    }
-        # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if self.Index[-1]['布林'] >= -1 and self._fallTimes <= 2:
-            patternResult['结果'] = 1
+        """结合轨距判断"""
+        if self.Index[-1]['布林'] >= -1:
+            if self._fallTimes == 0:
+                patternResult['结果'] = 1
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 4:
+                patternResult['结果'] = 1
+            elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2:
+                patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
             return
@@ -1367,17 +1364,15 @@ class Yline:
                                  'fallResult': 0,
                              }
                          }
-        # """层级和成功的层级差次数"""
-        # self.levelTimes = {'riseLevel': 0,
-        #                    'riseResult': 0,
-        #                    'horiLevel': 0,
-        #                    'horiResult': 0,
-        #                    'fallLevel': 0,
-        #                    'fallResult': 0,
-        #                    }
-        # upper_mid = (self.Index[-1]['mid'] + self.Index[-1]['upper']) / 2
-        if 3 >= self.Index[-1]['布林'] >= -2 and self._fallTimes <= 1 and self._lastLevelName != '下降层级':
-            patternResult['结果'] = 1
+        """结合轨距判断"""
+        if 3 >= self.Index[-1]['布林'] >= -2:
+            if self.Index[-1]['布林'] >= -1:
+                if self._fallTimes == 0:
+                    patternResult['结果'] = 1
+                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
+                    patternResult['结果'] = 1
+                elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 1 and self._lastLevelName != '下降层级':
+                    patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return

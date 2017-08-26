@@ -24,7 +24,7 @@ def req(url):
                 return content
             else:
                 return ''
-        except ValueError or TimeoutError or urllib.error.URLError:
+        except (ValueError, TimeoutError, urllib.error.URLError):
             print(url)
             try:
                 print('QQ_request.req Error! Time sleep 5S!')
@@ -44,7 +44,7 @@ def req(url):
                     return content
                 else:
                     return ''
-            except ValueError or TimeoutError or urllib.error.URLError:
+            except (ValueError, TimeoutError, urllib.error.URLError):
                 return ''
     finally:
         return content
