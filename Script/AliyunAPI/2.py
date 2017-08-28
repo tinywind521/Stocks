@@ -321,5 +321,5 @@ for i in result60['101']:
         code = i['code'] + '.SZ'
     else:
         pass
-    sql = "replace dailypreselect1 SET gid='" + i['code'] + "';"
+    sql = "replace dailypreselect SET gid='" + code + "';"
     sDB.execTXSQL(sql)
