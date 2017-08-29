@@ -1033,7 +1033,7 @@ class Yline:
                     self._highestLevel = self._head[0]['布林']
                     self._fallTimes = 0
                     self._raised = False
-            elif self._head[0]['布林'] >= 2:
+            elif self._head[0]['布林'] >= 1:
                 upSideMark = True
             else:
                 upSideMark = False

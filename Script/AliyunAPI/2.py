@@ -163,20 +163,10 @@ for element in result['101']:
         else:
             temp['result']['101_20Boll60F4B']['结果'] = 0
         if temp['result']['101_20Boll60F4B']['结果'] == 1:
-            if (2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1 or
-                2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1) and \
-                    (temp['result']['101_20BollDay4B']['中轨状态'] >= 0 or temp['result']['101_20Boll60F4B']['中轨状态'] >= 0):
-                """
-                布林斜率？
-                必须叠加倍量
-                回调次数等于1的时候接收下降.
-                
-                （60F如果是下降层级）往15F找，同时对15F的层级差进行一次判断主要是最近层级差 不是下降！再结合倍量
-                阳线占比与层级差
-                
-                反转瓶颈
-                
-                """
+            if 2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1 \
+                    and 2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1 \
+                    and temp['result']['101_20BollDay4B']['中轨状态'] >= 0 \
+                    and temp['result']['101_20Boll60F4B']['中轨状态'] >= 0:
                 if temp['result']['101_20Boll60F4B']['阳线占比'] >= 75:
                     result60['101'].append(temp)
                 elif temp['result']['101_20Boll60F4B']['阳线占比'] >= 25 and temp['result']['101_20Boll60F4B']['层级差得分'] >= 80:
@@ -321,5 +311,14 @@ for i in result60['101']:
         code = i['code'] + '.SZ'
     else:
         pass
-    sql = "replace dailypreselect SET gid='" + code + "';"
+    sql = "insert ignore dailypreselect SET gid='" + code + "';"
     sDB.execTXSQL(sql)
+
+"""
+布林斜率？
+必须叠加倍量
+回调次数等于1的时候接收下降.
+（60F如果是下降层级）往15F找，同时对15F的层级差进行一次判断主要是最近层级差 不是下降！再结合倍量
+阳线占比与层级差
+反转瓶颈
+"""
