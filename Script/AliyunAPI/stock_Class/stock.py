@@ -62,9 +62,15 @@ class Stock:
             if self._ref_list['KtimeType'] == '60':
                 self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
                                                      self._ref_list['KgetLength'])
+                # self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                #                                      self._ref_list['KgetLength'])[0:-4]
+                # print(self.Kvalue[-1])
             elif self._ref_list['KtimeType'] == 'day':
                 self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
                                                       self._ref_list['KgetLength'])
+                # self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                #                                       self._ref_list['KgetLength'])[0:-1]
+                # print(self.Kvalue[-1])
         except ValueError:
             try:
                 if self._ref_list['KtimeType'] == '60':
@@ -434,6 +440,7 @@ class Yline:
         self._fallTimes = 0
         self._raised = None
         self._highestLevel = -10
+        self._highestPrice = 0
 
         self.levelTimes = None
         self._lastFirstK = None
@@ -806,6 +813,7 @@ class Yline:
 
         """近期最高层级"""
         self._highestLevel = -10
+        self._highestPrice = 0
 
         """层级和成功的层级差次数"""
         self.levelTimes = {'riseLevel': 0,
@@ -830,6 +838,7 @@ class Yline:
         s = None
         judge = None
         beared = False
+        upSideMark = None
         # bottom = False
         t = []
         num = 0
@@ -1038,10 +1047,15 @@ class Yline:
             # print(self._rear[0]['time'])
 
             """判断是否位上部区间，同时计算近期最高层级，若层级新高 self._fallTimes 重置"""
-            upSideMark = None
+            # upSideMark = None
             if upSideMark:
-                if self._head[0]['布林'] > self._highestLevel:
-                    self._highestLevel = self._head[0]['布林']
+                thisMaxPrice = max([k['close'] for k in self.Index[self._head[0]['序号']:self._rear[0]['序号']]])
+                # print(self.Index[self._head[0]['序号']:self._rear[0]['序号']])
+                # print(thisMaxPrice)
+                if self._head[0]['布林'] > self._highestLevel \
+                        or (self._head[0]['布林'] >= 1 and thisMaxPrice >= self._highestPrice):
+                    self._highestLevel = max(self._head[0]['布林'], self._highestLevel)
+                    self._highestPrice = max(self._highestPrice, thisMaxPrice)
                     self._fallTimes = 0
                     self._raised = False
             elif self._head[0]['布林'] >= 1:
@@ -1292,7 +1306,7 @@ class Yline:
         if self.Index[-1]['布林'] >= -1:
             if self._fallTimes == 0:
                 patternResult['结果'] = 1
-            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 8:
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 6:
                 patternResult['结果'] = 1
             # elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2:
             #     patternResult['结果'] = 1
@@ -1380,10 +1394,10 @@ class Yline:
             if self.Index[-1]['布林'] >= -1:
                 if self._fallTimes == 0:
                     patternResult['结果'] = 1
-                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 4:
+                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
                     patternResult['结果'] = 1
-                elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2 and self._lastLevelName != '下降层级':
-                    patternResult['结果'] = 1
+                # elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 1 and self._lastLevelName != '下降层级':
+                #     patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return

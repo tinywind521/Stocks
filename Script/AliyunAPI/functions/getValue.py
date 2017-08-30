@@ -495,8 +495,9 @@ def get_60F_qtimq(code, allLength, getLength, n=20, p=2):
             raise ValueError('Invalid code:', code)
 
         api_str = qtimq_api.realtime(code, allLength, '60')
-        # print(showapi_str)
+        # print(api_str)
         api_dict = json.loads(api_str)
+        # print(api_dict)
         for i in range(10):
             try:
                 if api_dict['code'] != 0 or api_dict['msg'] != '':
@@ -513,7 +514,7 @@ def get_60F_qtimq(code, allLength, getLength, n=20, p=2):
                 api_dict = json.loads(api_str)
 
         dataList = api_dict['data'][code]['m60']
-        dataList.reverse()
+        # dataList.reverse()
         realtimeValue = []
         # tempVol = 0
         # tempOpen = 0

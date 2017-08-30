@@ -45,11 +45,7 @@ else:
 
 """获取code列表"""
 if debuger:
-    codeList = ['002603', '002460']
-    # 000837
-    # 601998
-    # 300506
-    # 002695
+    codeList = ['601001', '600621']
 else:
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
@@ -87,14 +83,15 @@ length = len(codeList)
 r = ResultDeal(result)
 for i in range(0, length, PoolLength):
     realList = codeList[i:i + PoolLength]
-    realLenth = len(realList)
-    function.view_bar(i + realLenth, length)
-    pool = ThreadPool(realLenth)
+    realLength = len(realList)
+    function.view_bar(i + realLength, length)
+    pool = ThreadPool(realLength)
     objTemp = [{'codeArg': k, 'objResult': r, 'ref_List': ref_List} for k in realList]
     pool.map(function.calDayStatus, objTemp)
     pool.close()
     pool.join()
 result = r.getResultValue()
+# print(result)
 print()
 
 ref_List = {'KtimeType': '60',
@@ -115,16 +112,17 @@ length = len(result['101'])
 r60 = ResultDeal(result60)
 for i in range(0, length, PoolLength):
     realList = result['101'][i:i + PoolLength]
-    realLenth = len(realList)
-    function.view_bar(i + realLenth, length)
-    pool = ThreadPool(realLenth)
+    realLength = len(realList)
+    function.view_bar(i + realLength, length)
+    pool = ThreadPool(realLength)
     objTemp = [{'element': k, 'objResult': r60, 'ref_List': ref_List} for k in realList]
     pool.map(function.cal60FStatus, objTemp)
     pool.close()
     pool.join()
 result60 = r60.getResultValue()
+# print(result60)
+print()
 
-print('\n')
 finalResult = {}
 tempNum = 0
 print('代码,总层级得分,近期层级类型,最近一次层级差得分,回调次数,位于20布林,位于144布林,近期最大涨幅,')
@@ -267,4 +265,7 @@ for i in result60['101']:
 （60F如果是下降层级）往15F找，同时对15F的层级差进行一次判断主要是最近层级差 不是下降！再结合倍量
 阳线占比与层级差
 反转瓶颈
+
+考虑周线？
+
 """
