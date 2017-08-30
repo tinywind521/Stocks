@@ -5,6 +5,7 @@ import sys
 
 from http_api import aliyun_api, showapi_api
 from functions import getValue
+from stock_Class.stock import Stock, Yline, ResultDeal
 
 
 def return_date(beginDay, appcode, code='000001', timeType='day'):
@@ -359,7 +360,7 @@ def return_timeline(code, day, appcode):
         return None
 
 
-def view_bar(num, total, codeIn):
+def view_bar(num, total, codeIn=''):
     rate = num / total
     rate_num = rate * 100
     flow = int(rate_num)
@@ -368,3 +369,81 @@ def view_bar(num, total, codeIn):
     sys.stdout.flush()
 
 
+def calDayStatus(obj):
+    codeArg = obj['codeArg']
+    objResult = obj['objResult']
+    ref_List = obj['ref_List']
+    tempArg = {'code': '', 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}}}
+    s = Stock(codeArg, ref_List)
+    while True:
+        try:
+            s.get_KValue()
+            s.update_Kstatus()
+            len(s.Kvalue)
+            break
+        except (TypeError, IndexError):
+            time.sleep(5)
+    if len(s.Kvalue) >= 5:
+        try:
+            y = Yline(s.Kvalue, None)
+        except ValueError:
+            return
+        y.cal_patternResult(ref_List['KtimeType'])
+        tempArg['code'] = codeArg
+        tempArg['value'] = round(y.status, 3)
+        tempArg['result'] = y.patternResult
+        # print(codeArg)
+        if tempArg['result']['001_144BollUpper20BollUpside']['结果'] == 1:
+            objResult.setResultAppend('001', tempArg)
+        if tempArg['result']['101_20BollDay4B']['结果'] == 1:
+            objResult.setResultAppend('101', tempArg)
+        del tempArg
+    else:
+        pass
+
+
+def cal60FStatus(obj):
+    element = obj['element']
+    objResult = obj['objResult']
+    ref_List = obj['ref_List']
+    tempArg = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
+    s = Stock(element['code'], ref_List)
+    while True:
+        try:
+            s.get_KValue()
+            s.update_Kstatus()
+            len(s.Kvalue)
+            break
+        except TypeError:
+            time.sleep(5)
+    if len(s.Kvalue) >= 5:
+        try:
+            y = Yline(s.Kvalue, None)
+        except ValueError:
+            return
+        y.cal_patternResult(ref_List['KtimeType'])
+        tempArg['code'] = element['code']
+        tempArg['valueDay'] = element['value']
+        tempArg['value60F'] = round(y.status, 3)
+        # print(element['result'])
+        # print({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
+        if y.patternResult:
+            tempdict = element['result']
+            tempdict.update({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
+            tempArg['result'] = tempdict
+        else:
+            tempArg['result']['101_20Boll60F4B']['结果'] = 0
+        if tempArg['result']['101_20Boll60F4B']['结果'] == 1:
+            if tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1 \
+                    and 2 > tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1 \
+                    and tempArg['result']['101_20BollDay4B']['中轨状态'] >= 0 \
+                    and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0:
+                if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 75:
+                    objResult.setResultAppend('101', tempArg)
+                elif tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 25 and tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 80:
+                    objResult.setResultAppend('101', tempArg)
+                else:
+                    pass
+        del tempArg
+    else:
+        pass

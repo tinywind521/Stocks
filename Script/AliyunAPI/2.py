@@ -1,10 +1,13 @@
 import os
 import pymysql
 import time
+
 from file_io import txt, jsonFiles
 from functions import getValue, function
-from stock_Class.stock import Stock, Yline
+from stock_Class.stock import Stock, Yline, ResultDeal
 from stock_Class.MySQL import MySQL
+from multiprocessing.dummy import Pool as ThreadPool
+
 
 aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
@@ -27,6 +30,7 @@ needCodeRefresh = input('Want to refresh codeList? (1/0): ')
 needBlockRefresh = input('Want to refresh blockList? (1/0): ')
 needNameRefresh = input('Want to refresh nameList? (1/0): ')
 
+PoolLength = 20
 ref_List['KallLength'] = dateLenth
 
 if KtimeType == 1:
@@ -47,7 +51,6 @@ if debuger:
     # 300506
     # 002695
 else:
-
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
             print('refreshing...')
@@ -81,37 +84,17 @@ NameList = {}
 
 i = 0
 length = len(codeList)
-for code in codeList:
-    # print(code)
-    i += 1
-    function.view_bar(i, length, code)
-    temp = {'code': '', 'value': 0, 'result': {'001_144BollUpper20BollUpside': {}}}
-    s = Stock(code, ref_List)
-    while True:
-        try:
-            s.get_KValue()
-            s.update_Kstatus()
-            len(s.Kvalue)
-            break
-        except TypeError:
-            time.sleep(5)
-    if len(s.Kvalue) >= 5:
-        try:
-            y = Yline(s.Kvalue, None)
-        except ValueError:
-            continue
-        y.cal_patternResult(ref_List['KtimeType'])
-        temp['code'] = code
-        temp['value'] = round(y.status, 3)
-        temp['result'] = y.patternResult
-        # print(temp)
-        if temp['result']['001_144BollUpper20BollUpside']['结果'] == 1:
-            result['001'].append(temp)
-        if temp['result']['101_20BollDay4B']['结果'] == 1:
-            result['101'].append(temp)
-        del temp
-    else:
-        pass
+r = ResultDeal(result)
+for i in range(0, length, PoolLength):
+    realList = codeList[i:i + PoolLength]
+    realLenth = len(realList)
+    function.view_bar(i + realLenth, length)
+    pool = ThreadPool(realLenth)
+    objTemp = [{'codeArg': k, 'objResult': r, 'ref_List': ref_List} for k in realList]
+    pool.map(function.calDayStatus, objTemp)
+    pool.close()
+    pool.join()
+result = r.getResultValue()
 print()
 
 ref_List = {'KtimeType': '60',
@@ -127,55 +110,19 @@ result60 = {
                 '001': [],
                 '101': [],
             }
-temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {}}
 
-i = 0
 length = len(result['101'])
-for element in result['101']:
-    # print(element['code'])
-    i += 1
-    function.view_bar(i, length, code)
-    temp = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
-    s = Stock(element['code'], ref_List)
-    while True:
-        try:
-            s.get_KValue()
-            s.update_Kstatus()
-            len(s.Kvalue)
-            break
-        except TypeError:
-            time.sleep(5)
-    if len(s.Kvalue) >= 5:
-        try:
-            y = Yline(s.Kvalue, None)
-        except ValueError:
-            continue
-        y.cal_patternResult(ref_List['KtimeType'])
-        temp['code'] = element['code']
-        temp['valueDay'] = element['value']
-        temp['value60F'] = round(y.status, 3)
-        # print(element['result'])
-        # print({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
-        if y.patternResult:
-            tempdict = element['result']
-            tempdict.update({'101_20Boll60F4B': y.patternResult['101_20Boll60F4B']})
-            temp['result'] = tempdict
-        else:
-            temp['result']['101_20Boll60F4B']['结果'] = 0
-        if temp['result']['101_20Boll60F4B']['结果'] == 1:
-            if 2 > temp['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1 \
-                    and 2 > temp['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1 \
-                    and temp['result']['101_20BollDay4B']['中轨状态'] >= 0 \
-                    and temp['result']['101_20Boll60F4B']['中轨状态'] >= 0:
-                if temp['result']['101_20Boll60F4B']['阳线占比'] >= 75:
-                    result60['101'].append(temp)
-                elif temp['result']['101_20Boll60F4B']['阳线占比'] >= 25 and temp['result']['101_20Boll60F4B']['层级差得分'] >= 80:
-                    result60['101'].append(temp)
-                else:
-                    pass
-        del temp
-    else:
-        pass
+r60 = ResultDeal(result60)
+for i in range(0, length, PoolLength):
+    realList = result['101'][i:i + PoolLength]
+    realLenth = len(realList)
+    function.view_bar(i + realLenth, length)
+    pool = ThreadPool(realLenth)
+    objTemp = [{'element': k, 'objResult': r60, 'ref_List': ref_List} for k in realList]
+    pool.map(function.cal60FStatus, objTemp)
+    pool.close()
+    pool.join()
+result60 = r60.getResultValue()
 
 print('\n')
 finalResult = {}
@@ -198,8 +145,6 @@ for i in result['001']:
         else:
             tempNum += 1
             finalResult[i['result'][j]['名称']] = format(tempNum, '03d')
-
-print('\n')
 
 # 写入 JSON 数据
 outputRootPath = 'Z:/Test'
@@ -302,7 +247,8 @@ except AttributeError:
 
 # print('代码,60F层级得分')
 print('\n')
-print('形态101：')
+print('形态101：', end='\t')
+print(len(result60['101']))
 for i in result60['101']:
     print(i['code'])
     if i['code'][0] == '6':

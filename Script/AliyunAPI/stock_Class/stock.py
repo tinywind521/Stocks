@@ -3,6 +3,17 @@ import math
 from functions import getValue, function
 
 
+class ResultDeal:
+    def __init__(self, firstValue):
+        self._result = firstValue
+
+    def setResultAppend(self, key, tempArg):
+        self._result[key].append(tempArg)
+
+    def getResultValue(self):
+        return self._result
+
+
 class Stock:
     """
     stock 类的测试版
@@ -1281,10 +1292,10 @@ class Yline:
         if self.Index[-1]['布林'] >= -1:
             if self._fallTimes == 0:
                 patternResult['结果'] = 1
-            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 4:
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 8:
                 patternResult['结果'] = 1
-            elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2:
-                patternResult['结果'] = 1
+            # elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2:
+            #     patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
             return
@@ -1365,13 +1376,13 @@ class Yline:
                              }
                          }
         """结合轨距判断"""
-        if 3 >= self.Index[-1]['布林'] >= -2:
+        if 3 >= self.Index[-1]['布林'] >= -1:
             if self.Index[-1]['布林'] >= -1:
                 if self._fallTimes == 0:
                     patternResult['结果'] = 1
-                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
+                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 4:
                     patternResult['结果'] = 1
-                elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 1 and self._lastLevelName != '下降层级':
+                elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2 and self._lastLevelName != '下降层级':
                     patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult

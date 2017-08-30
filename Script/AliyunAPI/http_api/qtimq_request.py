@@ -29,6 +29,7 @@ def req(url, sleepTime=0.1):
                 response.close()
                 break
             except (BaseException, socket.error, OSError):
+                print('\n')
                 print(url)
                 return ''
         except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionAbortedError,
