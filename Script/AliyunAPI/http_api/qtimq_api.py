@@ -20,7 +20,7 @@ def timeline(code):
     url = host + path + '?' + querys
     # print(url)
 
-    content = qtimq_request.req(url, 0.05)
+    content = qtimq_request.req(url, 0.02)
     return content
 
 

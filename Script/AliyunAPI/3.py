@@ -61,8 +61,8 @@ def printTimeLine(codeIn):
     except TypeError:
         time.clock()
 
-PoolLength = 50
-for j in range(0, 100):
+PoolLength = 100
+for j in range(0, 1000):
     for i in range(0, length, PoolLength):
         realList = codeList[i:i + PoolLength]
         realLength = len(realList)
