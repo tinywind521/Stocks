@@ -23,7 +23,7 @@ ref_List = {'KtimeType': '60',
 """前期参数设定"""
 KtimeType = 1
 beginDate = ''
-dateLenth = 160
+dateLength = 160
 getLength = 61
 debuger = input('Want to debuger? (1/0): ')
 needCodeRefresh = input('Want to refresh codeList? (1/0): ')
@@ -31,7 +31,7 @@ needBlockRefresh = input('Want to refresh blockList? (1/0): ')
 needNameRefresh = input('Want to refresh nameList? (1/0): ')
 
 PoolLength = 20
-ref_List['KallLength'] = dateLenth
+ref_List['KallLength'] = dateLength
 
 if KtimeType == 1:
     ref_List['KtimeType'] = 'day'
@@ -45,7 +45,7 @@ else:
 
 """获取code列表"""
 if debuger:
-    codeList = ['002846']
+    codeList = ['002846', '300537', '300514', '300647', '002180', '002813', '002852']
 else:
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
@@ -100,7 +100,7 @@ ref_List = {'KtimeType': '60',
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': aliyun_appcode}
-ref_List = getValue.get_beginDate(ref_List, dateLenth, beginDate)
+ref_List = getValue.get_beginDate(ref_List, dateLength, beginDate)
 
 result60 = {
                 '001': [],

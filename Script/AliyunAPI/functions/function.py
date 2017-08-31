@@ -458,16 +458,20 @@ def cal60FStatus(obj):
             tempArg['result'] = tempdict
         else:
             tempArg['result']['101_20Boll60F4B']['结果'] = 0
-        # print(tempArg['code'])
+        # print(tempArg['code'], tempArg['result'])
         # print(tempArg['result'])
         if tempArg['result']['101_20Boll60F4B']['结果'] == 1:
             if tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1 \
-                    and 2 > tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 0 \
+                    and 2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1\
                     and tempArg['result']['101_20BollDay4B']['中轨状态'] >= 0 \
-                    and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0:
-                if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 70:
+                    and tempArg['result']['101_20Boll60F4B']['中轨状态'] == 1:
+                if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 \
+                        and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 90
+                             or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):
                     objResult.setResultAppend('101', tempArg)
-                elif tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 and tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 75:
+                elif tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 30 \
+                        and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 92
+                             or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):
                     objResult.setResultAppend('101', tempArg)
                 else:
                     pass
