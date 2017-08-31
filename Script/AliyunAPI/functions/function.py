@@ -379,7 +379,7 @@ def return_timeline_qtimq(code):
             timeDict = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
             timeList.append(timeDict)
         temp['timeline'] = timeList
-        result.append(temp)
+        result = temp
         return result
     except ValueError:
         return None

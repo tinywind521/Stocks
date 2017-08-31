@@ -49,13 +49,20 @@ else:
 """开始计算日线"""
 
 length = len(codeList)
+n = 0
+time.clock()
 
 
 def printTimeLine(codeIn):
-    print('\r', codeIn, '\t', getValue.get_timeLine_qtimq(codeIn))
+    global n
+    n += 1
+    try:
+        print(format(time.clock(), '04.2f'), '\t', format(n, '08d'), '\t', format(i, '04d'), '\t', codeIn, '\t', getValue.get_timeLine_qtimq(codeIn)['timeline'][-1]['time'])
+    except TypeError:
+        time.clock()
 
-while True:
-    PoolLength = 50
+PoolLength = 50
+for j in range(0, 100):
     for i in range(0, length, PoolLength):
         realList = codeList[i:i + PoolLength]
         realLength = len(realList)
@@ -63,3 +70,4 @@ while True:
         pool.map(printTimeLine, realList)
         pool.close()
         pool.join()
+
