@@ -22,9 +22,6 @@ def req(url, sleepTime=0.1):
             try:
                 request = urllib.request.Request(url)
                 response = urllib.request.urlopen(request, timeout=10)
-                # print(response)
-                # response = urllib.request.urlopen(request)
-                # time.sleep(0.1)
                 content = response.read().decode("utf-8")
                 response.close()
                 break

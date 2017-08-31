@@ -1,6 +1,3 @@
-import sys
-
-from http_api import aliyun_api
 
 
 def txt_write(text, path):
@@ -11,10 +8,6 @@ def txt_write(text, path):
         f.close()
     except ValueError:
         pass
-
-#    f = open(path, 'w')
-#    f.write(text)
-#    f.close()
 
 
 def txt_read(path):
