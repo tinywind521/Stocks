@@ -4,28 +4,23 @@
 #
 # from functions import function, getValue
 from http_api import qtimq_request
-from http_api import aliyun_request
 
 
-def timeline(code, day, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
+def timeline(code):
     """
     获取分时数据
     :param code:
-    :param day:
-    :param appcode:
     :return:
+
+    http://web.ifzq.gtimg.cn/appstock/app/minute/query?code=sh600010
     """
-    host = 'https://ali-stock.showapi.com'
-    path = '/timeline'
-    method = 'GET'
-    #   appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-    #   querys = 'code=000000&day=1'
-    bodys = {}
-    #   url = host + path + '?' + querys
-    url = host + path + '?' + "code=" + code + '&' + "day=" + day
+    host = 'http://web.ifzq.gtimg.cn/appstock/app/'
+    path = 'minute/query'
+    querys = 'code=' + code
+    url = host + path + '?' + querys
     # print(url)
 
-    content = aliyun_request.req(url, appcode)
+    content = qtimq_request.req(url, 0.05)
     return content
 
 

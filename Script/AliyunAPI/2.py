@@ -78,7 +78,6 @@ result = {
 temp = {'code': '', 'value': 0, 'result': {}}
 NameList = {}
 
-i = 0
 length = len(codeList)
 r = ResultDeal(result)
 for i in range(0, length, PoolLength):

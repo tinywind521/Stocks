@@ -3,7 +3,7 @@ import numpy
 import time
 import sys
 
-from http_api import aliyun_api, showapi_api
+from http_api import aliyun_api, showapi_api, qtimq_api
 from functions import getValue
 from stock_Class.stock import Stock, Yline, ResultDeal
 
@@ -355,6 +355,31 @@ def return_timeline(code, day, appcode):
             #     for ss in timeline:
             #         print(ss)
             result.append(temp)
+        return result
+    except ValueError:
+        return None
+
+
+def return_timeline_qtimq(code):
+    try:
+        result = []
+        text = qtimq_api.timeline(code)
+        all_dict = json.loads(text)
+        # print(all_dict)
+        showapi_res_body = all_dict['data']
+        dataList = showapi_res_body[code]
+        # print(dataList)
+        temp = dict()
+        temp['date'] = dataList['data']['date']
+        timeLine = dataList['data']['data']
+        timeList = []
+        for timeElement in timeLine:
+            timeArray = timeElement.split(' ')
+            # timeKeys = ('time', 'nowPrice', 'volume')
+            timeDict = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+            timeList.append(timeDict)
+        temp['timeline'] = timeList
+        result.append(temp)
         return result
     except ValueError:
         return None

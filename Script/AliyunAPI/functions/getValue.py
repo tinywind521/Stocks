@@ -874,6 +874,25 @@ def get_timeLine(code, dayLength, appcode='c7689f18e1484e9faec07122cc0b5f9e'):
         return result
 
 
+def get_timeLine_qtimq(code):
+    if len(code) == 6:
+        if code[0] == '6':
+            code = 'sh' + code
+        elif code[0] == '0' or code[0] == '3':
+            code = 'sz' + code
+    elif len(code) == 8:
+        code = code
+    else:
+        raise ValueError('Invalid code:', code)
+
+    try:
+        result = function.return_timeline_qtimq(code)
+    except ValueError:
+        return None
+    else:
+        return result
+
+
 def add_index(code):
     """
     输入6位代码，输出带主板的代码
