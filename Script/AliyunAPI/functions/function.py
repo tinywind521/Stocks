@@ -431,7 +431,7 @@ def cal60FStatus(obj):
     element = obj['element']
     objResult = obj['objResult']
     ref_List = obj['ref_List']
-    tempArg = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {}}}
+    tempArg = {'code': '', 'valueDay': 0, 'value60F': 0, 'result': {'101_20Boll60F4B': {'结果': 0}}}
     s = Stock(element['code'], ref_List)
     while True:
         try:
