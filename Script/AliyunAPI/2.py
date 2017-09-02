@@ -1,13 +1,11 @@
 import os
 import pymysql
-import time
 
 from file_io import txt, jsonFiles
 from functions import getValue, function
-from stock_Class.stock import Stock, Yline, ResultDeal
+from stock_Class.stock import ResultDeal
 from stock_Class.MySQL import MySQL
 from multiprocessing.dummy import Pool as ThreadPool
-
 
 aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'

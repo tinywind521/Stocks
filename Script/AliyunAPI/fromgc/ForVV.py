@@ -7,9 +7,11 @@ import json
 import time
 import sys
 
+"""多线程库"""
 from multiprocessing.dummy import Pool as ThreadPool
 
 
+# """多线程使用到的对象"""
 class ResultDeal:
     def __init__(self):
         self._result = []
@@ -31,8 +33,8 @@ class ResultDeal:
         return self._title
 
 
-# """主要功能函数"""
-def get_iWenCai(keyWord):
+# """主要爬虫功能函数"""
+def get_iWenCai(keyWordIn):
     """
     1、获取iWenCai 抓包的Token代码数据；
     2、分页抓取相关数据，多线程。
@@ -44,30 +46,30 @@ def get_iWenCai(keyWord):
     tokenRefererHost = 'http://www.iwencai.com/data-robot/extraction?'
     # method = 'GET'
     tokenBodys = {
-                'preParams': '',
-                'ts': '1',
-                'f': '1',
-                'verticalType': 'iwencai',
-                'querytype': 'stock',
-                'searchfilte': '',
-                'tid': 'stockpick',
-                'qs': 'zhineng',
-                'w': keyWord,
-                'isDataRobot': '',
-            }
+        'preParams': '',
+        'ts': '1',
+        'f': '1',
+        'verticalType': 'iwencai',
+        'querytype': 'stock',
+        'searchfilte': '',
+        'tid': 'stockpick',
+        'qs': 'zhineng',
+        'w': keyWordIn,
+        'isDataRobot': '',
+    }
     tokenRef = {
-                'query': keyWord,
-                'querytype': 'stock',
-           }
+        'query': keyWordIn,
+        'querytype': 'stock',
+    }
     tokenHeaders = {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'zh-CN,zh;q=0.8',
-                'Connection': 'keep-alive',
-                'Host': 'www.iwencai.com',
-                'Upgrade-Insecure-Requests': '1',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
-               }
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.8',
+        'Connection': 'keep-alive',
+        'Host': 'www.iwencai.com',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+    }
     tokenURL = tokenMainHost + urllib.parse.urlencode(tokenBodys)
     tokenReferer = tokenRefererHost + urllib.parse.urlencode(tokenRef)
     print(tokenURL)
@@ -81,14 +83,14 @@ def get_iWenCai(keyWord):
     MainHost = 'http://www.iwencai.com/stockpick/cache?'
     Referer = tokenURL
     Headers = {
-                'Accept': 'application/json, text/javascript, */*; q=0.01',
-                'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'zh-CN,zh;q=0.8',
-                'Connection': 'keep-alive',
-                'Host': 'www.iwencai.com',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
-                'X-Requested-With': 'XMLHttpRequest',
-            }
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.8',
+        'Connection': 'keep-alive',
+        'Host': 'www.iwencai.com',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+    }
 
     PoolLength = 10
     perPage = 70
@@ -101,21 +103,21 @@ def get_iWenCai(keyWord):
             if p > pages:
                 break
             Bodys = {
-                        'token': token,
-                        'p': format(p, 'd'),
-                        'perpage': format(perPage, 'd'),
-                    }
+                'token': token,
+                'p': format(p, 'd'),
+                'perpage': format(perPage, 'd'),
+            }
             # print(p)
             view_bar(p, pages)
             p += 1
             URL = MainHost + urllib.parse.urlencode(Bodys)
             arg = {
-                   'objResult': r,
-                   'URL': URL,
-                   'Bodys': Bodys,
-                   'Headers': Headers,
-                   'Referer': Referer,
-                   }
+                'objResult': r,
+                'URL': URL,
+                'Bodys': Bodys,
+                'Headers': Headers,
+                'Referer': Referer,
+            }
             args.append(arg)
         pool = ThreadPool(PoolLength)
         pool.map(getAll, args)
@@ -149,7 +151,7 @@ def req(url, data, headers, referer=None):
                     try:
                         cookie = responseHeader['Set-Cookie']
                     except (KeyError, TypeError):
-                        raise KeyError('Refresh iWenCai Link!')
+                        raise KeyError('如果你看到了我，请点击上方链接输一下验证码!')
                     # print(cookie)
                     # response.close()
                     break
@@ -194,8 +196,8 @@ def req(url, data, headers, referer=None):
 
 def getAll(arg):
     URL = arg['URL']
-    Bodys = arg['Bodys']
-    Headers = arg['Headers']
+    Bodys = arg['URL']
+    Headers = arg['Bodys']
     Referer = arg['Referer']
     objResult = arg['objResult']
     content = req(URL, Bodys, Headers, Referer)
@@ -206,10 +208,63 @@ def getAll(arg):
     objResult.setTitle(r['title'])
 
 
+# """进度条函数"""
 def view_bar(num, total):
     rate = num / total
     rate_num = rate * 100
     flow = int(rate_num)
-    r = '\r[%s%s] %2.2f%% %d/%d' % ("|"*flow, " "*(100-flow), rate_num, num, total)
-    sys.stdout.write(r)
+    s = '\r[%s%s] %2.2f%% %d/%d' % ("|"*flow, " "*(100-flow), rate_num, num, total)
+    sys.stdout.write(s)
     sys.stdout.flush()
+
+
+# """CSV写入函数"""
+def writeWenCaiHeader(filePath, headers, method='w+'):
+    try:
+        f = open(filePath, method)
+        text = ''
+        end = headers.pop()
+        for s in headers:
+            text = text + s + ','
+        text = (text + end + '\n').replace('\r', '')
+        f.write(text)
+        f.close()
+    except ValueError:
+        pass
+
+
+def writeWenCaiRow(filePath, rows):
+    try:
+        f = open(filePath, 'a+')
+        for row in rows:
+            text = ''
+            end = row.pop()
+            for s in row:
+                text = text + str(s).replace(',', '') + ','
+            text = text + end + '\n'
+            f.write(text)
+        f.close()
+    except ValueError:
+        pass
+
+
+# 保存路径
+path = 'Z:\Test\Test.csv'
+
+# 搜索关键字
+date = time.strftime("%Y%m%d", time.localtime())
+keyWord = date + ',股票简称,涨跌幅,开盘价不复权,最高价不复权,最低价不复权,收盘价不复权,开盘价前复权,' \
+                 '最高价前复权,最低价前复权,收盘价前复权,成交量(股),换手率(%),振幅,上市不超过，上市天数,技术形态,A股流通市值'
+
+# 如果需要使用其他日期请用这里
+# keyWord = '-> 这里是日期哟 <-,股票简称,涨跌幅,开盘价不复权,最高价不复权,最低价不复权,收盘价不复权,开盘价前复权,最高价前复权,最低价前复权,' \
+# '收盘价前复权,成交量(股),换手率(%),振幅,上市不超过，上市天数,技术形态,A股流通市值'
+
+results = get_iWenCai(keyWord)
+print()
+if len(results['results']) == results['length']:
+    print('抓包成功！')
+    writeWenCaiHeader(path, results['title'])
+    writeWenCaiRow(path, results['results'])
+else:
+    print('抓包失败！')

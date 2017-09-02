@@ -1057,7 +1057,7 @@ class Yline:
                     self._highestLevel = max(self._head[0]['布林'], self._highestLevel)
                     self._highestPrice = max(self._highestPrice, thisMaxPrice)
                     self._fallTimes = 0
-                    self._raised = False
+                    self._raised = True
             elif self._head[0]['布林'] >= 1:
                 upSideMark = True
             else:
