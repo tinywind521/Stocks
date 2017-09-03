@@ -51,7 +51,7 @@ def writeWenCaiRow(path, rows):
             end = row.pop()
             for s in row:
                 text = text + str(s).replace(',', '') + ','
-            text = text + end + '\n'
+            text = text + str(end) + '\n'
             f.write(text)
         f.close()
     except ValueError:
