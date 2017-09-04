@@ -28,6 +28,7 @@
       <w>ktimetype</w>
       <w>kvalue</w>
       <w>lastrowid</w>
+      <w>limitup</w>
       <w>narray</w>
       <w>nlist</w>
       <w>pagebean</w>
@@ -43,6 +44,7 @@
       <w>tday</w>
       <w>tget</w>
       <w>tvalue</w>
+      <w>unlimitup</w>
       <w>yline</w>
       <w>ystatus</w>
       <w>yybuy</w>

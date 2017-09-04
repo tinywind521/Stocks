@@ -32,7 +32,7 @@ class ResultDeal:
 
 
 # """主要功能函数"""
-def get_iWenCai(keyWord):
+def get_iWenCai(keyWord, PoolLength=1):
     """
     1、获取iWenCai 抓包的Token代码数据；
     2、分页抓取相关数据，多线程。
@@ -90,7 +90,7 @@ def get_iWenCai(keyWord):
                 'X-Requested-With': 'XMLHttpRequest',
             }
 
-    PoolLength = 10
+    # PoolLength = 10
     perPage = 70
     pages = int(math.ceil(code_count / perPage))
     r = ResultDeal()
