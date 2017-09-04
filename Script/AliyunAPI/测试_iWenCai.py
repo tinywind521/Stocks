@@ -2,12 +2,14 @@ from http_api import iWenCai_api
 from file_io import dict2CSV
 import time
 
-rootPath = 'Z:/Test/'
+rootPath = 'Z:/Output/'
+# rootPath = 'Z:/Test/'
 addName = '.csv'
 
 # 自动和手动日期切换
-# date = time.strftime("%Y%m%d", time.localtime())
-date = '20170901'
+date = time.strftime("%Y%m%d", time.localtime())
+# date = '20170901'
+print(date)
 
 keyWords = [
                 {
