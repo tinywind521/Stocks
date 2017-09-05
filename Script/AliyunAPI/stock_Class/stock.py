@@ -1214,7 +1214,7 @@ class Yline:
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
                          }
-
+        self.patternResult['002_20DayBollRaiseAndHoriLevel'] = patternResult
         length002 = 15
         valueList002 = self.Index[-length002:][::-1]
         # 'open' 'close' 'lastclose'
@@ -1233,11 +1233,11 @@ class Yline:
             for element002 in valueList002:
                 if element002['close'] <= element002['lastclose'] \
                         and element002['close'] <= element002['open']:
-                    if status002 == 0 or element002 == 2:
+                    if status002 == 0 or status002 == 2:
                         status002 += 1
                     if status002 == 1:
                         firstBearList.append(element002)
-                    elif element002 == 3:
+                    elif status002 == 3:
                         secondBearList.append(element002)
                 else:
                     if status002 == 0:
@@ -1248,11 +1248,10 @@ class Yline:
                         firstBullList.append(element002)
                     elif status002 == 4:
                         secondBullList.append(element002)
-            if len(secondBearList) >= 1:
-                patternResult['结果'] = 1
-        else:
-            self.patternResult['002_20DayBollRaiseAndHoriLevel'] = patternResult
-            return
+            if 3 >= len(secondBearList) >= 2 and 3 >= len(firstBearList) >= 1:
+                if (secondBearList[0]['布林'] <= firstBearList[-1]['布林'])\
+                        and (max([k['量能'] for k in secondBearList]) >= min([k['量能'] for k in firstBearList])):
+                    patternResult['结果'] = 1
         # print(self.Index[-1])
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)

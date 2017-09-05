@@ -422,6 +422,8 @@ def calDayStatus(obj):
             objResult.setResultAppend('001', tempArg)
         if tempArg['result']['101_20BollDay4B']['结果'] == 1:
             objResult.setResultAppend('101', tempArg)
+        if tempArg['result']['002_20DayBollRaiseAndHoriLevel']['结果'] == 1:
+            objResult.setResultAppend('002', tempArg)
         del tempArg
     else:
         pass

@@ -43,7 +43,7 @@ else:
 
 """获取code列表"""
 if debuger:
-    codeList = ['002846', '300537', '300514', '300647', '002180', '002813', '002852']
+    codeList = ['002388']
 else:
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
@@ -70,6 +70,7 @@ else:
 """开始计算日线"""
 result = {
             '001': [],
+            '002': [],
             '101': [],
         }
 
@@ -89,6 +90,10 @@ for i in range(0, length, PoolLength):
     pool.join()
 result = r.getResultValue()
 # print(result)
+print()
+print('002')
+for a in result['002']:
+    print(a['code'])
 print()
 
 ref_List = {'KtimeType': '60',
