@@ -554,15 +554,18 @@ def get_60F_qtimq(code, allLength, getLength, n=20, p=2):
         # closeList.reverse()
         lastcloseList = closeList[:]
         boll = function.cal_boll(closeList[:], n, p)
+        boll55 = function.cal_boll_55(closeList[:])
         boll144 = function.cal_boll_144(closeList[:])
         m = len(boll)
         n = len(boll144)
-        m = min(m, n)
+        w = len(boll55)
+        m = min(m, n, w)
         # print('m len(boll) = ', end='')
         # print(m)
         # print('n len(boll144) = ', end='')
         # print(n)
         boll = boll[-m + 1:]
+        boll55 = boll55[-m + 1:]
         boll144 = boll144[-m + 1:]
         realtimeList = realtimeList[-m + 1:]
         lastcloseList = lastcloseList[-m:]
@@ -579,6 +582,7 @@ def get_60F_qtimq(code, allLength, getLength, n=20, p=2):
             realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
             realtimeList[0].update(lastclose)
             realtimeList[0].update(boll[0])
+            realtimeList[0].update(boll55[0])
             realtimeList[0].update(boll144[0])
         for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
@@ -593,6 +597,7 @@ def get_60F_qtimq(code, allLength, getLength, n=20, p=2):
             realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
             realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
+            realtimeList[i].update(boll55[i])
             realtimeList[i].update(boll144[i])
             # print(realtimeList[i])
         # print(realtimeList)
@@ -817,15 +822,18 @@ def get_dayK_qtimq(code, allLength, getLength, n=20, p=2):
         # closeList.reverse()
         lastcloseList = closeList[:]
         boll = function.cal_boll(closeList[:], n, p)
+        boll55 = function.cal_boll_55(closeList[:])
         boll144 = function.cal_boll_144(closeList[:])
         m = len(boll)
         n = len(boll144)
-        m = min(m, n)
+        w = len(boll55)
+        m = min(m, n, w)
         # print('m len(boll) = ', end='')
         # print(m)
         # print('n len(boll144) = ', end='')
         # print(n)
         boll = boll[-m + 1:]
+        boll55 = boll55[-m + 1:]
         boll144 = boll144[-m + 1:]
         realtimeList = realtimeList[-m + 1:]
         lastcloseList = lastcloseList[-m:]
@@ -842,6 +850,7 @@ def get_dayK_qtimq(code, allLength, getLength, n=20, p=2):
             realtimeList[0]['volumn'] = float(realtimeList[0]['volumn'])
             realtimeList[0].update(lastclose)
             realtimeList[0].update(boll[0])
+            realtimeList[0].update(boll55[0])
             realtimeList[0].update(boll144[0])
         for i in range(0, m - 1):
             # realtimeList[i]['mid', 'upper', 'lower'] = boll[i]['mid', 'upper', 'lower']
@@ -856,6 +865,7 @@ def get_dayK_qtimq(code, allLength, getLength, n=20, p=2):
             realtimeList[i]['volumn'] = float(realtimeList[i]['volumn'])
             realtimeList[i].update(lastclose)
             realtimeList[i].update(boll[i])
+            realtimeList[i].update(boll55[i])
             realtimeList[i].update(boll144[i])
             # print(realtimeList[i])
         # print(realtimeList)

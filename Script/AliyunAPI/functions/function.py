@@ -183,7 +183,7 @@ def cal_boll(valueList, n, p):
     boll = []
     for value in valueList:
         boll_dict = {}
-        if len(valueTemp) >= 20:
+        if len(valueTemp) >= n:
             tempList = valueTemp[0:n]
             narray = numpy.array(tempList)
             mid = numpy.mean(narray)
@@ -203,6 +203,39 @@ def cal_boll(valueList, n, p):
     return boll
 
 
+def cal_boll_55(valueList, n=55, p=2):
+    """
+    计算144布林三轨
+    :param valueList:
+    :param n:
+    :param p:
+    :return:
+    """
+    valueList.reverse()
+    valueTemp = [float(k) for k in valueList]
+    boll = []
+    for value in valueList:
+        boll_dict = {}
+        if len(valueTemp) >= n:
+            tempList = valueTemp[0:n]
+            narray = numpy.array(tempList)
+            mid = numpy.mean(narray)
+            spd = numpy.sqrt(numpy.var(narray))
+            upper = mid + p * spd
+            lower = mid - p * spd
+            boll_dict['mid55'] = float(format(mid, '.2f'))
+            boll_dict['upper55'] = float(format(upper, '.2f'))
+            boll_dict['lower55'] = float(format(lower, '.2f'))
+        else:
+            boll_dict['mid55'] = 0
+            boll_dict['upper55'] = 0
+            boll_dict['lower55'] = 0
+        # print(boll_dict)
+        boll.insert(0, boll_dict)
+        valueTemp.pop(0)
+    return boll
+
+
 def cal_boll_144(valueList, n=144, p=2):
     """
     计算144布林三轨
@@ -216,7 +249,7 @@ def cal_boll_144(valueList, n=144, p=2):
     boll = []
     for value in valueList:
         boll_dict = {}
-        if len(valueTemp) >= 144:
+        if len(valueTemp) >= n:
             tempList = valueTemp[0:n]
             narray = numpy.array(tempList)
             mid = numpy.mean(narray)
@@ -420,10 +453,10 @@ def calDayStatus(obj):
         # print(codeArg)
         if tempArg['result']['001_144BollUpper20BollUpside']['结果'] == 1:
             objResult.setResultAppend('001', tempArg)
-        if tempArg['result']['101_20BollDay4B']['结果'] == 1:
-            objResult.setResultAppend('101', tempArg)
         if tempArg['result']['002_20DayBollRaiseAndHoriLevel']['结果'] == 1:
             objResult.setResultAppend('002', tempArg)
+        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 100:
+            objResult.setResultAppend('101', tempArg)
         del tempArg
     else:
         pass
@@ -440,6 +473,7 @@ def cal60FStatus(obj):
             s.get_KValue()
             s.update_Kstatus()
             len(s.Kvalue)
+            # print(s.Kvalue[-1])
             break
         except TypeError:
             time.sleep(5)

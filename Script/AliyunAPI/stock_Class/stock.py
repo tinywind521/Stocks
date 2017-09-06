@@ -42,7 +42,8 @@ class Stock:
         self.Tvalue = None
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
-                        '布林': 0, '144布林': 0, '轨距': 0, '层级': '', '趋势': None, '底部': None,
+                        '布林': 0, '55布林': 0, '144布林': 0, '轨距': 0, '层级': '',
+                        '趋势': None, '底部': None,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
     def get_ref_List(self):
@@ -1374,13 +1375,16 @@ class Yline:
                              }
                          }
         """结合轨距判断"""
-        if self.Index[-1]['布林'] >= -1:
+        if self.Index[-1]['布林'] >= 2:
             if self._fallTimes == 0:
                 patternResult['结果'] = 1
             elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 6:
                 patternResult['结果'] = 1
-            # elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 2:
-            #     patternResult['结果'] = 1
+            elif 1 >= self.Index[-1]['布林'] >= -1 and self._lastLevelName != '下降层级':
+                if self._fallTimes == 0:
+                    patternResult['结果'] = 1
+                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 6:
+                    patternResult['结果'] = 1
         else:
             self.patternResult['101_20BollDay4B'] = patternResult
             return
@@ -1461,14 +1465,16 @@ class Yline:
                              }
                          }
         """结合轨距判断"""
-        if 3 >= self.Index[-1]['布林'] >= -1:
-            if self.Index[-1]['布林'] >= -1:
-                if self._fallTimes == 0:
-                    patternResult['结果'] = 1
-                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
-                    patternResult['结果'] = 1
-                # elif self._fallTimes == 2 and self.Index[-1]['轨距'] >= 1 and self._lastLevelName != '下降层级':
-                #     patternResult['结果'] = 1
+        if self.Index[-1]['布林'] >= 2:
+            if self._fallTimes == 0:
+                patternResult['结果'] = 1
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
+                patternResult['结果'] = 1
+        elif 1 >= self.Index[-1]['布林'] >= -1 and self._lastLevelName != '下降层级':
+            if self._fallTimes == 0:
+                patternResult['结果'] = 1
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
+                patternResult['结果'] = 1
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return
