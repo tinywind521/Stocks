@@ -453,8 +453,10 @@ def calDayStatus(obj):
         # print(codeArg)
         if tempArg['result']['001_144BollUpper20BollUpside']['结果'] == 1:
             objResult.setResultAppend('001', tempArg)
-        if tempArg['result']['002_20DayBollRaiseAndHoriLevel']['结果'] == 1:
-            objResult.setResultAppend('002', tempArg)
+        # if tempArg['result']['002_20DayBollRaiseAndHoriLevel']['结果'] == 1:
+        #     objResult.setResultAppend('002', tempArg)
+        if tempArg['result']['003_Day9Bears']['结果'] == 1:
+            objResult.setResultAppend('003', tempArg)
         if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 100:
             objResult.setResultAppend('101', tempArg)
         del tempArg

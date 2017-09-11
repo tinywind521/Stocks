@@ -474,6 +474,7 @@ class Yline:
             # Kvalue = Stock.get_KValue()
             raise ValueError('input Kvalue is None!')
         else:
+            self._Kvalue = Kvalue
             self._para = para
             self.Index = None
             self.status = self._para['评分初值']
@@ -1148,6 +1149,7 @@ class Yline:
         if KtimeType == 'day':
             # self._pattern_002_20DayBollRaiseAndHoriLevel()
             self._pattern_003_Day9Bears()
+            pass
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
@@ -1274,9 +1276,9 @@ class Yline:
 
         :return:
         """
-        # print(self.Index[-1])
-        patternResult = {'序号': '002',
-                         '名称': '日线级别20布林的上升和水平层级差',
+        # self._Kvalue
+        patternResult = {'序号': '003',
+                         '名称': '日线级别9阴线',
                          '结果': 0,
                          '近期层级类型': None,
                          '层级差得分': 0,
@@ -1285,44 +1287,32 @@ class Yline:
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
                          }
-        self.patternResult['002_20DayBollRaiseAndHoriLevel'] = patternResult
-        length002 = 15
-        valueList002 = self.Index[-length002:][::-1]
-        # 'open' 'close' 'lastclose'
-        # 判断层级差
-        status002 = 0
-        # status002 = 1
-        firstBearList = []
-        # status002 = 2
-        firstBullList = []
-        # status002 = 3
-        secondBearList = []
-        # status002 = 4
-        secondBullList = []
-        if valueList002[0]['close'] <= valueList002[0]['lastclose'] \
-                and valueList002[0]['close'] <= valueList002[0]['open']:
-            for element002 in valueList002:
-                if element002['close'] <= element002['lastclose'] \
-                        and element002['close'] <= element002['open']:
-                    if status002 == 0 or status002 == 2:
-                        status002 += 1
-                    if status002 == 1:
-                        firstBearList.append(element002)
-                    elif status002 == 3:
-                        secondBearList.append(element002)
-                else:
-                    if status002 == 0:
+        self.patternResult['003_Day9Bears'] = patternResult
+        DayBearsNum = 0
+        MaxBearVolumn = 0
+        BearsVols = []
+        if self._Kvalue[-1]['close'] <= self._Kvalue[-1]['open']:
+            for i in self._Kvalue[::-1]:
+                if i['close'] < i['open'] or i['open'] == i['close'] < i['lastclose']:
+                    MaxBearVolumn = max(MaxBearVolumn, i['volumn'])
+                    BearsVols.append(i['volumn'])
+                    if DayBearsNum == 8:
                         pass
-                    elif status002 == 1 or status002 == 3:
-                        status002 += 1
-                    if status002 == 2:
-                        firstBullList.append(element002)
-                    elif status002 == 4:
-                        secondBullList.append(element002)
-            if 3 >= len(secondBearList) >= 2 and 3 >= len(firstBearList) >= 1:
-                if (secondBearList[0]['布林'] <= firstBearList[-1]['布林']) \
-                        and (max([k['量能'] for k in secondBearList]) >= min([k['量能'] for k in firstBearList])):
-                    patternResult['结果'] = 1
+                    elif DayBearsNum < 8:
+                        DayBearsNum += 1
+                        continue
+                    else:
+                        return
+                else:
+                    if BearsVols:
+                        if len(BearsVols) == 9:
+                            if i['volumn'] > MaxBearVolumn \
+                                    and (i['close'] > i['open'] or i['open'] == i['close'] >= i['lastclose']) \
+                                    and sum(BearsVols[0:3]) <= sum(BearsVols[-4:]) \
+                                    and max(BearsVols[0:3]) <= max(BearsVols[-4:]):
+                                print(BearsVols)
+                                patternResult['结果'] = 1
+                                break
         # print(self.Index[-1])
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
@@ -1331,7 +1321,7 @@ class Yline:
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
         # print(patternResult)
-        self.patternResult['002_20DayBollRaiseAndHoriLevel'] = patternResult
+        self.patternResult['003_Day9Bears'] = patternResult
 
     def _pattern_100_20BollAnd144BollFirstWave(self):
         """
