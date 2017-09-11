@@ -1146,7 +1146,8 @@ class Yline:
         self._pattern_001_144BollUpper20BollUpside()
         # self._pattern_100_20BollAnd144BollFirstWave()
         if KtimeType == 'day':
-            self._pattern_002_20DayBollRaiseAndHoriLevel()
+            # self._pattern_002_20DayBollRaiseAndHoriLevel()
+            self._pattern_003_Day9Bears()
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
@@ -1251,6 +1252,75 @@ class Yline:
                         secondBullList.append(element002)
             if 3 >= len(secondBearList) >= 2 and 3 >= len(firstBearList) >= 1:
                 if (secondBearList[0]['布林'] <= firstBearList[-1]['布林'])\
+                        and (max([k['量能'] for k in secondBearList]) >= min([k['量能'] for k in firstBearList])):
+                    patternResult['结果'] = 1
+        # print(self.Index[-1])
+        patternResult['近期层级类型'] = self._lastLevelName
+        patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
+        patternResult['回调次数'] = self._fallTimes
+        patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
+        patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
+        patternResult['近期最大涨幅'] = self.maxChange
+        # print(patternResult)
+        self.patternResult['002_20DayBollRaiseAndHoriLevel'] = patternResult
+
+    def _pattern_003_Day9Bears(self):
+        """
+        形态002：
+        20日布林的上升和水平层级差
+
+        过滤标准：
+        1、日线级别20布林的上升和水平层级差
+
+        :return:
+        """
+        # print(self.Index[-1])
+        patternResult = {'序号': '002',
+                         '名称': '日线级别20布林的上升和水平层级差',
+                         '结果': 0,
+                         '近期层级类型': None,
+                         '层级差得分': 0,
+                         '回调次数': 0,
+                         'K线位于20布林位置': None,
+                         'K线位于144布林位置': None,
+                         '近期最大涨幅': 0,
+                         }
+        self.patternResult['002_20DayBollRaiseAndHoriLevel'] = patternResult
+        length002 = 15
+        valueList002 = self.Index[-length002:][::-1]
+        # 'open' 'close' 'lastclose'
+        # 判断层级差
+        status002 = 0
+        # status002 = 1
+        firstBearList = []
+        # status002 = 2
+        firstBullList = []
+        # status002 = 3
+        secondBearList = []
+        # status002 = 4
+        secondBullList = []
+        if valueList002[0]['close'] <= valueList002[0]['lastclose'] \
+                and valueList002[0]['close'] <= valueList002[0]['open']:
+            for element002 in valueList002:
+                if element002['close'] <= element002['lastclose'] \
+                        and element002['close'] <= element002['open']:
+                    if status002 == 0 or status002 == 2:
+                        status002 += 1
+                    if status002 == 1:
+                        firstBearList.append(element002)
+                    elif status002 == 3:
+                        secondBearList.append(element002)
+                else:
+                    if status002 == 0:
+                        pass
+                    elif status002 == 1 or status002 == 3:
+                        status002 += 1
+                    if status002 == 2:
+                        firstBullList.append(element002)
+                    elif status002 == 4:
+                        secondBullList.append(element002)
+            if 3 >= len(secondBearList) >= 2 and 3 >= len(firstBearList) >= 1:
+                if (secondBearList[0]['布林'] <= firstBearList[-1]['布林']) \
                         and (max([k['量能'] for k in secondBearList]) >= min([k['量能'] for k in firstBearList])):
                     patternResult['结果'] = 1
         # print(self.Index[-1])

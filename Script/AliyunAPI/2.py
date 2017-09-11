@@ -71,6 +71,7 @@ else:
 result = {
             '001': [],
             '002': [],
+            '003': [],
             '101': [],
         }
 
@@ -91,8 +92,8 @@ for i in range(0, length, PoolLength):
 result = r.getResultValue()
 # print(result)
 print()
-print('002')
-for a in result['002']:
+print('003')
+for a in result['003']:
     print(a['code'])
 print()
 

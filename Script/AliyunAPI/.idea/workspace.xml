@@ -17,18 +17,18 @@
       <file leaf-file-name="测试_iWenCai.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1026">
+            <state relative-caret-position="0">
               <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stock.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+            <state relative-caret-position="712">
+              <caret line="1195" column="74" lean-forward="true" selection-start-line="1195" selection-start-column="74" selection-end-line="1195" selection-end-column="74" />
               <folding>
                 <element signature="e#78#290#0" expanded="false" />
                 <element signature="e#310#11882#0" expanded="false" />
@@ -57,7 +57,6 @@
                 <element signature="e#9709#10006#0" expanded="false" />
                 <element signature="e#10006#10032#0" expanded="false" />
                 <element signature="e#10110#11882#0" expanded="false" />
-                <element signature="e#11902#50241#0" expanded="false" />
                 <element signature="e#11902#12495#1" expanded="false" />
                 <element signature="e#12543#14437#0" expanded="false" />
                 <element signature="e#14478#14502#0" expanded="false" />
@@ -87,17 +86,17 @@
                 <element signature="e#32295#32320#0" expanded="false" />
                 <element signature="e#32987#33017#0" expanded="false" />
                 <element signature="e#33311#33371#0" expanded="false" />
-                <element signature="e#36783#37092#0" expanded="false" />
-                <element signature="e#37155#38822#0" expanded="false" />
-                <element signature="e#38887#41651#0" expanded="false" />
-                <element signature="e#41715#43266#0" expanded="false" />
-                <element signature="e#43339#43697#0" expanded="false" />
-                <element signature="e#43747#46982#0" expanded="false" />
-                <element signature="e#43747#44275#1" expanded="false" />
-                <element signature="e#44332#45388#0" expanded="false" />
-                <element signature="e#47032#50241#0" expanded="false" />
-                <element signature="e#47032#47554#1" expanded="false" />
-                <element signature="e#47611#48667#0" expanded="false" />
+                <element signature="e#37199#38866#0" expanded="false" />
+                <element signature="e#38931#41695#0" expanded="false" />
+                <element signature="e#41743#44509#0" expanded="false" />
+                <element signature="e#44573#46124#0" expanded="false" />
+                <element signature="e#46197#46555#0" expanded="false" />
+                <element signature="e#46605#49840#0" expanded="false" />
+                <element signature="e#46605#47133#1" expanded="false" />
+                <element signature="e#47190#48246#0" expanded="false" />
+                <element signature="e#49890#53099#0" expanded="false" />
+                <element signature="e#49890#50412#1" expanded="false" />
+                <element signature="e#50469#51525#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,8 +105,8 @@
       <file leaf-file-name="2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="120" column="28" lean-forward="false" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="28" />
+            <state relative-caret-position="396">
+              <caret line="95" column="23" lean-forward="true" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#383#597#0" expanded="false" />
@@ -121,16 +120,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
               <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Pythonic" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Pythonic">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -205,8 +194,6 @@
         <option value="$PROJECT_DIR$/fromgc/ForVV.py" />
         <option value="$PROJECT_DIR$/http_api/iWenCai_api.py" />
         <option value="$PROJECT_DIR$/测试_iWenCai.py" />
-        <option value="$PROJECT_DIR$/2.py" />
-        <option value="$PROJECT_DIR$/stock_Class/stock.py" />
         <option value="$PROJECT_DIR$/functions/getValue.py" />
         <option value="$PROJECT_DIR$/functions/function.py" />
         <option value="$PROJECT_DIR$/3.py" />
@@ -214,6 +201,8 @@
         <option value="$PROJECT_DIR$/debug/Python学习/迭代器和生成器" />
         <option value="$PROJECT_DIR$/让Python代码更Pythonic" />
         <option value="$PROJECT_DIR$/Pythonic" />
+        <option value="$PROJECT_DIR$/stock_Class/stock.py" />
+        <option value="$PROJECT_DIR$/2.py" />
       </list>
     </option>
   </component>
@@ -266,6 +255,11 @@
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
               <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
+              <item name="functions" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -304,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.3">
+  <component name="RunManager" selected="Python.hkex">
     <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -480,10 +474,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.3" />
-        <item index="1" class="java.lang.String" itemvalue="Python.2" />
-        <item index="2" class="java.lang.String" itemvalue="Python.测试_iWenCai" />
-        <item index="3" class="java.lang.String" itemvalue="Python.hkex" />
+        <item index="0" class="java.lang.String" itemvalue="Python.hkex" />
+        <item index="1" class="java.lang.String" itemvalue="Python.3" />
+        <item index="2" class="java.lang.String" itemvalue="Python.2" />
+        <item index="3" class="java.lang.String" itemvalue="Python.测试_iWenCai" />
         <item index="4" class="java.lang.String" itemvalue="Python.ForVV" />
       </list>
     </recent_temporary>
@@ -516,7 +510,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23600605" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2397882" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2944079" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -557,7 +551,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="191" />
+      <option name="time" value="193" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -722,17 +716,155 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/aliyun_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/aliyun_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/showapi_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/qtimq_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/showapi_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="31" column="96" lean-forward="false" selection-start-line="31" selection-start-column="96" selection-end-line="31" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/sina_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/sina_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="26" column="76" lean-forward="false" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/qtimq_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/iWenCai_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="34" column="39" lean-forward="false" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/QQ_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="26" column="41" lean-forward="false" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http_api/QQ_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug/Python学习/迭代器和生成器">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="70" lean-forward="false" selection-start-line="0" selection-start-column="70" selection-end-line="0" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/让Python代码更Pythonic" />
+    <entry file="file://$PROJECT_DIR$/Pythonic">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hkex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
+        <state relative-caret-position="538">
           <caret line="44" column="15" lean-forward="false" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/functions/function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="524" column="0" lean-forward="true" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
+          <folding>
+            <element signature="e#264#1333#0" expanded="false" />
+            <element signature="e#1371#5427#0" expanded="false" />
+            <element signature="e#5465#5592#0" expanded="false" />
+            <element signature="e#5638#5766#0" expanded="false" />
+            <element signature="e#5798#6204#0" expanded="false" />
+            <element signature="e#6242#7126#0" expanded="false" />
+            <element signature="e#7172#8071#0" expanded="false" />
+            <element signature="e#8119#9024#0" expanded="false" />
+            <element signature="e#9074#12898#0" expanded="false" />
+            <element signature="e#12946#13935#0" expanded="false" />
+            <element signature="e#13975#14746#0" expanded="false" />
+            <element signature="e#14790#15002#0" expanded="false" />
+            <element signature="e#15032#16202#0" expanded="false" />
+            <element signature="e#16232#18936#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/functions/getValue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
+        <state relative-caret-position="734">
           <caret line="747" column="58" lean-forward="false" selection-start-line="747" selection-start-column="58" selection-end-line="747" selection-end-column="58" />
           <folding>
             <element signature="e#282#798#0" expanded="false" />
@@ -763,162 +895,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/functions/function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="429" column="22" lean-forward="false" selection-start-line="429" selection-start-column="22" selection-end-line="429" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/aliyun_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#209#666#0" expanded="false" />
-            <element signature="e#770#1471#0" expanded="false" />
-            <element signature="e#1563#1990#0" expanded="false" />
-            <element signature="e#2077#2442#0" expanded="false" />
-            <element signature="e#2508#2865#0" expanded="false" />
-            <element signature="e#2932#3210#0" expanded="false" />
-            <element signature="e#3301#3717#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/aliyun_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
-          <folding>
-            <element signature="e#449#477#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/hkex_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/showapi_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="e#569#586#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/qtimq_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/showapi_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="31" column="96" lean-forward="false" selection-start-line="31" selection-start-column="96" selection-end-line="31" selection-end-column="96" />
-          <folding>
-            <element signature="e#246#715#0" expanded="false" />
-            <element signature="e#819#1616#0" expanded="false" />
-            <element signature="e#1708#2139#0" expanded="false" />
-            <element signature="e#2226#2734#0" expanded="false" />
-            <element signature="e#2800#3157#0" expanded="false" />
-            <element signature="e#3224#3502#0" expanded="false" />
-            <element signature="e#3593#4118#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/sina_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#162#536#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/sina_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="26" column="76" lean-forward="false" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
-          <folding>
-            <element signature="e#223#235#0" expanded="false" />
-            <element signature="e#430#458#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/qtimq_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-          <folding>
-            <element signature="e#162#507#0" expanded="false" />
-            <element signature="e#555#1954#0" expanded="false" />
-            <element signature="e#1000#1020#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/hkex_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/iWenCai_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="34" column="39" lean-forward="false" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
-          <folding>
-            <element signature="e#201#584#0" expanded="false" />
-            <element signature="e#643#4070#0" expanded="false" />
-            <element signature="e#4120#6261#0" expanded="false" />
-            <element signature="e#6285#6608#0" expanded="false" />
-            <element signature="e#6641#6841#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/QQ_request.py">
+    <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="26" column="41" lean-forward="false" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+          <caret line="95" column="23" lean-forward="true" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
           <folding>
-            <element signature="e#193#226#0" expanded="false" />
-            <element signature="e#991#1024#0" expanded="false" />
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#383#597#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/http_api/QQ_api.py">
+    <entry file="file://$PROJECT_DIR$/3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding>
-            <element signature="e#111#2592#0" expanded="false" />
-            <element signature="e#2647#4056#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="132">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        <state relative-caret-position="712">
+          <caret line="1195" column="74" lean-forward="true" selection-start-line="1195" selection-start-column="74" selection-end-line="1195" selection-end-column="74" />
           <folding>
             <element signature="e#78#290#0" expanded="false" />
             <element signature="e#310#11882#0" expanded="false" />
@@ -947,7 +946,6 @@
             <element signature="e#9709#10006#0" expanded="false" />
             <element signature="e#10006#10032#0" expanded="false" />
             <element signature="e#10110#11882#0" expanded="false" />
-            <element signature="e#11902#50241#0" expanded="false" />
             <element signature="e#11902#12495#1" expanded="false" />
             <element signature="e#12543#14437#0" expanded="false" />
             <element signature="e#14478#14502#0" expanded="false" />
@@ -977,69 +975,18 @@
             <element signature="e#32295#32320#0" expanded="false" />
             <element signature="e#32987#33017#0" expanded="false" />
             <element signature="e#33311#33371#0" expanded="false" />
-            <element signature="e#36783#37092#0" expanded="false" />
-            <element signature="e#37155#38822#0" expanded="false" />
-            <element signature="e#38887#41651#0" expanded="false" />
-            <element signature="e#41715#43266#0" expanded="false" />
-            <element signature="e#43339#43697#0" expanded="false" />
-            <element signature="e#43747#46982#0" expanded="false" />
-            <element signature="e#43747#44275#1" expanded="false" />
-            <element signature="e#44332#45388#0" expanded="false" />
-            <element signature="e#47032#50241#0" expanded="false" />
-            <element signature="e#47032#47554#1" expanded="false" />
-            <element signature="e#47611#48667#0" expanded="false" />
+            <element signature="e#37199#38866#0" expanded="false" />
+            <element signature="e#38931#41695#0" expanded="false" />
+            <element signature="e#41743#44509#0" expanded="false" />
+            <element signature="e#44573#46124#0" expanded="false" />
+            <element signature="e#46197#46555#0" expanded="false" />
+            <element signature="e#46605#49840#0" expanded="false" />
+            <element signature="e#46605#47133#1" expanded="false" />
+            <element signature="e#47190#48246#0" expanded="false" />
+            <element signature="e#49890#53099#0" expanded="false" />
+            <element signature="e#49890#50412#1" expanded="false" />
+            <element signature="e#50469#51525#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="120" column="28" lean-forward="false" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#383#597#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug/Python学习/迭代器和生成器">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="70" lean-forward="false" selection-start-line="0" selection-start-column="70" selection-end-line="0" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/让Python代码更Pythonic">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="69" lean-forward="false" selection-start-line="0" selection-start-column="69" selection-end-line="0" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pythonic">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
