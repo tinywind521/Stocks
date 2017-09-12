@@ -1310,7 +1310,7 @@ class Yline:
                                     and (i['close'] > i['open'] or i['open'] == i['close'] >= i['lastclose']) \
                                     and sum(BearsVols[0:3]) <= sum(BearsVols[-4:]) \
                                     and max(BearsVols[0:3]) <= max(BearsVols[-4:]):
-                                print(BearsVols)
+                                # print(BearsVols)
                                 patternResult['结果'] = 1
                                 break
         # print(self.Index[-1])
