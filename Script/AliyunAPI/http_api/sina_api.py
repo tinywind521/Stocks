@@ -5,8 +5,6 @@
 from http_api import sina_request
 from functions import function, getValue
 
-# http://money.finance.sina.com.cn/quotes_service/api/jsonp_v2.php/var%20_sh603901_5_1505264471270=/CN_MarketData.getKLineData?symbol=sh603901&scale=5&ma=no&datalen=1023
-
 
 def timeline(codeList):
     """
