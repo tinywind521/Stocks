@@ -963,11 +963,16 @@ def get_timeLine5Days_qtimq(code):
             dateTemp = dateValue['date']
             dataTemp = dateValue['data']
             timeList = []
+            lastVol = 0
             for timeElement in dataTemp:
                 if timeElement:
                     timeArray = timeElement.split(' ')
-                    timeDict = {'time': timeArray[0], 'nowPrice': float(timeArray[1]), 'volume': int(timeArray[2])}
+                    totalVolumn = int(timeArray[2])
+                    volumn = totalVolumn - lastVol
+                    lastVol = totalVolumn
+                    timeDict = {'time': timeArray[0], 'nowPrice': float(timeArray[1]), 'volume': volumn}
                     timeList.append(timeDict)
+            timeList = timeList[2:-1]
             result.append({dateTemp: timeList})
         # print(code, [k['date'] for k in datesList])
         return result

@@ -181,7 +181,7 @@ stocks_config = {
 
 # sDB for stocksDatabase
 sDB = MySQL(stocks_config)
-sql = 'select gid, name from pandc'
+sql = 'select gid, name from pandc;'
 sDB.execSQL(sql)
 nameList = {}
 for i in sDB.dbReturn:
@@ -260,7 +260,6 @@ for i in result60['101']:
         pass
     sql = "insert ignore dailypreselect SET gid='" + code + "';"
     sDB.execTXSQL(sql)
-
 """
 布林斜率？
 必须叠加倍量

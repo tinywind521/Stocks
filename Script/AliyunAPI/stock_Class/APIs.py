@@ -14,12 +14,6 @@ from functions import getValue, function
 from stock_Class.MySQL import MySQL
 from multiprocessing.dummy import Pool as ThreadPool
 
-aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
-showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
-tempPath = 'z:/test/codeList.txt'
-needCodeRefresh = 0
-
-
 class ResultDeal:
     def __init__(self):
         self._ArrayResult = []
@@ -79,42 +73,45 @@ def maxVol5Days(arg):
         try:
             for k in resultIn:
                 for key in k:
-                    # print(k[key])
-                    # print([i['volume'] for i in k])
                     maxList.append(max([i['volume'] for i in k[key]]))
         except TypeError:
             print(codeIn, '\t', resultIn)
         obj.setResultArrayAppend({'code': codeIn, 'maxVol': max(maxList)})
-        # print(codeIn, '\t', max(maxList))
+        # print(codeIn, '\t', maxList)
 
 
-if os.path.exists(tempPath):
-    if needCodeRefresh == '1':
-        print('refreshing...')
-        codeList = getValue.get_allCodelist()
-        text = ''
-        for code in codeList:
-            text += code + '\n'
-        txt.txt_write(text, tempPath)
-    else:
-        print('file is exist.')
-        f = open(tempPath, 'r')
-        text = f.read()
-        f.close()
-        codeList = text.splitlines()
-else:
-    print('file is not exist.')
-    codeList = getValue.get_allCodelist()
-    text = ''
-    for code in codeList:
-        text += code + '\n'
-    txt.txt_write(text, tempPath)
+stocks_config = {
+    'host': 'localhost',
+    'port': 3306,
+    'user': 'root',
+    'password': 'star2249',
+    'db': 'stocks',
+    'charset': 'utf8',
+    'cursorclass': pymysql.cursors.DictCursor,
+}
 
+# sDB for stocksDatabase
+sDB = MySQL(stocks_config)
+sql = 'select gid from dailypreselect;'
+sDB.execSQL(sql)
+dailyList = [gid['gid'][0:6] for gid in sDB.dbReturn]
+# print(dailyList)
+# dailyList = ['600569']
 
 func = maxVol5Days
 r = ResultDeal()
-multiPool(func, codeList, r)
+multiPool(func, dailyList, r)
 
 print()
+
 for j in r.getArrayResultValue():
-    print(j)
+    # print(j)
+    if j['code'][0] == '6':
+        code = j['code'] + '.SH'
+    elif j['code'][0] == '0' or j['code'][0] == '3':
+        code = j['code'] + '.SZ'
+    else:
+        pass
+    sql = "update dailypreselect SET gsharevol='" + format(j['maxVol'] * 100, 'd') + "' where gid='" + code + "';"
+    # print(sql)
+    sDB.execTXSQL(sql)
