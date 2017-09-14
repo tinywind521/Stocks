@@ -24,6 +24,24 @@ def timeline(code):
     return content
 
 
+def timeline5Days(code):
+    """
+    获取五日分时数据
+    :param code:
+    :return:
+
+    http://web.ifzq.gtimg.cn/appstock/app/day/query?code=sh600010
+    """
+    host = 'http://web.ifzq.gtimg.cn/appstock/app/'
+    path = 'day/query'
+    querys = 'code=' + code
+    url = host + path + '?' + querys
+    # print(url)
+
+    content = qtimq_request.req(url, 0.02)
+    return content
+
+
 def realtime(code, allLength, timetype):
     """
     获取K线数据

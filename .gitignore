@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+*.xml
+*.xml
+Script/AliyunAPI/.idea/workspace.xml
+*.xml

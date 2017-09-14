@@ -21,5 +21,8 @@ http://web.ifzq.gtimg.cn/appstock/hs/yjbg/get?type=tips&page=1&code=sh600010&lim
 
 # http://web.ifzq.gtimg.cn/appstock/app/minute/query?_var=min_data_sh600010&code=sh600010
 # http://web.ifzq.gtimg.cn/appstock/app/day/query?_var=fdays_data_sh600010&code=sh600010
+http://web.ifzq.gtimg.cn/appstock/app/minute/query?var=min&code=sh600010
+http://web.ifzq.gtimg.cn/appstock/app/day/query?code=sh600010
+
 # http://money.finance.sina.com.cn/quotes_service/api/jsonp_v2.php/var%20_sh603901_5_1505264471270=/CN_MarketData.getKLineData?symbol=sh603901&scale=5&ma=no&datalen=1023
 # https://gupiao.baidu.com/api/stocks/stocktimelinefive?from=pc&os_ver=1&cuid=xxx&vv=100&format=json&stock_code=sh600010&step=3
