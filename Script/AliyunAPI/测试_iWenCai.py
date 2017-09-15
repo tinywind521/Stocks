@@ -57,6 +57,12 @@ keyWords = [
                     'name': 'YYB',
                     'PoolLength': 1
                 },
+                {
+                    'keyWord': date + '的交易状态是可交易，' + date + '的不是新股，' + date + '的交易状态不包含停牌',
+                    'fileName': 'daily' + addName,
+                    'name': 'daily',
+                    'PoolLength': 10
+                },
             ]
 # keyWords = date + ',股票简称,涨跌幅,开盘价不复权,最高价不复权,最低价不复权,收盘价不复权,开盘价前复权,' \
 #                  '最高价前复权,最低价前复权,收盘价前复权,成交量(股),换手率(%),振幅,上市不超过，上市天数,技术形态,A股流通市值'
