@@ -7,31 +7,10 @@ import json
 import time
 import sys
 
+from stock_Class.ResultDeal import ResultDeal
 from multiprocessing.dummy import Pool as ThreadPool
 
 
-class ResultDeal:
-    def __init__(self):
-        self._result = []
-        self._title = None
-
-    def setResultAppend(self, tempArg):
-        self._result.extend(tempArg)
-
-    def getResultValue(self):
-        return self._result
-
-    def setTitle(self, title):
-        if self._title:
-            pass
-        else:
-            self._title = title
-
-    def getTitle(self):
-        return self._title
-
-
-# """主要功能函数"""
 def get_iWenCai(keyWord, PoolLength=1):
     """
     1、获取iWenCai 抓包的Token代码数据；
@@ -93,7 +72,7 @@ def get_iWenCai(keyWord, PoolLength=1):
     # PoolLength = 10
     perPage = 70
     pages = int(math.ceil(code_count / perPage))
-    r = ResultDeal()
+    rd = ResultDeal()
     p = 1
     for i in range(0, pages, PoolLength):
         args = []
@@ -110,7 +89,7 @@ def get_iWenCai(keyWord, PoolLength=1):
             p += 1
             URL = MainHost + urllib.parse.urlencode(Bodys)
             arg = {
-                   'objResult': r,
+                   'objResult': rd,
                    'URL': URL,
                    'Bodys': Bodys,
                    'Headers': Headers,
@@ -122,7 +101,7 @@ def get_iWenCai(keyWord, PoolLength=1):
         pool.close()
         pool.join()
         time.sleep(1)
-    results = {'title': r.getTitle(), 'results': r.getResultValue(), 'length': code_count}
+    results = {'title': rd.getTitle(), 'results': rd.getArrayResultValue(), 'length': code_count}
     return results
 
 
@@ -202,7 +181,7 @@ def getAll(arg):
     r = json.loads(content)
     # for k in r:
     #     print(k)
-    objResult.setResultAppend(r['result'])
+    objResult.setResultArrayExtend(r['result'])
     objResult.setTitle(r['title'])
 
 

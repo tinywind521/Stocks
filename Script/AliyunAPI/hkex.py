@@ -41,14 +41,16 @@ for date in dateList:
     print(date + ' sz begin writing...')
     exp1 = re.compile('(?isu)<tr class="row[^>]*>(.*?)</tr>')
     exp2 = re.compile("(?isu)<td[^>]*>(.*?)</td>")
+    exp3 = re.compile("(?isu)\\s+?")
     key = ['代码', '名称', '持股量', '百分比']
     result = []
     for row in exp1.findall(s):
         value = []
         # d = {}
         for col in exp2.findall(row):
-            value.append(col.replace('\r\n                                ', '')
-                         .replace('\r\n                            ', ''))
+            # value.append(col.replace('\r\n                                ', '')
+            #              .replace('\r\n                            ', ''))
+            value.append(exp3.sub('', col))
         d = dict(zip(key, value))
         result.append(d)
     path = 'z:/test/' + date + 'sz' + '_hkex.csv'

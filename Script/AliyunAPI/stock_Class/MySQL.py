@@ -145,8 +145,9 @@ class MySQL:
         except pymysql.Error as er:
             raise pymysql.Error(er)
         finally:
-            if self.__conn:
-                self.close()
+            # if self.__conn:
+            #     self.close()
+            pass
 
 
     # 专门处理dml语句 delete，update，insert和replace
@@ -157,18 +158,23 @@ class MySQL:
                 self.__init_cursor()
             if self.__cursor is None:
                 self.__init_cursor()
+            self.__conn.autocommit = True
             self.rows_affected = self.__cursor.execute(sql, args)
             self.lastrowid = self.__cursor.lastrowid
             return self.rows_affected
         except pymysql.Error as er:
             raise pymysql.Error(er)
         finally:
-            if self.__cursor:
-                self.__cursor.close()
-                self.__cursor = None
+            # if self.__cursor:
+            #     self.__cursor.close()
+            #     self.__cursor = None
+            # if self.__conn:
+            #     self.close()
+            pass
 
 
-    # 提交
+
+# 提交
     def commit(self):
         try:
             if self.__conn:

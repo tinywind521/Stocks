@@ -66,7 +66,7 @@ for keyWord in keyWords:
     print()
     # print(len(r['results']))
     # print(r['length'])
-    if len(r['results']) >= r['length']:
+    if len(r['results']) >= r['length'] and r['length']:
         print('All the ' + keyWord['name'] + ' data(s) has been fetched!')
         path = rootPath + keyWord['fileName']
         dict2CSV.writeWenCaiHeader(path, r['title'])

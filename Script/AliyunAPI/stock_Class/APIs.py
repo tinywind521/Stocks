@@ -1,51 +1,43 @@
-import os
-import pymysql
-import urllib.request
-import urllib.error
-import urllib.parse
-import socket
-import math
-import json
-import time
-import sys
-
-from file_io import txt, jsonFiles
 from functions import getValue, function
-from stock_Class.MySQL import MySQL
 from multiprocessing.dummy import Pool as ThreadPool
 
-class ResultDeal:
-    def __init__(self):
-        self._ArrayResult = []
-        self._DictResult = {}
-        self._title = None
+if __name__ == '__main__':
+    import pymysql
+    from stock_Class.ResultDeal import ResultDeal
+    from stock_Class.MySQL import MySQL
 
-    def setResultArrayAppend(self, tempArg):
-        self._ArrayResult.append(tempArg)
-
-    def getArrayResultValue(self):
-        return self._ArrayResult
-
-    def resetArrayResultValue(self):
-        self._ArrayResult = []
-
-    def setResultDictAppend(self, key, tempArg):
-        self._DictResult[key].append(tempArg)
-
-    def getDictResultValue(self):
-        return self._DictResult
-
-    def resetDictResultValue(self):
-        self._DictResult = {}
-
-    def setTitle(self, title):
-        if self._title:
-            pass
-        else:
-            self._title = title
-
-    def getTitle(self):
-        return self._title
+# class ResultDeal:
+#     def __init__(self):
+#         self._ArrayResult = []
+#         self._DictResult = {}
+#         self._title = None
+#
+#     def setResultArrayAppend(self, tempArg):
+#         self._ArrayResult.append(tempArg)
+#
+#     def getArrayResultValue(self):
+#         return self._ArrayResult
+#
+#     def resetArrayResultValue(self):
+#         self._ArrayResult = []
+#
+#     def setResultDictAppend(self, key, tempArg):
+#         self._DictResult[key].append(tempArg)
+#
+#     def getDictResultValue(self):
+#         return self._DictResult
+#
+#     def resetDictResultValue(self):
+#         self._DictResult = {}
+#
+#     def setTitle(self, title):
+#         if self._title:
+#             pass
+#         else:
+#             self._title = title
+#
+#     def getTitle(self):
+#         return self._title
 
 
 def multiPool(funcIn, codeListIn, objIn, PoolLength=50):
@@ -79,39 +71,39 @@ def maxVol5Days(arg):
         obj.setResultArrayAppend({'code': codeIn, 'maxVol': max(maxList)})
         # print(codeIn, '\t', maxList)
 
+if __name__ == '__main__':
+    stocks_config = {
+        'host': 'localhost',
+        'port': 3306,
+        'user': 'root',
+        'password': 'star2249',
+        'db': 'stocks',
+        'charset': 'utf8',
+        'cursorclass': pymysql.cursors.DictCursor,
+    }
 
-stocks_config = {
-    'host': 'localhost',
-    'port': 3306,
-    'user': 'root',
-    'password': 'star2249',
-    'db': 'stocks',
-    'charset': 'utf8',
-    'cursorclass': pymysql.cursors.DictCursor,
-}
+    # sDB for stocksDatabase
+    sDB = MySQL(stocks_config)
+    sql = 'select gid from dailypreselect;'
+    sDB.execSQL(sql)
+    dailyList = [gid['gid'][0:6] for gid in sDB.dbReturn]
+    # print(dailyList)
+    # dailyList = ['600569']
 
-# sDB for stocksDatabase
-sDB = MySQL(stocks_config)
-sql = 'select gid from dailypreselect;'
-sDB.execSQL(sql)
-dailyList = [gid['gid'][0:6] for gid in sDB.dbReturn]
-# print(dailyList)
-# dailyList = ['600569']
+    func = maxVol5Days
+    r = ResultDeal()
+    multiPool(func, dailyList, r)
 
-func = maxVol5Days
-r = ResultDeal()
-multiPool(func, dailyList, r)
+    print()
 
-print()
-
-for j in r.getArrayResultValue():
-    # print(j)
-    if j['code'][0] == '6':
-        code = j['code'] + '.SH'
-    elif j['code'][0] == '0' or j['code'][0] == '3':
-        code = j['code'] + '.SZ'
-    else:
-        pass
-    sql = "update dailypreselect SET gsharevol='" + format(j['maxVol'] * 100, 'd') + "' where gid='" + code + "';"
-    # print(sql)
-    sDB.execTXSQL(sql)
+    for j in r.getArrayResultValue():
+        # print(j)
+        if j['code'][0] == '6':
+            code = j['code'] + '.SH'
+        elif j['code'][0] == '0' or j['code'][0] == '3':
+            code = j['code'] + '.SZ'
+        else:
+            pass
+        sql = "update dailypreselect SET gsharevol='" + format(j['maxVol'] * 100, 'd') + "' where gid='" + code + "';"
+        # print(sql)
+        sDB.execTXSQL(sql)

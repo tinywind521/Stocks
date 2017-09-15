@@ -5,7 +5,7 @@ import sys
 
 from http_api import aliyun_api, showapi_api, qtimq_api
 from functions import getValue
-from stock_Class.stock import Stock, Yline, ResultDeal
+from stock_Class.stock import Stock, Yline
 
 
 def return_date(beginDay, appcode, code='000001', timeType='day'):

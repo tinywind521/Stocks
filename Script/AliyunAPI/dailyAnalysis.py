@@ -3,9 +3,11 @@ import pymysql
 
 from file_io import txt, jsonFiles
 from functions import getValue, function
-from stock_Class.stock import ResultDeal
+from stock_Class.ResultDeal import ResultDeal
 from stock_Class.MySQL import MySQL
 from multiprocessing.dummy import Pool as ThreadPool
+from stock_Class.APIs import multiPool, maxVol5Days
+
 
 aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
@@ -251,7 +253,7 @@ print('\n')
 print('形态101：', end='\t')
 print(len(result60['101']))
 for i in result60['101']:
-    print(i['code'])
+    # print(i['code'])
     if i['code'][0] == '6':
         code = i['code'] + '.SH'
     elif i['code'][0] == '0' or i['code'][0] == '3':
@@ -260,14 +262,36 @@ for i in result60['101']:
         pass
     sql = "insert ignore dailypreselect SET gid='" + code + "';"
     sDB.execTXSQL(sql)
+sDB.commit()
+
+sql = 'select gid from dailypreselect;'
+sDB.execSQL(sql)
+dailyList = [gid['gid'][0:6] for gid in sDB.dbReturn]
+# print(dailyList)
+# dailyList = ['600569']
+
+func = maxVol5Days
+r = ResultDeal()
+multiPool(func, dailyList, r)
+
+print()
+
+for j in r.getArrayResultValue():
+    # print(j)
+    if j['code'][0] == '6':
+        code = j['code'] + '.SH'
+    elif j['code'][0] == '0' or j['code'][0] == '3':
+        code = j['code'] + '.SZ'
+    else:
+        pass
+    sql = "update dailypreselect SET gsharevol='" + format(j['maxVol'] * 100, 'd') + "' where gid='" + code + "';"
+    # print(sql)
+    sDB.execTXSQL(sql)
+sDB.commit()
+
 """
 布林斜率？
-必须叠加倍量
-回调次数等于1的时候接收下降.
 （60F如果是下降层级）往15F找，同时对15F的层级差进行一次判断主要是最近层级差 不是下降！再结合倍量
-阳线占比与层级差
 反转瓶颈
-
 考虑周线？
-
 """
