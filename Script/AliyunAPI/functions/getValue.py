@@ -981,6 +981,69 @@ def get_timeLine5Days_qtimq(code):
         return None
 
 
+def get_timeLine3Days_qtimq(code):
+    """
+    获取3日分时
+    :param code:
+    :return:
+    """
+    if len(code) == 6:
+        if code[0] == '6':
+            code = 'sh' + code
+        elif code[0] == '0' or code[0] == '3':
+            code = 'sz' + code
+    elif len(code) == 8:
+        code = code
+    else:
+        raise ValueError('Invalid code:', code)
+
+    api_str = qtimq_api.timeline5Days(code)
+    api_dict = json.loads(api_str)
+    for i in range(10):
+        try:
+            if api_dict['code'] != 0 or api_dict['msg'] != '':
+                print('Oh,Let me have a rest! 10S!')
+                time.sleep(5)
+            else:
+                break
+            api_str = qtimq_api.timeline5Days(code)
+            api_dict = json.loads(api_str)
+        except KeyError:
+            print('Oh,Let me have a rest! 10S!')
+            time.sleep(5)
+            api_str = qtimq_api.timeline5Days(code)
+            api_dict = json.loads(api_str)
+    try:
+        all_dict = json.loads(api_str)
+        showapi_res_body = all_dict['data']
+        dataList = showapi_res_body[code]
+        datesList = dataList['data']
+        if not datesList:
+            return None
+        result = []
+        for dateValue in datesList:
+            # print('dateValue\t', dateValue)
+            dateTemp = dateValue['date']
+            dataTemp = dateValue['data']
+            timeList = []
+            lastVol = 0
+            for timeElement in dataTemp:
+                if timeElement:
+                    timeArray = timeElement.split(' ')
+                    totalVolumn = int(timeArray[2])
+                    volumn = totalVolumn - lastVol
+                    lastVol = totalVolumn
+                    timeDict = {'time': timeArray[0], 'nowPrice': float(timeArray[1]), 'volume': volumn}
+                    timeList.append(timeDict)
+            timeList = timeList[2:-1]
+            result.append({dateTemp: timeList})
+        # print(code, [k['date'] for k in datesList])
+        return result[-3:]
+    except (ValueError, TypeError):
+        print('\nError Value: ', all_dict)
+        return None
+
+
 def add_index(code):
     """
     输入6位代码，输出带主板的代码

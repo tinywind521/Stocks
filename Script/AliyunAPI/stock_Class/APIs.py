@@ -72,6 +72,23 @@ def maxVol5Days(arg):
         # print(codeIn, '\t', maxList)
 
 
+def maxVol3Days(arg):
+    codeIn = arg['code']
+    obj = arg['obj']
+    resultIn = getValue.get_timeLine3Days_qtimq(codeIn)
+    # print(resultIn)
+    maxList = list()
+    if resultIn:
+        try:
+            for k in resultIn:
+                for key in k:
+                    maxList.append(max([i['volume'] for i in k[key]]))
+        except TypeError:
+            print(codeIn, '\t', resultIn)
+        obj.setResultArrayAppend({'code': codeIn, 'maxVol': max(maxList)})
+        # print(codeIn, '\t', maxList)
+
+
 if __name__ == '__main__':
     stocks_config = {
         'host': 'localhost',

@@ -6,7 +6,7 @@ from functions import getValue, function
 from stock_Class.ResultDeal import ResultDeal
 from stock_Class.MySQL import MySQL
 from multiprocessing.dummy import Pool as ThreadPool
-from stock_Class.APIs import multiPool, maxVol5Days
+from stock_Class.APIs import multiPool, maxVol3Days
 
 
 aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
@@ -270,7 +270,7 @@ dailyList = [gid['gid'][0:6] for gid in sDB.dbReturn]
 # print(dailyList)
 # dailyList = ['600569']
 
-func = maxVol5Days
+func = maxVol3Days
 r = ResultDeal()
 multiPool(func, dailyList, r)
 

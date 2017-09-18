@@ -457,7 +457,7 @@ def calDayStatus(obj):
         #     objResult.setResultAppend('002', tempArg)
         if tempArg['result']['003_Day9Bears']['结果'] == 1:
             objResult.setResultAppend('003', tempArg)
-        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 100:
+        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 98:
             objResult.setResultAppend('101', tempArg)
         del tempArg
     else:
@@ -505,18 +505,21 @@ def cal60FStatus(obj):
         if tempArg['result']['101_20Boll60F4B']['结果'] == 1:
             if (tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
                 or (1 > tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1
-                    and tempArg['result']['101_20BollDay4B']['回调次数'] == 1)) \
+                    and tempArg['result']['101_20BollDay4B']['回调次数'] <= 1)) \
+                \
                     and (2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1
                          or (1 > tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
-                             and tempArg['result']['101_20Boll60F4B']['回调次数'] == 1))\
+                             and tempArg['result']['101_20Boll60F4B']['回调次数'] <= 2))\
+                \
                     and tempArg['result']['101_20BollDay4B']['中轨状态'] >= 0 \
                     and tempArg['result']['101_20Boll60F4B']['中轨状态'] == 1:
+
                 if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 \
                         and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 90
                              or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):
                     objResult.setResultAppend('101', tempArg)
                 elif tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 30 \
-                        and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 92
+                        and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 92.5
                              or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):
                     objResult.setResultAppend('101', tempArg)
                 else:
