@@ -71,6 +71,7 @@ def maxVol5Days(arg):
         obj.setResultArrayAppend({'code': codeIn, 'maxVol': max(maxList)})
         # print(codeIn, '\t', maxList)
 
+
 if __name__ == '__main__':
     stocks_config = {
         'host': 'localhost',
