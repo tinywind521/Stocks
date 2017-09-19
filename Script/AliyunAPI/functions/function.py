@@ -503,6 +503,7 @@ def cal60FStatus(obj):
         中轨及其下方，只接受一次调整，以确保B3/4以及回撤后的二次启动。
         """
         if tempArg['result']['101_20Boll60F4B']['结果'] == 1:
+            # print(123)
             if (tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
                 or (1 > tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1
                     and tempArg['result']['101_20BollDay4B']['回调次数'] <= 1)) \
@@ -512,8 +513,9 @@ def cal60FStatus(obj):
                              and tempArg['result']['101_20Boll60F4B']['回调次数'] <= 2))\
                 \
                     and tempArg['result']['101_20BollDay4B']['中轨状态'] >= 0 \
-                    and tempArg['result']['101_20Boll60F4B']['中轨状态'] == 1:
-
+                    and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0 \
+                    and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 9:
+                # print(123)
                 if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 \
                         and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 90
                              or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):

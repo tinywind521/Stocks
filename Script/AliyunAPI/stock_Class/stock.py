@@ -17,7 +17,7 @@ class Stock:
         if ref_List is None:
             ref_List = {'KtimeType': '60/day',
                         'KbeginDay': '20170101',
-                        'KallLength': 160,
+                        'KallLength': 200,
                         'KgetLength': 10,
                         'TdayLength': 5,
                         'TgetLength': 1,
@@ -50,16 +50,16 @@ class Stock:
         """
         try:
             if self._ref_list['KtimeType'] == '60':
-                self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                                                     self._ref_list['KgetLength'])
                 # self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                #                                      self._ref_list['KgetLength'])[0:-4]
+                #                                      self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                     self._ref_list['KgetLength'])[0:-4]
                 # print(self.Kvalue[-1])
             elif self._ref_list['KtimeType'] == 'day':
-                self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                                                      self._ref_list['KgetLength'])
                 # self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                #                                       self._ref_list['KgetLength'])[0:-1]
+                #                                       self._ref_list['KgetLength'])
+                self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                      self._ref_list['KgetLength'])[0:-1]
                 # print(self.Kvalue[-1])
         except ValueError:
             try:
@@ -1406,6 +1406,7 @@ class Yline:
                          '中轨状态': 0,
                          'K线位于144布林位置': None,
                          '近期最大涨幅': 0,
+                         '前期最大涨幅': 0,
                          '阳线占比': 0,
                          'K线概况':
                              {
@@ -1438,16 +1439,21 @@ class Yline:
             self.patternResult['101_20BollDay4B'] = patternResult
             return
         # print(self.Index[-1])
-        if self._lastFirstK['mid'] > self._lastSecondK['mid']:
+        if self._lastFirstK['mid'] > self._lastSecondK['mid'] + 0.01:
             patternResult['中轨状态'] = 1
-        if self._lastFirstK['mid'] < self._lastSecondK['mid']:
+        if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01:
             patternResult['中轨状态'] = -1
+        maxChg = 0
+        for k in self._Kvalue:
+            maxChg = max(k['涨幅'], maxChg)
+            # print(k['序号'], maxChg)
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
+        patternResult['前期最大涨幅'] = maxChg
         patternResult['阳线占比'] = round(self.bull_por, 3)
         patternResult['K线概况']['阳线数'] = self.get_bull_length()
         patternResult['K线概况']['阴线数'] = self.get_bear_length()
@@ -1528,9 +1534,9 @@ class Yline:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return
         # print(self.Index[-1])
-        if self._lastFirstK['mid'] > self._lastSecondK['mid']:
+        if self._lastFirstK['mid'] > self._lastSecondK['mid'] + 0.01:
             patternResult['中轨状态'] = 1
-        if self._lastFirstK['mid'] < self._lastSecondK['mid']:
+        if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01:
             patternResult['中轨状态'] = -1
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
@@ -1545,6 +1551,7 @@ class Yline:
         patternResult['层级和层级差次数'] = self.levelTimes
         # print(patternResult)
         self.patternResult['101_20Boll60F4B'] = patternResult
+
 
 """
 中轨必须至少一个是上行的。

@@ -1035,10 +1035,10 @@ def get_timeLine3Days_qtimq(code):
                     lastVol = totalVolumn
                     timeDict = {'time': timeArray[0], 'nowPrice': float(timeArray[1]), 'volume': volumn}
                     timeList.append(timeDict)
-            timeList = timeList[2:-1]
+            # timeList = timeList[2:-1]
             result.append({dateTemp: timeList})
         # print(code, [k['date'] for k in datesList])
-        return result[-3:]
+        return result[0:3]
     except (ValueError, TypeError):
         print('\nError Value: ', all_dict)
         return None

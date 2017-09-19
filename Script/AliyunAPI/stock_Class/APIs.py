@@ -1,3 +1,5 @@
+import math
+
 from functions import getValue, function
 from multiprocessing.dummy import Pool as ThreadPool
 
@@ -77,15 +79,24 @@ def maxVol3Days(arg):
     obj = arg['obj']
     resultIn = getValue.get_timeLine3Days_qtimq(codeIn)
     # print(resultIn)
-    maxList = list()
+    # maxList = list()
+    allList = list()
     if resultIn:
         try:
             for k in resultIn:
                 for key in k:
-                    maxList.append(max([i['volume'] for i in k[key]]))
+                    tempList = [i['volume'] for i in k[key]]
+                    # maxList.append(max(tempList))
+                    allList.extend(tempList)
+
         except TypeError:
             print(codeIn, '\t', resultIn)
-        obj.setResultArrayAppend({'code': codeIn, 'maxVol': max(maxList)})
+        sortedList = sorted(allList, reverse=True)
+        maxVol = int(math.floor((sum(sortedList[0:6]) / 6)))
+        # maxVol = float(sum(allList)/len(allList))
+        # meanVol = float(sum(allList)/len(allList))
+        # maxVol = int(math.floor((meanVol + maxVol) / 2))
+        obj.setResultArrayAppend({'code': codeIn, 'maxVol': maxVol})
         # print(codeIn, '\t', maxList)
 
 

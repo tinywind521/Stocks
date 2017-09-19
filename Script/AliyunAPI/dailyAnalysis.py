@@ -15,7 +15,7 @@ tempPath = 'z:/test/codeList.txt'
 ref_List = {'KtimeType': '60',
             'KbeginDay': '20170701',
             'KallLength': 160,
-            'KgetLength': 61,
+            'KgetLength': 121,
             'TdayLength': 5,
             'TgetLength': 3,
             'appcode': aliyun_appcode}
@@ -24,7 +24,7 @@ ref_List = {'KtimeType': '60',
 KtimeType = 1
 beginDate = ''
 dateLength = 160
-getLength = 61
+getLength = 121
 debuger = input('Want to debuger? (1/0): ')
 needCodeRefresh = input('Want to refresh codeList? (1/0): ')
 needBlockRefresh = input('Want to refresh blockList? (1/0): ')
@@ -45,7 +45,7 @@ else:
 
 """获取code列表"""
 if debuger:
-    codeList = ['000893']
+    codeList = ['000656']
 else:
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
