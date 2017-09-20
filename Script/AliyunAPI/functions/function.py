@@ -457,7 +457,7 @@ def calDayStatus(obj):
         #     objResult.setResultAppend('002', tempArg)
         if tempArg['result']['003_Day9Bears']['结果'] == 1:
             objResult.setResultAppend('003', tempArg)
-        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 98:
+        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90:
             objResult.setResultAppend('101', tempArg)
         del tempArg
     else:
@@ -502,19 +502,29 @@ def cal60FStatus(obj):
         中轨以上，回调次数放宽；
         中轨及其下方，只接受一次调整，以确保B3/4以及回撤后的二次启动。
         """
+        # print(tempArg['result']['101_20Boll60F4B']['结果'])
+        # print(tempArg['result']['101_20BollDay4B']['结果'])
+        # print(tempArg['result']['101_20Boll60F4B']['中轨状态'])
+        # print(tempArg['result']['101_20BollDay4B']['中轨状态'])
         if tempArg['result']['101_20Boll60F4B']['结果'] == 1:
             # print(123)
-            if (tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
-                or (1 > tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1
-                    and tempArg['result']['101_20BollDay4B']['回调次数'] <= 1)) \
+            if ((tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
+                 and tempArg['result']['101_20BollDay4B']['回调次数'] == 0)
+                or (2 >= tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1
+                    and tempArg['result']['101_20BollDay4B']['回调次数'] == 1)
+                    or (2 >= tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
+                        and tempArg['result']['101_20BollDay4B']['回调次数'] == 2))\
                 \
-                    and (2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1
-                         or (1 > tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
-                             and tempArg['result']['101_20Boll60F4B']['回调次数'] <= 2))\
+                    and ((3 > tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
+                          and 1 <= tempArg['result']['101_20Boll60F4B']['回调次数'] <= 2)
+                         or (2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1
+                             and tempArg['result']['101_20Boll60F4B']['回调次数'] == 0))\
                 \
-                    and tempArg['result']['101_20BollDay4B']['中轨状态'] >= 0 \
-                    and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0 \
-                    and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 9:
+                    and ((tempArg['result']['101_20BollDay4B']['中轨状态'] == 0
+                         and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 1)
+                         or (tempArg['result']['101_20BollDay4B']['中轨状态'] >= 1
+                             and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0)) \
+                    and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 3:
                 # print(123)
                 if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 \
                         and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 90

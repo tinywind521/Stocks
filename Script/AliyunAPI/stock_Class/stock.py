@@ -50,16 +50,16 @@ class Stock:
         """
         try:
             if self._ref_list['KtimeType'] == '60':
-                # self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                #                                      self._ref_list['KgetLength'])
                 self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                                                     self._ref_list['KgetLength'])[0:-4]
+                                                     self._ref_list['KgetLength'])
+                # self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                #                                      self._ref_list['KgetLength'])[0:-4]
                 # print(self.Kvalue[-1])
             elif self._ref_list['KtimeType'] == 'day':
-                # self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                #                                       self._ref_list['KgetLength'])
                 self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                                                      self._ref_list['KgetLength'])[0:-1]
+                                                      self._ref_list['KgetLength'])
+                # self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                #                                       self._ref_list['KgetLength'])[0:-1]
                 # print(self.Kvalue[-1])
         except ValueError:
             try:
@@ -1401,7 +1401,7 @@ class Yline:
                          '结果': 0,
                          '近期层级类型': None,
                          '层级差得分': 0,
-                         '回调次数': 0,
+                         '回调次数': 10,
                          'K线位于20布林位置': None,
                          '中轨状态': 0,
                          'K线位于144布林位置': None,
@@ -1425,23 +1425,31 @@ class Yline:
                              }
                          }
         """结合轨距判断"""
+        # print(self.Index[-1]['布林'])
+        # print(self._lastLevelName)
         if self.Index[-1]['布林'] >= 2:
+            # print('3333')
             if self._fallTimes == 0:
                 patternResult['结果'] = 1
-            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 6:
+            if self._fallTimes == 1 and self.Index[-1]['轨距'] >= 6:
                 patternResult['结果'] = 1
-            elif 1 >= self.Index[-1]['布林'] >= -1 and self._lastLevelName != '下降层级':
-                if self._fallTimes == 0:
-                    patternResult['结果'] = 1
-                elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 6:
-                    patternResult['结果'] = 1
+        elif (self.Index[-1]['布林'] == -1 and self._lastLevelName != '下降层级') \
+                or (1 >= self.Index[-1]['布林'] >= 0):
+                # print('1111')
+            if self._fallTimes == 0:
+                patternResult['结果'] = 1
+                # print('1111')
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 4:
+                patternResult['结果'] = 1
         else:
+            # print('2222')
             self.patternResult['101_20BollDay4B'] = patternResult
             return
         # print(self.Index[-1])
         if self._lastFirstK['mid'] > self._lastSecondK['mid'] + 0.01:
             patternResult['中轨状态'] = 1
-        if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01:
+        if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01 \
+                and (self._lastSecondK['mid'] - self._lastFirstK['mid']) / self._lastSecondK['mid'] >= 0.01:
             patternResult['中轨状态'] = -1
         maxChg = 0
         for k in self._Kvalue:
@@ -1497,7 +1505,7 @@ class Yline:
                          '结果': 0,
                          '近期层级类型': None,
                          '层级差得分': 0,
-                         '回调次数': 0,
+                         '回调次数': 10,
                          'K线位于20布林位置': None,
                          '中轨状态': 0,
                          'K线位于144布林位置': None,
@@ -1520,12 +1528,15 @@ class Yline:
                              }
                          }
         """结合轨距判断"""
+        # print('布林', self.Index[-1]['布林'])
+        # print('self._fallTimes', self._fallTimes)
         if self.Index[-1]['布林'] >= 2:
             if self._fallTimes == 0:
                 patternResult['结果'] = 1
-            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
+            elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 4:
                 patternResult['结果'] = 1
-        elif 1 >= self.Index[-1]['布林'] >= -1 and self._lastLevelName != '下降层级':
+        elif (self.Index[-1]['布林'] == -1 and self._lastLevelName != '下降层级') \
+                or (1 >= self.Index[-1]['布林'] >= 0):
             if self._fallTimes == 0:
                 patternResult['结果'] = 1
             elif self._fallTimes == 1 and self.Index[-1]['轨距'] >= 2:
@@ -1533,7 +1544,7 @@ class Yline:
         else:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return
-        # print(self.Index[-1])
+        # print('self._fallTimes', self.Index[-1])
         if self._lastFirstK['mid'] > self._lastSecondK['mid'] + 0.01:
             patternResult['中轨状态'] = 1
         if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01:
