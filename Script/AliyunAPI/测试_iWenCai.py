@@ -8,7 +8,7 @@ addName = '.csv'
 
 # 自动和手动日期切换
 date = time.strftime("%Y%m%d", time.localtime())
-# date = '20170901'
+# date = '20170926'
 print(date)
 
 keyWords = [

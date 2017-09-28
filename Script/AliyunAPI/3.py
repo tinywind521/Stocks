@@ -1,8 +1,19 @@
 import pymysql
 from stock_Class.MySQL import MySQL
 
-from functions import getValue
 
+stocks_config = {
+    'host': 'localhost',
+    'port': 3306,
+    'user': 'root',
+    'password': 'star2249',
+    'db': 'stocks',
+    'charset': 'utf8',
+    'cursorclass': pymysql.cursors.DictCursor,
+}
 
-for i in getValue.get_timeLine3Days_qtimq('600173'):
-    print(i)
+# sDB for stocksDatabase
+sDB = MySQL(stocks_config)
+sql = 'truncate table dailypreselect;'
+sDB.execTXSQL(sql)
+sDB.commit()

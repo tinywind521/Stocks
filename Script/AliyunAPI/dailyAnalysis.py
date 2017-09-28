@@ -189,6 +189,10 @@ nameList = {}
 for i in sDB.dbReturn:
     nameList[i['gid'].split('.')[0]] = i['name']
 
+sql = 'truncate table dailypreselect;'
+sDB.execTXSQL(sql)
+sDB.commit()
+
 path = outputRootPath + '/allNameList.json'
 if needNameRefresh == '1' or not os.path.exists(path):
     # 写入 JSON 数据
