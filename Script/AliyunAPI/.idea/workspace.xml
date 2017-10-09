@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="stock.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="1572" column="0" lean-forward="false" selection-start-line="1572" selection-start-column="0" selection-end-line="1572" selection-end-column="0" />
+            <state relative-caret-position="479">
+              <caret line="1368" column="39" lean-forward="false" selection-start-line="1368" selection-start-column="39" selection-end-line="1368" selection-end-column="39" />
               <folding>
                 <element signature="e#63#11635#0" expanded="false" />
                 <element signature="e#255#1158#0" expanded="false" />
@@ -49,7 +49,6 @@
                 <element signature="e#6443#9375#0" expanded="false" />
                 <element signature="e#9462#9759#0" expanded="false" />
                 <element signature="e#9863#11635#0" expanded="false" />
-                <element signature="e#11655#53142#0" expanded="false" />
                 <element signature="e#11655#12248#1" expanded="false" />
                 <element signature="e#12296#14224#0" expanded="false" />
                 <element signature="e#14265#14289#0" expanded="false" />
@@ -88,7 +87,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="测试_iWenCai.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="function.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/functions/function.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-993">
+              <caret line="467" column="0" lean-forward="true" selection-start-line="467" selection-start-column="0" selection-end-line="467" selection-end-column="0" />
+              <folding>
+                <element signature="e#252#1321#0" expanded="false" />
+                <element signature="e#1359#5415#0" expanded="false" />
+                <element signature="e#5453#5580#0" expanded="false" />
+                <element signature="e#5626#5754#0" expanded="false" />
+                <element signature="e#5786#6192#0" expanded="false" />
+                <element signature="e#6230#7114#0" expanded="false" />
+                <element signature="e#7160#8059#0" expanded="false" />
+                <element signature="e#8107#9012#0" expanded="false" />
+                <element signature="e#9062#12886#0" expanded="false" />
+                <element signature="e#12934#13923#0" expanded="false" />
+                <element signature="e#13963#14734#0" expanded="false" />
+                <element signature="e#14778#14990#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="测试_iWenCai.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -105,8 +127,8 @@
       <file leaf-file-name="dailyAnalysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="191" column="38" lean-forward="false" selection-start-line="191" selection-start-column="38" selection-end-line="191" selection-end-column="38" />
+            <state relative-caret-position="778">
+              <caret line="303" column="33" lean-forward="false" selection-start-line="303" selection-start-column="33" selection-end-line="303" selection-end-column="33" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -117,7 +139,7 @@
       <file leaf-file-name="APIs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stock_Class/APIs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-211">
+            <state relative-caret-position="989">
               <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -202,10 +224,10 @@
         <option value="$PROJECT_DIR$/functions/getValue.py" />
         <option value="$PROJECT_DIR$/stock_Class/APIs.py" />
         <option value="$PROJECT_DIR$/stock_Class/stock.py" />
-        <option value="$PROJECT_DIR$/functions/function.py" />
         <option value="$PROJECT_DIR$/3.py" />
-        <option value="$PROJECT_DIR$/dailyAnalysis.py" />
         <option value="$PROJECT_DIR$/测试_iWenCai.py" />
+        <option value="$PROJECT_DIR$/functions/function.py" />
+        <option value="$PROJECT_DIR$/dailyAnalysis.py" />
       </list>
     </option>
   </component>
@@ -249,7 +271,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,16 +279,11 @@
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
               <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="stock_Class" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -514,12 +531,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.123667374" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12473348" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2944079" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="259" y="152" width="1062" height="506" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="785" y="149" width="1062" height="506" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24886535" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6677632" sideWeight="0.4969743" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2980333" sideWeight="0.5065789" order="2" side_tool="true" content_ui="tabs" />
@@ -826,13 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/functions/function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="733">
-          <caret line="466" column="22" lean-forward="false" selection-start-line="466" selection-start-column="22" selection-end-line="466" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/MySQL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3404">
@@ -847,31 +857,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="30" column="33" lean-forward="false" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#2545#2614#0" expanded="false" />
-            <element signature="e#2875#2901#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="191" column="38" lean-forward="false" selection-start-line="191" selection-start-column="38" selection-end-line="191" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/APIs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-211">
+        <state relative-caret-position="989">
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -883,8 +871,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="1572" column="0" lean-forward="false" selection-start-line="1572" selection-start-column="0" selection-end-line="1572" selection-end-column="0" />
+        <state relative-caret-position="479">
+          <caret line="1368" column="39" lean-forward="false" selection-start-line="1368" selection-start-column="39" selection-end-line="1368" selection-end-column="39" />
           <folding>
             <element signature="e#63#11635#0" expanded="false" />
             <element signature="e#255#1158#0" expanded="false" />
@@ -915,7 +903,6 @@
             <element signature="e#6443#9375#0" expanded="false" />
             <element signature="e#9462#9759#0" expanded="false" />
             <element signature="e#9863#11635#0" expanded="false" />
-            <element signature="e#11655#53142#0" expanded="false" />
             <element signature="e#11655#12248#1" expanded="false" />
             <element signature="e#12296#14224#0" expanded="false" />
             <element signature="e#14265#14289#0" expanded="false" />
@@ -949,6 +936,49 @@
             <element signature="e#45502#45860#0" expanded="false" />
             <element signature="e#45910#49702#0" expanded="false" />
             <element signature="e#49752#53142#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-993">
+          <caret line="467" column="0" lean-forward="true" selection-start-line="467" selection-start-column="0" selection-end-line="467" selection-end-column="0" />
+          <folding>
+            <element signature="e#252#1321#0" expanded="false" />
+            <element signature="e#1359#5415#0" expanded="false" />
+            <element signature="e#5453#5580#0" expanded="false" />
+            <element signature="e#5626#5754#0" expanded="false" />
+            <element signature="e#5786#6192#0" expanded="false" />
+            <element signature="e#6230#7114#0" expanded="false" />
+            <element signature="e#7160#8059#0" expanded="false" />
+            <element signature="e#8107#9012#0" expanded="false" />
+            <element signature="e#9062#12886#0" expanded="false" />
+            <element signature="e#12934#13923#0" expanded="false" />
+            <element signature="e#13963#14734#0" expanded="false" />
+            <element signature="e#14778#14990#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="778">
+          <caret line="303" column="33" lean-forward="false" selection-start-line="303" selection-start-column="33" selection-end-line="303" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="30" column="33" lean-forward="false" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#2545#2614#0" expanded="false" />
+            <element signature="e#2875#2901#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -457,7 +457,10 @@ def calDayStatus(obj):
         #     objResult.setResultAppend('002', tempArg)
         if tempArg['result']['003_Day9Bears']['结果'] == 1:
             objResult.setResultAppend('003', tempArg)
-        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90:
+        # if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90:
+        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90 \
+                and tempArg['result']['101_20BollDay4B']['近期最大涨幅'] >= 4 \
+                and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 5:
             objResult.setResultAppend('101', tempArg)
         del tempArg
     else:
