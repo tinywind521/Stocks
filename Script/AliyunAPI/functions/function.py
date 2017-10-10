@@ -459,8 +459,7 @@ def calDayStatus(obj):
             objResult.setResultAppend('003', tempArg)
         # if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90:
         if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90 \
-                and tempArg['result']['101_20BollDay4B']['近期最大涨幅'] >= 4 \
-                and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 5:
+                and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 10:
             objResult.setResultAppend('101', tempArg)
         del tempArg
     else:
@@ -518,7 +517,7 @@ def cal60FStatus(obj):
                     or (2 >= tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
                         and tempArg['result']['101_20BollDay4B']['回调次数'] == 2))\
                 \
-                    and ((3 > tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
+                    and ((tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
                           and 1 <= tempArg['result']['101_20Boll60F4B']['回调次数'] <= 2)
                          or (2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1
                              and tempArg['result']['101_20Boll60F4B']['回调次数'] == 0))\
@@ -527,7 +526,10 @@ def cal60FStatus(obj):
                          and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 1)
                          or (tempArg['result']['101_20BollDay4B']['中轨状态'] >= 1
                              and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0)) \
-                    and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 3:
+                    and ((tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 2
+                          and tempArg['result']['101_20Boll60F4B']['回调次数'] == 0)
+                         or (tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 5
+                             and 2 >= tempArg['result']['101_20Boll60F4B']['回调次数'] >= 1)):
                 # print(123)
                 if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 \
                         and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 90
