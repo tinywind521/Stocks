@@ -36,7 +36,9 @@ def get_beginDate(ref_List, dateLenth, beginDate=''):
         ref_List['KbeginDay'] = beginDate
     elif not beginDate:
         if ref_List['KtimeType'] == '60':
-            dateList = get_dateList('20170101', 50)
+            dateList = get_dateList('20170101', 60)
+            # print(dateList)
+            # print(dateLenth)
             ref_List['KbeginDay'] = dateList[-int(dateLenth / 4) - 1]
         elif ref_List['KtimeType'] == 'day':
             dateList = get_dateList('20150101', 400)

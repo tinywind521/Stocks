@@ -29,10 +29,11 @@ class Stock:
         self._ref_list = ref_List
         self.Kvalue = None
         self.Tvalue = None
+        self.debug = 0
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
                         '布林': 0, '55布林': 0, '144布林': 0, '轨距': 0, '层级': '',
-                        '趋势': None, '底部': None,
+                        '趋势': None, '底部': None, 'maxLevel': 0,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
     def get_ref_List(self):
@@ -48,27 +49,47 @@ class Stock:
         获取各级别的K线
         :return: Error return None
         """
+        self.debug = 0
+        printValue = 0
         try:
             if self._ref_list['KtimeType'] == '60':
-                self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                                                     self._ref_list['KgetLength'])
-                # self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                #                                      self._ref_list['KgetLength'])[0:-4]
-                # print(self.Kvalue[-1])
+                if not self.debug:
+                    self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                         self._ref_list['KgetLength'])
+                else:
+                    self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                         self._ref_list['KgetLength'])[0:-4]
+                    if printValue:
+                        print(self.Kvalue[-1])
             elif self._ref_list['KtimeType'] == 'day':
-                self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                                                      self._ref_list['KgetLength'])
-                # self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                #                                       self._ref_list['KgetLength'])[0:-1]
-                # print(self.Kvalue[-1])
+                if not self.debug:
+                    self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                          self._ref_list['KgetLength'])
+                else:
+                    self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                          self._ref_list['KgetLength'])[0:-1]
+                    if printValue:
+                        print(self.Kvalue[-1])
         except ValueError:
             try:
                 if self._ref_list['KtimeType'] == '60':
-                    self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
-                                                         self._ref_list['KgetLength'])
+                    if not self.debug:
+                        self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                             self._ref_list['KgetLength'])
+                    else:
+                        self.Kvalue = getValue.get_60F_qtimq(self.code, self._ref_list['KallLength'],
+                                                             self._ref_list['KgetLength'])[0:-4]
+                        if printValue:
+                            print(self.Kvalue[-1])
                 elif self._ref_list['KtimeType'] == 'day':
-                    self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
-                                                          self._ref_list['KgetLength'])
+                    if not self.debug:
+                        self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                              self._ref_list['KgetLength'])
+                    else:
+                        self.Kvalue = getValue.get_dayK_qtimq(self.code, self._ref_list['KallLength'],
+                                                              self._ref_list['KgetLength'])[0:-1]
+                        if printValue:
+                            print(self.Kvalue[-1])
             except ValueError:
                 self.Kvalue = None
 
@@ -432,6 +453,8 @@ class Yline:
         self._highestLevel = -10
         self._highestPrice = 0
 
+        self.maxLevel = -10
+
         self.levelTimes = None
         self._lastFirstK = None
         self._lastSecondK = None
@@ -443,7 +466,7 @@ class Yline:
 
         """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
-                          'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144',
+                          'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144', 'maxLevel',
                           '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '144布林', '底部', '轨距', '层级', '趋势', '平台']
 
@@ -898,6 +921,7 @@ class Yline:
             temp['序号'] = num
             num += 1
             self.maxChange = max(self.maxChange, temp['涨幅'])
+            self.maxLevel = max(self.maxChange, temp['布林'])
             self.Index.append(temp)
             if not s:
                 """not s：未判断"""
@@ -1137,7 +1161,7 @@ class Yline:
         # self._pattern_100_20BollAnd144BollFirstWave()
         if KtimeType == 'day':
             # self._pattern_002_20DayBollRaiseAndHoriLevel()
-            self._pattern_003_Day9Bears()
+            # self._pattern_003_Day9Bears()
             pass
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
 
@@ -1257,11 +1281,10 @@ class Yline:
 
     def _pattern_003_Day9Bears(self):
         """
-        形态002：
-        20日布林的上升和水平层级差
+        形态003：
+        日线9连阴
 
         过滤标准：
-        1、日线级别20布林的上升和水平层级差
 
         :return:
         """
@@ -1446,21 +1469,22 @@ class Yline:
             self.patternResult['101_20BollDay4B'] = patternResult
             return
         # print(self.Index[-1])
-        if self._lastFirstK['mid'] > self._lastSecondK['mid'] + 0.01:
+        if self._lastFirstK['mid'] >= self._lastSecondK['mid'] + 0.01:
             patternResult['中轨状态'] = 1
-        if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01 \
+        if self._lastFirstK['mid'] <= self._lastSecondK['mid'] - 0.01 \
                 and (self._lastSecondK['mid'] - self._lastFirstK['mid']) / self._lastSecondK['mid'] >= 0.01:
             patternResult['中轨状态'] = -1
         maxChg = 0
         for k in self._Kvalue:
             maxChg = max(k['涨幅'], maxChg)
-            # print(k['序号'], maxChg)
+        # print(self._Kvalue)
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
         patternResult['回调次数'] = self._fallTimes
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
+        patternResult['近期最高位置'] = self.maxLevel
         patternResult['前期最大涨幅'] = maxChg
         patternResult['阳线占比'] = round(self.bull_por, 3)
         patternResult['K线概况']['阳线数'] = self.get_bull_length()
@@ -1545,9 +1569,9 @@ class Yline:
             self.patternResult['101_20Boll60F4B'] = patternResult
             return
         # print('self._fallTimes', self.Index[-1])
-        if self._lastFirstK['mid'] > self._lastSecondK['mid'] + 0.01:
+        if self._lastFirstK['mid'] >= self._lastSecondK['mid'] + 0.01:
             patternResult['中轨状态'] = 1
-        if self._lastFirstK['mid'] < self._lastSecondK['mid'] - 0.01:
+        if self._lastFirstK['mid'] <= self._lastSecondK['mid'] - 0.01:
             patternResult['中轨状态'] = -1
         patternResult['近期层级类型'] = self._lastLevelName
         patternResult['层级差得分'] = round(self._lastLevelResult * 100, 3)
@@ -1555,6 +1579,7 @@ class Yline:
         patternResult['K线位于20布林位置'] = self.Index[-1]['布林']
         patternResult['K线位于144布林位置'] = self.Index[-1]['144布林']
         patternResult['近期最大涨幅'] = self.maxChange
+        patternResult['近期最高位置'] = self.maxLevel
         patternResult['阳线占比'] = round(self.bull_por, 3)
         patternResult['K线概况']['阳线数'] = self.get_bull_length()
         patternResult['K线概况']['阴线数'] = self.get_bear_length()

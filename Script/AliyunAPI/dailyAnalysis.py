@@ -13,7 +13,7 @@ aliyun_appcode = 'c7689f18e1484e9faec07122cc0b5f9e'
 showapi_appcode = '6a09e5fe3e724252b35d571a0b715baa'
 tempPath = 'z:/test/codeList.txt'
 ref_List = {'KtimeType': '60',
-            'KbeginDay': '20170701',
+            'KbeginDay': '20160101',
             'KallLength': 160,
             'KgetLength': 121,
             'TdayLength': 5,
@@ -23,8 +23,8 @@ ref_List = {'KtimeType': '60',
 """前期参数设定"""
 KtimeType = 1
 beginDate = ''
-dateLength = 160
-getLength = 121
+dateLength = 200
+getLength = 200
 debuger = input('Want to debuger? (1/0): ')
 needCodeRefresh = input('Want to refresh codeList? (1/0): ')
 needBlockRefresh = input('Want to refresh blockList? (1/0): ')
@@ -45,7 +45,8 @@ else:
 
 """获取code列表"""
 if debuger:
-    codeList = ['002156']
+    codeList = ['002017', '600231', '002843', '002856']
+    codeList = ['603926']
 else:
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
@@ -94,8 +95,8 @@ for i in range(0, length, PoolLength):
 result = r.getResultValue()
 # print(result)
 print()
-print('003')
-for a in result['003']:
+print('101')
+for a in result['101']:
     print(a['code'])
 print()
 
@@ -301,6 +302,7 @@ sDB.commit()
 
 增加：
 1、攻击上轨次数；
-2、分时最大量能，不能是阴量，除去首分钟，分析分时阳线与阴线关系.
+2、分时最大量能，不能是阴量，除去首分钟，分析分时阳线与阴线关系;
+3、回调的票，需要到达压力线？
 
 """

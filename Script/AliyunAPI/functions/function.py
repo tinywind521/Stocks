@@ -450,15 +450,15 @@ def calDayStatus(obj):
         tempArg['code'] = codeArg
         tempArg['value'] = round(y.status, 3)
         tempArg['result'] = y.patternResult
-        # print(codeArg)
+        # print(tempArg['result']['101_20BollDay4B'])
         if tempArg['result']['001_144BollUpper20BollUpside']['结果'] == 1:
             objResult.setResultAppend('001', tempArg)
         # if tempArg['result']['002_20DayBollRaiseAndHoriLevel']['结果'] == 1:
         #     objResult.setResultAppend('002', tempArg)
-        if tempArg['result']['003_Day9Bears']['结果'] == 1:
-            objResult.setResultAppend('003', tempArg)
+        # if tempArg['result']['003_Day9Bears']['结果'] == 1:
+        #     objResult.setResultAppend('003', tempArg)
         # if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90:
-        if tempArg['result']['101_20BollDay4B']['结果'] == 1 and tempArg['value'] >= 90 \
+        if tempArg['result']['101_20BollDay4B']['结果'] == 1\
                 and tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 10:
             objResult.setResultAppend('101', tempArg)
         del tempArg
@@ -504,12 +504,20 @@ def cal60FStatus(obj):
         中轨以上，回调次数放宽；
         中轨及其下方，只接受一次调整，以确保B3/4以及回撤后的二次启动。
         """
-        # print(tempArg['result']['101_20Boll60F4B']['结果'])
-        # print(tempArg['result']['101_20BollDay4B']['结果'])
-        # print(tempArg['result']['101_20Boll60F4B']['中轨状态'])
-        # print(tempArg['result']['101_20BollDay4B']['中轨状态'])
+        # print('结果', ': ', tempArg['result']['101_20Boll60F4B']['结果'])
+        # print('结果', ': ', tempArg['result']['101_20BollDay4B']['结果'])
+        # print('中轨状态', ': ', tempArg['result']['101_20Boll60F4B']['中轨状态'])
+        # print('中轨状态', ': ', tempArg['result']['101_20BollDay4B']['中轨状态'])
+        # print('K线位于20布林位置', ': ', tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'])
+        # print('K线位于20布林位置', ': ', tempArg['result']['101_20BollDay4B']['K线位于20布林位置'])
+        # print('回调次数', ': ', tempArg['result']['101_20Boll60F4B']['回调次数'])
+        # print('回调次数', ': ', tempArg['result']['101_20BollDay4B']['回调次数'])
+        # print('层级差得分', ': ', tempArg['result']['101_20Boll60F4B']['层级差得分'])
+        # print('层级差得分', ': ', tempArg['result']['101_20BollDay4B']['层级差得分'])
+        # print('阳线占比', ': ', tempArg['result']['101_20Boll60F4B']['阳线占比'])
+        # print('阳线占比', ': ', tempArg['result']['101_20BollDay4B']['阳线占比'])
         if tempArg['result']['101_20Boll60F4B']['结果'] == 1:
-            # print(123)
+            # print('第一轮判断')
             if ((tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
                  and tempArg['result']['101_20BollDay4B']['回调次数'] == 0)
                 or (2 >= tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= -1
@@ -517,27 +525,28 @@ def cal60FStatus(obj):
                     or (2 >= tempArg['result']['101_20BollDay4B']['K线位于20布林位置'] >= 1
                         and tempArg['result']['101_20BollDay4B']['回调次数'] == 2))\
                 \
-                    and ((tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
+                    and ((2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1
                           and 1 <= tempArg['result']['101_20Boll60F4B']['回调次数'] <= 2)
-                         or (2 >= tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= 1
+                         or (tempArg['result']['101_20Boll60F4B']['K线位于20布林位置'] >= -1
                              and tempArg['result']['101_20Boll60F4B']['回调次数'] == 0))\
                 \
                     and ((tempArg['result']['101_20BollDay4B']['中轨状态'] == 0
                          and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 1)
                          or (tempArg['result']['101_20BollDay4B']['中轨状态'] >= 1
                              and tempArg['result']['101_20Boll60F4B']['中轨状态'] >= 0)) \
-                    and ((tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 2
-                          and tempArg['result']['101_20Boll60F4B']['回调次数'] == 0)
-                         or (tempArg['result']['101_20BollDay4B']['前期最大涨幅'] >= 5
-                             and 2 >= tempArg['result']['101_20Boll60F4B']['回调次数'] >= 1)):
-                # print(123)
-                if tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 50 \
-                        and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 90
-                             or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):
+                    and ((tempArg['result']['101_20BollDay4B']['近期最大涨幅'] >= 3
+                          and tempArg['result']['101_20BollDay4B']['回调次数'] == 0)
+                         or (tempArg['result']['101_20BollDay4B']['近期最大涨幅'] >= 8
+                             and 2 >= tempArg['result']['101_20BollDay4B']['回调次数'] >= 1
+                             and tempArg['result']['101_20BollDay4B']['近期最高位置'] >= 2)):
+                # print('第二轮判断')
+                if tempArg['result']['101_20BollDay4B']['阳线占比'] >= 50 \
+                        and (tempArg['result']['101_20BollDay4B']['层级差得分'] >= 90
+                             or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0):
                     objResult.setResultAppend('101', tempArg)
-                elif tempArg['result']['101_20Boll60F4B']['阳线占比'] >= 30 \
-                        and (tempArg['result']['101_20Boll60F4B']['层级差得分'] >= 92.5
-                             or tempArg['result']['101_20Boll60F4B']['层级差得分'] == 0):
+                elif tempArg['result']['101_20BollDay4B']['阳线占比'] >= 30 \
+                        and (tempArg['result']['101_20BollDay4B']['层级差得分'] >= 92.5
+                             or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0):
                     objResult.setResultAppend('101', tempArg)
                 else:
                     pass
