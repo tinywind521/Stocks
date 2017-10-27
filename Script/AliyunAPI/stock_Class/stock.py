@@ -473,6 +473,8 @@ class Yline:
         """minVol 近期地量"""
         self.minVol = 0
         self._YY_VolumnList = None
+
+        """打印！！！"""
         self._setPrint = 0
         if para is None:
             para = {
@@ -1023,6 +1025,8 @@ class Yline:
             if self._levelList[-1][-1]['布林'] >= self._levelList[-2][-1]['布林']:
                 temp = self._levelList.pop()
                 self._bull_length -= len(temp)
+                if self._setPrint:
+                    print('self._bull_length：', self._bull_length)
         except IndexError:
             pass
 
@@ -1034,6 +1038,9 @@ class Yline:
             _levelList = self._levelList[-1][-1]['序号']
         else:
             _levelList = 0
+        if self._setPrint:
+            print('self._levelList[-1][-1]：', self._levelList[-1][-1])
+            print("self._seq[-1][-1]：", self._seq[-1][-1])
         self._all_length = self._seq[-1][-1]['序号'] - _levelList + 1
         self._bull_length = self._all_length - self._bear_length
         # print(self._all_length)
@@ -1131,6 +1138,10 @@ class Yline:
         """ 阳线占比 """
         self.bull_por = 100 * (self._bull_length / self._all_length)
         if self._setPrint:
+            print('bullLength：' + format(self._bull_length, 'd'))
+            print('bearLength：' + format(self._bear_length, 'd'))
+            print('allLength：' + format(self._all_length, 'd'))
+
             print('阳线占比：' + format(self.bull_por, '0.3f'))
             print('最终结果：' + format(self.status, '0.3f'))
 

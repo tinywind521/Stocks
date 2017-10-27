@@ -540,16 +540,19 @@ def cal60FStatus(obj):
                              and 2 >= tempArg['result']['101_20BollDay4B']['回调次数'] >= 1
                              and tempArg['result']['101_20BollDay4B']['近期最高位置'] >= 2)):
                 # print('第二轮判断')
-                if tempArg['result']['101_20BollDay4B']['阳线占比'] >= 50 \
-                        and (tempArg['result']['101_20BollDay4B']['层级差得分'] >= 90
-                             or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0):
+                # if tempArg['result']['101_20BollDay4B']['阳线占比'] >= 50 \
+                #         and (tempArg['result']['101_20BollDay4B']['层级差得分'] >= 90
+                #              or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0):
+                #     objResult.setResultAppend('101', tempArg)
+                # elif tempArg['result']['101_20BollDay4B']['阳线占比'] >= 30 \
+                #         and (tempArg['result']['101_20BollDay4B']['层级差得分'] >= 92.5
+                #              or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0):
+                #     objResult.setResultAppend('101', tempArg)
+                # else:
+                #     pass
+                if tempArg['result']['101_20BollDay4B']['层级差得分'] >= 90 \
+                        or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0:
                     objResult.setResultAppend('101', tempArg)
-                elif tempArg['result']['101_20BollDay4B']['阳线占比'] >= 30 \
-                        and (tempArg['result']['101_20BollDay4B']['层级差得分'] >= 92.5
-                             or tempArg['result']['101_20BollDay4B']['层级差得分'] == 0):
-                    objResult.setResultAppend('101', tempArg)
-                else:
-                    pass
         del tempArg
     else:
         pass

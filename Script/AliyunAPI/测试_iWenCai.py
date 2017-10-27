@@ -10,6 +10,7 @@ addName = '.csv'
 date = time.strftime("%Y%m%d", time.localtime())
 # date = '20171020'
 print(date)
+lastDate = input("Input last date (20170101): ")
 
 keyWords = [
                 {
@@ -24,6 +25,12 @@ keyWords = [
                     'fileName': date + '_data' + addName,
                     'name': 'data',
                     'PoolLength': 10
+                },
+                {
+                    'keyWord': lastDate + '的大宗交易笔数',
+                    'fileName': lastDate + '_lastDateDZ' + addName,
+                    'name': 'dz',
+                    'PoolLength': 1
                 },
                 {
                     'keyWord': date + '的大宗交易笔数',
