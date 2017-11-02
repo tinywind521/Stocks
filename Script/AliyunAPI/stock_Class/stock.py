@@ -1599,6 +1599,17 @@ class Yline:
         # print(patternResult)
         self.patternResult['101_20Boll60F4B'] = patternResult
 
+    def _pattern_102_DayLimitUpSecondWave(self, KtimeType):
+        # print(self._lastFirstK)
+        # print(self._lastSecondK)
+        if KtimeType == 'day':
+            # print(KtimeType)
+            self._pattern_101_20BollDay4B()
+        elif KtimeType == '60':
+            # print(KtimeType)
+            self._pattern_101_20Boll60F4B()
+        else:
+            raise ValueError("KtimeType输入值不正确! 输入值为：", str(KtimeType))
 
 """
 中轨必须至少一个是上行的。
