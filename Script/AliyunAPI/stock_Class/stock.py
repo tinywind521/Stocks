@@ -467,7 +467,7 @@ class Yline:
         """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144', 'maxLevel',
-                          '涨幅', '开收', '量能', '上针',
+                          '涨幅', '开收', '量能', '上针', '上波首次涨停',
                           '下针', '布林', '144布林', '底部', '轨距', '层级', '趋势', '平台']
 
         """minVol 近期地量"""
@@ -1175,6 +1175,7 @@ class Yline:
             # self._pattern_003_Day9Bears()
             pass
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
+        self._pattern_102_DayLimitUpSecondWave(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
@@ -1389,6 +1390,11 @@ class Yline:
         self.patternResult['100_20BollAnd144BollFirstWave'] = patternResult
 
     def _pattern_101_20BollDayAnd60fDoubleB3(self, KtimeType):
+        """
+        布林日线、60F双B3
+        :param KtimeType:
+        :return:
+        """
         # print(self._lastFirstK)
         # print(self._lastSecondK)
         if KtimeType == 'day':
@@ -1600,16 +1606,35 @@ class Yline:
         self.patternResult['101_20Boll60F4B'] = patternResult
 
     def _pattern_102_DayLimitUpSecondWave(self, KtimeType):
+        """
+        涨停后的第二波、过60F压力线
+        :param KtimeType:
+        :return:
+        """
         # print(self._lastFirstK)
         # print(self._lastSecondK)
         if KtimeType == 'day':
             # print(KtimeType)
-            self._pattern_101_20BollDay4B()
+            self._pattern_102_DayLimitUpStartPoint()
         elif KtimeType == '60':
             # print(KtimeType)
-            self._pattern_101_20Boll60F4B()
+            self._pattern_102_60F_BrakeTrendLine()
         else:
             raise ValueError("KtimeType输入值不正确! 输入值为：", str(KtimeType))
+
+    def _pattern_102_DayLimitUpStartPoint(self):
+        # print(self._Kvalue)
+        print()
+        for i in range(len(self._Kvalue)-1, -1, -1):
+            print(self._Kvalue[i])
+            pass
+
+        pass
+
+    def _pattern_102_60F_BrakeTrendLine(self):
+        pass
+
+
 
 """
 中轨必须至少一个是上行的。
