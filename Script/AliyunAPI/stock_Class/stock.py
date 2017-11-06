@@ -33,7 +33,7 @@ class Stock:
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
                         '布林': 0, '55布林': 0, '144布林': 0, '轨距': 0, '层级': '',
-                        '趋势': None, '底部': None, 'maxLevel': 0,
+                        '趋势': None, '底部': None, 'maxLevel': 0, '上波首次涨停': None,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
     def get_ref_List(self):
@@ -1626,6 +1626,7 @@ class Yline:
         # print(self._Kvalue)
         print()
         for i in range(len(self._Kvalue)-1, -1, -1):
+            """此处需要改为，最近xx根K线内"""
             print(self._Kvalue[i])
             pass
 
