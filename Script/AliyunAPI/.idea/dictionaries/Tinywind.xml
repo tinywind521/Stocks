@@ -12,6 +12,7 @@
       <w>ksingle</w>
       <w>lastclose</w>
       <w>mainindex</w>
+      <w>pyinstaller</w>
       <w>realtime</w>
       <w>rootdir</w>
       <w>showapi</w>

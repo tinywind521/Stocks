@@ -1173,7 +1173,7 @@ class Yline:
             # self._pattern_003_Day9Bears()
             pass
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
-        self._pattern_102_DayLimitUpSecondWave(KtimeType)
+        # self._pattern_102_DayLimitUpSecondWave(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
