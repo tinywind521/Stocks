@@ -33,7 +33,7 @@ class Stock:
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
                         '布林': 0, '55布林': 0, '144布林': 0, '轨距': 0, '层级': '',
-                        '趋势': None, '底部': None, 'maxLevel': 0, '上波首次涨停': None,
+                        '趋势': None, '底部': None, 'maxLevel': 0,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
     def get_ref_List(self):
@@ -467,7 +467,7 @@ class Yline:
         """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144', 'maxLevel',
-                          '涨幅', '开收', '量能', '上针', '上波首次涨停',
+                          '涨幅', '开收', '量能', '上针',
                           '下针', '布林', '144布林', '底部', '轨距', '层级', '趋势', '平台']
 
         """minVol 近期地量"""
@@ -1145,8 +1145,6 @@ class Yline:
             print('阳线占比：' + format(self.bull_por, '0.3f'))
             print('最终结果：' + format(self.status, '0.3f'))
 
-        # 1、注意底部起来的连续阳线；
-
         """
         未完成的任务：
         2、计算水平，上升和下降层级差，不同的层级差对中间阳线的量能要求不一样
@@ -1624,12 +1622,27 @@ class Yline:
 
     def _pattern_102_DayLimitUpStartPoint(self):
         # print(self._Kvalue)
+        patternResult = {'序号': '102',
+                         '名称': '涨停回撤过压力线',
+                         '结果': 0,
+                         '近期层级类型': None,
+                         '层级差得分': 0,
+                         '回调次数': 0,
+                         'K线位于20布林位置': None,
+                         'K线位于144布林位置': None,
+                         '近期最大涨幅': 0,
+                         }
         print()
-        for i in range(len(self._Kvalue)-1, -1, -1):
-            """此处需要改为，最近xx根K线内"""
+        m = 60
+        LastLimitUpStat = None
+        LastLimitUpNum = None
+        LastBottomStat = None
+        LastBottomNum = None
+        for i in range(-1, -m-1, -1):
+            """此处需要改为，最近m根内"""
             print(self._Kvalue[i])
             pass
-
+        self.patternResult['102_DayLimitUpStartPoint'] = patternResult
         pass
 
     def _pattern_102_60F_BrakeTrendLine(self):
