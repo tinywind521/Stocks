@@ -1173,7 +1173,7 @@ class Yline:
             # self._pattern_003_Day9Bears()
             pass
         self._pattern_101_20BollDayAnd60fDoubleB3(KtimeType)
-        # self._pattern_102_DayLimitUpSecondWave(KtimeType)
+        self._pattern_102_DayLimitUpSecondWave(KtimeType)
 
     def _pattern_001_144BollUpper20BollUpside(self):
         """
@@ -1625,20 +1625,25 @@ class Yline:
         patternResult = {'序号': '102',
                          '名称': '涨停回撤过压力线',
                          '结果': 0,
-                         '近期层级类型': None,
-                         '层级差得分': 0,
+                         '上次涨停距离': 0,
+                         '上次涨停前底部距离': 0,
+                         '近期跌幅': 0,
                          '回调次数': 0,
                          'K线位于20布林位置': None,
-                         'K线位于144布林位置': None,
-                         '近期最大涨幅': 0,
                          }
         print()
         m = 60
-        LastLimitUpStat = None
+        """最近m天内出现涨停"""
+        LastLimitUp = 9
+        """上次涨停的涨幅标准（名义涨停，可多日）"""
         LastLimitUpNum = None
-        LastBottomStat = None
+
+        LastBottom = -2
+        """上次涨停前的底部标准"""
         LastBottomNum = None
-        for i in range(-1, -m-1, -1):
+
+        judgeLength = min(m + 1, len(self._Kvalue))
+        for i in range(-1, -judgeLength, -1):
             """此处需要改为，最近m根内"""
             print(self._Kvalue[i])
             pass
