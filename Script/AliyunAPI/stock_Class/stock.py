@@ -1631,7 +1631,7 @@ class Yline:
                          '回调次数': 0,
                          'K线位于20布林位置': None,
                          }
-        print()
+        # print()
         m = 60
         """最近m天内出现涨停"""
         LastLimitUp = 9
