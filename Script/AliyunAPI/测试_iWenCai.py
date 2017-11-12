@@ -8,7 +8,7 @@ addName = '.csv'
 
 # 自动和手动日期切换
 date = time.strftime("%Y%m%d", time.localtime())
-# date = '20171020'
+# date = '20171110'
 print(date)
 # lastDate = input("Input last date (20170101): ")
 

@@ -1645,7 +1645,7 @@ class Yline:
         judgeLength = min(m + 1, len(self._Kvalue))
         for i in range(-1, -judgeLength, -1):
             """此处需要改为，最近m根内"""
-            print(self._Kvalue[i])
+            # print(self._Kvalue[i])
             pass
         self.patternResult['102_DayLimitUpStartPoint'] = patternResult
         pass
