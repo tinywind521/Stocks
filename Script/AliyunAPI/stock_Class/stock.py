@@ -33,7 +33,7 @@ class Stock:
         # self.value = self.get_KValue()
         self.Kstatus = {'涨幅': 0, '开收': 0, '量能': 0, '上针': 0, '下针': 0,
                         '布林': 0, '55布林': 0, '144布林': 0, '轨距': 0, '层级': '',
-                        '趋势': None, '底部': None, 'maxLevel': 0,
+                        '趋势': None, '底部': None, 'maxLevel': 0, 'code': self.code,
                         '平台': '', '序号': 0, '预留': '', '备用': ''}
 
     def get_ref_List(self):
@@ -467,7 +467,7 @@ class Yline:
         """过程参数"""
         self._paraList = ['序号', 'time', 'open', 'min', 'max', 'close', 'lastclose', 'volumn',
                           'upper', 'mid', 'lower', 'upper144', 'mid144', 'lower144', 'maxLevel',
-                          '涨幅', '开收', '量能', '上针',
+                          '涨幅', '开收', '量能', '上针', 'code',
                           '下针', '布林', '144布林', '底部', '轨距', '层级', '趋势', '平台']
 
         """minVol 近期地量"""
@@ -1634,19 +1634,42 @@ class Yline:
         # print()
         m = 60
         """最近m天内出现涨停"""
-        LastLimitUp = 9
+        LastLimitUp = 8
         """上次涨停的涨幅标准（名义涨停，可多日）"""
-        LastLimitUpNum = None
+        LastLimitUpNum = 0
+        LimitUp_ed = None
 
         LastBottom = -2
         """上次涨停前的底部标准"""
-        LastBottomNum = None
-
+        LastBottomNum = 0
+        Bottom_ed = None
+        valueList = [0, 0, 0, 0, 0]
+        kMax = 0
+        maxValue = 0
         judgeLength = min(m + 1, len(self._Kvalue))
         for i in range(-1, -judgeLength, -1):
-            """此处需要改为，最近m根内"""
-            # print(self._Kvalue[i])
+            if not LimitUp_ed:
+                kMax = max(self._Kvalue[i]['open'], self._Kvalue[i]['close'])
+                valueList.pop(0)
+                valueList.append(kMax)
+                maxValue = max(maxValue, kMax)
+                if self._Kvalue[i]['涨幅'] >= LastLimitUp:
+                    print()
+                    print(self._Kvalue[i]['code'], self._Kvalue[i]['time'], i, valueList, maxValue)
+                    LimitUp_ed = True
+                    LastLimitUpNum = i
+            if self._Kvalue[i]['布林'] <= LastBottom and LimitUp_ed and (not Bottom_ed):
+                Bottom_ed = True
+                LastBottomNum = i
+            if LimitUp_ed and Bottom_ed and True:
+                break
             pass
+        kMax = max(valueList)
+        if maxValue == kMax:
+            pass
+        patternResult['上次涨停距离'] = LastLimitUpNum
+        patternResult['上次涨停前底部距离'] = LastBottomNum
+        patternResult['近期跌幅'] = self._Kvalue[-1]['close']
         self.patternResult['102_DayLimitUpStartPoint'] = patternResult
         pass
 
