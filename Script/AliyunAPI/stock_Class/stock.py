@@ -1654,8 +1654,8 @@ class Yline:
                 valueList.append(kMax)
                 maxValue = max(maxValue, kMax)
                 if self._Kvalue[i]['涨幅'] >= LastLimitUp:
-                    print()
-                    print(self._Kvalue[i]['code'], self._Kvalue[i]['time'], i, valueList, maxValue)
+                    # print()
+                    # print(self._Kvalue[i]['code'], self._Kvalue[i]['time'], i, valueList, maxValue)
                     LimitUp_ed = True
                     LastLimitUpNum = i
             if self._Kvalue[i]['布林'] <= LastBottom and LimitUp_ed and (not Bottom_ed):
