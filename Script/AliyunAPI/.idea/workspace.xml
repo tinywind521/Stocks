@@ -17,7 +17,7 @@
       <file leaf-file-name="stock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="4899">
               <caret line="1511" column="0" lean-forward="false" selection-start-line="1511" selection-start-column="0" selection-end-line="1511" selection-end-column="0" />
               <folding>
                 <element signature="e#1253#1274#0" expanded="false" />
@@ -72,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="测试_iWenCai.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="测试_iWenCai.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="74">
@@ -82,7 +82,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dailyAnalysis.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dailyAnalysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="682">
@@ -95,7 +95,7 @@
       <file leaf-file-name="function.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions/function.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9636">
+            <state relative-caret-position="10074">
               <caret line="445" column="0" lean-forward="false" selection-start-line="445" selection-start-column="0" selection-end-line="445" selection-end-column="0" />
               <folding />
             </state>
@@ -463,12 +463,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18154311" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.49342105" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2944079" sideWeight="0.5091603" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="138" y="267" width="1099" height="441" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.4908397" order="2" side_tool="false" content_ui="tabs" x="480" y="292" width="1099" height="441" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24886535" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -777,7 +778,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/functions/function.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9636">
+        <state relative-caret-position="10074">
           <caret line="445" column="0" lean-forward="false" selection-start-line="445" selection-start-column="0" selection-end-line="445" selection-end-column="0" />
           <folding />
         </state>
@@ -814,7 +815,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
+        <state relative-caret-position="4899">
           <caret line="1511" column="0" lean-forward="false" selection-start-line="1511" selection-start-column="0" selection-end-line="1511" selection-end-column="0" />
           <folding>
             <element signature="e#1253#1274#0" expanded="false" />
@@ -868,18 +869,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="682">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
