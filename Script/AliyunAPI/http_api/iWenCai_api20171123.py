@@ -6,7 +6,6 @@ import math
 import json
 import time
 import sys
-import requests
 
 from stock_Class.ResultDeal import ResultDeal
 from multiprocessing.dummy import Pool as ThreadPool
@@ -20,8 +19,7 @@ def get_iWenCai(keyWord, PoolLength=1):
     """
 
     "getToken"
-    tokenMainHost = 'https://www.iwencai.com/stockpick/robot-search?'
-    # tokenMainHost = 'http://www.iwencai.com/stockpick/search?'
+    tokenMainHost = 'http://www.iwencai.com/rapid/entry-search?'
     tokenRefererHost = 'http://www.iwencai.com/data-robot/extraction?'
     # method = 'GET'
     tokenBodys = {
@@ -53,7 +51,7 @@ def get_iWenCai(keyWord, PoolLength=1):
     tokenReferer = tokenRefererHost + urllib.parse.urlencode(tokenRef)
     print(tokenURL)
     content = req(tokenURL, tokenBodys, tokenHeaders, tokenReferer)
-    # print(content)
+    print(content)
     tokenAll = dict(eval(('{' + content.partition('var allResult = {')[2].partition(';\n')[0])
                          .replace(':true', ':True').replace(':false', ':False').replace(':null', ':None')))
     code_count = tokenAll['code_count']
@@ -119,12 +117,9 @@ def req(url, data, headers, referer=None):
     """
     while True:
         try:
-            # print('hehehehe', requests.get(url, headers=headers, allow_redirects=False).text)
             request = urllib.request.Request(url)
             request.add_header('Connection',
                                'keep-alive')
-            request.add_header('allow_redirects',
-                               'False')
             while True:
                 try:
                     response = urllib.request.urlopen(request, timeout=5)
