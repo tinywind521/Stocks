@@ -47,7 +47,7 @@ def get_iWenCai(keyWord, PoolLength=1):
                 'Connection': 'keep-alive',
                 'Host': 'www.iwencai.com',
                 'Upgrade-Insecure-Requests': '1',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.1.3071.115 Safari/537.36',
                }
     tokenURL = tokenMainHost + urllib.parse.urlencode(tokenBodys)
     tokenReferer = tokenRefererHost + urllib.parse.urlencode(tokenRef)
