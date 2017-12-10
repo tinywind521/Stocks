@@ -20,56 +20,70 @@ def get_iWenCai(keyWord, PoolLength=1):
     """
 
     "getToken"
-    tokenMainHost = 'https://www.iwencai.com/stockpick/robot-search?'
-    # tokenMainHost = 'http://www.iwencai.com/stockpick/search?'
-    tokenRefererHost = 'http://www.iwencai.com/data-robot/extraction?'
+    # tokenMainHost = 'http://www.iwencai.com/stockpick/load-data?preParams=&ts=1&f=1&querytype=&searchfilte=&tid=stockpick&qs=zxmcxh&typed=0&selfsectsn=&queryarea='
+    tokenMainHost = 'http://www.iwencai.com/stockpick/load-data?'
+    tokenRefererHost = 'https://www.iwencai.com/stockpick/search?'
+    # tokenRefererHost = 'https://www.iwencai.com/stockpick/search?preParams=&ts=1&f=1&querytype=&searchfilter=&tid=stockpick&qs=zhineng'
     # method = 'GET'
     tokenBodys = {
                 'preParams': '',
                 'ts': '1',
                 'f': '1',
-                'verticalType': 'iwencai',
-                'querytype': 'stock',
+                'querytype': '',
                 'searchfilte': '',
                 'tid': 'stockpick',
-                'qs': 'zhineng',
+                'qs': 'zxmcxh',
                 'w': keyWord,
-                'isDataRobot': '',
+                'typed': '0',
+                'selfsectsn': '',
+                'queryarea': '',
             }
     tokenRef = {
                 'query': keyWord,
+                'qs': 'zhineng',
                 'querytype': 'stock',
+                'preParams': '',
+                'ts': '1',
+                'f': '1',
+                'tid': 'stockpick',
            }
     tokenHeaders = {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'zh-CN,zh;q=0.8',
+                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8',
                 'Connection': 'keep-alive',
                 'Host': 'www.iwencai.com',
-                'Upgrade-Insecure-Requests': '1',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.1.3071.115 Safari/537.36',
+                'hexin-v': 'Aj8_HX0jWVuzD11H7pgLlZUozhjMJJEVrXyXstEM2Vo1q1HM2fQjFr1IJwDh',
+                # 'Upgrade-Insecure-Requests': '1',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Cookie': '',
                }
     tokenURL = tokenMainHost + urllib.parse.urlencode(tokenBodys)
     tokenReferer = tokenRefererHost + urllib.parse.urlencode(tokenRef)
     print(tokenURL)
     content = req(tokenURL, tokenBodys, tokenHeaders, tokenReferer)
     # print(content)
-    tokenAll = dict(eval(('{' + content.partition('var allResult = {')[2].partition(';\n')[0])
-                         .replace(':true', ':True').replace(':false', ':False').replace(':null', ':None')))
-    code_count = tokenAll['code_count']
-    token = tokenAll['token']
+    # tokenAll = dict(eval(('{' + content.partition('var allResult = {')[2].partition(';\n')[0])
+    #                      .replace(':true', ':True').replace(':false', ':False').replace(':null', ':None')))
+    tokenAll = dict(eval((content.replace(':true', ':True').replace(':false', ':False').replace(':null', ':None'))))
+    # print(tokenAll['data']['result'].keys())
+    code_count = tokenAll['data']['result']['code_count']
+    token = tokenAll['data']['result']['token']
 
     "getAllResult"
     MainHost = 'http://www.iwencai.com/stockpick/cache?'
     Referer = tokenURL
     Headers = {
-                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                 'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'zh-CN,zh;q=0.8',
+                'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8',
                 'Connection': 'keep-alive',
                 'Host': 'www.iwencai.com',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
-                'X-Requested-With': 'XMLHttpRequest',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36',
+                'Upgrade-Insecure-Requests': '1',
+                'Cookie': 'sp_search_last_right_status=show; other_uid=Ths_iwencai_Xuangu_pz2yqsq9umwzj46zj3sau4oed56rdvp0; other_uname=nnmo424153; user=MDp0aW55d2luZDUyMTo6Tm9uZTo1MDA6Mjg3NDE2NjUzOjUsMSw0MDs2LDEsNDA7NywxMTExMTExMTExMTAsNDA7OCwxMTExMDExMTAwMDAxMTExMTAwMTAwMDAwMSwxMjk7MzMsMDAwMTAwMDAwMDAwLDEyOTszNiwxMDAxMTExMTAwMDAxMTAwMTAxMTExMTEsMTI5OzQ2LDAwMDAxMTAwMTAwMDAwMTExMTExMTExMSwxMjk7NTEsMTEwMDAwMDAwMDAwMDAwMCwxMjk7NTgsMDAwMDAwMDAwMDAwMDAwMDEsMTI5Ozc4LDEsMTI5Ozg3LDAwMDAwMDAwMDAwMDAwMDAwMDAxMDAwMCwxMjk7NDQsMTEsNDA6MjQ6OjoyNzc0MTY2NTM6MTUxMjkxMDQ5Mzo6OjE0MzYxMDAzNjA6MjI3MTA3OjA6MThhYWM1YTJjNTdiYWVjYjM2ZjgxOGEzZDBkMTQ5ODYwOmRlZmF1bHRfMjow; userid=277416653; ticket=6e35a17b4c476a8bfaae5986d2da4589; ver_mark=c; guideState=1; v=Avz81JqSiqKV0b5-wSd4XMqpzZGr9aAfIpm049Z9COfKoZKF_gVwr3KphHIm; PHPSESSID=6464cb3615f41f7b7eae2c72e82f5052; cid=k44e4lnbm2er4l12pakhivkmd11503929938; ComputerID=k44e4lnbm2er4l12pakhivkmd11503929938'
+                # 'X-Requested-With': 'XMLHttpRequest',
             }
 
     # PoolLength = 10
@@ -103,7 +117,7 @@ def get_iWenCai(keyWord, PoolLength=1):
         pool.map(getAll, args)
         pool.close()
         pool.join()
-        time.sleep(1)
+        time.sleep(5)
     results = {'title': rd.getTitle(), 'results': rd.getArrayResultValue(), 'length': code_count}
     return results
 
@@ -119,7 +133,37 @@ def req(url, data, headers, referer=None):
     """
     while True:
         try:
-            # print('hehehehe', requests.get(url, headers=headers, allow_redirects=False).text)
+            # content = requests.get(url, headers=headers, allow_redirects=False).text
+            r = requests.get(url, headers=headers, allow_redirects=False)
+            # if headers['Cookie']:
+            #     # r = requests.get(url, headers=headers, cookies=headers['Cookie'], allow_redirects=False)
+            #     r = requests.get(url, headers=headers, cookies=headers['Cookie'])
+            # else:
+            #     # r = requests.get(url, headers=headers, allow_redirects=False)
+            #     r = requests.get(url, headers=headers)
+            # print(r.status_code)
+            content = r.text
+            # print(content)
+            if content:
+                return content
+            else:
+                return ''
+        except ValueError:
+            return None
+        except (socket.timeout, urllib.error):
+            pass
+
+
+def reqDetail(url, data, headers, referer=None):
+    """
+    :param url:
+    :param data:
+    :param referer:
+    :param headers:
+    :return:
+    """
+    while True:
+        try:
             request = urllib.request.Request(url)
             request.add_header('Connection',
                                'keep-alive')
@@ -130,7 +174,7 @@ def req(url, data, headers, referer=None):
                     response = urllib.request.urlopen(request, timeout=5)
                     response.close()
                     responseHeader = dict(response.info().items())
-                    # print(responseHeader)
+                    print(responseHeader)
                     try:
                         cookie = responseHeader['Set-Cookie']
                     except (KeyError, TypeError):
@@ -141,7 +185,7 @@ def req(url, data, headers, referer=None):
                 except socket.timeout or urllib.error:
                     pass
             # time.sleep(0.1)
-            # print(cookie)
+            print(cookie)
             request.add_header('Cookie',
                                cookie)
             if referer:
@@ -181,12 +225,23 @@ def getAll(arg):
     URL = arg['URL']
     Bodys = arg['Bodys']
     Headers = arg['Headers']
-    Referer = arg['Referer']
+    # Referer = arg['Referer']
+    Referer = None
     objResult = arg['objResult']
-    content = req(URL, Bodys, Headers, Referer)
-    r = json.loads(content)
-    # for k in r:
-    #     print(k)
+    # print('URL', URL)
+    # print('Referer', Referer)
+    # print('Headers', Headers)
+    while True:
+        try:
+            content = req(URL, Bodys, Headers, Referer)
+            r = json.loads(content)
+            # for k in r:
+            #     print(k)
+            break
+        except json.decoder.JSONDecodeError:
+            # print(content)
+            time.sleep(10)
+            pass
     objResult.setResultArrayExtend(r['result'])
     objResult.setTitle(r['title'])
 

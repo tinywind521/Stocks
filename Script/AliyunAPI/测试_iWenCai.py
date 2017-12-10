@@ -8,8 +8,10 @@ addName = '.csv'
 
 # 自动和手动日期切换
 date = time.strftime("%Y%m%d", time.localtime())
-# date = '20171128'
+# date = '20171208'
 print(date)
+daily = input('pass Daily? : ')
+pc = input('Need PC? : ')
 # lastDate = input("Input last date (20170101): ")
 
 keyWords = [
@@ -78,6 +80,10 @@ keyWords = [
 # keyWords = date + ',股票简称,涨跌幅,开盘价不复权,最高价不复权,最低价不复权,收盘价不复权,开盘价前复权,' \
 #                  '最高价前复权,最低价前复权,收盘价前复权,成交量(股),换手率(%),振幅,上市不超过，上市天数,技术形态,A股流通市值'
 for keyWord in keyWords:
+    if not pc and keyWord['name'] == 'pc':
+        continue
+    if daily and keyWord['name'] == 'daily':
+        continue
     print('Fetching ' + date + ' ' + keyWord['name'] + '...')
     r = iWenCai_api.get_iWenCai(keyWord['keyWord'], keyWord['PoolLength'])
     print()
