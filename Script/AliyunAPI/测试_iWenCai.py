@@ -8,11 +8,11 @@ addName = '.csv'
 
 # 自动和手动日期切换
 date = time.strftime("%Y%m%d", time.localtime())
-# date = '20171208'
+# date = '20171211'
 print(date)
 daily = input('pass Daily? : ')
 pc = input('Need PC? : ')
-# lastDate = input("Input last date (20170101): ")
+lastDate = input("Input last date (20180101): ")
 
 keyWords = [
                 {
@@ -28,12 +28,12 @@ keyWords = [
                     'name': 'data',
                     'PoolLength': 10
                 },
-                # {
-                #     'keyWord': lastDate + '的大宗交易笔数',
-                #     'fileName': lastDate + '_lastDateDZ' + addName,
-                #     'name': 'dz',
-                #     'PoolLength': 1
-                # },
+                {
+                    'keyWord': lastDate + '的大宗交易笔数',
+                    'fileName': lastDate + '_lastDateDZ' + addName,
+                    'name': 'dz',
+                    'PoolLength': 1
+                },
                 {
                     'keyWord': date + '的大宗交易笔数',
                     'fileName': date + '_dz' + addName,
@@ -53,7 +53,7 @@ keyWords = [
                     'PoolLength': 10
                 },
                 {
-                    'keyWord': date + '的涨停,' + date + '的首次涨停时间,' + date + '的最终涨停时间',
+                    'keyWord': date + '的涨停,' + date + '的首次涨停时间,' + date + '的涨停原因,' + date + '的最终涨停时间',
                     'fileName': date + '_limitup' + addName,
                     'name': 'limitup',
                     'PoolLength': 1
