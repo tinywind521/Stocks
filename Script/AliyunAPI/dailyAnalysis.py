@@ -46,7 +46,7 @@ else:
 """获取code列表"""
 if debuger:
     codeList = ['002017', '600231', '002843', '002856']
-    codeList = ['300618']
+    # codeList = ['300618']
 else:
     if os.path.exists(tempPath):
         if needCodeRefresh == '1':
