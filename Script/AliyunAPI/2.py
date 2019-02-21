@@ -3,7 +3,7 @@ import pymysql
 
 from file_io import txt, jsonFiles
 from functions import getValue, function
-from stock_Class.stock import ResultDeal
+from stock_Class.ResultDeal import ResultDeal
 from stock_Class.MySQL import MySQL
 from multiprocessing.dummy import Pool as ThreadPool
 

@@ -8,58 +8,18 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="927373559">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="11" />
-          <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.23" value="1" />
-          <entry key="project.open.time.38" value="1" />
-          <entry key="project.open.time.39" value="1" />
-          <entry key="project.open.time.4" value="4" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="11" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="24" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="24" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="5" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="5" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="AliyunAPI" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Witch_Ver0.00.py">
+        <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+            <state relative-caret-position="5754">
+              <caret line="274" lean-forward="true" selection-start-line="274" selection-end-line="274" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#3593#4430#0" />
-                <element signature="e#5943#6991#0" />
               </folding>
             </state>
           </provider>
@@ -122,7 +82,6 @@
         <option value="$PROJECT_DIR$/debug/Python学习/迭代器和生成器" />
         <option value="$PROJECT_DIR$/让Python代码更Pythonic" />
         <option value="$PROJECT_DIR$/Pythonic" />
-        <option value="$PROJECT_DIR$/2.py" />
         <option value="$PROJECT_DIR$/http_api/sina_api.py" />
         <option value="$PROJECT_DIR$/http_api/qtimq_cn.txt" />
         <option value="$PROJECT_DIR$/http_api/qtimq_api.py" />
@@ -143,6 +102,7 @@
         <option value="$PROJECT_DIR$/测试_iWenCai.py" />
         <option value="$PROJECT_DIR$/dailyAnalysis.py" />
         <option value="$PROJECT_DIR$/Witch_Ver0.00.py" />
+        <option value="$PROJECT_DIR$/2.py" />
       </list>
     </option>
   </component>
@@ -176,6 +136,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,7 +153,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,6 +350,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15852048" />
       <window_info id="Structure" order="1" weight="0.24834874" />
@@ -411,9 +372,27 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" />
     </layout>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15852048" />
+      <window_info id="Structure" order="1" weight="0.24834874" />
+      <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32826087" />
+      <window_info anchor="bottom" x="226" y="176" width="1029" height="526" id="Run" order="2" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.7576087" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.32894737" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.2944079" />
+      <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.6677632" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32894737" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
+    </layout-to-restore>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -422,9 +401,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
       <default-breakpoints>
         <breakpoint enabled="true" log-message="true" type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -435,13 +411,7 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://Z:/Python/Lib/json/decoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="354" selection-start-line="354" selection-end-line="354" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://Z:/Python/Lib/json/decoder.py" />
     <entry file="file://$PROJECT_DIR$/debug/showapi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -540,13 +510,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="55" column="13" lean-forward="true" selection-end-line="274" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/http_api/qtimq_cn.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
@@ -559,7 +522,6 @@
         <state relative-caret-position="-146" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stock_Class/ResultDeal.py" />
     <entry file="file://$PROJECT_DIR$/web/HelloWorld/HelloWorld/view.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -685,19 +647,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/Python/Lib/site-packages/requests/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/Python/Lib/os.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://Z:/Python/Lib/site-packages/pymysql/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://Z:/Python/Lib/site-packages/requests/api.py" />
+    <entry file="file://Z:/Python/Lib/os.py" />
+    <entry file="file://Z:/Python/Lib/site-packages/pymysql/__init__.py" />
     <entry file="file://$PROJECT_DIR$/fromgc/功能模块/量化K参数.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -728,19 +680,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1360">
-          <caret line="418" column="49" selection-start-line="418" selection-start-column="49" selection-end-line="418" selection-end-column="49" />
+        <state relative-caret-position="3690">
+          <caret line="401" column="12" selection-start-line="401" selection-start-column="12" selection-end-line="401" selection-end-column="12" />
+          <folding>
+            <element signature="e#12704#57464#0" />
+          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/stock_Class/ResultDeal.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Witch_Ver0.00.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
+        <state relative-caret-position="735">
           <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#3593#4430#0" />
             <element signature="e#5943#6991#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5754">
+          <caret line="274" lean-forward="true" selection-start-line="274" selection-end-line="274" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
