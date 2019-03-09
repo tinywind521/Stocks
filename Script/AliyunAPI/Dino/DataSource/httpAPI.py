@@ -5,7 +5,7 @@ import time
 import json
 
 
-class DataSource:
+class DataSourceQQ:
     """
     整个常用数据源的类对象：
     :param code:无前后缀的代码
@@ -26,8 +26,8 @@ class DataSource:
             raise ValueError('Invalid code:', code)
         self.length = length
         self.allLength = allLength
-        self.timeLine = self.__timeline()
-        self.timeLine5Days = self.__timeline5Days()
+        self.__timeline()
+        self.__timeline5Days()
         self.kLineDay = self.__realtime('day')
         self.kLine60F = self.__realtime('60')
 
@@ -37,17 +37,41 @@ class DataSource:
         获取分时数据
         :param code:
         :return:
-
         http://web.ifzq.gtimg.cn/appstock/app/minute/query?code=sh600010
         """
         host = 'http://web.ifzq.gtimg.cn/appstock/app/'
         path = 'minute/query'
         query = 'code=' + self.codeF
         url = host + path + '?' + query
-        # print(url)
+        # if __name__ == '__main__':
+        #     print(url)
+        content = self.__req(url, 0.02)
 
-        content = json.load(self.__req(url, 0.02))
-        return content
+        try:
+            result = []
+            all_dict = json.loads(content)
+            if __name__ == '__main__':
+                print(all_dict)
+            if all_dict['code'] == 0:
+                showapi_res_body = all_dict['data']
+                dataList = showapi_res_body[self.codeF]
+                # print(dataList)
+                temp = dict()
+                temp['date'] = dataList['data']['date']
+                timeLine = dataList['data']['data']
+                timeList = []
+                for timeElement in timeLine:
+                    timeArray = timeElement.split(' ')
+                    # timeKeys = ('time', 'nowPrice', 'volume')
+                    timeDict = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+                    timeList.append(timeDict)
+                temp['timeline'] = timeList
+                result = temp
+                self.timeLine = result
+            else:
+                raise ValueError
+        except ValueError:
+            self.timeLine = None
 
 
     def __timeline5Days(self):
@@ -55,17 +79,46 @@ class DataSource:
         获取五日分时数据
         :param code:
         :return:
-
         http://web.ifzq.gtimg.cn/appstock/app/day/query?code=sh600010
         """
         host = 'http://web.ifzq.gtimg.cn/appstock/app/'
         path = 'day/query'
         query = 'code=' + self.codeF
         url = host + path + '?' + query
-        # print(url)
+        # if __name__ == '__main__':
+        #     print(url)
+        content = self.__req(url, 0.02)
+        try:
+            result = []
+            all_dict = json.loads(content)
+            if __name__ == '__main__':
+                print(all_dict)
+            if all_dict['code'] == 0:
+                showapi_res_body = all_dict['data']
+                dataList = showapi_res_body[self.codeF]
+                # print(dataList)
 
-        content = json.load(self.__req(url, 0.02))
-        return content
+                timeListAllinOne = []
+                resultDaily = []
+                for dailyList in dataList['data'][::-1]:
+                    # print(dailyList)
+                    timeLine = dailyList['data']
+                    timeListDaily = []
+                    for timeElement in timeLine:
+                        timeArray = timeElement.split(' ')
+                        # timeKeys = ('time', 'nowPrice', 'volume')
+                        timeDictDaily = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+                        timeListDaily.append(timeDictDaily)
+
+                        timeDictAllinOne = {'date':dailyList['date'], 'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+                        timeListAllinOne.append(timeDictAllinOne)
+                    resultDaily.append({'date':dailyList['date'], 'data':timeListDaily})
+                resultAllinOne = timeListAllinOne
+                self.timeLine5DaysAllinOne = resultAllinOne
+                self.timeLine5DaysDaily = resultDaily
+        except ValueError:
+            self.timeLine5DaysAllinOne = None
+            self.timeLine5DaysDaily = None
 
 
     def __realtime(self, timeType):
@@ -79,20 +132,9 @@ class DataSource:
                                 month = 月k线。
                                 注意港股不支持5分、30分和60分k线。
         :return:
-
         http://web.ifzq.gtimg.cn/appstock/app/kline/mkline?param=sh600010,m60,,320
         http://web.ifzq.gtimg.cn/appstock/app/kline/kline?param=sz300100,day,,,1000
         """
-        # if len(code) == 6:
-        #     if code[0] == '6':
-        #         code = 'sh' + code
-        #     elif code[0] == '0' or code[0] == '3':
-        #         code = 'sz' + code
-        # elif len(code) == 8:
-        #     code = code
-        # else:
-        #     raise ValueError('Invalid code:', code)
-
         if timeType == '60':
             add_Kline = 'mKLine'
             timeValue = ',m60,,'
@@ -114,10 +156,11 @@ class DataSource:
 
         host = 'http://web.ifzq.gtimg.cn/appstock/app/kline/'
         path = add_Kline
-        query = 'param=' + code + timeValue + allLength
+        query = 'param=' + self.codeF + timeValue + allLength
         url = host + path + '?' + query
-
-        content = json.load(self.__req(url, 0.05))
+        # if __name__ == '__main__':
+        #     print(url)
+        content = json.loads(self.__req(url, 0.05))
         return content
 
 
@@ -130,7 +173,8 @@ class DataSource:
         """
 
         url.encode('utf-8')
-        # print(url)
+        if __name__ == '__main__':
+            print(url)
         socket.setdefaulttimeout(10)
         content = None
         for i in range(10):
@@ -157,7 +201,17 @@ class DataSource:
 
 
 if __name__ == '__main__':
-    code = input('Please input the code(600001): ')
-    test = DataSource(code)
+    #code = input('Please input the code(600001): ')
+    code = '000514'
+    if code != None:
+        test = DataSourceQQ(code)
+    else:
+        raise ValueError
     print(test.timeLine)
-    print(test.timeLine5Days)
+    for i in test.timeLine5DaysAllinOne:
+        print(i)
+    print()
+    for i in test.timeLine5DaysDaily:
+        print(i)
+    print(test.kLine60F)
+    print(test.kLineDay)

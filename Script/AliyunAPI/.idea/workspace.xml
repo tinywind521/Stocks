@@ -14,23 +14,23 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/http_api/qtimq_cn.txt">
+        <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+            <state relative-caret-position="294">
+              <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#12704#57464#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
+        <entry file="file://$PROJECT_DIR$/functions/getValue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#12704#57464#0" />
-              </folding>
+            <state relative-caret-position="-970">
+              <caret line="749" column="4" selection-start-line="749" selection-start-column="4" selection-end-line="749" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -47,27 +47,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI/qtimq_api.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="132" column="36" lean-forward="true" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
+            <state relative-caret-position="202">
+              <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#828#2211#0" />
+                <element signature="e#1249#1277#0" />
+                <element signature="e#1725#1753#0" />
+                <element signature="e#3463#3491#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI/httpAPI.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Study/Study.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="161" column="24" lean-forward="true" selection-start-line="161" selection-start-column="24" selection-end-line="161" selection-end-column="24" />
+            <state relative-caret-position="336">
+              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#1659#1679#0" />
+                <element signature="e#0#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +77,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/function.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="91" column="26" lean-forward="true" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
+            <state relative-caret-position="336">
+              <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,8 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/debug/python之文件的读写和文件目录以及文件夹的操作.py" />
-        <option value="$PROJECT_DIR$/debug/Python学习/Django" />
         <option value="$PROJECT_DIR$/web/HelloWorld/HelloWorld/urls.py" />
         <option value="$PROJECT_DIR$/web/HelloWorld/HelloWorld/settings.py" />
         <option value="$PROJECT_DIR$/web/HelloWorld/manage.py" />
@@ -178,6 +180,8 @@
         <option value="$PROJECT_DIR$/Dino/DataSource/getValue.py" />
         <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI/qtimq_api.py" />
         <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI/httpAPI.py" />
+        <option value="$PROJECT_DIR$/Study/Study.py" />
+        <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
       </list>
     </option>
   </component>
@@ -232,24 +236,12 @@
             <path>
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
               <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="Dino" type="462c0819:PsiDirectoryNode" />
-              <item name="DataSource" type="462c0819:PsiDirectoryNode" />
-              <item name="httpAPI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
               <item name="functions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
               <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="http_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="stock_Class" type="462c0819:PsiDirectoryNode" />
+              <item name="Study" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -267,19 +259,19 @@
     <property name="settings.editor.splitter.proportion" value="0.25395256" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\Resource\Stocks\Script\AliyunAPI\Dino\DataSource" />
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\functions" />
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\debug" />
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\debug\Python学习" />
+      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\gui" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="Z:\Resource\Stocks\Script\AliyunAPI\Dino\DataSource\httpAPI" />
       <recent name="Z:\Resource\Stocks\Script\AliyunAPI\Dino\DataSource" />
       <recent name="Z:\Resources\Stocks\Script\AliyunAPI\http_api" />
       <recent name="Z:\Resources\Stocks\Script\AliyunAPI\aliyun" />
       <recent name="Z:\Resources\Stocks\Script\AliyunAPI" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\functions" />
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\debug" />
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\debug\Python学习" />
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\gui" />
-      <recent name="Z:\Resources\Stocks\Script\AliyunAPI\fromgc\EXE" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -294,7 +286,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.httpAPI">
+  <component name="RunManager" selected="Python.httpAPI (1)">
     <configuration name="AudioDevice" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -316,7 +308,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="DrawPython" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Study" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -328,7 +320,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Study/DrawPython.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Study/Study.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="httpAPI (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AliyunAPI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Dino/DataSource" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -349,28 +362,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dino/DataSource/httpAPI/httpAPI.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="AliyunAPI" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/web/HelloWorld" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web/HelloWorld/manage.py" />
+      <option name="SCRIPT_NAME" value="Z:\Resource\Stocks\Script\AliyunAPI\Dino\DataSource\httpAPI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -415,19 +407,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.manage" />
-      <item itemvalue="Python.DrawPython" />
       <item itemvalue="Python.AudioDevice" />
       <item itemvalue="Python.qtimq_api" />
       <item itemvalue="Python.httpAPI" />
+      <item itemvalue="Python.Study" />
+      <item itemvalue="Python.httpAPI (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.httpAPI (1)" />
         <item itemvalue="Python.httpAPI" />
+        <item itemvalue="Python.Study" />
         <item itemvalue="Python.qtimq_api" />
         <item itemvalue="Python.AudioDevice" />
-        <item itemvalue="Python.DrawPython" />
-        <item itemvalue="Python.manage" />
       </list>
     </recent_temporary>
   </component>
@@ -455,6 +447,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15852048" />
       <window_info id="Structure" order="1" weight="0.24834874" />
@@ -464,7 +457,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.7567185" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info active="true" anchor="bottom" x="145" y="326" width="1029" height="477" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" visible="true" weight="0.32733223" />
+      <window_info anchor="bottom" x="369" y="184" width="1023" height="471" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.2944079" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
@@ -753,20 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18291">
-          <caret line="879" selection-start-line="879" selection-end-line="879" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Study/Study.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/http_api/qtimq_request.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -784,22 +763,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/getValue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2478">
           <caret line="274" selection-start-line="274" selection-end-line="274" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#12704#57464#0" />
           </folding>
         </state>
       </provider>
@@ -815,31 +795,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/function.py">
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/getValue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="91" column="26" lean-forward="true" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        <state relative-caret-position="462">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#12704#57464#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI/httpAPI.py">
+    <entry file="file://$PROJECT_DIR$/functions/getValue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="161" column="24" lean-forward="true" selection-start-line="161" selection-start-column="24" selection-end-line="161" selection-end-column="24" />
+        <state relative-caret-position="-970">
+          <caret line="749" column="4" selection-start-line="749" selection-start-column="4" selection-end-line="749" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Study/Study.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#1659#1679#0" />
+            <element signature="e#1249#1277#0" />
+            <element signature="e#1725#1753#0" />
+            <element signature="e#3463#3491#0" />
           </folding>
         </state>
       </provider>
