@@ -2,17 +2,37 @@ import urllib.request
 import urllib.error
 import socket
 import time
+import json
 
-class DataSource():
-    def __int__(self, code, length, timeType, allLength = 1000):
-        self.code = code
+
+class DataSource:
+    """
+    整个常用数据源的类对象：
+    :param code:无前后缀的代码
+    :param length:需要返回的数据长度
+    :param allLength:预加载的数据长度
+    :return 由json转化为dict的数据
+
+    """
+    def __init__(self, code, length = 1000, allLength = 1000):
+        if len(code) == 6:
+            if code[0] == '6':
+                self.codeF = 'sh' + code
+                self.codeR = code + '.sh'
+            elif code[0] == '0' or code[0] == '3':
+                self.codeF = 'sz' + code
+                self.codeR = code + '.sz'
+        else:
+            raise ValueError('Invalid code:', code)
         self.length = length
-        self.timeType = timeType
         self.allLength = allLength
+        self.timeLine = self.__timeline()
+        self.timeLine5Days = self.__timeline5Days()
+        self.kLineDay = self.__realtime('day')
+        self.kLine60F = self.__realtime('60')
 
 
-
-    def timeline(self):
+    def __timeline(self):
         """
         获取分时数据
         :param code:
@@ -22,15 +42,15 @@ class DataSource():
         """
         host = 'http://web.ifzq.gtimg.cn/appstock/app/'
         path = 'minute/query'
-        query = 'code=' + self.code
+        query = 'code=' + self.codeF
         url = host + path + '?' + query
         # print(url)
 
-        content = req(url, 0.02)
+        content = json.load(self.__req(url, 0.02))
         return content
 
 
-    def timeline5Days(code):
+    def __timeline5Days(self):
         """
         获取五日分时数据
         :param code:
@@ -40,15 +60,15 @@ class DataSource():
         """
         host = 'http://web.ifzq.gtimg.cn/appstock/app/'
         path = 'day/query'
-        query = 'code=' + code
+        query = 'code=' + self.codeF
         url = host + path + '?' + query
         # print(url)
 
-        content = req(url, 0.02)
+        content = json.load(self.__req(url, 0.02))
         return content
 
 
-    def realtime(code, allLength, timeType):
+    def __realtime(self, timeType):
         """
         获取K线数据
         :param allLength:
@@ -85,21 +105,23 @@ class DataSource():
         elif timeType == 'month':
             add_Kline = 'KLine'
             timeValue = ',month,,,'
+        elif timeType == 'minute':
+            return None
         else:
             raise ValueError('Invalid timetype:', timeType)
 
-        allLength = str(allLength)
+        allLength = str(self.allLength)
 
         host = 'http://web.ifzq.gtimg.cn/appstock/app/kline/'
         path = add_Kline
         query = 'param=' + code + timeValue + allLength
         url = host + path + '?' + query
 
-        content = req(url, 0.05)
+        content = json.load(self.__req(url, 0.05))
         return content
 
 
-    def req(url, sleepTime=0.1):
+    def __req(self, url, sleepTime=0.1):
         """
         aliyun API
         :param sleepTime:
@@ -134,9 +156,8 @@ class DataSource():
             return ''
 
 
-    if __name__ == '__main__':
-        code = input('Please input the code(sh600001): ')
-        print(timeline(code))
-        print(timeline5Days(code))
-        print(realtime(code, 100, '60'))
-        print(realtime(code, 100, 'day'))
+if __name__ == '__main__':
+    code = input('Please input the code(600001): ')
+    test = DataSource(code)
+    print(test.timeLine)
+    print(test.timeLine5Days)
