@@ -14,49 +14,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/stock_Class/stock.py">
+        <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+            <state relative-caret-position="5607">
+              <caret line="274" selection-start-line="274" selection-end-line="274" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#12704#57464#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/functions/getValue.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-970">
-              <caret line="749" column="4" selection-start-line="749" selection-start-column="4" selection-end-line="749" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/getValue.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1877">
-              <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#1249#1277#0" />
-                <element signature="e#1725#1753#0" />
-                <element signature="e#3463#3491#0" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Study/Study.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+            <state relative-caret-position="168">
+              <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -74,26 +37,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/function.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+            <state relative-caret-position="-294">
+              <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2.py">
+        <entry file="file://$PROJECT_DIR$/Study/DrawPython.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2478">
-              <caret line="274" selection-start-line="274" selection-end-line="274" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="315">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -236,7 +196,7 @@
             <path>
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
               <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="functions" type="462c0819:PsiDirectoryNode" />
+              <item name="stock_Class" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
@@ -416,8 +376,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.httpAPI (1)" />
-        <item itemvalue="Python.httpAPI" />
         <item itemvalue="Python.Study" />
+        <item itemvalue="Python.httpAPI" />
         <item itemvalue="Python.qtimq_api" />
         <item itemvalue="Python.AudioDevice" />
       </list>
@@ -446,10 +406,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15852048" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15806112" />
       <window_info id="Structure" order="1" weight="0.24834874" />
       <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -725,17 +685,11 @@
     <entry file="file://Z:/ProgramFiles/Anaconda3/Scripts/pip-script.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/pyaudio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2877">
-          <caret line="25" column="66" lean-forward="true" selection-start-line="25" selection-start-column="66" selection-end-line="25" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/pyaudio.py" />
     <entry file="file://$PROJECT_DIR$/Study/DrawPython.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -765,7 +719,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2478">
+        <state relative-caret-position="5607">
           <caret line="274" selection-start-line="274" selection-end-line="274" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -784,17 +738,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI/qtimq_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="132" column="36" lean-forward="true" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#828#2211#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI/qtimq_api.py" />
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/getValue.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -814,8 +758,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Study/Study.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        <state relative-caret-position="168">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
@@ -834,13 +778,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1877">
+        <state relative-caret-position="-294">
           <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#1249#1277#0" />
-            <element signature="e#1725#1753#0" />
-            <element signature="e#3463#3491#0" />
           </folding>
         </state>
       </provider>
