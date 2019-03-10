@@ -215,3 +215,21 @@ if __name__ == '__main__':
         print(i)
     print(test.kLine60F)
     print(test.kLineDay)
+
+"""
+Hello everyone, I am very glad to introduce myself.
+My name is Lixin.
+My hometown is Kaifeng in Henan Province, which is a small beautiful city with a long history called "Ancient capital city of seven dynasties". 
+Daliang, Bianliang, Bianjing, which you may have seen in the novels, are her former names.
+
+Then, Vector is my English name.
+Vector is a basic element to represent space in mathematics and Physics.
+So I want to use this name for reminding me the importance of the basic profession knowledge.
+
+Now, I am working in the Automation Development Department.
+And I have been working in automation area for about 10 years.
+The main fields are automative testing and assembling.
+I hope and will make a great effort to contribute to the development of automation of our company.
+
+That's all.
+Thank you."""
