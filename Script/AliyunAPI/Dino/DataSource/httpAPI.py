@@ -26,13 +26,13 @@ class DataSourceQQ:
             raise ValueError('Invalid code:', code)
         self.length = length
         self.allLength = allLength
-        self.__timeline()
-        self.__timeline5Days()
-        self.kLineDay = self.__realtime('day')
-        self.kLine60F = self.__realtime('60')
+        self._timeline()
+        self._timeline5Days()
+        self.kLineDay = self._realtime('day')
+        self.kLine60F = self._realtime('60')
 
 
-    def __timeline(self):
+    def _timeline(self):
         """
         获取分时数据
         :param code:
@@ -45,7 +45,7 @@ class DataSourceQQ:
         url = host + path + '?' + query
         # if __name__ == '__main__':
         #     print(url)
-        content = self.__req(url, 0.02)
+        content = self._req(url, 0.02)
 
         try:
             result = []
@@ -74,7 +74,7 @@ class DataSourceQQ:
             self.timeLine = None
 
 
-    def __timeline5Days(self):
+    def _timeline5Days(self):
         """
         获取五日分时数据
         :param code:
@@ -87,7 +87,7 @@ class DataSourceQQ:
         url = host + path + '?' + query
         # if __name__ == '__main__':
         #     print(url)
-        content = self.__req(url, 0.02)
+        content = self._req(url, 0.02)
         try:
             result = []
             all_dict = json.loads(content)
@@ -121,7 +121,7 @@ class DataSourceQQ:
             self.timeLine5DaysDaily = None
 
 
-    def __realtime(self, timeType):
+    def _realtime(self, timeType):
         """
         获取K线数据
         :param allLength:
@@ -160,11 +160,11 @@ class DataSourceQQ:
         url = host + path + '?' + query
         # if __name__ == '__main__':
         #     print(url)
-        content = json.loads(self.__req(url, 0.05))
+        content = json.loads(self._req(url, 0.05))
         return content
 
 
-    def __req(self, url, sleepTime=0.1):
+    def _req(self, url, sleepTime=0.1):
         """
         aliyun API
         :param sleepTime:
@@ -216,26 +216,3 @@ if __name__ == '__main__':
     print(test.kLine60F)
     print(test.kLineDay)
 
-"""
-Hello everyone, I am very glad to introduce myself.
-
-My name is Lixin.
-My hometown is Kaifeng in Henan Province, which is a small beautiful city with a long history called "Ancient capital city of seven dynasties". 
-She is famous for Song Dynasty, the Riverside Scene at Qingming Festival by Zhang Zeduan displays her everyday life in Song.
-Daliang, Bianliang, Bianjing, which you may have seen in the novels, are her former ancient names.
-
-Then, my English name is Vector.
-Vector is a basic element to represent space in mathematics and Physics.
-All the values, directions and movements in space could be expressed by one vector or more.
-So I want to use this name for reminding me the importance of the basic profession knowledge.
-
-Now, I am working in the Department of Automation Development.
-Non-standard automation is my favorite career, it can provide chances to imagination, creation and innovation for us.
-I have been working in automation area for about 10 years.
-The main fields, that I have taken part in, are automative testing and assembling, mainly for automobile and electrical parts.
-And I hope and will make a great effort to contribute to the development of automation of our company.
-
-That's all.
-Thank you.
-
-"""
