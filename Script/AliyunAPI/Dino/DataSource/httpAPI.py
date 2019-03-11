@@ -218,18 +218,24 @@ if __name__ == '__main__':
 
 """
 Hello everyone, I am very glad to introduce myself.
+
 My name is Lixin.
 My hometown is Kaifeng in Henan Province, which is a small beautiful city with a long history called "Ancient capital city of seven dynasties". 
-Daliang, Bianliang, Bianjing, which you may have seen in the novels, are her former names.
+She is famous for Song Dynasty, the Riverside Scene at Qingming Festival by Zhang Zeduan displays her everyday life in Song.
+Daliang, Bianliang, Bianjing, which you may have seen in the novels, are her former ancient names.
 
-Then, Vector is my English name.
+Then, my English name is Vector.
 Vector is a basic element to represent space in mathematics and Physics.
+All the values, directions and movements in space could be expressed by one vector or more.
 So I want to use this name for reminding me the importance of the basic profession knowledge.
 
-Now, I am working in the Automation Development Department.
-And I have been working in automation area for about 10 years.
-The main fields are automative testing and assembling.
-I hope and will make a great effort to contribute to the development of automation of our company.
+Now, I am working in the Department of Automation Development.
+Non-standard automation is my favorite career, it can provide chances to imagination, creation and innovation for us.
+I have been working in automation area for about 10 years.
+The main fields, that I have taken part in, are automative testing and assembling, mainly for automobile and electrical parts.
+And I hope and will make a great effort to contribute to the development of automation of our company.
 
 That's all.
-Thank you."""
+Thank you.
+
+"""
