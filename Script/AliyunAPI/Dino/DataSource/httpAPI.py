@@ -3,6 +3,7 @@ import urllib.error
 import socket
 import time
 import json
+import tushare as ts
 
 """
 数据源：
@@ -339,12 +340,59 @@ class DataSource_iFeng:
             return ''
 
 
+class DataTuShare:
+    """
+    源自tushare的数据源，
+    返回值是一个Pandas的DataFrames矩阵，
+    列数据需要用Keywords索引出来。
+    https://www.cnblogs.com/hdulzt/p/7067187.html
+    """
+    def __init__(self):
+        self.token = 'c48302b906aab9cf3ce6a8279edb75756646204934f69863754ba7a7'
+        #token由https://tushare.pro/提供
+        ts.set_token(self.token)
+        self.pro = ts.pro_api()
+
+    def getList(self):
+        #self.list = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
+        data = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
+        return data
+
+    def setCode(self, code):
+        self.code = code
+
+    def getDailyKLine(self):
+        self.dailyKline = self.pro.daily(ts_code=self.code, fields='ts_code, open, pre_close')
+
+    """
+    ts_code	str
+    trade_date	str	
+    open	float	
+    high	float	
+    low	float	
+    close	float	
+    pre_close	float	
+    change	float	
+    pct_chg	float	 
+    vol	float	 
+    amount	float	 
+    """
+
+
+    # for i in data['symbol']:
+    #     print(i)
+    # print(df)
+
+
 if __name__ == '__main__':
-    #code = input('Please input the code(600001): ')
     code = '300313'
+    data = DataTuShare()
+    stockList = data.getList()
+    print(stockList)
     if code != None:
         # test = DataSourceQQ(code)
-        test = DataSource_iFeng(code)
+        # test = DataSource_iFeng(code)
+        pass
     else:
         raise ValueError
     # print(test.timeLine)
@@ -354,8 +402,8 @@ if __name__ == '__main__':
     # for i in test.timeLine5DaysDaily:
     #     print(i)
     # print(test.kLine60F['record'])
-    for i in test.kLine60F['record']:
-        print(i)
-    # print(test.kLineDay['record'])
-    for i in test.kLineDay['record']:
-        print(i)
+    # for i in test.kLine60F['record']:
+    #     print(i)
+    # # print(test.kLineDay['record'])
+    # for i in test.kLineDay['record']:
+    #     print(i)
