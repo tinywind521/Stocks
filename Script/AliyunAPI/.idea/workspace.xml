@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="255" column="13" lean-forward="true" selection-start-line="254" selection-end-line="257" selection-end-column="32" />
+            <state relative-caret-position="5208">
+              <caret line="255" column="13" selection-start-line="254" selection-end-line="257" selection-end-column="32" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -28,15 +28,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="373" column="28" lean-forward="true" selection-start-line="373" selection-start-column="28" selection-end-line="373" selection-end-column="28" />
+            <state relative-caret-position="618">
+              <caret line="272" column="13" lean-forward="true" selection-start-line="272" selection-start-column="13" selection-end-line="272" selection-end-column="13" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#102#245#1" />
-                <element signature="e#246#700#1" />
-                <element signature="e#701#1110#1" />
-                <element signature="e#1136#7903#0" />
-                <element signature="e#7934#10845#0" />
+                <element signature="e#1918#8685#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dino/DataSource/classBackup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="882">
+              <caret line="46" selection-start-line="46" selection-end-line="239" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,7 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/HelloWorld/HelloWorld/settings.py" />
         <option value="$PROJECT_DIR$/web/HelloWorld/manage.py" />
         <option value="$PROJECT_DIR$/timetest.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
@@ -134,6 +141,7 @@
         <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI/httpAPI.py" />
         <option value="$PROJECT_DIR$/Study/Study.py" />
         <option value="$PROJECT_DIR$/Study/SourceTest.py" />
+        <option value="$PROJECT_DIR$/Dino/DataSource/classBackup.py" />
         <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
       </list>
     </option>
@@ -168,6 +176,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -200,7 +209,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -388,7 +396,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/让Python代码更Pythonic" />
     <entry file="file://$PROJECT_DIR$/Pythonic">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -684,6 +691,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5208">
+          <caret line="255" column="13" selection-start-line="254" selection-end-line="257" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/classBackup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="46" selection-start-line="46" selection-end-line="239" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Study/SourceTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -691,27 +718,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="255" column="13" lean-forward="true" selection-start-line="254" selection-end-line="257" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="373" column="28" lean-forward="true" selection-start-line="373" selection-start-column="28" selection-end-line="373" selection-end-column="28" />
+        <state relative-caret-position="618">
+          <caret line="272" column="13" lean-forward="true" selection-start-line="272" selection-start-column="13" selection-end-line="272" selection-end-column="13" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#102#245#1" />
-            <element signature="e#246#700#1" />
-            <element signature="e#701#1110#1" />
-            <element signature="e#1136#7903#0" />
-            <element signature="e#7934#10845#0" />
+            <element signature="e#1918#8685#0" />
           </folding>
         </state>
       </provider>
