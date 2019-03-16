@@ -54,7 +54,6 @@ class DataTuShare:
                                                 'pre_close, change, pct_chg, vol, amount')
 
 
-
 class DataSourceQQ:
     """
     整个常用数据源的类对象：
@@ -62,8 +61,8 @@ class DataSourceQQ:
     :param length:需要返回的数据长度
     :param allLength:预加载的数据长度
     :return 由json转化为dict的数据
-
     """
+
     def __init__(self, code, length = 1000, allLength = 1000):
         if len(code) == 6:
             if code[0] == '6':
@@ -78,7 +77,7 @@ class DataSourceQQ:
         self.allLength = allLength
         self._timeline()
         self._timeline5Days()
-        self.kLineDay = self._realtime('day')
+        #self.kLineDay = self._realtime('day')
         self.kLine60F = self._realtime('60')
 
 
