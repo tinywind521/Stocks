@@ -9,7 +9,6 @@ import tushare as ts
 数据源：
 https://blog.csdn.net/afgasdg/article/details/86071921
 https://blog.csdn.net/afgasdg/article/details/84064421
-https://tushare.pro/
 """
 """
 http://api.finance.ifeng.com/akdaily/?code=sh600030&type=last
@@ -346,49 +345,53 @@ class DataTuShare:
     返回值是一个Pandas的DataFrames矩阵，
     列数据需要用Keywords索引出来。
     https://www.cnblogs.com/hdulzt/p/7067187.html
+    https://tushare.pro/
+    13524302581
+    Aa12345678
     """
     def __init__(self):
-        self.token = 'c48302b906aab9cf3ce6a8279edb75756646204934f69863754ba7a7'
+        self.token = '220faa2050cc97b5ad1ff92c000535c01e5ab6c792cbd63addbe7ff1'
         #token由https://tushare.pro/提供
-        ts.set_token(self.token)
+        self.set_token = ts.set_token(self.token)
         self.pro = ts.pro_api()
 
     def getList(self):
         #self.list = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
-        data = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
+        # self.set_token
+        temp = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol, ts_code')
+        data = list(temp['ts_code'])
         return data
 
     def setCode(self, code):
-        self.code = code
+        codeEnd = code[-3:].upper()
+        # print(codeEnd)
+        if i['code'][0] == '6':
+            code = i['code'] + '.SH'
+        elif i['code'][0] == '0' or i['code'][0] == '3':
+            code = i['code'] + '.SZ'
+
+        if len(code) == 9 and (codeEnd == '.SZ' or codeEnd == '.SH'):
+            self.code = code
+        else:
+            print('代码格式错误：' + code)
+            raise ValueError
 
     def getDailyKLine(self):
-        self.dailyKline = self.pro.daily(ts_code=self.code, fields='ts_code, open, pre_close')
+        print()
+        self.dailyKline = self.pro.daily(ts_code=self.code, start_date='20180101',
+                                         fields='ts_code,trade_date, open, high, low, close,'
+                                                'pre_close, change, pct_chg, vol, amount')
 
-    """
-    ts_code	str
-    trade_date	str	
-    open	float	
-    high	float	
-    low	float	
-    close	float	
-    pre_close	float	
-    change	float	
-    pct_chg	float	 
-    vol	float	 
-    amount	float	 
-    """
-
-
-    # for i in data['symbol']:
-    #     print(i)
-    # print(df)
 
 
 if __name__ == '__main__':
-    code = '300313'
+    code = '300313.sz'
     data = DataTuShare()
     stockList = data.getList()
     print(stockList)
+    data.setCode(code)
+    data.getDailyKLine()
+    print(data.dailyKline)
     if code != None:
         # test = DataSourceQQ(code)
         # test = DataSource_iFeng(code)
