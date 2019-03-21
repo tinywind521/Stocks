@@ -1,10 +1,10 @@
 import urllib.request
 import urllib.error
-import socket
+import socket, numpy
 import time
 import json
 import tushare as ts
-import pandas
+import pandas as pd
 
 
 class DataTuShare:
@@ -12,7 +12,13 @@ class DataTuShare:
     源自tushare的数据源，
     返回值是一个Pandas的DataFrames矩阵，
     列数据需要用Keywords索引出来。
-    https://www.cnblogs.com/hdulzt/p/7067187.html
+
+    Python之DataFrame常用方法小结
+    https://blog.csdn.net/a786150017/article/details/78573055
+
+    Pandas中DataFrame基本函数整理
+    https://blog.csdn.net/brucewong0516/article/details/81782312
+
     https://tushare.pro/
     13524302581
     Aa12345678
@@ -48,10 +54,64 @@ class DataTuShare:
             raise ValueError
 
     def getDailyKLine(self):
-        print()
+        # print()
+        self.dailyKline = pd.DataFrame()
         self.dailyKline = self.pro.daily(ts_code=self.code, start_date='20180101',
                                          fields='ts_code,trade_date, open, high, low, close,'
                                                 'pre_close, change, pct_chg, vol, amount')
+
+    def updateDailyKLine(self):
+        #self.cal_boll()
+        pass
+
+    def calLimit(self):
+        def function(pre_close, close):
+            if round(100*(close - pre_close + 0.01) / pre_close, 2) >10:
+                return 1
+            elif round(100*(close - pre_close - 0.01) / pre_close, 2) < -10:
+                return -1
+            else:
+                return 0
+        try:
+            self.dailyKline['limit'] = self.dailyKline.apply(lambda x: function(x.pre_close, x.close), axis=1)
+        except ValueError:
+            self.dailyKline['limit'] = 0
+            # print(self.dailyKline)
+            pass
+
+
+
+    def calBoll(self, valueList, n, p):
+        """
+        计算布林三轨
+        :param valueList:
+        :param n:
+        :param p:
+        :return:
+        """
+        valueList.reverse()
+        valueTemp = [float(k) for k in valueList]
+        boll = []
+        for value in valueList:
+            boll_dict = {}
+            if len(valueTemp) >= n:
+                tempList = valueTemp[0:n]
+                narray = numpy.array(tempList)
+                mid = numpy.mean(narray)
+                spd = numpy.sqrt(numpy.var(narray))
+                upper = mid + p * spd
+                lower = mid - p * spd
+                boll_dict['mid'] = float(format(mid, '.2f'))
+                boll_dict['upper'] = float(format(upper, '.2f'))
+                boll_dict['lower'] = float(format(lower, '.2f'))
+            else:
+                boll_dict['mid'] = 0
+                boll_dict['upper'] = 0
+                boll_dict['lower'] = 0
+            # print(boll_dict)
+            boll.insert(0, boll_dict)
+            valueTemp.pop(0)
+        return boll
 
 
 class DataSourceQQ:
@@ -250,22 +310,48 @@ class DataSourceQQ:
 
 
 if __name__ == '__main__':
-    code = '300313.sz'
+    debug = 0
+    code = '000037.sz'
     a = code.partition('.')
     code = a[0]
-    print(a)
+    # print(a)
     data = DataTuShare()
     stockList = data.getList()
     print(stockList)
     data.setCode(code)
     data.getDailyKLine()
+    # print(data.dailyKline)
+    data.calLimit()
     print(data.dailyKline)
-    if code != None:
-        test = DataSourceQQ(code)
-        # test = DataSource_iFeng(code)
-        pass
-    else:
-        raise ValueError
+    if debug:
+        j = 0
+        for code in stockList:
+            data.setCode(code)
+            # print(code)
+            while True:
+                try:
+                    data.getDailyKLine()
+                    break
+                except Exception:
+                    print(code, 'time sleep...')
+                    time.sleep(60)
+            data.calLimit()
+            try:
+                if data.dailyKline.head(1)['limit'][0] == 1:
+                    # {col: data.dailyKline[col].tolist() for col in data.dailyKline.columns}
+                    print(dict(data.dailyKline[0:1]['ts_code'])[0])
+                    j += 1
+            except:
+                pass
+        print(j)
+
+
+    # if code != None:
+    #     test = DataSourceQQ(code)
+    #     # test = DataSource_iFeng(code)
+    #     pass
+    # else:
+    #     raise ValueError
     # print(test.timeLine)
     # for i in test.timeLine5DaysAllinOne:
     #     print(i)
