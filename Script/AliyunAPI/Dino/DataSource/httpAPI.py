@@ -311,7 +311,7 @@ class DataSourceQQ:
 
 if __name__ == '__main__':
     debug = 0
-    code = '000037.sz'
+    code = '000951.sz'
     a = code.partition('.')
     code = a[0]
     # print(a)
@@ -320,7 +320,7 @@ if __name__ == '__main__':
     print(stockList)
     data.setCode(code)
     data.getDailyKLine()
-    # print(data.dailyKline)
+    print(data.dailyKline)
     data.calLimit()
     print(data.dailyKline)
     if debug:
