@@ -25,48 +25,50 @@ class DataTuShare:
     """
     def __init__(self):
         self.token = '220faa2050cc97b5ad1ff92c000535c01e5ab6c792cbd63addbe7ff1'
-        #token由https://tushare.pro/提供
+        # token由https://tushare.pro/提供
         self.set_token = ts.set_token(self.token)
         self.pro = ts.pro_api()
+        self.dailyKline = pd.DataFrame()
+        self.code = ''
 
     def getList(self):
-        #self.list = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
+        # self.list = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
         # self.set_token
         temp = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol, ts_code')
-        data = list(temp['ts_code'])
-        return data
+        dataList = list(temp['ts_code'])
+        return dataList
 
-    def setCode(self, code):
-        codeEnd = code[-3:].upper()
+    def setCode(self, codeTemp):
+        codeEnd = codeTemp[-3:].upper()
         # print(codeEnd)
-        if len(code) == 9 and (codeEnd in ['.SZ', '.SH']):
-            self.code = code
-        elif len(code) == 6 and code.isnumeric():
-            if code[0] == '6':
-                self.code = code + '.SH'
-            elif code[0] in ['0', '3']:
-                self.code = code + '.SZ'
+        if len(codeTemp) == 9 and (codeEnd in ['.SZ', '.SH']):
+            self.code = codeTemp
+        elif len(codeTemp) == 6 and codeTemp.isnumeric():
+            if codeTemp[0] == '6':
+                self.code = codeTemp + '.SH'
+            elif codeTemp[0] in ['0', '3']:
+                self.code = codeTemp + '.SZ'
             else:
-                print('代码格式错误：' + code)
+                print('代码格式错误：' + codeTemp)
                 raise ValueError
         else:
-            print('代码格式错误：' + code)
+            print('代码格式错误：' + codeTemp)
             raise ValueError
 
     def getDailyKLine(self):
         # print()
-        self.dailyKline = pd.DataFrame()
         self.dailyKline = self.pro.daily(ts_code=self.code, start_date='20180101',
                                          fields='ts_code,trade_date, open, high, low, close,'
                                                 'pre_close, change, pct_chg, vol, amount')
 
     def updateDailyKLine(self):
-        #self.cal_boll()
+        self.calLimit()
+        self.calBoll(20, 2)
         pass
 
     def calLimit(self):
         def function(pre_close, close):
-            if round(100*(close - pre_close + 0.01) / pre_close, 2) >10:
+            if round(100*(close - pre_close + 0.01) / pre_close, 2) > 10:
                 return 1
             elif round(100*(close - pre_close - 0.01) / pre_close, 2) < -10:
                 return -1
@@ -81,7 +83,7 @@ class DataTuShare:
 
 
 
-    def calBoll(self, valueList, n, p):
+    def calBoll(self, n, p):
         """
         计算布林三轨
         :param valueList:
@@ -89,6 +91,8 @@ class DataTuShare:
         :param p:
         :return:
         """
+        valueList = list(self.dailyKline['close'])
+        print(self.dailyKline['close'])
         valueList.reverse()
         valueTemp = [float(k) for k in valueList]
         boll = []
@@ -111,7 +115,10 @@ class DataTuShare:
             # print(boll_dict)
             boll.insert(0, boll_dict)
             valueTemp.pop(0)
-        return boll
+        for bollElement in boll:
+            print(bollElement)
+        print(len(boll))
+        # print(boll)
 
 
 class DataSourceQQ:
@@ -186,7 +193,6 @@ class DataSourceQQ:
     def _timeline5Days(self):
         """
         获取五日分时数据
-        :param code:
         :return:
         http://web.ifzq.gtimg.cn/appstock/app/day/query?code=sh600010
         """
@@ -320,9 +326,10 @@ if __name__ == '__main__':
     print(stockList)
     data.setCode(code)
     data.getDailyKLine()
-    print(data.dailyKline)
-    data.calLimit()
-    print(data.dailyKline)
+    # print(data.dailyKline)
+    data.updateDailyKLine()
+
+    # print(data.dailyKline)
     if debug:
         j = 0
         for code in stockList:
