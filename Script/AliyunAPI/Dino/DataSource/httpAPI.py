@@ -1,6 +1,7 @@
 import urllib.request
 import urllib.error
-import socket, numpy
+import socket
+import numpy
 import time
 import json
 import tushare as ts
@@ -29,7 +30,11 @@ class DataTuShare:
         self.set_token = ts.set_token(self.token)
         self.pro = ts.pro_api()
         self.dailyKline = pd.DataFrame()
+        self.startDate = '20180101'
         self.code = ''
+
+    def setStartDate(self, startDate):
+        self.startDate = startDate
 
     def getList(self):
         # self.list = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol')
@@ -57,16 +62,16 @@ class DataTuShare:
 
     def getDailyKLine(self):
         # print()
-        self.dailyKline = self.pro.daily(ts_code=self.code, start_date='20180101',
-                                         fields='ts_code,trade_date, open, high, low, close,'
+        self.dailyKline = self.pro.daily(ts_code = self.code, start_date = self.startDate,
+                                         fields = 'ts_code,trade_date, open, high, low, close,'
                                                 'pre_close, change, pct_chg, vol, amount')
 
     def updateDailyKLine(self):
-        self.calLimit()
-        self.calBoll(20, 2)
+        self._calLimit()
+        self._calBoll(20, 2)
         pass
 
-    def calLimit(self):
+    def _calLimit(self):
         def function(pre_close, close):
             if round(100*(close - pre_close + 0.01) / pre_close, 2) > 10:
                 return 1
@@ -81,39 +86,50 @@ class DataTuShare:
             # print(self.dailyKline)
             pass
 
-
-
-    def calBoll(self, n, p):
+    def _calBoll(self, n, p):
         """
         计算布林三轨
-        :param valueList:
         :param n:
         :param p:
         :return:
         """
+        '''
+        valueList和valueTemp根据实际需求进行顺序和逆序，
+        可以使用.reverse()
+        '''
         valueList = list(self.dailyKline['close'])
-        print(self.dailyKline['close'])
-        valueList.reverse()
+        # valueList.reverse()
         valueTemp = [float(k) for k in valueList]
+        # print(valueTemp)
         boll = []
         for value in valueList:
             boll_dict = {}
             if len(valueTemp) >= n:
                 tempList = valueTemp[0:n]
-                narray = numpy.array(tempList)
-                mid = numpy.mean(narray)
-                spd = numpy.sqrt(numpy.var(narray))
+                mid = numpy.mean(tempList)
+                spd = numpy.std(tempList, ddof=0)
                 upper = mid + p * spd
                 lower = mid - p * spd
-                boll_dict['mid'] = float(format(mid, '.2f'))
-                boll_dict['upper'] = float(format(upper, '.2f'))
-                boll_dict['lower'] = float(format(lower, '.2f'))
+                boll_dict['mid'] = round(mid, 2)
+                boll_dict['upper'] = round(upper, 2)
+                boll_dict['lower'] = round(lower, 2)
+                # narray = numpy.mean(tempList)
+                # mid = numpy.mean(narray)
+                # spd = numpy.sqrt(numpy.var(narray))
+                # upper = mid + p * spd
+                # lower = mid - p * spd
+                # boll_dict['mid'] = float(format(mid, '.2f'))
+                # boll_dict['upper'] = float(format(upper, '.2f'))
+                # boll_dict['lower'] = float(format(lower, '.2f'))
             else:
                 boll_dict['mid'] = 0
                 boll_dict['upper'] = 0
                 boll_dict['lower'] = 0
             # print(boll_dict)
             boll.insert(0, boll_dict)
+            '''
+            .insert 这里是按日期顺序的
+            '''
             valueTemp.pop(0)
         for bollElement in boll:
             print(bollElement)
@@ -317,7 +333,7 @@ class DataSourceQQ:
 
 if __name__ == '__main__':
     debug = 0
-    code = '000951.sz'
+    code = '000001.sz'
     a = code.partition('.')
     code = a[0]
     # print(a)
