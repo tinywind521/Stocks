@@ -139,11 +139,31 @@ class DataTuShare:
         # print(boll)
         def average(a0, a1):
             return round((a0 + a1)/2, 2)
-        self.dailyKline['upper20'] = self.upper20
-        self.dailyKline['mid20'] = self.mid20
-        self.dailyKline['lower20'] = self.lower20
-        self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
-        self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
+        try:
+            if len(self.dailyKline['close']):
+                self.dailyKline['upper20'] = self.upper20
+                self.dailyKline['mid20'] = self.mid20
+                self.dailyKline['lower20'] = self.lower20
+                try:
+                    self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
+                    self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
+                except ValueError:
+                    self.dailyKline['upperMid20'] = [round((i[0] + i[1])/2, 2) for i in zip(self.dailyKline['upper20'],
+                                                                                            self.dailyKline['mid20'])]
+                    self.dailyKline['lowerMid20'] = [round((i[0] + i[1])/2, 2) for i in zip(self.dailyKline['lower20'],
+                                                                                            self.dailyKline['mid20'])]
+            else:
+                self.dailyKline['upper20'] = 0
+                self.dailyKline['mid20'] = 0
+                self.dailyKline['lower20'] = 0
+                self.dailyKline['upperMid20'] = 0
+                self.dailyKline['lowerMid20'] = 0
+        except KeyError or IndexError:
+            self.dailyKline['upper20'] = 0
+            self.dailyKline['mid20'] = 0
+            self.dailyKline['lower20'] = 0
+            self.dailyKline['upperMid20'] = 0
+            self.dailyKline['lowerMid20'] = 0
 
 
 class DataSourceQQ:
@@ -342,7 +362,7 @@ class DataSourceQQ:
 
 if __name__ == '__main__':
     debug = 1
-    code = '000001.sz'
+    code = '000029.sz'
     a = code.partition('.')
     code = a[0]
     # print(a)
@@ -363,13 +383,19 @@ if __name__ == '__main__':
             while True:
                 try:
                     data.getDailyKLine()
-                    data.updateDailyKLine()
+                    # data.updateDailyKLine()
                     break
                 except Exception:
                     print(code, 'time sleep...')
                     time.sleep(60)
             data.updateDailyKLine()
-            print(code, 'mid20:', data.dailyKline['mid20'][0], '\trunning...')
+            try:
+                if len(data.dailyKline['close']):
+                    print(code, 'mid20:\t', data.dailyKline['mid20'][0], '\trunning...')
+                else:
+                    print(code, 'no data!!!')
+            except ValueError or KeyError or IndexError:
+                pass
             try:
                 if data.dailyKline.head(1)['limit'][0] == 1:
                     # {col: data.dailyKline[col].tolist() for col in data.dailyKline.columns}
