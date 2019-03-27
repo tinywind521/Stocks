@@ -32,6 +32,9 @@ class DataTuShare:
         self.dailyKline = pd.DataFrame()
         self.startDate = '20180101'
         self.code = ''
+        self.mid20 = []
+        self.upper20 = []
+        self.lower20 = []
 
     def setStartDate(self, startDate):
         self.startDate = startDate
@@ -72,7 +75,7 @@ class DataTuShare:
         pass
 
     def _calLimit(self):
-        def function(pre_close, close):
+        def judgeLimit(pre_close, close):
             if round(100*(close - pre_close + 0.01) / pre_close, 2) > 10:
                 return 1
             elif round(100*(close - pre_close - 0.01) / pre_close, 2) < -10:
@@ -80,7 +83,7 @@ class DataTuShare:
             else:
                 return 0
         try:
-            self.dailyKline['limit'] = self.dailyKline.apply(lambda x: function(x.pre_close, x.close), axis=1)
+            self.dailyKline['limit'] = self.dailyKline.apply(lambda x: judgeLimit(x.pre_close, x.close), axis=1)
         except ValueError:
             self.dailyKline['limit'] = 0
             # print(self.dailyKline)
@@ -97,44 +100,50 @@ class DataTuShare:
         valueList和valueTemp根据实际需求进行顺序和逆序，
         可以使用.reverse()
         '''
+        self.mid20.clear()
+        self.upper20.clear()
+        self.lower20.clear()
         valueList = list(self.dailyKline['close'])
         # valueList.reverse()
         valueTemp = [float(k) for k in valueList]
         # print(valueTemp)
-        boll = []
+        # boll = []
         for value in valueList:
-            boll_dict = {}
+            # boll_dict = {}
             if len(valueTemp) >= n:
                 tempList = valueTemp[0:n]
                 mid = numpy.mean(tempList)
                 spd = numpy.std(tempList, ddof=0)
                 upper = mid + p * spd
                 lower = mid - p * spd
-                boll_dict['mid'] = round(mid, 2)
-                boll_dict['upper'] = round(upper, 2)
-                boll_dict['lower'] = round(lower, 2)
-                # narray = numpy.mean(tempList)
-                # mid = numpy.mean(narray)
-                # spd = numpy.sqrt(numpy.var(narray))
-                # upper = mid + p * spd
-                # lower = mid - p * spd
-                # boll_dict['mid'] = float(format(mid, '.2f'))
-                # boll_dict['upper'] = float(format(upper, '.2f'))
-                # boll_dict['lower'] = float(format(lower, '.2f'))
+                boll20_mid = round(mid, 2)
+                boll20_upper = round(upper, 2)
+                boll20_lower = round(lower, 2)
+                # boll_dict['mid'] = round(mid, 2)
+                # boll_dict['upper'] = round(upper, 2)
+                # boll_dict['lower'] = round(lower, 2)
             else:
-                boll_dict['mid'] = 0
-                boll_dict['upper'] = 0
-                boll_dict['lower'] = 0
+                boll20_mid = 0
+                boll20_upper = 0
+                boll20_lower = 0
+                # boll_dict['mid'] = 0
+                # boll_dict['upper'] = 0
+                # boll_dict['lower'] = 0
             # print(boll_dict)
-            boll.insert(0, boll_dict)
-            '''
-            .insert 这里是按日期顺序的
-            '''
+            self.mid20.append(boll20_mid)
+            self.upper20.append(boll20_upper)
+            self.lower20.append(boll20_lower)
             valueTemp.pop(0)
-        for bollElement in boll:
-            print(bollElement)
-        print(len(boll))
+        # print(len(self.mid20))
+        # print(self.mid20)
         # print(boll)
+        def average(a0, a1):
+            return round((a0 + a1)/2, 2)
+        self.dailyKline['upper20'] = self.upper20
+        self.dailyKline['mid20'] = self.mid20
+        self.dailyKline['lower20'] = self.lower20
+        self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
+        self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
 
 
 class DataSourceQQ:
@@ -332,7 +341,7 @@ class DataSourceQQ:
 
 
 if __name__ == '__main__':
-    debug = 0
+    debug = 1
     code = '000001.sz'
     a = code.partition('.')
     code = a[0]
@@ -340,12 +349,12 @@ if __name__ == '__main__':
     data = DataTuShare()
     stockList = data.getList()
     print(stockList)
-    data.setCode(code)
-    data.getDailyKLine()
-    # print(data.dailyKline)
-    data.updateDailyKLine()
-
-    # print(data.dailyKline)
+    if not debug:
+        data.setCode(code)
+        data.getDailyKLine()
+        # print(data.dailyKline)
+        data.updateDailyKLine()
+        print(data.dailyKline)
     if debug:
         j = 0
         for code in stockList:
@@ -354,15 +363,17 @@ if __name__ == '__main__':
             while True:
                 try:
                     data.getDailyKLine()
+                    data.updateDailyKLine()
                     break
                 except Exception:
                     print(code, 'time sleep...')
                     time.sleep(60)
-            data.calLimit()
+            data.updateDailyKLine()
+            print(code, 'mid20:', data.dailyKline['mid20'][0], '\trunning...')
             try:
                 if data.dailyKline.head(1)['limit'][0] == 1:
                     # {col: data.dailyKline[col].tolist() for col in data.dailyKline.columns}
-                    print(dict(data.dailyKline[0:1]['ts_code'])[0])
+                    print(dict(data.dailyKline[0:1]['ts_code'])[0], 'Limited!!!')
                     j += 1
             except:
                 pass

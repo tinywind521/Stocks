@@ -16,12 +16,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="107" column="41" lean-forward="true" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+            <state relative-caret-position="552">
+              <caret line="375" column="79" selection-start-line="375" selection-start-column="79" selection-end-line="375" selection-end-column="79" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#3677#3708#0" />
-                <element signature="e#3901#10648#0" />
+                <element signature="e#3641#3675#0" />
+                <element signature="e#3945#3967#0" />
+                <element signature="e#4377#4401#0" />
+                <element signature="e#4061#10808#0" />
+                <element signature="e#4272#4815#0" />
+                <element signature="e#4851#6294#0" />
+                <element signature="e#6335#8229#0" />
+                <element signature="e#8275#9657#0" />
+                <element signature="e#9708#10808#0" />
+                <element signature="e#11849#11867#0" />
               </folding>
             </state>
           </provider>
@@ -124,8 +131,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="24" />
-    <option name="y" value="123" />
+    <option name="x" value="22" />
+    <option name="y" value="121" />
     <option name="width" value="1540" />
     <option name="height" value="900" />
   </component>
@@ -338,10 +345,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15437302" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15389696" />
       <window_info id="Structure" order="1" weight="0.24834874" />
       <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -349,7 +355,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.7567185" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="566" y="174" width="986" height="702" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
+      <window_info active="true" anchor="bottom" x="612" y="92" width="856" height="561" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" visible="true" weight="0.32733223" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.2944079" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
@@ -642,13 +648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Study/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Z:/ProgramFiles/Anaconda3/pkgs/conda-4.5.12-py37_0/Lib/site-packages/conda/history.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -724,14 +723,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Study/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="107" column="41" lean-forward="true" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+        <state relative-caret-position="552">
+          <caret line="375" column="79" selection-start-line="375" selection-start-column="79" selection-end-line="375" selection-end-column="79" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#3677#3708#0" />
-            <element signature="e#3901#10648#0" />
+            <element signature="e#3641#3675#0" />
+            <element signature="e#3945#3967#0" />
+            <element signature="e#4377#4401#0" />
+            <element signature="e#4061#10808#0" />
+            <element signature="e#4272#4815#0" />
+            <element signature="e#4851#6294#0" />
+            <element signature="e#6335#8229#0" />
+            <element signature="e#8275#9657#0" />
+            <element signature="e#9708#10808#0" />
+            <element signature="e#11849#11867#0" />
           </folding>
         </state>
       </provider>
