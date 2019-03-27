@@ -24,6 +24,7 @@ class DataTuShare:
     13524302581
     Aa12345678
     """
+
     def __init__(self):
         self.token = '220faa2050cc97b5ad1ff92c000535c01e5ab6c792cbd63addbe7ff1'
         # token由https://tushare.pro/提供
@@ -35,6 +36,8 @@ class DataTuShare:
         self.mid20 = []
         self.upper20 = []
         self.lower20 = []
+        self.ma = []
+        self.nList = [5, 10, 55, 144]
 
     def setStartDate(self, startDate):
         self.startDate = startDate
@@ -47,6 +50,11 @@ class DataTuShare:
         return dataList
 
     def setCode(self, codeTemp):
+        """
+        设置代码code
+        :param codeTemp:
+        :return:
+        """
         codeEnd = codeTemp[-3:].upper()
         # print(codeEnd)
         if len(codeTemp) == 9 and (codeEnd in ['.SZ', '.SH']):
@@ -65,23 +73,26 @@ class DataTuShare:
 
     def getDailyKLine(self):
         # print()
-        self.dailyKline = self.pro.daily(ts_code = self.code, start_date = self.startDate,
-                                         fields = 'ts_code,trade_date, open, high, low, close,'
+        self.dailyKline = self.pro.daily(ts_code=self.code, start_date=self.startDate,
+                                         fields='ts_code, trade_date, open, high, low, close,'
                                                 'pre_close, change, pct_chg, vol, amount')
 
     def updateDailyKLine(self):
         self._calLimit()
         self._calBoll(20, 2)
+
+        self._calMa(5)
         pass
 
     def _calLimit(self):
         def judgeLimit(pre_close, close):
-            if round(100*(close - pre_close + 0.01) / pre_close, 2) > 10:
+            if round(100 * (close - pre_close + 0.01) / pre_close, 2) > 10:
                 return 1
-            elif round(100*(close - pre_close - 0.01) / pre_close, 2) < -10:
+            elif round(100 * (close - pre_close - 0.01) / pre_close, 2) < -10:
                 return -1
             else:
                 return 0
+
         try:
             self.dailyKline['limit'] = self.dailyKline.apply(lambda x: judgeLimit(x.pre_close, x.close), axis=1)
         except ValueError:
@@ -134,11 +145,13 @@ class DataTuShare:
             self.upper20.append(boll20_upper)
             self.lower20.append(boll20_lower)
             valueTemp.pop(0)
+
         # print(len(self.mid20))
         # print(self.mid20)
         # print(boll)
         def average(a0, a1):
-            return round((a0 + a1)/2, 2)
+            return round((a0 + a1) / 2, 2)
+
         try:
             if len(self.dailyKline['close']):
                 self.dailyKline['upper20'] = self.upper20
@@ -148,10 +161,12 @@ class DataTuShare:
                     self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
                     self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
                 except ValueError:
-                    self.dailyKline['upperMid20'] = [round((i[0] + i[1])/2, 2) for i in zip(self.dailyKline['upper20'],
-                                                                                            self.dailyKline['mid20'])]
-                    self.dailyKline['lowerMid20'] = [round((i[0] + i[1])/2, 2) for i in zip(self.dailyKline['lower20'],
-                                                                                            self.dailyKline['mid20'])]
+                    self.dailyKline['upperMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
+                                                     zip(self.dailyKline['upper20'],
+                                                         self.dailyKline['mid20'])]
+                    self.dailyKline['lowerMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
+                                                     zip(self.dailyKline['lower20'],
+                                                         self.dailyKline['mid20'])]
             else:
                 self.dailyKline['upper20'] = 0
                 self.dailyKline['mid20'] = 0
@@ -165,6 +180,35 @@ class DataTuShare:
             self.dailyKline['upperMid20'] = 0
             self.dailyKline['lowerMid20'] = 0
 
+    def _calMa(self):
+        """
+        计算移动平均MA
+        :return:
+        """
+        self.ma.clear()
+        valueList = list(self.dailyKline['close'])
+        # valueList.reverse()
+        valueTemp = [float(k) for k in valueList]
+        # print(valueTemp)
+        maList = []
+        for value in valueList:
+            # maList = []
+            for n in self.nList:
+                if len(valueTemp) >= n:
+                    tempList = valueTemp[0:n]
+                    mid = numpy.mean(tempList)
+                    ma_element = round(mid, 2)
+                else:
+                    ma_element = 0
+                maList[n].append(ma_element)
+            valueTemp.pop(0)
+        for n in self.nList:
+            maName = 'ma' + str(n)
+            try:
+                if len(self.dailyKline['close']):
+                    self.dailyKline[maName] = maList[]
+
+
 
 class DataSourceQQ:
     """
@@ -175,7 +219,7 @@ class DataSourceQQ:
     :return 由json转化为dict的数据
     """
 
-    def __init__(self, code, length = 1000, allLength = 1000):
+    def __init__(self, code, length=1000, allLength=1000):
         if len(code) == 6:
             if code[0] == '6':
                 self.codeF = 'sh' + code
@@ -189,9 +233,8 @@ class DataSourceQQ:
         self.allLength = allLength
         self._timeline()
         self._timeline5Days()
-        #self.kLineDay = self._realtime('day')
+        # self.kLineDay = self._realtime('day')
         self.kLine60F = self._realtime('60')
-
 
     def _timeline(self):
         """
@@ -234,7 +277,6 @@ class DataSourceQQ:
         except ValueError:
             self.timeLine = None
 
-
     def _timeline5Days(self):
         """
         获取五日分时数据
@@ -270,16 +312,16 @@ class DataSourceQQ:
                         timeDictDaily = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
                         timeListDaily.append(timeDictDaily)
 
-                        timeDictAllinOne = {'date':dailyList['date'], 'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+                        timeDictAllinOne = {'date': dailyList['date'], 'time': timeArray[0], 'nowPrice': timeArray[1],
+                                            'volume': timeArray[2]}
                         timeListAllinOne.append(timeDictAllinOne)
-                    resultDaily.append({'date':dailyList['date'], 'data':timeListDaily})
+                    resultDaily.append({'date': dailyList['date'], 'data': timeListDaily})
                 resultAllinOne = timeListAllinOne
                 self.timeLine5DaysAllinOne = resultAllinOne
                 self.timeLine5DaysDaily = resultDaily
         except ValueError:
             self.timeLine5DaysAllinOne = None
             self.timeLine5DaysDaily = None
-
 
     def _realtime(self, timeType):
         """
@@ -323,7 +365,6 @@ class DataSourceQQ:
         content = json.loads(self._req(url, 0.05))
         return content
 
-
     def _req(self, url, sleepTime=0.1):
         """
         aliyun API
@@ -361,10 +402,10 @@ class DataSourceQQ:
 
 
 if __name__ == '__main__':
-    debug = 1
-    code = '000029.sz'
-    a = code.partition('.')
-    code = a[0]
+    debug = 0
+    code = '000001.sz'
+    # a = code.partition('.')
+    # code = a[0]
     # print(a)
     data = DataTuShare()
     stockList = data.getList()
@@ -375,12 +416,14 @@ if __name__ == '__main__':
         # print(data.dailyKline)
         data.updateDailyKLine()
         print(data.dailyKline)
+        data.dailyKline.to_csv('d:/' + code + '.csv')
     if debug:
         j = 0
         for code in stockList:
             data.setCode(code)
             # print(code)
             while True:
+                # noinspection PyBroadException
                 try:
                     data.getDailyKLine()
                     # data.updateDailyKLine()
@@ -404,7 +447,6 @@ if __name__ == '__main__':
             except:
                 pass
         print(j)
-
 
     # if code != None:
     #     test = DataSourceQQ(code)
