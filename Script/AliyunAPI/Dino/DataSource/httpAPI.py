@@ -80,8 +80,7 @@ class DataTuShare:
     def updateDailyKLine(self):
         self._calLimit()
         self._calBoll(20, 2)
-
-        self._calMa(5)
+        self._calMa()
         pass
 
     def _calLimit(self):
@@ -191,23 +190,28 @@ class DataTuShare:
         valueTemp = [float(k) for k in valueList]
         # print(valueTemp)
         maList = []
+        for i in range(len(self.nList)):
+            maList.append([])
         for value in valueList:
-            # maList = []
-            for n in self.nList:
+            for i in range(len(self.nList)):
+                n = self.nList[i]
                 if len(valueTemp) >= n:
                     tempList = valueTemp[0:n]
                     mid = numpy.mean(tempList)
                     ma_element = round(mid, 2)
                 else:
                     ma_element = 0
-                maList[n].append(ma_element)
+                maList[i].append(ma_element)
             valueTemp.pop(0)
-        for n in self.nList:
-            maName = 'ma' + str(n)
+        for i in range(len(self.nList)):
+            maName = 'ma' + str(self.nList[i])
             try:
                 if len(self.dailyKline['close']):
-                    self.dailyKline[maName] = maList[]
-
+                    self.dailyKline[maName] = maList[i]
+                else:
+                    self.dailyKline[maName] = 0
+            except KeyError or IndexError:
+                self.dailyKline[maName] = 0
 
 
 class DataSourceQQ:
@@ -403,7 +407,7 @@ class DataSourceQQ:
 
 if __name__ == '__main__':
     debug = 0
-    code = '000001.sz'
+    code = '603963'
     # a = code.partition('.')
     # code = a[0]
     # print(a)
