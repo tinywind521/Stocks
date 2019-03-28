@@ -16,15 +16,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="443" column="36" lean-forward="true" selection-start-line="443" selection-start-column="36" selection-end-line="443" selection-end-column="36" />
+            <state relative-caret-position="420">
+              <caret line="291" column="41" lean-forward="true" selection-start-line="291" selection-start-column="41" selection-end-line="291" selection-end-column="41" />
               <folding>
-                <element signature="e#159#10759#0" />
-                <element signature="e#8286#8356#0" />
-                <element signature="e#8211#9654#0" />
-                <element signature="e#9694#11635#0" />
-                <element signature="e#13112#14212#0" />
-                <element signature="e#14662#15756#0" />
+                <element signature="e#159#10750#0" />
               </folding>
             </state>
           </provider>
@@ -130,8 +125,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="373" />
-    <option name="y" value="17" />
+    <option name="x" value="372" />
+    <option name="y" value="16" />
     <option name="width" value="1540" />
     <option name="height" value="900" />
   </component>
@@ -159,7 +154,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,6 +186,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -714,15 +709,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="443" column="36" lean-forward="true" selection-start-line="443" selection-start-column="36" selection-end-line="443" selection-end-column="36" />
+        <state relative-caret-position="420">
+          <caret line="291" column="41" lean-forward="true" selection-start-line="291" selection-start-column="41" selection-end-line="291" selection-end-column="41" />
           <folding>
-            <element signature="e#159#10759#0" />
-            <element signature="e#8286#8356#0" />
-            <element signature="e#8211#9654#0" />
-            <element signature="e#9694#11635#0" />
-            <element signature="e#13112#14212#0" />
-            <element signature="e#14662#15756#0" />
+            <element signature="e#159#10750#0" />
           </folding>
         </state>
       </provider>

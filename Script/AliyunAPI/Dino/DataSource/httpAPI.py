@@ -282,6 +282,7 @@ class DataSourceQQ:
     :param length:需要返回的数据长度
     :param allLength:预加载的数据长度
     :return 由json转化为dict的数据
+    https://blog.csdn.net/afgasdg/article/details/86071921
     """
 
     def __init__(self, code, length=1000, allLength=1000):
