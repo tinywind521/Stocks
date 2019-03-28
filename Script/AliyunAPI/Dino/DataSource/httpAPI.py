@@ -179,10 +179,11 @@ class DataTuShare:
                                 dailyDict['upperMid20'][0], dailyDict['mid20'][0],
                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0]]
                     closeList = [dailyDict['close'][0], dailyDict['upper20'][0],
-                                dailyDict['upperMid20'][0], dailyDict['mid20'][0],
-                                dailyDict['lowerMid20'][0], dailyDict['lower20'][0]]
+                                 dailyDict['upperMid20'][0], dailyDict['mid20'][0],
+                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0]]
                     # print('OpenList', openList)
                     # print('CloseList', closeList)
+
                     def bollJudge(bollList):
                         if bollList[0] > bollList[1]:
                             return 5
@@ -297,15 +298,18 @@ class DataSourceQQ:
             raise ValueError('Invalid code:', code)
         self.length = length
         self.allLength = allLength
+        self.timeLine5DaysAllinOne = None
+        self.timeLine5DaysDaily = None
+        self.kLineDay = None
+        self.kLine60F = None
         self._timeline()
         self._timeline5Days()
-        self.kLineDay = self._realtime('day')
-        self.kLine60F = self._realtime('60')
+        # self._realtime('day')
+        self._realtime('60')
 
     def _timeline(self):
         """
         获取分时数据
-        :param code:
         :return:
         http://web.ifzq.gtimg.cn/appstock/app/minute/query?code=sh600010
         """
@@ -321,7 +325,7 @@ class DataSourceQQ:
             result = []
             all_dict = json.loads(content)
             if __name__ == '__main__':
-                print('_timeline', all_dict)
+                print('_timeline', self.codeF, all_dict)
             if all_dict['code'] == 0:
                 showapi_res_body = all_dict['data']
                 dataList = showapi_res_body[self.codeF]
@@ -333,7 +337,7 @@ class DataSourceQQ:
                 for timeElement in timeLine:
                     timeArray = timeElement.split(' ')
                     # timeKeys = ('time', 'nowPrice', 'volume')
-                    timeDict = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+                    timeDict = {'time': timeArray[0], 'nowPrice': float(timeArray[1]), 'volume': float(timeArray[2])}
                     timeList.append(timeDict)
                 temp['timeline'] = timeList
                 result = temp
@@ -360,7 +364,7 @@ class DataSourceQQ:
             result = []
             all_dict = json.loads(content)
             if __name__ == '__main__':
-                print('_timeline5Days', all_dict)
+                print('_timeline5Days', self.codeF, all_dict)
             if all_dict['code'] == 0:
                 showapi_res_body = all_dict['data']
                 dataList = showapi_res_body[self.codeF]
@@ -375,11 +379,11 @@ class DataSourceQQ:
                     for timeElement in timeLine:
                         timeArray = timeElement.split(' ')
                         # timeKeys = ('time', 'nowPrice', 'volume')
-                        timeDictDaily = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
+                        timeDictDaily = {'time': timeArray[0], 'nowPrice': float(timeArray[1]),
+                                         'volume': float(timeArray[2])}
                         timeListDaily.append(timeDictDaily)
-
-                        timeDictAllinOne = {'date': dailyList['date'], 'time': timeArray[0], 'nowPrice': timeArray[1],
-                                            'volume': timeArray[2]}
+                        timeDictAllinOne = {'date': dailyList['date'], 'time': timeArray[0],
+                                            'nowPrice': float(timeArray[1]), 'volume': float(timeArray[2])}
                         timeListAllinOne.append(timeDictAllinOne)
                     resultDaily.append({'date': dailyList['date'], 'data': timeListDaily})
                 resultAllinOne = timeListAllinOne
@@ -392,8 +396,6 @@ class DataSourceQQ:
     def _realtime(self, timeType):
         """
         获取K线数据
-        :param allLength:
-        :param code:
         :param timetype:    	60 = 60分k线，
                                 day = 日k线，
                                 week = 周k线，
@@ -429,40 +431,50 @@ class DataSourceQQ:
         # if __name__ == '__main__':
         #     print(url)
         content = self._req(url, 0.05)
-        try:
-            result = []
-            all_dict = json.loads(content)
-            if __name__ == '__main__':
-                print('_realtime', timeType, all_dict)
-            if all_dict['code'] == 0:
-                showapi_res_body = all_dict['data']
-                dataList = showapi_res_body[self.codeF]
-                print(dataList)
-
-                timeListAllinOne = []
-                resultDaily = []
-                for dailyList in dataList['day'][::-1]:
-                    print(dailyList)
-                    timeLine = dailyList['data']
-                    timeListDaily = []
-                    for timeElement in timeLine:
-                        timeArray = timeElement.split(' ')
-                        # timeKeys = ('time', 'nowPrice', 'volume')
-                        timeDictDaily = {'time': timeArray[0], 'nowPrice': timeArray[1], 'volume': timeArray[2]}
-                        timeListDaily.append(timeDictDaily)
-
-                        timeDictAllinOne = {'date': dailyList['date'], 'time': timeArray[0], 'nowPrice': timeArray[1],
-                                            'volume': timeArray[2]}
-                        timeListAllinOne.append(timeDictAllinOne)
-                    resultDaily.append({'date': dailyList['date'], 'data': timeListDaily})
-                resultAllinOne = timeListAllinOne
-                self.timeLine5DaysAllinOne = resultAllinOne
-                self.timeLine5DaysDaily = resultDaily
-        except ValueError:
-            self.timeLine5DaysAllinOne = None
-            self.timeLine5DaysDaily = None
-
-        return content
+        if timeType == 'day':
+            try:
+                result = []
+                all_dict = json.loads(content)
+                if __name__ == '__main__':
+                    print('_realtime', self.codeF, timeType, all_dict)
+                    # {'code': 0, 'msg': '', 'data': {'sh603963': {'day': [['2019-03-28', '18.500', '18.000', '19.600', '17.270', '143121.000'],
+                if all_dict['code'] == 0:
+                    showapi_res_body = all_dict['data']
+                    dataList = showapi_res_body[self.codeF]
+                    # print(dataList)
+                    resultDaily = []
+                    for dailyData in dataList['day'][::-1]:
+                        # print(dailyData)
+                        timeDictDaily = {'date': dailyData[0], 'open': float(dailyData[1]),
+                                         'close': float(dailyData[2]), 'high': float(dailyData[3]),
+                                         'low': float(dailyData[4]), 'volumn': float(dailyData[5])}
+                        resultDaily.append(timeDictDaily)
+                    self.kLineDay = resultDaily
+                    # print(self.kLineDay)
+            except ValueError:
+                self.kLineDay = None
+        elif timeType == '60':
+            try:
+                result = []
+                all_dict = json.loads(content)
+                if __name__ == '__main__':
+                    print('_realtime', self.codeF, timeType, all_dict)
+                if all_dict['code'] == 0:
+                    showapi_res_body = all_dict['data']
+                    dataList = showapi_res_body[self.codeF]['m60']
+                    # print(dataList)
+                    resultDaily = []
+                    for dailyData in dataList[::-1]:
+                        # print(dailyData)
+                        timeDictDaily = {'time': dailyData[0], 'open': float(dailyData[1]),
+                                         'close': float(dailyData[2]), 'high': float(dailyData[3]),
+                                         'low': float(dailyData[4]), 'volumn': float(dailyData[5]),
+                                         'exchange': float(dailyData[7])}
+                        resultDaily.append(timeDictDaily)
+                    self.kLine60F = resultDaily
+                    # print(self.kLine60F)
+            except ValueError:
+                self.kLine60F = None
 
     def _req(self, url, sleepTime=0.1):
         """
@@ -552,22 +564,17 @@ if __name__ == '__main__':
                 pass
         print(j)
 
-    if code != None:
+    if code is not None:
         test = DataSourceQQ(code)
         # test = DataSource_iFeng(code)
         pass
     else:
         raise ValueError
-    # print(test.timeLine)
-    # for i in test.timeLine5DaysAllinOne:
-    #     print(i)
-    # print()
-    # for i in test.timeLine5DaysDaily:
-    #     print(i)
-    print(test.kLine60F)
-    print(test.kLine60F['record'])
-    for i in test.kLine60F['record']:
+    print(test.timeLine)
+    for i in test.timeLine5DaysAllinOne:
+        print(i)
+    for i in test.timeLine5DaysDaily:
+        print(i)
+    for i in test.kLine60F:
         print(i)
     # print(test.kLineDay['record'])
-    for i in test.kLineDay['record']:
-        print(i)
