@@ -16,17 +16,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1039">
-              <caret line="416" column="17" lean-forward="true" selection-start-line="416" selection-start-column="17" selection-end-line="416" selection-end-column="17" />
+            <state relative-caret-position="156">
+              <caret line="443" column="36" lean-forward="true" selection-start-line="443" selection-start-column="36" selection-end-line="443" selection-end-column="36" />
               <folding>
-                <element signature="e#3068#6256#0" />
-                <element signature="e#6288#7306#0" />
-                <element signature="e#7155#13942#0" />
-                <element signature="e#7362#7906#0" />
-                <element signature="e#7941#9384#0" />
-                <element signature="e#9424#11365#0" />
-                <element signature="e#11410#12792#0" />
-                <element signature="e#12842#13942#0" />
+                <element signature="e#159#10759#0" />
+                <element signature="e#8286#8356#0" />
+                <element signature="e#8211#9654#0" />
+                <element signature="e#9694#11635#0" />
+                <element signature="e#13112#14212#0" />
+                <element signature="e#14662#15756#0" />
               </folding>
             </state>
           </provider>
@@ -132,8 +130,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="22" />
-    <option name="y" value="121" />
+    <option name="x" value="373" />
+    <option name="y" value="17" />
     <option name="width" value="1540" />
     <option name="height" value="900" />
   </component>
@@ -161,6 +159,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,7 +192,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,10 +339,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15279241" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.15257595" />
       <window_info id="Structure" order="1" weight="0.24834874" />
       <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -352,7 +350,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.7567185" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="909" y="342" width="864" height="478" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
+      <window_info anchor="bottom" x="366" y="154" width="936" height="593" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.2936078" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
@@ -716,17 +714,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1039">
-          <caret line="416" column="17" lean-forward="true" selection-start-line="416" selection-start-column="17" selection-end-line="416" selection-end-column="17" />
+        <state relative-caret-position="156">
+          <caret line="443" column="36" lean-forward="true" selection-start-line="443" selection-start-column="36" selection-end-line="443" selection-end-column="36" />
           <folding>
-            <element signature="e#3068#6256#0" />
-            <element signature="e#6288#7306#0" />
-            <element signature="e#7155#13942#0" />
-            <element signature="e#7362#7906#0" />
-            <element signature="e#7941#9384#0" />
-            <element signature="e#9424#11365#0" />
-            <element signature="e#11410#12792#0" />
-            <element signature="e#12842#13942#0" />
+            <element signature="e#159#10759#0" />
+            <element signature="e#8286#8356#0" />
+            <element signature="e#8211#9654#0" />
+            <element signature="e#9694#11635#0" />
+            <element signature="e#13112#14212#0" />
+            <element signature="e#14662#15756#0" />
           </folding>
         </state>
       </provider>
