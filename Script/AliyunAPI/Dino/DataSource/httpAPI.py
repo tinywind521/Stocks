@@ -570,11 +570,16 @@ if __name__ == '__main__':
         pass
     else:
         raise ValueError
-    print(test.timeLine)
-    for i in test.timeLine5DaysAllinOne:
-        print(i)
-    for i in test.timeLine5DaysDaily:
-        print(i)
-    for i in test.kLine60F:
-        print(i)
+    a = pd.DataFrame(test.timeLine5DaysAllinOne)
+    print(a)
+    b = pd.DataFrame(test.kLine60F, columns=['time', 'open', 'close', 'high', 'low', 'volumn', 'exchange'])
+    b.to_csv('D:/min.csv')
+    print(b)
+    # print(test.timeLine)
+    # for i in test.timeLine5DaysAllinOne:
+    #     print(i)
+    # for i in test.timeLine5DaysDaily:
+    #     print(i)
+    # for i in test.kLine60F:
+    #     print(i)
     # print(test.kLineDay['record'])

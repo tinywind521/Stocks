@@ -16,15 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="794">
-              <caret line="580" lean-forward="true" selection-start-line="580" selection-end-line="580" />
-              <folding>
-                <element signature="e#6989#8250#0" />
-                <element signature="e#11620#13076#0" />
-                <element signature="e#13116#15075#0" />
-                <element signature="e#15120#17608#0" />
-                <element signature="e#18794#20930#0" />
-              </folding>
+            <state relative-caret-position="621">
+              <caret line="575" column="24" selection-start-line="575" selection-start-column="24" selection-end-line="575" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -114,8 +107,8 @@
         <option value="$PROJECT_DIR$/Study/Study.py" />
         <option value="$PROJECT_DIR$/Study/SourceTest.py" />
         <option value="$PROJECT_DIR$/Dino/DataSource/classBackup.py" />
-        <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
         <option value="$PROJECT_DIR$/Study/Test.py" />
+        <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
       </list>
     </option>
   </component>
@@ -332,7 +325,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.14646997" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.14646997" />
       <window_info id="Structure" order="1" weight="0.24834874" />
       <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -340,7 +333,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.7567185" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="419" y="44" width="1348" height="593" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
+      <window_info anchor="bottom" x="259" y="123" width="1360" height="593" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.2936078" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
@@ -707,15 +700,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
-          <caret line="580" lean-forward="true" selection-start-line="580" selection-end-line="580" />
-          <folding>
-            <element signature="e#6989#8250#0" />
-            <element signature="e#11620#13076#0" />
-            <element signature="e#13116#15075#0" />
-            <element signature="e#15120#17608#0" />
-            <element signature="e#18794#20930#0" />
-          </folding>
+        <state relative-caret-position="621">
+          <caret line="575" column="24" selection-start-line="575" selection-start-column="24" selection-end-line="575" selection-end-column="24" />
         </state>
       </provider>
     </entry>
