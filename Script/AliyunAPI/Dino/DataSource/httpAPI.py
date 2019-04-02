@@ -42,9 +42,11 @@ class DataTuShare:
         self.lowerMid20 = []
         self.lower20 = []
         self.lowerOut20 = []
+        self.upper20Vol = []
+        self.mid20Vol = []
 
         self.ma = []
-        self.nList = [5, 10, 55, 144]
+        self.nList = [5, 10, 60, 144]
 
     def setStartDate(self, startDate):
         self.startDate = startDate
@@ -86,7 +88,7 @@ class DataTuShare:
 
     def updateDailyKLine(self):
         self._calLimit()
-        self._calBoll(20)
+        self._calBoll(20, 10)
         self._calMa()
         pass
 
@@ -108,7 +110,7 @@ class DataTuShare:
             # print(self.dailyKline)
             pass
 
-    def _calBoll(self, n):
+    def _calBoll(self, n, nVol):
         """
         计算布林三轨
         :param n:
@@ -118,26 +120,36 @@ class DataTuShare:
         valueList和valueTemp根据实际需求进行顺序和逆序，
         可以使用.reverse()
         '''
-        p1 = 1
-        p2 = 2
-        p3 = 2.58
-        self.mid20.clear()
+        factor = 1.026
+        p1 = 1.00 / factor
+        p2 = 2.00 / factor
+        p3 = 2.58 / factor
+
+        self.upperOut20.clear()
         self.upper20.clear()
+        self.upperMid20.clear()
+        self.mid20.clear()
+        self.lowerMid20.clear()
         self.lower20.clear()
+        self.lowerOut20.clear()
+        self.upper20Vol.clear()
+        self.mid20Vol.clear()
         valueList = list(self.dailyKline['close'])
         volList = list(self.dailyKline['vol'])
         # valueList.reverse()
         valueTemp = [float(k) for k in valueList]
         volTemp = [float(k) for k in volList]
-        # print(valueTemp)
         # boll = []
-        for value, vol in valueList, volTemp:
-            print(vol)
+        for value in valueList:
             # boll_dict = {}
-            if len(valueTemp) >= n:
+            if len(valueTemp) >= max(n, nVol):
                 tempList = valueTemp[0:n]
+                tempVol = volTemp[0:nVol]
                 mid = numpy.mean(tempList)
                 spd = numpy.std(tempList, ddof=0)
+                midVol = numpy.mean(tempVol)
+                spdVol = numpy.std(tempVol, ddof=0)
+                upperVol = midVol + p2 * spdVol
                 upperOut = mid + p3 *spd
                 upper = mid + p2 * spd
                 upperMid = mid + p1 * spd
@@ -151,6 +163,8 @@ class DataTuShare:
                 boll20_lowerMid = round(lowerMid, 2)
                 boll20_lower = round(lower, 2)
                 boll20_lowerOut = round(lowerOut, 2)
+                boll20_upperVol = round(upperVol, 2)
+                boll20_midVol = round(midVol, 2)
             else:
                 boll20_upperOut = 0
                 boll20_upper = 0
@@ -159,6 +173,8 @@ class DataTuShare:
                 boll20_lowerMid = 0
                 boll20_lower = 0
                 boll20_lowerOut = 0
+                boll20_upperVol = 0
+                boll20_midVol = 0
             # print(boll_dict)
             self.upperOut20.append(boll20_upperOut)
             self.upper20.append(boll20_upper)
@@ -167,7 +183,10 @@ class DataTuShare:
             self.lowerMid20.append(boll20_lowerMid)
             self.lower20.append(boll20_lower)
             self.lowerOut20.append(boll20_lowerOut)
+            self.upper20Vol.append(boll20_upperVol)
+            self.mid20Vol.append(boll20_midVol)
             valueTemp.pop(0)
+            volTemp.pop(0)
 
         # print(len(self.mid20))
         # print(self.mid20)
@@ -175,7 +194,10 @@ class DataTuShare:
         pass
         # def average(a0, a1):
         #     return round((a0 + a1) / 2, 2)
-
+        # print(len(self.dailyKline['close']))
+        # print(len(self.mid20))
+        # print(len(self.upperOut20))
+        # print(len(self.mid20Vol))
         try:
             if len(self.dailyKline['close']):
                 self.dailyKline['upperOut20'] = self.upperOut20
@@ -256,22 +278,32 @@ class DataTuShare:
                     bollCloseResult.append(closeResult)
                 self.dailyKline['bollPisOpen'] = bollOpenResult
                 self.dailyKline['bollPisClose'] = bollCloseResult
+                self.dailyKline['upper20Vol'] = self.upper20Vol
+                self.dailyKline['mid20Vol'] = self.mid20Vol
             else:
+                self.dailyKline['upperOut20'] = 0
                 self.dailyKline['upper20'] = 0
-                self.dailyKline['mid20'] = 0
-                self.dailyKline['lower20'] = 0
                 self.dailyKline['upperMid20'] = 0
+                self.dailyKline['mid20'] = 0
                 self.dailyKline['lowerMid20'] = 0
+                self.dailyKline['lower20'] = 0
+                self.dailyKline['lowerOut20'] = 0
                 self.dailyKline['bollPisOpen'] = 0
                 self.dailyKline['bollPisClose'] = 0
+                self.dailyKline['upper20Vol'] = 0
+                self.dailyKline['mid20Vol'] = 0
         except KeyError or IndexError:
+            self.dailyKline['upperOut20'] = 0
             self.dailyKline['upper20'] = 0
-            self.dailyKline['mid20'] = 0
-            self.dailyKline['lower20'] = 0
             self.dailyKline['upperMid20'] = 0
+            self.dailyKline['mid20'] = 0
             self.dailyKline['lowerMid20'] = 0
+            self.dailyKline['lower20'] = 0
+            self.dailyKline['lowerOut20'] = 0
             self.dailyKline['bollPisOpen'] = 0
             self.dailyKline['bollPisClose'] = 0
+            self.dailyKline['upper20Vol'] = 0
+            self.dailyKline['mid20Vol'] = 0
 
     def _calMa(self):
         """
@@ -545,7 +577,7 @@ class DataSourceQQ:
 
 
 if __name__ == '__main__':
-    debug = 0
+    debug = 1
     code = '603963'
     # a = code.partition('.')
     # code = a[0]
@@ -596,17 +628,17 @@ if __name__ == '__main__':
                 pass
         print(j)
 
-    if code is not None:
-        test = DataSourceQQ(code)
-        # test = DataSource_iFeng(code)
-        pass
-    else:
-        raise ValueError
-    a = pd.DataFrame(test.timeLine5DaysAllinOne)
-    print(a)
-    b = pd.DataFrame(test.kLine60F, columns=['time', 'open', 'close', 'high', 'low', 'volumn', 'exchange'])
-    b.to_csv('D:/min.csv')
-    print(b)
+    # if code is not None:
+    #     test = DataSourceQQ(code)
+    #     # test = DataSource_iFeng(code)
+    #     pass
+    # else:
+    #     raise ValueError
+    # a = pd.DataFrame(test.timeLine5DaysAllinOne)
+    # print(a)
+    # b = pd.DataFrame(test.kLine60F, columns=['time', 'open', 'close', 'high', 'low', 'volumn', 'exchange'])
+    # b.to_csv('D:/min.csv')
+    # print(b)
     # print(test.timeLine)
     # for i in test.timeLine5DaysAllinOne:
     #     print(i)
