@@ -34,9 +34,15 @@ class DataTuShare:
         self.dailyKline = pd.DataFrame()
         self.startDate = '20170701'
         self.code = ''
-        self.mid20 = []
+
+        self.upperOut20 = []
         self.upper20 = []
+        self.upperMid20  = []
+        self.mid20 = []
+        self.lowerMid20 = []
         self.lower20 = []
+        self.lowerOut20 = []
+
         self.ma = []
         self.nList = [5, 10, 55, 144]
 
@@ -80,7 +86,7 @@ class DataTuShare:
 
     def updateDailyKLine(self):
         self._calLimit()
-        self._calBoll(20, 2)
+        self._calBoll(20)
         self._calMa()
         pass
 
@@ -102,73 +108,93 @@ class DataTuShare:
             # print(self.dailyKline)
             pass
 
-    def _calBoll(self, n, p):
+    def _calBoll(self, n):
         """
         计算布林三轨
         :param n:
-        :param p:
         :return:
         """
         '''
         valueList和valueTemp根据实际需求进行顺序和逆序，
         可以使用.reverse()
         '''
+        p1 = 1
+        p2 = 2
+        p3 = 2.58
         self.mid20.clear()
         self.upper20.clear()
         self.lower20.clear()
         valueList = list(self.dailyKline['close'])
+        volList = list(self.dailyKline['vol'])
         # valueList.reverse()
         valueTemp = [float(k) for k in valueList]
+        volTemp = [float(k) for k in volList]
         # print(valueTemp)
         # boll = []
-        for value in valueList:
+        for value, vol in valueList, volTemp:
+            print(vol)
             # boll_dict = {}
             if len(valueTemp) >= n:
                 tempList = valueTemp[0:n]
                 mid = numpy.mean(tempList)
                 spd = numpy.std(tempList, ddof=0)
-                upper = mid + p * spd
-                lower = mid - p * spd
-                boll20_mid = round(mid, 2)
+                upperOut = mid + p3 *spd
+                upper = mid + p2 * spd
+                upperMid = mid + p1 * spd
+                lowerMid = mid - p1 * spd
+                lower = mid - p2 * spd
+                lowerOut = mid - p3 * spd
+                boll20_upperOut = round(upperOut, 2)
                 boll20_upper = round(upper, 2)
+                boll20_upperMid = round(upperMid, 2)
+                boll20_mid = round(mid, 2)
+                boll20_lowerMid = round(lowerMid, 2)
                 boll20_lower = round(lower, 2)
-                # boll_dict['mid'] = round(mid, 2)
-                # boll_dict['upper'] = round(upper, 2)
-                # boll_dict['lower'] = round(lower, 2)
+                boll20_lowerOut = round(lowerOut, 2)
             else:
-                boll20_mid = 0
+                boll20_upperOut = 0
                 boll20_upper = 0
+                boll20_upperMid = 0
+                boll20_mid = 0
+                boll20_lowerMid = 0
                 boll20_lower = 0
-                # boll_dict['mid'] = 0
-                # boll_dict['upper'] = 0
-                # boll_dict['lower'] = 0
+                boll20_lowerOut = 0
             # print(boll_dict)
-            self.mid20.append(boll20_mid)
+            self.upperOut20.append(boll20_upperOut)
             self.upper20.append(boll20_upper)
+            self.upperMid20.append(boll20_upperMid)
+            self.mid20.append(boll20_mid)
+            self.lowerMid20.append(boll20_lowerMid)
             self.lower20.append(boll20_lower)
+            self.lowerOut20.append(boll20_lowerOut)
             valueTemp.pop(0)
 
         # print(len(self.mid20))
         # print(self.mid20)
         # print(boll)
-        def average(a0, a1):
-            return round((a0 + a1) / 2, 2)
+        pass
+        # def average(a0, a1):
+        #     return round((a0 + a1) / 2, 2)
 
         try:
             if len(self.dailyKline['close']):
+                self.dailyKline['upperOut20'] = self.upperOut20
                 self.dailyKline['upper20'] = self.upper20
+                self.dailyKline['upperMid20'] = self.upperMid20
                 self.dailyKline['mid20'] = self.mid20
+                self.dailyKline['lowerMid20'] = self.lowerMid20
                 self.dailyKline['lower20'] = self.lower20
-                try:
-                    self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
-                    self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
-                except ValueError:
-                    self.dailyKline['upperMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
-                                                     zip(self.dailyKline['upper20'],
-                                                         self.dailyKline['mid20'])]
-                    self.dailyKline['lowerMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
-                                                     zip(self.dailyKline['lower20'],
-                                                         self.dailyKline['mid20'])]
+                self.dailyKline['lowerOut20'] = self.lowerOut20
+                # try:
+                #     self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
+                #     self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
+                # except ValueError:
+                #     self.dailyKline['upperMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
+                #                                      zip(self.dailyKline['upper20'],
+                #                                          self.dailyKline['mid20'])]
+                #     self.dailyKline['lowerMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
+                #                                      zip(self.dailyKline['lower20'],
+                #                                          self.dailyKline['mid20'])]
                 bollOpenResult = []
                 bollCloseResult = []
                 for i in range(len(self.dailyKline['open'])):
@@ -177,15 +203,19 @@ class DataTuShare:
                     # print('dailyData', dailyDict)
                     openList = [dailyDict['open'][0], dailyDict['upper20'][0],
                                 dailyDict['upperMid20'][0], dailyDict['mid20'][0],
-                                dailyDict['lowerMid20'][0], dailyDict['lower20'][0]]
+                                dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
+                                dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
                     closeList = [dailyDict['close'][0], dailyDict['upper20'][0],
                                  dailyDict['upperMid20'][0], dailyDict['mid20'][0],
-                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0]]
+                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
+                                 dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
                     # print('OpenList', openList)
                     # print('CloseList', closeList)
 
                     def bollJudge(bollList):
-                        if bollList[0] > bollList[1]:
+                        if bollList[0] >= bollList[6]:
+                            return 5.5
+                        elif bollList[0] > bollList[1]:
                             return 5
                         elif bollList[0] == bollList[1]:
                             # upper
@@ -210,8 +240,10 @@ class DataTuShare:
                         elif bollList[0] == bollList[5]:
                             # lower
                             return -4
-                        elif bollList[0] < bollList[4]:
+                        elif bollList[0] > bollList[7]:
                             return -5
+                        elif bollList[0] <= bollList[7]:
+                            return -5.5
                         else:
                             return -10
                     openResult = bollJudge(openList)
