@@ -386,8 +386,6 @@ class DataSourceQQ:
         self._timeline5Days()
         # self._realtime('day')
         self._realtime('60')
-        self._calBoll(20, 10)
-        self._calMa()
         pass
 
     def _timeline(self):
@@ -548,10 +546,14 @@ class DataSourceQQ:
                                          'close': float(dailyData[2]), 'high': float(dailyData[3]),
                                          'low': float(dailyData[4]), 'volumn': float(dailyData[5])}
                         resultDaily.append(timeDictDaily)
-                    self.kLineDay = resultDaily
+                    self.kLineDay = pd.DataFrame(resultDaily,
+                                                 columns=['time', 'open', 'close', 'high', 'low', 'volumn', 'exchange'])
                     # print(self.kLineDay)
             except ValueError:
                 self.kLineDay = None
+            self._calBoll(20, 10)
+            self._calMa()
+
         elif timeType == '60':
             try:
                 result = []
@@ -575,6 +577,8 @@ class DataSourceQQ:
                     # print(self.kLine60F)
             except ValueError:
                 self.kLine60F = None
+            self._calBoll(20, 10)
+            self._calMa()
 
     def _req(self, url, sleepTime=0.1):
         """

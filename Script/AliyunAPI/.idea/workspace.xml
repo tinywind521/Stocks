@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="588">
+              <caret line="556" column="30" lean-forward="true" selection-start-line="556" selection-start-column="30" selection-end-line="556" selection-end-column="30" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#159#484#1" />
@@ -28,15 +28,13 @@
                 <element signature="e#2758#3446#0" />
                 <element signature="e#3489#12399#0" />
                 <element signature="e#12431#13543#0" />
-                <element signature="e#13726#14739#0" />
-                <element signature="e#14522#15983#0" />
-                <element signature="e#16023#18441#0" />
-                <element signature="e#18486#22303#0" />
-                <element signature="e#21839#22939#0" />
-                <element signature="e#24087#32997#0" />
-                <element signature="e#33029#34141#0" />
-                <element signature="e#23007#23032#0" />
-                <element signature="e#26075#26097#0" />
+                <element signature="e#13729#14718#0" />
+                <element signature="e#14964#16425#0" />
+                <element signature="e#16465#19474#0" />
+                <element signature="e#23386#24486#0" />
+                <element signature="e#24529#32217#0" />
+                <element signature="e#28955#30409#0" />
+                <element signature="e#32249#33351#0" />
               </folding>
             </state>
           </provider>
@@ -162,6 +160,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,7 +193,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -342,10 +340,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.14583333" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.14541623" />
       <window_info id="Structure" order="1" weight="0.24834874" />
       <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -353,7 +351,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.7567185" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="153" y="151" width="955" height="523" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
+      <window_info anchor="bottom" x="838" y="254" width="955" height="523" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.2936078" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
@@ -712,13 +710,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Anaconda3/Lib/site-packages/numpy/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://Z:/Anaconda3/Lib/site-packages/numpy/__init__.py" />
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="588">
+          <caret line="556" column="30" lean-forward="true" selection-start-line="556" selection-start-column="30" selection-end-line="556" selection-end-column="30" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#159#484#1" />
@@ -729,15 +725,13 @@
             <element signature="e#2758#3446#0" />
             <element signature="e#3489#12399#0" />
             <element signature="e#12431#13543#0" />
-            <element signature="e#13726#14739#0" />
-            <element signature="e#14522#15983#0" />
-            <element signature="e#16023#18441#0" />
-            <element signature="e#18486#22303#0" />
-            <element signature="e#21839#22939#0" />
-            <element signature="e#24087#32997#0" />
-            <element signature="e#33029#34141#0" />
-            <element signature="e#23007#23032#0" />
-            <element signature="e#26075#26097#0" />
+            <element signature="e#13729#14718#0" />
+            <element signature="e#14964#16425#0" />
+            <element signature="e#16465#19474#0" />
+            <element signature="e#23386#24486#0" />
+            <element signature="e#24529#32217#0" />
+            <element signature="e#28955#30409#0" />
+            <element signature="e#32249#33351#0" />
           </folding>
         </state>
       </provider>
