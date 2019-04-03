@@ -342,15 +342,17 @@ class DataTuShare:
 
 class DataSourceQQ:
     """
-    整个常用数据源的类对象：
-    :param code:无前后缀的代码
-    :param length:需要返回的数据长度
-    :param allLength:预加载的数据长度
-    :return 由json转化为dict的数据
+    QQ数据源，ifzq的类对象：
     https://blog.csdn.net/afgasdg/article/details/86071921
     """
 
     def __init__(self, code, length=1000, allLength=1000):
+        """
+        :param code: 无前后缀的代码
+        :param length: 需要返回的数据长度
+        :param allLength: 预加载的数据长度
+        :return 由json转化为dict的数据
+        """
         if len(code) == 6:
             if code[0] == '6':
                 self.codeF = 'sh' + code
@@ -366,10 +368,27 @@ class DataSourceQQ:
         self.timeLine5DaysDaily = None
         self.kLineDay = None
         self.kLine60F = None
-        self._timeline()
+
+        self.upperOut20 = []
+        self.upper20 = []
+        self.upperMid20 = []
+        self.mid20 = []
+        self.lowerMid20 = []
+        self.lower20 = []
+        self.lowerOut20 = []
+        self.upper20Vol = []
+        self.mid20Vol = []
+        self.ma = []
+        self.nList = [60, 144]
+
+    def updateKLine(self):
+        # self._timeline()
         self._timeline5Days()
         # self._realtime('day')
         self._realtime('60')
+        self._calBoll(20, 10)
+        self._calMa()
+        pass
 
     def _timeline(self):
         """
@@ -440,21 +459,37 @@ class DataSourceQQ:
                     # print(dailyList)
                     timeLine = dailyList['data']
                     timeListDaily = []
+                    dateTemp = None
                     for timeElement in timeLine:
                         timeArray = timeElement.split(' ')
-                        # timeKeys = ('time', 'nowPrice', 'volume')
+                        volumn = float(timeArray[2])
+                        if dateTemp != dailyList['date']:
+                            # firstVol = volumn
+                            dateTemp = dailyList['date']
+                            lastVol = 0
+                        else:
+                            pass
+                        volTime = volumn - lastVol
+                        lastVol = volumn
+                                                # timeKeys = ('time', 'nowPrice', 'volume')
+
                         timeDictDaily = {'time': timeArray[0], 'nowPrice': float(timeArray[1]),
-                                         'volume': float(timeArray[2])}
+                                         'volume': float(timeArray[2]), 'volTime': volTime}
                         timeListDaily.append(timeDictDaily)
-                        timeDictAllinOne = {'date': dailyList['date'], 'time': timeArray[0],
-                                            'nowPrice': float(timeArray[1]), 'volume': float(timeArray[2])}
+                        timeDictAllinOne = {'time': (dailyList['date'] + timeArray[0]),
+                                            'nowPrice': float(timeArray[1]), 'volume': float(timeArray[2]),
+                                            'volTime': volTime}
+                        # timeDictAllinOne = {'date': dailyList['date'], 'time': (dailyList['date'] + timeArray[0]),
+                        #                     'nowPrice': float(timeArray[1]), 'volume': float(timeArray[2])}
                         timeListAllinOne.append(timeDictAllinOne)
                     resultDaily.append({'date': dailyList['date'], 'data': timeListDaily})
                 resultAllinOne = timeListAllinOne
-                self.timeLine5DaysAllinOne = resultAllinOne
+                self.timeLine5DaysAllinOne = pd.DataFrame(resultAllinOne,
+                                                          columns=['time', 'nowPrice', 'volume', 'volTime']).iloc[::-1]
                 self.timeLine5DaysDaily = resultDaily
         except ValueError:
-            self.timeLine5DaysAllinOne = None
+            self.timeLine5DaysAllinOne = pd.DataFrame()
+            # self.timeLine5DaysAllinOne = None
             self.timeLine5DaysDaily = None
 
     def _realtime(self, timeType):
@@ -535,7 +570,8 @@ class DataSourceQQ:
                                          'low': float(dailyData[4]), 'volumn': float(dailyData[5]),
                                          'exchange': float(dailyData[7])}
                         resultDaily.append(timeDictDaily)
-                    self.kLine60F = resultDaily
+                    self.kLine60F = pd.DataFrame(resultDaily,
+                                                 columns=['time', 'open', 'close', 'high', 'low', 'volumn', 'exchange'])
                     # print(self.kLine60F)
             except ValueError:
                 self.kLine60F = None
@@ -575,9 +611,219 @@ class DataSourceQQ:
         else:
             return ''
 
+    def _calBoll(self, n, nVol):
+        """
+        计算布林三轨
+        :param n:
+        :return:
+        """
+        '''
+        valueList和valueTemp根据实际需求进行顺序和逆序，
+        可以使用.reverse()
+        '''
+        factor = 1.026
+        p1 = 1.00 / factor
+        p2 = 2.00 / factor
+        p3 = 2.58 / factor
+
+        self.upperOut20.clear()
+        self.upper20.clear()
+        self.upperMid20.clear()
+        self.mid20.clear()
+        self.lowerMid20.clear()
+        self.lower20.clear()
+        self.lowerOut20.clear()
+        self.upper20Vol.clear()
+        self.mid20Vol.clear()
+        valueList = list(self.kLine60F['close'])
+        volList = list(self.kLine60F['volumn'])
+        # valueList.reverse()
+        valueTemp = [float(k) for k in valueList]
+        volTemp = [float(k) for k in volList]
+        # boll = []
+        for value in valueList:
+            # boll_dict = {}
+            if len(valueTemp) >= max(n, nVol):
+                tempList = valueTemp[0:n]
+                tempVol = volTemp[0:nVol]
+                mid = numpy.mean(tempList)
+                spd = numpy.std(tempList, ddof=0)
+                midVol = numpy.mean(tempVol)
+                spdVol = numpy.std(tempVol, ddof=0)
+                upperVol = midVol + p2 * spdVol
+                upperOut = mid + p3 *spd
+                upper = mid + p2 * spd
+                upperMid = mid + p1 * spd
+                lowerMid = mid - p1 * spd
+                lower = mid - p2 * spd
+                lowerOut = mid - p3 * spd
+                boll20_upperOut = round(upperOut, 2)
+                boll20_upper = round(upper, 2)
+                boll20_upperMid = round(upperMid, 2)
+                boll20_mid = round(mid, 2)
+                boll20_lowerMid = round(lowerMid, 2)
+                boll20_lower = round(lower, 2)
+                boll20_lowerOut = round(lowerOut, 2)
+                boll20_upperVol = round(upperVol, 2)
+                boll20_midVol = round(midVol, 2)
+            else:
+                boll20_upperOut = 0
+                boll20_upper = 0
+                boll20_upperMid = 0
+                boll20_mid = 0
+                boll20_lowerMid = 0
+                boll20_lower = 0
+                boll20_lowerOut = 0
+                boll20_upperVol = 0
+                boll20_midVol = 0
+            # print(boll_dict)
+            self.upperOut20.append(boll20_upperOut)
+            self.upper20.append(boll20_upper)
+            self.upperMid20.append(boll20_upperMid)
+            self.mid20.append(boll20_mid)
+            self.lowerMid20.append(boll20_lowerMid)
+            self.lower20.append(boll20_lower)
+            self.lowerOut20.append(boll20_lowerOut)
+            self.upper20Vol.append(boll20_upperVol)
+            self.mid20Vol.append(boll20_midVol)
+            valueTemp.pop(0)
+            volTemp.pop(0)
+
+        pass
+        try:
+            if len(self.kLine60F['close']):
+                self.kLine60F['upperOut20'] = self.upperOut20
+                self.kLine60F['upper20'] = self.upper20
+                self.kLine60F['upperMid20'] = self.upperMid20
+                self.kLine60F['mid20'] = self.mid20
+                self.kLine60F['lowerMid20'] = self.lowerMid20
+                self.kLine60F['lower20'] = self.lower20
+                self.kLine60F['lowerOut20'] = self.lowerOut20
+                bollOpenResult = []
+                bollCloseResult = []
+                for i in range(len(self.kLine60F['open'])):
+                    min60Data = self.kLine60F[i:(i + 1)]
+                    min60Dict = {col: min60Data[col].tolist() for col in min60Data.columns}
+                    # print('dailyData', dailyDict)
+                    openList = [min60Dict['open'][0], min60Dict['upper20'][0],
+                                min60Dict['upperMid20'][0], min60Dict['mid20'][0],
+                                min60Dict['lowerMid20'][0], min60Dict['lower20'][0],
+                                min60Dict['upperOut20'][0], min60Dict['lowerOut20'][0]]
+                    closeList = [min60Dict['close'][0], min60Dict['upper20'][0],
+                                 min60Dict['upperMid20'][0], min60Dict['mid20'][0],
+                                 min60Dict['lowerMid20'][0], min60Dict['lower20'][0],
+                                 min60Dict['upperOut20'][0], min60Dict['lowerOut20'][0]]
+                    # print('OpenList', openList)
+                    # print('CloseList', closeList)
+
+                    def bollJudge(bollList):
+                        if bollList[0] >= bollList[6]:
+                            return 5.5
+                        elif bollList[0] > bollList[1]:
+                            return 5
+                        elif bollList[0] == bollList[1]:
+                            # upper
+                            return 4
+                        elif bollList[0] > bollList[2]:
+                            return 3
+                        elif bollList[0] == bollList[2]:
+                            # upperMid
+                            return 2
+                        elif bollList[0] > bollList[3]:
+                            return 1
+                        elif bollList[0] == bollList[3]:
+                            # mid20
+                            return 0
+                        elif bollList[0] > bollList[4]:
+                            return -1
+                        elif bollList[0] == bollList[4]:
+                            # lowerMid
+                            return -2
+                        elif bollList[0] > bollList[5]:
+                            return -3
+                        elif bollList[0] == bollList[5]:
+                            # lower
+                            return -4
+                        elif bollList[0] > bollList[7]:
+                            return -5
+                        elif bollList[0] <= bollList[7]:
+                            return -5.5
+                        else:
+                            return -10
+                    openResult = bollJudge(openList)
+                    closeResult = bollJudge(closeList)
+                    # openResult = sorted(range(len(openList)), key=lambda k: openList[k])
+                    # closeResult = sorted(range(len(closeList)), key=lambda k: closeList[k])
+                    # print('openResult', openResult)
+                    # print('closeResult', closeResult)
+                    bollOpenResult.append(openResult)
+                    bollCloseResult.append(closeResult)
+                self.kLine60F['bollPisOpen'] = bollOpenResult
+                self.kLine60F['bollPisClose'] = bollCloseResult
+                self.kLine60F['upper20Vol'] = self.upper20Vol
+                self.kLine60F['mid20Vol'] = self.mid20Vol
+            else:
+                self.kLine60F['upperOut20'] = 0
+                self.kLine60F['upper20'] = 0
+                self.kLine60F['upperMid20'] = 0
+                self.kLine60F['mid20'] = 0
+                self.kLine60F['lowerMid20'] = 0
+                self.kLine60F['lower20'] = 0
+                self.kLine60F['lowerOut20'] = 0
+                self.kLine60F['bollPisOpen'] = 0
+                self.kLine60F['bollPisClose'] = 0
+                self.kLine60F['upper20Vol'] = 0
+                self.kLine60F['mid20Vol'] = 0
+        except KeyError or IndexError:
+            self.kLine60F['upperOut20'] = 0
+            self.kLine60F['upper20'] = 0
+            self.kLine60F['upperMid20'] = 0
+            self.kLine60F['mid20'] = 0
+            self.kLine60F['lowerMid20'] = 0
+            self.kLine60F['lower20'] = 0
+            self.kLine60F['lowerOut20'] = 0
+            self.kLine60F['bollPisOpen'] = 0
+            self.kLine60F['bollPisClose'] = 0
+            self.kLine60F['upper20Vol'] = 0
+            self.kLine60F['mid20Vol'] = 0
+
+    def _calMa(self):
+        """
+        计算移动平均MA
+        :return:
+        """
+        self.ma.clear()
+        valueList = list(self.kLine60F['close'])
+        # valueList.reverse()
+        valueTemp = [float(k) for k in valueList]
+        # print(valueTemp)
+        maList = []
+        for i in range(len(self.nList)):
+            maList.append([])
+        for value in valueList:
+            for i in range(len(self.nList)):
+                n = self.nList[i]
+                if len(valueTemp) >= n:
+                    tempList = valueTemp[0:n]
+                    mid = numpy.mean(tempList)
+                    ma_element = round(mid, 2)
+                else:
+                    ma_element = 0
+                maList[i].append(ma_element)
+            valueTemp.pop(0)
+        for i in range(len(self.nList)):
+            maName = 'ma' + str(self.nList[i])
+            try:
+                if len(self.kLine60F['close']):
+                    self.kLine60F[maName] = maList[i]
+                else:
+                    self.kLine60F[maName] = 0
+            except KeyError or IndexError:
+                self.kLine60F[maName] = 0
+
 
 if __name__ == '__main__':
-    debug = 1
+    debug = 0
     code = '603963'
     # a = code.partition('.')
     # code = a[0]
@@ -628,17 +874,18 @@ if __name__ == '__main__':
                 pass
         print(j)
 
-    # if code is not None:
-    #     test = DataSourceQQ(code)
-    #     # test = DataSource_iFeng(code)
-    #     pass
-    # else:
-    #     raise ValueError
-    # a = pd.DataFrame(test.timeLine5DaysAllinOne)
-    # print(a)
-    # b = pd.DataFrame(test.kLine60F, columns=['time', 'open', 'close', 'high', 'low', 'volumn', 'exchange'])
-    # b.to_csv('D:/min.csv')
-    # print(b)
+    if code is not None:
+        test = DataSourceQQ(code)
+        test.updateKLine()
+        # test = DataSource_iFeng(code)
+        pass
+    else:
+        raise ValueError
+    print(test.timeLine5DaysAllinOne)
+    test.timeLine5DaysAllinOne.to_csv('D:/time.csv')
+    b = test.kLine60F
+    b.to_csv('D:/min.csv')
+    print(b)
     # print(test.timeLine)
     # for i in test.timeLine5DaysAllinOne:
     #     print(i)
