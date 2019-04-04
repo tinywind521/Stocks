@@ -23,6 +23,9 @@ class DataTuShare:
     https://tushare.pro/
     13524302581
     Aa12345678
+
+    实时数据范例：
+    http://qt.gtimg.cn/q=bkqtRank_A_sh,bkqtRank_A_sz
     """
 
     def __init__(self):
@@ -88,8 +91,8 @@ class DataTuShare:
 
     def updateDailyKLine(self):
         self._calLimit()
-        self._calBoll(20, 10)
         self._calMa()
+        self._calBoll(20, 10)
         pass
 
     def _calLimit(self):
@@ -219,6 +222,7 @@ class DataTuShare:
                 #                                          self.dailyKline['mid20'])]
                 bollOpenResult = []
                 bollCloseResult = []
+                bollMa60Result = []
                 for i in range(len(self.dailyKline['open'])):
                     dailyData = self.dailyKline[i:(i + 1)]
                     dailyDict = {col: dailyData[col].tolist() for col in dailyData.columns}
@@ -231,11 +235,19 @@ class DataTuShare:
                                  dailyDict['upperMid20'][0], dailyDict['mid20'][0],
                                  dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
                                  dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
+                    ma60List = [dailyDict['ma60'][0], dailyDict['upper20'][0],
+                                 dailyDict['upperMid20'][0], dailyDict['mid20'][0],
+                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
+                                 dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
                     # print('OpenList', openList)
                     # print('CloseList', closeList)
 
                     def bollJudge(bollList):
-                        if bollList[0] >= bollList[6]:
+                        if bollList[3] == 0 or bollList[0] == 0:
+                            # boll is None
+                            return 0
+                        elif bollList[0] >= bollList[6]:
+                            # upperOut
                             return 5.5
                         elif bollList[0] > bollList[1]:
                             return 5
@@ -265,19 +277,23 @@ class DataTuShare:
                         elif bollList[0] > bollList[7]:
                             return -5
                         elif bollList[0] <= bollList[7]:
+                            # lowerOut
                             return -5.5
                         else:
                             return -10
                     openResult = bollJudge(openList)
                     closeResult = bollJudge(closeList)
+                    ma60Result = bollJudge(ma60List)
                     # openResult = sorted(range(len(openList)), key=lambda k: openList[k])
                     # closeResult = sorted(range(len(closeList)), key=lambda k: closeList[k])
                     # print('openResult', openResult)
                     # print('closeResult', closeResult)
                     bollOpenResult.append(openResult)
                     bollCloseResult.append(closeResult)
+                    bollMa60Result.append(ma60Result)
                 self.dailyKline['bollPisOpen'] = bollOpenResult
                 self.dailyKline['bollPisClose'] = bollCloseResult
+                self.dailyKline['bollPisMa60'] = bollMa60Result
                 self.dailyKline['upper20Vol'] = self.upper20Vol
                 self.dailyKline['mid20Vol'] = self.mid20Vol
             else:
@@ -290,6 +306,7 @@ class DataTuShare:
                 self.dailyKline['lowerOut20'] = 0
                 self.dailyKline['bollPisOpen'] = 0
                 self.dailyKline['bollPisClose'] = 0
+                self.dailyKline['bollPisMa60'] = 0
                 self.dailyKline['upper20Vol'] = 0
                 self.dailyKline['mid20Vol'] = 0
         except KeyError or IndexError:
@@ -302,6 +319,7 @@ class DataTuShare:
             self.dailyKline['lowerOut20'] = 0
             self.dailyKline['bollPisOpen'] = 0
             self.dailyKline['bollPisClose'] = 0
+            self.dailyKline['bollPisMa60'] = 0
             self.dailyKline['upper20Vol'] = 0
             self.dailyKline['mid20Vol'] = 0
 
@@ -551,8 +569,8 @@ class DataSourceQQ:
                     # print(self.kLineDay)
             except ValueError:
                 self.kLineDay = None
-            self._calBoll(20, 10)
             self._calMa()
+            self._calBoll(20, 10)
 
         elif timeType == '60':
             try:
@@ -577,8 +595,8 @@ class DataSourceQQ:
                     # print(self.kLine60F)
             except ValueError:
                 self.kLine60F = None
-            self._calBoll(20, 10)
             self._calMa()
+            self._calBoll(20, 10)
 
     def _req(self, url, sleepTime=0.1):
         """
@@ -705,6 +723,7 @@ class DataSourceQQ:
                 self.kLine60F['lowerOut20'] = self.lowerOut20
                 bollOpenResult = []
                 bollCloseResult = []
+                bollMa60Result = []
                 for i in range(len(self.kLine60F['open'])):
                     min60Data = self.kLine60F[i:(i + 1)]
                     min60Dict = {col: min60Data[col].tolist() for col in min60Data.columns}
@@ -717,11 +736,16 @@ class DataSourceQQ:
                                  min60Dict['upperMid20'][0], min60Dict['mid20'][0],
                                  min60Dict['lowerMid20'][0], min60Dict['lower20'][0],
                                  min60Dict['upperOut20'][0], min60Dict['lowerOut20'][0]]
-                    # print('OpenList', openList)
-                    # print('CloseList', closeList)
+                    ma60List = [min60Dict['ma60'][0], min60Dict['upper20'][0],
+                                 min60Dict['upperMid20'][0], min60Dict['mid20'][0],
+                                 min60Dict['lowerMid20'][0], min60Dict['lower20'][0],
+                                 min60Dict['upperOut20'][0], min60Dict['lowerOut20'][0]]
 
                     def bollJudge(bollList):
-                        if bollList[0] >= bollList[6]:
+                        if bollList[3] == 0 or bollList[0] == 0:
+                            # boll is None
+                            return 0
+                        elif bollList[0] >= bollList[6]:
                             return 5.5
                         elif bollList[0] > bollList[1]:
                             return 5
@@ -756,14 +780,14 @@ class DataSourceQQ:
                             return -10
                     openResult = bollJudge(openList)
                     closeResult = bollJudge(closeList)
-                    # openResult = sorted(range(len(openList)), key=lambda k: openList[k])
-                    # closeResult = sorted(range(len(closeList)), key=lambda k: closeList[k])
-                    # print('openResult', openResult)
-                    # print('closeResult', closeResult)
+                    ma60Result = bollJudge(ma60List)
+
                     bollOpenResult.append(openResult)
                     bollCloseResult.append(closeResult)
+                    bollMa60Result.append(ma60Result)
                 self.kLine60F['bollPisOpen'] = bollOpenResult
                 self.kLine60F['bollPisClose'] = bollCloseResult
+                self.kLine60F['bollPisMa60'] = bollMa60Result
                 self.kLine60F['upper20Vol'] = self.upper20Vol
                 self.kLine60F['mid20Vol'] = self.mid20Vol
             else:
@@ -776,6 +800,7 @@ class DataSourceQQ:
                 self.kLine60F['lowerOut20'] = 0
                 self.kLine60F['bollPisOpen'] = 0
                 self.kLine60F['bollPisClose'] = 0
+                self.kLine60F['bollPisMa60'] = 0
                 self.kLine60F['upper20Vol'] = 0
                 self.kLine60F['mid20Vol'] = 0
         except KeyError or IndexError:
@@ -788,6 +813,7 @@ class DataSourceQQ:
             self.kLine60F['lowerOut20'] = 0
             self.kLine60F['bollPisOpen'] = 0
             self.kLine60F['bollPisClose'] = 0
+            self.kLine60F['bollPisMa60'] = 0
             self.kLine60F['upper20Vol'] = 0
             self.kLine60F['mid20Vol'] = 0
 
@@ -886,9 +912,9 @@ if __name__ == '__main__':
     else:
         raise ValueError
     print(test.timeLine5DaysAllinOne)
-    test.timeLine5DaysAllinOne.to_csv('D:/time.csv')
+    test.timeLine5DaysAllinOne.to_csv('D:/min.csv')
     b = test.kLine60F
-    b.to_csv('D:/min.csv')
+    b.to_csv('D:/hour.csv')
     print(b)
     # print(test.timeLine)
     # for i in test.timeLine5DaysAllinOne:
