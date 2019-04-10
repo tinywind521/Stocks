@@ -6,6 +6,9 @@ import time
 import json
 import tushare as ts
 import pandas as pd
+# import pymysql
+
+from sqlalchemy import create_engine
 
 
 class DataTuShare:
@@ -37,6 +40,7 @@ class DataTuShare:
         self.dailyKline = pd.DataFrame()
         self.startDate = '20170701'
         self.code = ''
+        self.connection = create_engine('mysql+pymysql://root:star2249@localhost:3306/stock?charset=utf8')
 
         self.upperOut20 = []
         self.upper20 = []
@@ -94,6 +98,15 @@ class DataTuShare:
         self._calMa()
         self._calBoll(20, 10)
         pass
+
+    def saveDailyKLine(self):
+        """
+            def to_sql(self, name, con, schema=None, if_exists='fail', index=True,
+            index_label=None, chunksize=None, dtype=None, method=None):
+            603963.sh
+        :return:
+        """
+        self.dailyKline.to_sql(self.code, self.connection, if_exists='replace', index=False)
 
     def _calLimit(self):
         def judgeLimit(pre_close, close):
@@ -866,6 +879,7 @@ if __name__ == '__main__':
         data.getDailyKLine()
         # print(data.dailyKline)
         data.updateDailyKLine()
+        data.saveDailyKLine()
         # print(data.dailyKline)
         while True:
             try:
