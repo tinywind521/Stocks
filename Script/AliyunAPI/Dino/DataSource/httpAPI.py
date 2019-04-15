@@ -38,7 +38,7 @@ class DataTuShare:
         self.pro = ts.pro_api()
         # print(self.pro.news(src='sina', start_date='20190326', end_date='20190327'))
         self.dailyKline = pd.DataFrame()
-        self.startDate = '20170701'
+        self.startDate = '20170101'
         self.code = ''
         self.connection = create_engine('mysql+pymysql://root:star2249@localhost:3306/stock?charset=utf8')
 
@@ -97,6 +97,7 @@ class DataTuShare:
         self._calLimit()
         self._calMa()
         self._calBoll(20, 10)
+        self._calPosition()
         pass
 
     def saveDailyKLine(self):
@@ -369,6 +370,21 @@ class DataTuShare:
                     self.dailyKline[maName] = 0
             except KeyError or IndexError:
                 self.dailyKline[maName] = 0
+
+    def _calPosition(self):
+        dataLength = len(self.dailyKline)
+        frame_1 = self.dailyKline[:-1]
+        frame_2 = self.dailyKline[1:]
+        print(frame_1)
+        print(frame_2)
+        for col in frame_1.columns and not ['ts_code', 'trade_date']:
+            print(col)
+
+        for i in range(len(self.dailyKline)):
+            print('content: ', self.dailyKline[i:i + 1])
+            print('content: ', self.dailyKline[i + 1:i + 2])
+            break
+        pass
 
 
 class DataSourceQQ:
@@ -879,7 +895,8 @@ if __name__ == '__main__':
         data.getDailyKLine()
         # print(data.dailyKline)
         data.updateDailyKLine()
-        data.saveDailyKLine()
+        # print('DataFrame Length ', len(data.dailyKline))
+        # data.saveDailyKLine()
         # print(data.dailyKline)
         while True:
             try:
