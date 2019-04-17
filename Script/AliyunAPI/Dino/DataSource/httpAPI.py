@@ -6,9 +6,10 @@ import time
 import json
 import tushare as ts
 import pandas as pd
-# import pymysql
+import pymysql
 
 from sqlalchemy import create_engine
+from Dino.DataSource.MySQL import MySQL
 
 
 class DataTuShare:
@@ -40,7 +41,7 @@ class DataTuShare:
         self.dailyKline = pd.DataFrame()
         self.startDate = '20170101'
         self.code = ''
-        self.connection = create_engine('mysql+pymysql://root:star2249@localhost:3306/stock?charset=utf8')
+        self.connection = create_engine('mysql+pymysql://root:star2249@localhost:3306/stocks?charset=utf8')
 
         self.upperOut20 = []
         self.upper20 = []
@@ -49,11 +50,28 @@ class DataTuShare:
         self.lowerMid20 = []
         self.lower20 = []
         self.lowerOut20 = []
+        self.width20 = []
         self.upper20Vol = []
         self.mid20Vol = []
 
         self.ma = []
         self.nList = [5, 10, 60, 144]
+
+        self.dateTime = None
+        self.tableName = None
+        self.colList = None
+
+        self.stocks_config = \
+            {
+            'host': 'localhost',
+            'port': 3306,
+            'user': 'root',
+            'password': 'star2249',
+            'db': 'stocks',
+            'charset': 'utf8',
+            'cursorclass': pymysql.cursors.DictCursor,
+            }
+        self.sDB = MySQL(self.stocks_config)
 
     def setStartDate(self, startDate):
         self.startDate = startDate
@@ -63,6 +81,7 @@ class DataTuShare:
         # self.set_token
         temp = self.pro.query('stock_basic', exchange='', list_status='L', fields='symbol, ts_code')
         dataList = list(temp['ts_code'])
+        self._get_DateTime()
         return dataList
 
     def setCode(self, codeTemp):
@@ -88,26 +107,86 @@ class DataTuShare:
             raise ValueError
 
     def getDailyKLine(self):
+        """
+        获取日线数据
+        针对start_date需要优化，判断数据库的max(trade_date)
+        :return:
+        """
         # print()
         self.dailyKline = self.pro.daily(ts_code=self.code, start_date=self.startDate,
                                          fields='ts_code, trade_date, open, high, low, close,'
                                                 'pre_close, change, pct_chg, vol, amount')
 
     def updateDailyKLine(self):
-        self._calLimit()
-        self._calMa()
-        self._calBoll(20, 10)
+        """
+        更新各项指标，若数据库存在，则直接加载数据库。
+        针对start_date需要优化，判断数据库的max(trade_date)
+        :return:
+        """
+        self.tableName = self.code.replace('.', '').lower()
+        sql = 'select max(trade_date) from ' + self.tableName + ";"
+        maxTradeDate = None
+        try:
+            self.sDB.execSQL(sql)
+            maxTradeDate = self.sDB.dbReturn[0]['max(trade_date)']
+            self.sDB.close()
+        except pymysql.err.Error:
+            pass
+        if maxTradeDate and maxTradeDate == self.dateTime['shortDate']:
+            print('reading...')
+            print('reading...')
+            print('reading...')
+            self._loadDailyKLine()
+        else:
+            self._calLimit()
+            self._calMa()
+            self._calBoll(20, 10)
+            self._saveDailyKLine()
+            print('saving...')
+            print('saving...')
+            print('saving...')
+
+        if (not self.dailyKline.empty) and (not self.colList):
+            self.colList = list(self.dailyKline.columns)
+            for i in ['ts_code', 'trade_date']:
+                try:
+                    self.colList.remove(i)
+                except ValueError:
+                    pass
+        # print(self.colList)
+        '''
+        为calPosition计算表头列表
+        '''
         self._calPosition()
         pass
 
-    def saveDailyKLine(self):
+    def _saveDailyKLine(self):
         """
             def to_sql(self, name, con, schema=None, if_exists='fail', index=True,
             index_label=None, chunksize=None, dtype=None, method=None):
             603963.sh
         :return:
         """
-        self.dailyKline.to_sql(self.code, self.connection, if_exists='replace', index=False)
+        sql = "drop table if exists " + self.tableName + ";"
+        try:
+            self.sDB.execSQL(sql)
+            # alter table table_name add primary key(id)
+            self.sDB.close()
+        except UserWarning:
+            pass
+        self.dailyKline.to_sql(self.tableName, self.connection, if_exists='replace', index=False)
+
+    def _loadDailyKLine(self):
+        # sql = "select * from " + tableName + ";"
+        # colList = self.dailyKline.columns.values.tolist()
+        # try:
+        #     self.sDB.execSQL(sql)
+        #     dataReturn = self.sDB.dbReturn
+        #     self.sDB.close()
+        #     self.dailyKline = pd.DataFrame(dataReturn, columns=colList)
+        # except UserWarning:
+        #     pass
+        self.dailyKline = pd.read_sql_table(self.tableName, self.connection)
 
     def _calLimit(self):
         def judgeLimit(pre_close, close):
@@ -151,6 +230,7 @@ class DataTuShare:
         self.lowerOut20.clear()
         self.upper20Vol.clear()
         self.mid20Vol.clear()
+        self.width20.clear()
         valueList = list(self.dailyKline['close'])
         volList = list(self.dailyKline['vol'])
         # valueList.reverse()
@@ -180,6 +260,8 @@ class DataTuShare:
                 boll20_lowerMid = round(lowerMid, 2)
                 boll20_lower = round(lower, 2)
                 boll20_lowerOut = round(lowerOut, 2)
+                width = 100 * (boll20_upper - boll20_lower) / boll20_mid
+                boll20_width = round((width * 100), 2)
                 boll20_upperVol = round(upperVol, 2)
                 boll20_midVol = round(midVol, 2)
             else:
@@ -190,6 +272,7 @@ class DataTuShare:
                 boll20_lowerMid = 0
                 boll20_lower = 0
                 boll20_lowerOut = 0
+                boll20_width = 0
                 boll20_upperVol = 0
                 boll20_midVol = 0
             # print(boll_dict)
@@ -200,6 +283,7 @@ class DataTuShare:
             self.lowerMid20.append(boll20_lowerMid)
             self.lower20.append(boll20_lower)
             self.lowerOut20.append(boll20_lowerOut)
+            self.width20.append(boll20_width)
             self.upper20Vol.append(boll20_upperVol)
             self.mid20Vol.append(boll20_midVol)
             valueTemp.pop(0)
@@ -224,6 +308,7 @@ class DataTuShare:
                 self.dailyKline['lowerMid20'] = self.lowerMid20
                 self.dailyKline['lower20'] = self.lower20
                 self.dailyKline['lowerOut20'] = self.lowerOut20
+                self.dailyKline['width20'] = self.width20
                 # try:
                 #     self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
                 #     self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
@@ -318,6 +403,7 @@ class DataTuShare:
                 self.dailyKline['lowerMid20'] = 0
                 self.dailyKline['lower20'] = 0
                 self.dailyKline['lowerOut20'] = 0
+                self.dailyKline['width20'] = 0
                 self.dailyKline['bollPisOpen'] = 0
                 self.dailyKline['bollPisClose'] = 0
                 self.dailyKline['bollPisMa60'] = 0
@@ -331,6 +417,7 @@ class DataTuShare:
             self.dailyKline['lowerMid20'] = 0
             self.dailyKline['lower20'] = 0
             self.dailyKline['lowerOut20'] = 0
+            self.dailyKline['width20'] = 0
             self.dailyKline['bollPisOpen'] = 0
             self.dailyKline['bollPisClose'] = 0
             self.dailyKline['bollPisMa60'] = 0
@@ -373,18 +460,32 @@ class DataTuShare:
 
     def _calPosition(self):
         dataLength = len(self.dailyKline)
-        frame_1 = self.dailyKline[:-1]
-        frame_2 = self.dailyKline[1:]
-        print(frame_1)
-        print(frame_2)
-        for col in frame_1.columns and not ['ts_code', 'trade_date']:
-            print(col)
+        frame_1 = self.dailyKline[:-1].reset_index()[self.colList]
+        frame_2 = self.dailyKline[1:].reset_index()[self.colList]
+        print((frame_1 - frame_2)[1:2])
+        (frame_1 - frame_2).to_csv('D:/diff.csv')
+        # for i in range(len(self.dailyKline)):
+        #     print('content: ', self.dailyKline[i:i + 1])
+        #     print('content: ', self.dailyKline[i + 1:i + 2])
+        #     break
+        # pass
 
-        for i in range(len(self.dailyKline)):
-            print('content: ', self.dailyKline[i:i + 1])
-            print('content: ', self.dailyKline[i + 1:i + 2])
-            break
-        pass
+    def _get_DateTime(self):
+        """
+        获取当前日期和时间
+        :return:
+        """
+        timeStamp = time.localtime()
+        # DateTime = {}
+        fullDate = (time.strftime("%Y-%m-%d", timeStamp))
+        shortDate = (time.strftime("%Y%m%d", timeStamp))
+        fullTime = (time.strftime("%H:%M:%S", timeStamp))
+        shortTime = (time.strftime("%H%M%S", timeStamp))
+        keys = ['fullDate', 'shortDate', 'fullTime', 'shortTime']
+        # print(keys)
+        values = [fullDate, shortDate, fullTime, shortTime]
+        # print(values)
+        self.dateTime = dict(zip(keys, values))
 
 
 class DataSourceQQ:
@@ -884,12 +985,9 @@ class DataSourceQQ:
 if __name__ == '__main__':
     debug = 0
     code = '603963'
-    # a = code.partition('.')
-    # code = a[0]
-    # print(a)
     data = DataTuShare()
     stockList = data.getList()
-    print(stockList)
+    # print(stockList)
     if not debug:
         data.setCode(code)
         data.getDailyKLine()
@@ -897,6 +995,7 @@ if __name__ == '__main__':
         data.updateDailyKLine()
         # print('DataFrame Length ', len(data.dailyKline))
         # data.saveDailyKLine()
+        # data.loadDailyKLine()
         # print(data.dailyKline)
         while True:
             try:
@@ -942,11 +1041,11 @@ if __name__ == '__main__':
         pass
     else:
         raise ValueError
-    print(test.timeLine5DaysAllinOne)
+    # print(test.timeLine5DaysAllinOne)
     test.timeLine5DaysAllinOne.to_csv('D:/min.csv')
     b = test.kLine60F
     b.to_csv('D:/hour.csv')
-    print(b)
+    # print(b)
     # print(test.timeLine)
     # for i in test.timeLine5DaysAllinOne:
     #     print(i)
