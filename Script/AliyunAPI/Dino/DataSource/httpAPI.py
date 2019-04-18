@@ -7,10 +7,67 @@ import json
 import tushare as ts
 import pandas as pd
 import pymysql
+import sqlalchemy
 
 from sqlalchemy import create_engine
 from Dino.DataSource.MySQL import MySQL
 
+
+def bollJudge(bollList):
+    if bollList[3] == 0 or bollList[0] == 0:
+        # boll is None
+        return 0
+    elif bollList[0] >= bollList[6]:
+        # upperOut
+        return 5.5
+    elif bollList[0] > bollList[1]:
+        return 5
+    elif bollList[0] == bollList[1]:
+        # upper
+        return 4
+    elif bollList[0] > bollList[2]:
+        return 3
+    elif bollList[0] == bollList[2]:
+        # upperMid
+        return 2
+    elif bollList[0] > bollList[3]:
+        return 1
+    elif bollList[0] == bollList[3]:
+        # mid20
+        return 0
+    elif bollList[0] > bollList[4]:
+        return -1
+    elif bollList[0] == bollList[4]:
+        # lowerMid
+        return -2
+    elif bollList[0] > bollList[5]:
+        return -3
+    elif bollList[0] == bollList[5]:
+        # lower
+        return -4
+    elif bollList[0] > bollList[7]:
+        return -5
+    elif bollList[0] <= bollList[7]:
+        # lowerOut
+        return -5.5
+    else:
+        return -10
+
+def trendJudgeMA(m):
+    if m > 0.01:
+        return 1
+    elif m < -0.01:
+        return -1
+    else:
+        return 0
+
+def trendJudgeWidth(m):
+    if m > 1:
+        return 1
+    elif m < -1:
+        return -1
+    else:
+        return 0
 
 class DataTuShare:
     """
@@ -130,7 +187,8 @@ class DataTuShare:
             self.sDB.execSQL(sql)
             maxTradeDate = self.sDB.dbReturn[0]['max(trade_date)']
             self.sDB.close()
-        except pymysql.err.Error:
+        # except pymysql.err or ConnectionRefusedError:
+        except:
             pass
         if maxTradeDate and maxTradeDate == self.dateTime['shortDate']:
             print('reading...')
@@ -141,23 +199,22 @@ class DataTuShare:
             self._calLimit()
             self._calMa()
             self._calBoll(20, 10)
+            if (not self.dailyKline.empty) and (not self.colList):
+                self.colList = list(self.dailyKline.columns)
+                for i in ['ts_code', 'trade_date']:
+                    try:
+                        self.colList.remove(i)
+                    except ValueError:
+                        pass
+            # print(self.colList)
+            '''
+            为calPosition计算表头列表
+            '''
+            self._calPosition()
             self._saveDailyKLine()
             print('saving...')
             print('saving...')
             print('saving...')
-
-        if (not self.dailyKline.empty) and (not self.colList):
-            self.colList = list(self.dailyKline.columns)
-            for i in ['ts_code', 'trade_date']:
-                try:
-                    self.colList.remove(i)
-                except ValueError:
-                    pass
-        # print(self.colList)
-        '''
-        为calPosition计算表头列表
-        '''
-        self._calPosition()
         pass
 
     def _saveDailyKLine(self):
@@ -172,9 +229,13 @@ class DataTuShare:
             self.sDB.execSQL(sql)
             # alter table table_name add primary key(id)
             self.sDB.close()
-        except UserWarning:
+        # except UserWarning:
+        except:
             pass
-        self.dailyKline.to_sql(self.tableName, self.connection, if_exists='replace', index=False)
+        try:
+            self.dailyKline.to_sql(self.tableName, self.connection, if_exists='replace', index=False)
+        except sqlalchemy.exc.OperationalError:
+            pass
 
     def _loadDailyKLine(self):
         # sql = "select * from " + tableName + ";"
@@ -261,7 +322,7 @@ class DataTuShare:
                 boll20_lower = round(lower, 2)
                 boll20_lowerOut = round(lowerOut, 2)
                 width = 100 * (boll20_upper - boll20_lower) / boll20_mid
-                boll20_width = round((width * 100), 2)
+                boll20_width = round(width, 2)
                 boll20_upperVol = round(upperVol, 2)
                 boll20_midVol = round(midVol, 2)
             else:
@@ -340,46 +401,6 @@ class DataTuShare:
                                  dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
                     # print('OpenList', openList)
                     # print('CloseList', closeList)
-
-                    def bollJudge(bollList):
-                        if bollList[3] == 0 or bollList[0] == 0:
-                            # boll is None
-                            return 0
-                        elif bollList[0] >= bollList[6]:
-                            # upperOut
-                            return 5.5
-                        elif bollList[0] > bollList[1]:
-                            return 5
-                        elif bollList[0] == bollList[1]:
-                            # upper
-                            return 4
-                        elif bollList[0] > bollList[2]:
-                            return 3
-                        elif bollList[0] == bollList[2]:
-                            # upperMid
-                            return 2
-                        elif bollList[0] > bollList[3]:
-                            return 1
-                        elif bollList[0] == bollList[3]:
-                            # mid20
-                            return 0
-                        elif bollList[0] > bollList[4]:
-                            return -1
-                        elif bollList[0] == bollList[4]:
-                            # lowerMid
-                            return -2
-                        elif bollList[0] > bollList[5]:
-                            return -3
-                        elif bollList[0] == bollList[5]:
-                            # lower
-                            return -4
-                        elif bollList[0] > bollList[7]:
-                            return -5
-                        elif bollList[0] <= bollList[7]:
-                            # lowerOut
-                            return -5.5
-                        else:
-                            return -10
                     openResult = bollJudge(openList)
                     closeResult = bollJudge(closeList)
                     ma60Result = bollJudge(ma60List)
@@ -459,16 +480,15 @@ class DataTuShare:
                 self.dailyKline[maName] = 0
 
     def _calPosition(self):
-        dataLength = len(self.dailyKline)
         frame_1 = self.dailyKline[:-1].reset_index()[self.colList]
         frame_2 = self.dailyKline[1:].reset_index()[self.colList]
-        print((frame_1 - frame_2)[1:2])
-        (frame_1 - frame_2).to_csv('D:/diff.csv')
-        # for i in range(len(self.dailyKline)):
-        #     print('content: ', self.dailyKline[i:i + 1])
-        #     print('content: ', self.dailyKline[i + 1:i + 2])
-        #     break
-        # pass
+        result = frame_1 - frame_2
+        result.to_csv('D:/diff.csv')
+
+        self.dailyKline['mid20tr'] = result.apply(lambda x: trendJudgeMA(x.mid20), axis=1)
+        self.dailyKline['width20tr'] = result.apply(lambda x: trendJudgeWidth(x.width20), axis=1)
+        self.dailyKline['ma60tr'] = result.apply(lambda x: trendJudgeMA(x.ma60), axis=1)
+        self.dailyKline['ma144tr'] = result.apply(lambda x: trendJudgeMA(x.ma144), axis=1)
 
     def _get_DateTime(self):
         """
@@ -524,6 +544,7 @@ class DataSourceQQ:
         self.lowerMid20 = []
         self.lower20 = []
         self.lowerOut20 = []
+        self.width20 = []
         self.upper20Vol = []
         self.mid20Vol = []
         self.ma = []
@@ -785,6 +806,7 @@ class DataSourceQQ:
         self.lowerMid20.clear()
         self.lower20.clear()
         self.lowerOut20.clear()
+        self.width20.clear()
         self.upper20Vol.clear()
         self.mid20Vol.clear()
         valueList = list(self.kLine60F['close'])
@@ -816,6 +838,8 @@ class DataSourceQQ:
                 boll20_lowerMid = round(lowerMid, 2)
                 boll20_lower = round(lower, 2)
                 boll20_lowerOut = round(lowerOut, 2)
+                width = 100 * (boll20_upper - boll20_lower) / boll20_mid
+                boll20_width = round(width, 2)
                 boll20_upperVol = round(upperVol, 2)
                 boll20_midVol = round(midVol, 2)
             else:
@@ -826,6 +850,7 @@ class DataSourceQQ:
                 boll20_lowerMid = 0
                 boll20_lower = 0
                 boll20_lowerOut = 0
+                boll20_width = 0
                 boll20_upperVol = 0
                 boll20_midVol = 0
             # print(boll_dict)
@@ -836,6 +861,7 @@ class DataSourceQQ:
             self.lowerMid20.append(boll20_lowerMid)
             self.lower20.append(boll20_lower)
             self.lowerOut20.append(boll20_lowerOut)
+            self.width20.append(boll20_width)
             self.upper20Vol.append(boll20_upperVol)
             self.mid20Vol.append(boll20_midVol)
             valueTemp.pop(0)
@@ -851,6 +877,7 @@ class DataSourceQQ:
                 self.kLine60F['lowerMid20'] = self.lowerMid20
                 self.kLine60F['lower20'] = self.lower20
                 self.kLine60F['lowerOut20'] = self.lowerOut20
+                self.kLine60F['width20'] = self.width20
                 bollOpenResult = []
                 bollCloseResult = []
                 bollMa60Result = []
@@ -871,43 +898,6 @@ class DataSourceQQ:
                                  min60Dict['lowerMid20'][0], min60Dict['lower20'][0],
                                  min60Dict['upperOut20'][0], min60Dict['lowerOut20'][0]]
 
-                    def bollJudge(bollList):
-                        if bollList[3] == 0 or bollList[0] == 0:
-                            # boll is None
-                            return 0
-                        elif bollList[0] >= bollList[6]:
-                            return 5.5
-                        elif bollList[0] > bollList[1]:
-                            return 5
-                        elif bollList[0] == bollList[1]:
-                            # upper
-                            return 4
-                        elif bollList[0] > bollList[2]:
-                            return 3
-                        elif bollList[0] == bollList[2]:
-                            # upperMid
-                            return 2
-                        elif bollList[0] > bollList[3]:
-                            return 1
-                        elif bollList[0] == bollList[3]:
-                            # mid20
-                            return 0
-                        elif bollList[0] > bollList[4]:
-                            return -1
-                        elif bollList[0] == bollList[4]:
-                            # lowerMid
-                            return -2
-                        elif bollList[0] > bollList[5]:
-                            return -3
-                        elif bollList[0] == bollList[5]:
-                            # lower
-                            return -4
-                        elif bollList[0] > bollList[7]:
-                            return -5
-                        elif bollList[0] <= bollList[7]:
-                            return -5.5
-                        else:
-                            return -10
                     openResult = bollJudge(openList)
                     closeResult = bollJudge(closeList)
                     ma60Result = bollJudge(ma60List)
@@ -928,6 +918,7 @@ class DataSourceQQ:
                 self.kLine60F['lowerMid20'] = 0
                 self.kLine60F['lower20'] = 0
                 self.kLine60F['lowerOut20'] = 0
+                self.kLine60F['width20'] = 0
                 self.kLine60F['bollPisOpen'] = 0
                 self.kLine60F['bollPisClose'] = 0
                 self.kLine60F['bollPisMa60'] = 0
@@ -941,6 +932,7 @@ class DataSourceQQ:
             self.kLine60F['lowerMid20'] = 0
             self.kLine60F['lower20'] = 0
             self.kLine60F['lowerOut20'] = 0
+            self.kLine60F['width20'] = 0
             self.kLine60F['bollPisOpen'] = 0
             self.kLine60F['bollPisClose'] = 0
             self.kLine60F['bollPisMa60'] = 0
@@ -987,6 +979,7 @@ if __name__ == '__main__':
     code = '603963'
     data = DataTuShare()
     stockList = data.getList()
+    print('List get!')
     # print(stockList)
     if not debug:
         data.setCode(code)
