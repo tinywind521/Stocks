@@ -1,96 +1,95 @@
 from multiprocessing.dummy import Pool as ThreadPool
 from Dino.DataSource.httpAPI import DataSourceQQ as QQ
 from Dino.DataSource.httpAPI import DataTuShare as Tu
+from Dino.DataSource.httpAPI import DataTuShareMul as TuMul
 
 import time
+import sys
+
+def getCodeListAndColList():
+    value = {'codeList':[], 'colList':[]}
+    data = Tu()
+    codeList = data.getList()
+    print('List get!')
+    data.setCode(codeList[0])
+    data.getDailyKLine()
+    data.updateDailyKLine()
+    colList = data.colList
+    value['codeList'] = codeList
+    value['colList'] = colList
+    return value
+
+def view_bar(num, total, codeIn=''):
+    rate = num / total
+    rate_num = rate * 100
+    flow = int(rate_num)
+    r = '\r[%s%s] %2.2f%% %d/%d %s' % ("|"*flow, " "*(100-flow), rate_num, num, total, codeIn,)
+    sys.stdout.write(r)
+    sys.stdout.flush()
+
+def dailySingleDataCapture(objTemp):
+    """
+    多线程处理
+    DataTuShareMul
+    :param codeTemp: objTemp = [{'code': k, 'obj': self.tu} for k in realList]
+    :return:
+    """
+    obj = objTemp['obj']
+    code = objTemp['code']
+    colList = objTemp['colList']
+    try:
+        code = obj.setCode(code)
+    except:
+        return
+    # obj.updateDailyKLine(colList, code)
+    # print(code)
+    while True:
+        try:
+            obj.updateDailyKLine(colList, code)
+            break
+        except ValueError:
+            print(code, 'time sleep...')
+            time.sleep(60)
 
 
-class Filter:
+class StockFilter:
     """
     筛选过滤器
     """
-    def __init__(self):
+    def __init__(self, codeList, colList):
+        self.codeList = codeList
+        self.colList = colList
+        self.code = None
+        self.tu = TuMul()
+        """
+        多线程设定
+        """
+        self.poolLength = 20
+        # self.qq = QQ(self.code)
         pass
         # self.code = code
-'''
-length = len(codeList)
-r = ResultDeal(result)
-for i in range(0, length, PoolLength):
-    realList = codeList[i:i + PoolLength]
-    realLength = len(realList)
-    function.view_bar(i + realLength, length)
-    pool = ThreadPool(realLength)
-    objTemp = [{'codeArg': k, 'objResult': r, 'ref_List': ref_List} for k in realList]
-    pool.map(function.calDayStatus, objTemp)
-    pool.close()
-    pool.join()
-result = r.getResultValue()
-'''
+
+    def getDailyDataMul(self):
+
+        length = len(self.codeList)
+        for i in range(0, length, self.poolLength):
+            realList = self.codeList[i:i + self.poolLength]
+            print(realList)
+            realLength = len(realList)
+            view_bar(i + realLength, length)
+            pool = ThreadPool(realLength)
+            objTemp = [{'code': k, 'colList': self.colList, 'obj': self.tu} for k in realList]
+            pool.map(dailySingleDataCapture, objTemp)
+            pool.close()
+            pool.join()
+
+    def getDailyData(self):
+        pass
+
 
 if __name__ == '__main__':
     debug = 0
-    code = '603963'
-    data = Tu()
-    stockList = data.getList()
-    print(stockList)
-    if not debug:
-        data.setCode(code)
-        data.getDailyKLine()
-        data.updateDailyKLine()
-        while True:
-            try:
-                data.dailyKline.to_csv('d:/' + code + '.csv')
-                break
-            except PermissionError:
-                input('The file is open...please close it!!!')
-    if debug:
-        j = 0
-        for code in stockList:
-            data.setCode(code)
-            # print(code)
-            while True:
-                # noinspection PyBroadException
-                try:
-                    data.getDailyKLine()
-                    # data.updateDailyKLine()
-                    break
-                except Exception:
-                    print(code, 'time sleep...')
-                    time.sleep(60)
-            data.updateDailyKLine()
-            try:
-                if len(data.dailyKline['close']):
-                    print(code, 'mid20:\t', data.dailyKline['mid20'][0], '\trunning...')
-                else:
-                    print(code, 'no data!!!')
-            except ValueError or KeyError or IndexError:
-                pass
-            try:
-                if data.dailyKline.head(1)['limit'][0] == 1:
-                    # {col: data.dailyKline[col].tolist() for col in data.dailyKline.columns}
-                    print(dict(data.dailyKline[0:1]['ts_code'])[0], 'Limited!!!')
-                    j += 1
-            except:
-                pass
-        print(j)
+    value = getCodeListAndColList()
 
-    if code is not None:
-        test = QQ(code)
-        test.updateKLine()
-        # test = DataSource_iFeng(code)
-        pass
-    else:
-        raise ValueError
-    print(test.timeLine5DaysAllinOne)
-    test.timeLine5DaysAllinOne.to_csv('D:/min.csv')
-    b = test.kLine60F
-    b.to_csv('D:/hour.csv')
-    print(b)
-    # print(test.timeLine)
-    # for i in test.timeLine5DaysAllinOne:
-    #     print(i)
-    # for i in test.timeLine5DaysDaily:
-    #     print(i)
-    # for i in test.kLine60F:
-    #     print(i)
-    # print(test.kLineDay['record'])
+    data = StockFilter(value['codeList'], value['colList'])
+    data.getDailyData()

@@ -13,6 +13,15 @@ from sqlalchemy import create_engine
 from Dino.DataSource.MySQL import MySQL
 
 
+# public functions
+def judgeLimit(pre_close, close):
+    if round(100 * (close - pre_close + 0.01) / pre_close, 2) > 10:
+        return 1
+    elif round(100 * (close - pre_close - 0.01) / pre_close, 2) < -10:
+        return -1
+    else:
+        return 0
+
 def bollJudge(bollList):
     if bollList[3] == 0 or bollList[0] == 0:
         # boll is None
@@ -89,8 +98,8 @@ class DataTuShare:
     http://qt.gtimg.cn/q=bkqtRank_A_sh,bkqtRank_A_sz
     """
 
-    def __init__(self):
-        self.token = '87e4c600d3b00362d0519ed40484fbaad3867573d61e8e8f27543a56'
+    def __init__(self, token = 'ec39f11f62fc1950e52e452d21e4adb4736edf9cb0d0c827a8b2a02c'):
+        self.token = token
         # token由https://tushare.pro/提供
         self.set_token = ts.set_token(self.token)
         self.pro = ts.pro_api()
@@ -130,6 +139,9 @@ class DataTuShare:
             }
         self.sDB = MySQL(self.stocks_config)
 
+    # def close(self):
+    #     ts.close_apis()
+
     def setStartDate(self, startDate):
         self.startDate = startDate
 
@@ -163,18 +175,48 @@ class DataTuShare:
             print('代码格式错误：' + codeTemp)
             raise ValueError
 
-    def getDailyKLine(self):
+    def getDailyKLine(self, code=None):
         """
         获取日线数据
         针对start_date需要优化，判断数据库的max(trade_date)
         :return:
         """
         # print()
-        self.dailyKline = self.pro.daily(ts_code=self.code, start_date=self.startDate,
+        if code:
+            self.dailyKline = self.pro.daily(ts_code=code, start_date=self.startDate,
                                          fields='ts_code, trade_date, open, high, low, close,'
                                                 'pre_close, change, pct_chg, vol, amount')
+        else:
+            self.dailyKline = self.pro.daily(ts_code=self.code, start_date=self.startDate,
+                                             fields='ts_code, trade_date, open, high, low, close,'
+                                                    'pre_close, change, pct_chg, vol, amount')
 
     def updateDailyKLine(self):
+        """
+        更新各项指标，若数据库存在，则直接加载数据库。
+        针对start_date需要优化，判断数据库的max(trade_date)
+        :return:
+        """
+        self.tableName = self.code.replace('.', '').lower()
+        self._calLimit()
+        self._calMa()
+        self._calBoll(20, 10)
+        if (not self.dailyKline.empty) and (not self.colList):
+            self.colList = list(self.dailyKline.columns)
+            for i in ['ts_code', 'trade_date']:
+                try:
+                    self.colList.remove(i)
+                except ValueError:
+                    pass
+        # print(self.colList)
+        '''
+        为calPosition计算表头列表
+        '''
+        self._calPosition()
+        self.dailyKline.to_csv('d:/data/' + self.tableName + '.csv')
+        pass
+
+    def updateDailyKLineDB(self):
         """
         更新各项指标，若数据库存在，则直接加载数据库。
         针对start_date需要优化，判断数据库的max(trade_date)
@@ -191,9 +233,9 @@ class DataTuShare:
         except:
             pass
         if maxTradeDate and maxTradeDate == self.dateTime['shortDate']:
-            print('reading...')
-            print('reading...')
-            print('reading...')
+            if __name__ == '__main__':
+                print('reading...')
+                print('reading...')
             self._loadDailyKLine()
         else:
             self._calLimit()
@@ -212,9 +254,9 @@ class DataTuShare:
             '''
             self._calPosition()
             self._saveDailyKLine()
-            print('saving...')
-            print('saving...')
-            print('saving...')
+            if __name__ == '__main__':
+                print('saving...')
+                print('saving...')
         pass
 
     def _saveDailyKLine(self):
@@ -229,8 +271,8 @@ class DataTuShare:
             self.sDB.execSQL(sql)
             # alter table table_name add primary key(id)
             self.sDB.close()
-        # except UserWarning:
-        except:
+        except UserWarning:
+        # except:
             pass
         try:
             self.dailyKline.to_sql(self.tableName, self.connection, if_exists='replace', index=False)
@@ -250,14 +292,6 @@ class DataTuShare:
         self.dailyKline = pd.read_sql_table(self.tableName, self.connection)
 
     def _calLimit(self):
-        def judgeLimit(pre_close, close):
-            if round(100 * (close - pre_close + 0.01) / pre_close, 2) > 10:
-                return 1
-            elif round(100 * (close - pre_close - 0.01) / pre_close, 2) < -10:
-                return -1
-            else:
-                return 0
-
         try:
             self.dailyKline['limit'] = self.dailyKline.apply(lambda x: judgeLimit(x.pre_close, x.close), axis=1)
             self.dailyKline['limited'] = self.dailyKline.apply(lambda x: judgeLimit(x.pre_close, x.high), axis=1)
@@ -480,15 +514,409 @@ class DataTuShare:
                 self.dailyKline[maName] = 0
 
     def _calPosition(self):
+        """
+        针对mid20、width20、ma60、ma144的趋势进行量化分析（平/升/降，开口/收口/走平）
+        :return:
+        """
         frame_1 = self.dailyKline[:-1].reset_index()[self.colList]
         frame_2 = self.dailyKline[1:].reset_index()[self.colList]
-        result = frame_1 - frame_2
-        result.to_csv('D:/diff.csv')
-
+        result = (frame_1 - frame_2)
+        # result.to_csv('D:/diff.csv')
+        self.dailyKline['upper20tr'] = result.apply(lambda x: trendJudgeMA(x.upper20), axis=1)
         self.dailyKline['mid20tr'] = result.apply(lambda x: trendJudgeMA(x.mid20), axis=1)
+        self.dailyKline['lower20tr'] = result.apply(lambda x: trendJudgeMA(x.lower20), axis=1)
         self.dailyKline['width20tr'] = result.apply(lambda x: trendJudgeWidth(x.width20), axis=1)
         self.dailyKline['ma60tr'] = result.apply(lambda x: trendJudgeMA(x.ma60), axis=1)
         self.dailyKline['ma144tr'] = result.apply(lambda x: trendJudgeMA(x.ma144), axis=1)
+
+    def _get_DateTime(self):
+        """
+        获取当前日期和时间
+        :return:
+        """
+        timeStamp = time.localtime()
+        # DateTime = {}
+        fullDate = (time.strftime("%Y-%m-%d", timeStamp))
+        shortDate = (time.strftime("%Y%m%d", timeStamp))
+        fullTime = (time.strftime("%H:%M:%S", timeStamp))
+        shortTime = (time.strftime("%H%M%S", timeStamp))
+        keys = ['fullDate', 'shortDate', 'fullTime', 'shortTime']
+        # print(keys)
+        values = [fullDate, shortDate, fullTime, shortTime]
+        # print(values)
+        self.dateTime = dict(zip(keys, values))
+
+
+class DataTuShareMul:
+    def __init__(self):
+        self.token = 'ec39f11f62fc1950e52e452d21e4adb4736edf9cb0d0c827a8b2a02c'
+        # token由https://tushare.pro/提供
+        self.set_token = ts.set_token(self.token)
+        self.pro = ts.pro_api()
+        self.startDate = '20170101'
+        self.connection = create_engine('mysql+pymysql://root:star2249@localhost:3306/stocks?charset=utf8')
+        self.nList = [5, 10, 60, 144]
+        self.colList = None
+        self.stocks_config = \
+            {
+            'host': 'localhost',
+            'port': 3306,
+            'user': 'root',
+            'password': 'star2249',
+            'db': 'stocks',
+            'charset': 'utf8',
+            'cursorclass': pymysql.cursors.DictCursor,
+            }
+        self.sDB = MySQL(self.stocks_config)
+        self._get_DateTime()
+
+    def setStartDate(self, startDate):
+        self.startDate = startDate
+
+    def setCode(self, codeTemp):
+        """
+        设置代码code
+        :param codeTemp:
+        :return:
+        """
+        codeEnd = codeTemp[-3:].upper()
+        # print(codeEnd)
+        if len(codeTemp) == 9 and (codeEnd in ['.SZ', '.SH']):
+            code = codeTemp
+        elif len(codeTemp) == 6 and codeTemp.isnumeric():
+            if codeTemp[0] == '6':
+                code = codeTemp + '.SH'
+            elif codeTemp[0] in ['0', '3']:
+                code = codeTemp + '.SZ'
+            else:
+                print('代码格式错误：' + codeTemp)
+                raise ValueError
+        else:
+            print('代码格式错误：' + codeTemp)
+            raise ValueError
+        return code
+
+    def _getDailyKLine(self, code=None):
+        """
+        获取日线数据
+        针对start_date需要优化，判断数据库的max(trade_date)
+        :return:
+        """
+        # print()
+        if code:
+            dailyKline = self.pro.daily(ts_code=code, start_date=self.startDate,
+                                         fields='ts_code, trade_date, open, high, low, close,'
+                                                'pre_close, change, pct_chg, vol, amount')
+        else:
+            dailyKline = None
+        return dailyKline
+
+    def updateDailyKLine(self, colList, code=None):
+        """
+        更新各项指标，若数据库存在，则直接加载数据库。
+        针对start_date需要优化，判断数据库的max(trade_date)
+        :return:
+        """
+        # if code:
+        #     tableName = code.replace('.', '').lower()
+        #     sql = 'select max(trade_date) from ' + tableName + ";"
+        #     maxTradeDate = None
+        #     try:
+        #         self.sDB.execSQL(sql)
+        #         maxTradeDate = self.sDB.dbReturn[0]['max(trade_date)']
+        #         self.sDB.close()
+        #     # except pymysql.err or ConnectionRefusedError:
+        #     except:
+        #         pass
+        #     if maxTradeDate and maxTradeDate == self.dateTime['shortDate']:
+        #         dailyKline = self._loadDailyKLine(tableName)
+        #     else:
+        #         dailyKline = self._getDailyKLine(code)
+        #         dailyKline = self._calLimit(dailyKline)
+        #         dailyKline = self._calMa(dailyKline)
+        #         dailyKline = self._calBoll(dailyKline, 20, 10)
+        #         if (not dailyKline.empty) and (not colList):
+        #             colList = list(dailyKline.columns)
+        #             for i in ['ts_code', 'trade_date']:
+        #                 try:
+        #                     colList.remove(i)
+        #                 except ValueError:
+        #                     pass
+        #         # print(self.colList)
+        #         '''
+        #         为calPosition计算表头列表
+        #         '''
+        #         dailyKline = self._calPosition(dailyKline, colList)
+        #         self._saveDailyKLine(tableName, dailyKline)
+        if code:
+            tableName = code.replace('.', '').lower()
+            dailyKline = self._getDailyKLine(code)
+            dailyKline = self._calLimit(dailyKline)
+            dailyKline = self._calMa(dailyKline)
+            dailyKline = self._calBoll(dailyKline, 20, 10)
+            if (not dailyKline.empty) and (not colList):
+                colList = list(dailyKline.columns)
+                for i in ['ts_code', 'trade_date']:
+                    try:
+                        colList.remove(i)
+                    except ValueError:
+                        pass
+            '''
+            为calPosition计算表头列表
+            '''
+            dailyKline = self._calPosition(dailyKline, colList)
+            dailyKline.to_csv('d:/' + tableName + '.csv')
+
+        return dailyKline
+
+    def _saveDailyKLine(self, tableName, dailyKline):
+        sql = "drop table if exists " + tableName + ";"
+        try:
+            self.sDB.execSQL(sql)
+            self.sDB.close()
+        # except UserWarning:
+        except:
+            pass
+        try:
+            dailyKline.to_sql(tableName, self.connection, if_exists='replace', index=False)
+        except sqlalchemy.exc.OperationalError:
+            pass
+
+    def _loadDailyKLine(self, tableName):
+        dailyKline = pd.read_sql_table(tableName, self.connection)
+        return dailyKline
+
+    def _calLimit(self, dailyKlineIn):
+        dailyKlineOut = dailyKlineIn
+        try:
+            dailyKlineOut['limit'] = dailyKlineIn.apply(lambda x: judgeLimit(x.pre_close, x.close), axis=1)
+            dailyKlineOut['limited'] = dailyKlineIn.apply(lambda x: judgeLimit(x.pre_close, x.high), axis=1)
+        except ValueError:
+            dailyKlineOut['limit'] = 0
+            dailyKlineOut['limited'] = 0
+            # print(self.dailyKline)
+        return dailyKlineOut
+
+    def _calBoll(self, dailyKlineIn, n, nVol):
+        """
+        计算布林三轨
+        :param n:
+        :return:
+        """
+        '''
+        valueList和valueTemp根据实际需求进行顺序和逆序，
+        可以使用.reverse()
+        '''
+        factor = 1.026
+        p1 = 1.00 / factor
+        p2 = 2.00 / factor
+        p3 = 2.58 / factor
+
+        dailyKlineOut = dailyKlineIn
+
+        upperOut20 = []
+        upper20 = []
+        upperMid20 = []
+        mid20 = []
+        lowerMid20 = []
+        lower20 = []
+        lowerOut20 = []
+        upper20Vol = []
+        mid20Vol = []
+        width20 = []
+        valueList = list(dailyKlineIn['close'])
+        volList = list(dailyKlineIn['vol'])
+        # valueList.reverse()
+        valueTemp = [float(k) for k in valueList]
+        volTemp = [float(k) for k in volList]
+        # boll = []
+        for value in valueList:
+            # boll_dict = {}
+            if len(valueTemp) >= max(n, nVol):
+                tempList = valueTemp[0:n]
+                tempVol = volTemp[0:nVol]
+                mid = numpy.mean(tempList)
+                spd = numpy.std(tempList, ddof=0)
+                midVol = numpy.mean(tempVol)
+                spdVol = numpy.std(tempVol, ddof=0)
+                upperVol = midVol + p2 * spdVol
+                upperOut = mid + p3 *spd
+                upper = mid + p2 * spd
+                upperMid = mid + p1 * spd
+                lowerMid = mid - p1 * spd
+                lower = mid - p2 * spd
+                lowerOut = mid - p3 * spd
+                boll20_upperOut = round(upperOut, 2)
+                boll20_upper = round(upper, 2)
+                boll20_upperMid = round(upperMid, 2)
+                boll20_mid = round(mid, 2)
+                boll20_lowerMid = round(lowerMid, 2)
+                boll20_lower = round(lower, 2)
+                boll20_lowerOut = round(lowerOut, 2)
+                width = 100 * (boll20_upper - boll20_lower) / boll20_mid
+                boll20_width = round(width, 2)
+                boll20_upperVol = round(upperVol, 2)
+                boll20_midVol = round(midVol, 2)
+            else:
+                boll20_upperOut = 0
+                boll20_upper = 0
+                boll20_upperMid = 0
+                boll20_mid = 0
+                boll20_lowerMid = 0
+                boll20_lower = 0
+                boll20_lowerOut = 0
+                boll20_width = 0
+                boll20_upperVol = 0
+                boll20_midVol = 0
+            upperOut20.append(boll20_upperOut)
+            upper20.append(boll20_upper)
+            upperMid20.append(boll20_upperMid)
+            mid20.append(boll20_mid)
+            lowerMid20.append(boll20_lowerMid)
+            lower20.append(boll20_lower)
+            lowerOut20.append(boll20_lowerOut)
+            width20.append(boll20_width)
+            upper20Vol.append(boll20_upperVol)
+            mid20Vol.append(boll20_midVol)
+            valueTemp.pop(0)
+            volTemp.pop(0)
+        pass
+        try:
+            if len(dailyKlineIn['close']):
+                dailyKlineOut['upperOut20'] = upperOut20
+                dailyKlineOut['upper20'] = upper20
+                dailyKlineOut['upperMid20'] = upperMid20
+                dailyKlineOut['mid20'] = mid20
+                dailyKlineOut['lowerMid20'] = lowerMid20
+                dailyKlineOut['lower20'] = lower20
+                dailyKlineOut['lowerOut20'] = lowerOut20
+                dailyKlineOut['width20'] = width20
+                # try:
+                #     self.dailyKline['upperMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.upper20), axis=1)
+                #     self.dailyKline['lowerMid20'] = self.dailyKline.apply(lambda x: average(x.mid20, x.lower20), axis=1)
+                # except ValueError:
+                #     self.dailyKline['upperMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
+                #                                      zip(self.dailyKline['upper20'],
+                #                                          self.dailyKline['mid20'])]
+                #     self.dailyKline['lowerMid20'] = [round((i[0] + i[1]) / 2, 2) for i in
+                #                                      zip(self.dailyKline['lower20'],
+                #                                          self.dailyKline['mid20'])]
+                bollOpenResult = []
+                bollCloseResult = []
+                bollMa60Result = []
+                for i in range(len(dailyKlineIn['open'])):
+                    dailyData = dailyKlineIn[i:(i + 1)]
+                    dailyDict = {col: dailyData[col].tolist() for col in dailyData.columns}
+                    # print('dailyData', dailyDict)
+                    openList = [dailyDict['open'][0], dailyDict['upper20'][0],
+                                dailyDict['upperMid20'][0], dailyDict['mid20'][0],
+                                dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
+                                dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
+                    closeList = [dailyDict['close'][0], dailyDict['upper20'][0],
+                                 dailyDict['upperMid20'][0], dailyDict['mid20'][0],
+                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
+                                 dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
+                    ma60List = [dailyDict['ma60'][0], dailyDict['upper20'][0],
+                                 dailyDict['upperMid20'][0], dailyDict['mid20'][0],
+                                 dailyDict['lowerMid20'][0], dailyDict['lower20'][0],
+                                 dailyDict['upperOut20'][0], dailyDict['lowerOut20'][0]]
+                    # print('OpenList', openList)
+                    # print('CloseList', closeList)
+                    openResult = bollJudge(openList)
+                    closeResult = bollJudge(closeList)
+                    ma60Result = bollJudge(ma60List)
+                    # openResult = sorted(range(len(openList)), key=lambda k: openList[k])
+                    # closeResult = sorted(range(len(closeList)), key=lambda k: closeList[k])
+                    # print('openResult', openResult)
+                    # print('closeResult', closeResult)
+                    bollOpenResult.append(openResult)
+                    bollCloseResult.append(closeResult)
+                    bollMa60Result.append(ma60Result)
+                dailyKlineOut['bollPisOpen'] = bollOpenResult
+                dailyKlineOut['bollPisClose'] = bollCloseResult
+                dailyKlineOut['bollPisMa60'] = bollMa60Result
+                dailyKlineOut['upper20Vol'] = upper20Vol
+                dailyKlineOut['mid20Vol'] = mid20Vol
+            else:
+                dailyKlineOut['upperOut20'] = 0
+                dailyKlineOut['upper20'] = 0
+                dailyKlineOut['upperMid20'] = 0
+                dailyKlineOut['mid20'] = 0
+                dailyKlineOut['lowerMid20'] = 0
+                dailyKlineOut['lower20'] = 0
+                dailyKlineOut['lowerOut20'] = 0
+                dailyKlineOut['width20'] = 0
+                dailyKlineOut['bollPisOpen'] = 0
+                dailyKlineOut['bollPisClose'] = 0
+                dailyKlineOut['bollPisMa60'] = 0
+                dailyKlineOut['upper20Vol'] = 0
+                dailyKlineOut['mid20Vol'] = 0
+        except KeyError or IndexError:
+            dailyKlineOut['upperOut20'] = 0
+            dailyKlineOut['upper20'] = 0
+            dailyKlineOut['upperMid20'] = 0
+            dailyKlineOut['mid20'] = 0
+            dailyKlineOut['lowerMid20'] = 0
+            dailyKlineOut['lower20'] = 0
+            dailyKlineOut['lowerOut20'] = 0
+            dailyKlineOut['width20'] = 0
+            dailyKlineOut['bollPisOpen'] = 0
+            dailyKlineOut['bollPisClose'] = 0
+            dailyKlineOut['bollPisMa60'] = 0
+            dailyKlineOut['upper20Vol'] = 0
+            dailyKlineOut['mid20Vol'] = 0
+        return dailyKlineOut
+
+    def _calMa(self, dailyKlineIn):
+        """
+        计算移动平均MA
+        :return:
+        """
+        dailyKlineOut = dailyKlineIn
+        valueList = list(dailyKlineIn['close'])
+        valueTemp = [float(k) for k in valueList]
+        maList = []
+        for i in range(len(self.nList)):
+            maList.append([])
+        for value in valueList:
+            for i in range(len(self.nList)):
+                n = self.nList[i]
+                if len(valueTemp) >= n:
+                    tempList = valueTemp[0:n]
+                    mid = numpy.mean(tempList)
+                    ma_element = round(mid, 2)
+                else:
+                    ma_element = 0
+                maList[i].append(ma_element)
+            valueTemp.pop(0)
+        for i in range(len(self.nList)):
+            maName = 'ma' + str(self.nList[i])
+            try:
+                if len(dailyKlineIn['close']):
+                    dailyKlineOut[maName] = maList[i]
+                else:
+                    dailyKlineOut[maName] = 0
+            except KeyError or IndexError:
+                dailyKlineOut[maName] = 0
+        return dailyKlineOut
+
+    def _calPosition(self, dailyKlineIn, colList):
+        """
+        针对mid20、width20、ma60、ma144的趋势进行量化分析（平/升/降，开口/收口/走平）
+        :return:
+        """
+        dailyKlineOut = dailyKlineIn
+        frame_1 = dailyKlineIn[:-1].reset_index()[colList]
+        frame_2 = dailyKlineIn[1:].reset_index()[colList]
+        result = (frame_1 - frame_2)
+        # result.to_csv('D:/diff.csv')
+        dailyKlineOut['upper20tr'] = result.apply(lambda x: trendJudgeMA(x.upper20), axis=1)
+        dailyKlineOut['mid20tr'] = result.apply(lambda x: trendJudgeMA(x.mid20), axis=1)
+        dailyKlineOut['lower20tr'] = result.apply(lambda x: trendJudgeMA(x.lower20), axis=1)
+        dailyKlineOut['width20tr'] = result.apply(lambda x: trendJudgeWidth(x.width20), axis=1)
+        dailyKlineOut['ma60tr'] = result.apply(lambda x: trendJudgeMA(x.ma60), axis=1)
+        dailyKlineOut['ma144tr'] = result.apply(lambda x: trendJudgeMA(x.ma144), axis=1)
+        return dailyKlineOut
 
     def _get_DateTime(self):
         """
@@ -975,17 +1403,19 @@ class DataSourceQQ:
 
 
 if __name__ == '__main__':
-    debug = 0
+    debug = 1
     code = '603963'
+    # code = '000029'
     data = DataTuShare()
     stockList = data.getList()
     print('List get!')
-    # print(stockList)
+    print(stockList)
     if not debug:
         data.setCode(code)
         data.getDailyKLine()
         # print(data.dailyKline)
-        data.updateDailyKLine()
+        if data.dailyKline.empty:
+            data.updateDailyKLine()
         # print('DataFrame Length ', len(data.dailyKline))
         # data.saveDailyKLine()
         # data.loadDailyKLine()
@@ -996,35 +1426,40 @@ if __name__ == '__main__':
                 break
             except PermissionError:
                 input('The file is open...please close it!!!')
+
     if debug:
         j = 0
         for code in stockList:
-            data.setCode(code)
+            print(code)
+            try:
+                data.setCode(code)
+            except:
+                continue
             # print(code)
             while True:
                 # noinspection PyBroadException
                 try:
                     data.getDailyKLine()
-                    # data.updateDailyKLine()
                     break
                 except Exception:
                     print(code, 'time sleep...')
                     time.sleep(60)
-            data.updateDailyKLine()
-            try:
-                if len(data.dailyKline['close']):
-                    print(code, 'mid20:\t', data.dailyKline['mid20'][0], '\trunning...')
-                else:
-                    print(code, 'no data!!!')
-            except ValueError or KeyError or IndexError:
-                pass
-            try:
-                if data.dailyKline.head(1)['limit'][0] == 1:
-                    # {col: data.dailyKline[col].tolist() for col in data.dailyKline.columns}
-                    print(dict(data.dailyKline[0:1]['ts_code'])[0], 'Limited!!!')
-                    j += 1
-            except:
-                pass
+            if not data.dailyKline.empty:
+                data.updateDailyKLine()
+                try:
+                    if len(data.dailyKline['close']):
+                        print(code, 'mid20:\t', data.dailyKline['mid20'][0], '\trunning...')
+                    else:
+                        print(code, 'no data!!!')
+                except ValueError or KeyError or IndexError:
+                    pass
+                try:
+                    if data.dailyKline.head(1)['limit'][0] == 1:
+                        # {col: data.dailyKline[col].tolist() for col in data.dailyKline.columns}
+                        print(dict(data.dailyKline[0:1]['ts_code'])[0], 'Limited!!!')
+                        j += 1
+                except:
+                    pass
         print(j)
 
     if code is not None:
