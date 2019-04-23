@@ -1,5 +1,6 @@
 from multiprocessing.dummy import Pool as ThreadPool
 from Dino.DataSource.httpAPI import DataSourceQQ as QQ
+from Dino.DataSource.httpAPI import DailyQQMul as QQ
 from Dino.DataSource.httpAPI import DataTuShare as Tu
 from Dino.DataSource.httpAPI import DataTuShareMul as TuMul
 
@@ -7,6 +8,19 @@ import time
 import sys
 
 def getCodeListAndColList():
+    value = {'codeList':[], 'colList':[]}
+    data = Tu()
+    codeList = data.getList()
+    print('List get!')
+    data = QQ(codeList[0])
+    data.getDailyKLine()
+    data.updateDailyKLine()
+    colList = data.colList
+    value['codeList'] = codeList
+    value['colList'] = colList
+    return value
+
+def getCodeListAndColListTu():
     value = {'codeList':[], 'colList':[]}
     data = Tu()
     codeList = data.getList()
