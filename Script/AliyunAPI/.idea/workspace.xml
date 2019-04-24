@@ -13,17 +13,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="2019" column="59" lean-forward="true" selection-start-line="2019" selection-start-column="59" selection-end-line="2019" selection-end-column="59" />
+            <state relative-caret-position="138">
+              <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#304#500#0" />
                 <element signature="e#531#1470#0" />
                 <element signature="e#1497#1591#0" />
                 <element signature="e#1621#1709#0" />
+                <element signature="e#1734#20248#0" />
                 <element signature="e#2227#3427#0" />
                 <element signature="e#3526#3552#0" />
                 <element signature="e#3585#3895#0" />
@@ -36,9 +37,9 @@
                 <element signature="e#8763#9159#0" />
                 <element signature="e#9202#17606#0" />
                 <element signature="e#17638#18750#0" />
+                <element signature="e#18788#19648#0" />
                 <element signature="e#19687#20248#0" />
                 <element signature="e#20277#36393#0" />
-                <element signature="e#21126#21152#0" />
                 <element signature="e#21195#21840#0" />
                 <element signature="e#21891#22357#0" />
                 <element signature="e#22419#24757#0" />
@@ -49,44 +50,35 @@
                 <element signature="e#33749#34834#0" />
                 <element signature="e#34895#35793#0" />
                 <element signature="e#35832#36393#0" />
-                <element signature="e#36579#37594#0" />
-                <element signature="e#37631#37753#0" />
-                <element signature="e#37788#39249#0" />
-                <element signature="e#39289#42298#0" />
-                <element signature="e#42343#46416#0" />
-                <element signature="e#46466#47566#0" />
-                <element signature="e#47609#54384#0" />
-                <element signature="e#54416#55518#0" />
-                <element signature="e#55554#56656#0" />
-                <element signature="e#56397#56423#0" />
-                <element signature="e#67376#68476#0" />
-                <element signature="e#63665#66000#0" />
-                <element signature="e#63786#63796#0" />
-                <element signature="e#67179#68605#0" />
-                <element signature="e#68646#69292#0" />
-                <element signature="e#69333#69762#0" />
-                <element signature="e#78672#79784#0" />
-                <element signature="e#60092#60448#0" />
-                <element signature="e#60500#60584#0" />
-                <element signature="e#60633#61064#0" />
-                <element signature="e#61121#68974#0" />
-                <element signature="e#69020#70105#0" />
-                <element signature="e#70166#71064#0" />
-                <element signature="e#71103#71664#0" />
-                <element signature="e#71854#71869#0" />
-                <element signature="e#81000#81010#0" />
+                <element signature="e#36420#56650#0" />
+                <element signature="e#56738#58559#0" />
+                <element signature="e#58608#58634#0" />
+                <element signature="e#58679#63077#0" />
+                <element signature="e#61770#63077#0" />
+                <element signature="e#63127#64227#0" />
+                <element signature="e#67453#68916#0" />
+                <element signature="e#68957#69603#0" />
+                <element signature="e#69935#70003#0" />
+                <element signature="e#70108#70504#0" />
+                <element signature="e#70547#78951#0" />
+                <element signature="e#78986#80098#0" />
+                <element signature="e#80136#81047#0" />
+                <element signature="e#92140#92701#0" />
+                <element signature="e#92891#92906#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dino/filter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+            <state relative-caret-position="274">
+              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
+                <element signature="e#1004#1216#0" />
+                <element signature="e#1850#2386#0" />
               </folding>
             </state>
           </provider>
@@ -95,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1680">
-              <caret line="87" column="4" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="86" />
+            <state relative-caret-position="856">
+              <caret line="88" column="29" lean-forward="true" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -191,8 +183,8 @@
         <option value="$PROJECT_DIR$/Study/Study.py" />
         <option value="$PROJECT_DIR$/Study/SourceTest.py" />
         <option value="$PROJECT_DIR$/Dino/DataSource/classBackup.py" />
-        <option value="$PROJECT_DIR$/Study/Test.py" />
         <option value="$PROJECT_DIR$/Study/updateENV.py" />
+        <option value="$PROJECT_DIR$/Study/Test.py" />
         <option value="$PROJECT_DIR$/Dino/filter.py" />
         <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
       </list>
@@ -228,7 +220,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,6 +262,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -309,8 +301,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.httpAPI">
-    <configuration name="SourceTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.filter">
+    <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -318,11 +310,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Study" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Study/SourceTest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -431,11 +423,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.httpAPI" />
         <item itemvalue="Python.filter" />
-        <item itemvalue="Python.updateENV" />
+        <item itemvalue="Python.2" />
+        <item itemvalue="Python.httpAPI" />
         <item itemvalue="Python.Test" />
-        <item itemvalue="Python.SourceTest" />
+        <item itemvalue="Python.updateENV" />
       </list>
     </recent_temporary>
   </component>
@@ -462,10 +454,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.14531043" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49342105" visible="true" weight="0.14508928" />
       <window_info id="Structure" order="1" weight="0.24834874" />
       <window_info id="Favorites" order="2" sideWeight="0.5065789" side_tool="true" weight="0.2980333" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -473,7 +464,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.7567185" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="227" y="186" width="1264" height="554" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" weight="0.32733223" />
+      <window_info active="true" anchor="bottom" x="105" y="98" width="1228" height="582" id="Run" order="5" sideWeight="0.4908397" type="FLOATING" visible="true" weight="0.32733223" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5091603" side_tool="true" weight="0.29248366" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.4969743" weight="0.32894737" />
@@ -762,9 +753,6 @@
       </provider>
     </entry>
     <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/pandas/core/series.py" />
-    <entry file="file://$PROJECT_DIR$/Study/Test.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Study/updateENV.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -793,9 +781,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tushare/util/conns.py" />
+    <entry file="file://$PROJECT_DIR$/Study/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/functions/function.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
+        <state relative-caret-position="69">
           <caret line="429" column="4" selection-start-line="429" selection-start-column="4" selection-end-line="429" selection-end-column="4" />
           <folding>
             <element signature="e#252#1321#0" />
@@ -807,43 +803,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tushare/util/conns.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="87" column="4" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="86" />
+        <state relative-caret-position="856">
+          <caret line="88" column="29" lean-forward="true" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="2019" column="59" lean-forward="true" selection-start-line="2019" selection-start-column="59" selection-end-line="2019" selection-end-column="59" />
+        <state relative-caret-position="138">
+          <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#304#500#0" />
             <element signature="e#531#1470#0" />
             <element signature="e#1497#1591#0" />
             <element signature="e#1621#1709#0" />
+            <element signature="e#1734#20248#0" />
             <element signature="e#2227#3427#0" />
             <element signature="e#3526#3552#0" />
             <element signature="e#3585#3895#0" />
@@ -856,9 +836,9 @@
             <element signature="e#8763#9159#0" />
             <element signature="e#9202#17606#0" />
             <element signature="e#17638#18750#0" />
+            <element signature="e#18788#19648#0" />
             <element signature="e#19687#20248#0" />
             <element signature="e#20277#36393#0" />
-            <element signature="e#21126#21152#0" />
             <element signature="e#21195#21840#0" />
             <element signature="e#21891#22357#0" />
             <element signature="e#22419#24757#0" />
@@ -869,32 +849,33 @@
             <element signature="e#33749#34834#0" />
             <element signature="e#34895#35793#0" />
             <element signature="e#35832#36393#0" />
-            <element signature="e#36579#37594#0" />
-            <element signature="e#37631#37753#0" />
-            <element signature="e#37788#39249#0" />
-            <element signature="e#39289#42298#0" />
-            <element signature="e#42343#46416#0" />
-            <element signature="e#46466#47566#0" />
-            <element signature="e#47609#54384#0" />
-            <element signature="e#54416#55518#0" />
-            <element signature="e#55554#56656#0" />
-            <element signature="e#56397#56423#0" />
-            <element signature="e#67376#68476#0" />
-            <element signature="e#63665#66000#0" />
-            <element signature="e#63786#63796#0" />
-            <element signature="e#67179#68605#0" />
-            <element signature="e#68646#69292#0" />
-            <element signature="e#69333#69762#0" />
-            <element signature="e#78672#79784#0" />
-            <element signature="e#60092#60448#0" />
-            <element signature="e#60500#60584#0" />
-            <element signature="e#60633#61064#0" />
-            <element signature="e#61121#68974#0" />
-            <element signature="e#69020#70105#0" />
-            <element signature="e#70166#71064#0" />
-            <element signature="e#71103#71664#0" />
-            <element signature="e#71854#71869#0" />
-            <element signature="e#81000#81010#0" />
+            <element signature="e#36420#56650#0" />
+            <element signature="e#56738#58559#0" />
+            <element signature="e#58608#58634#0" />
+            <element signature="e#58679#63077#0" />
+            <element signature="e#61770#63077#0" />
+            <element signature="e#63127#64227#0" />
+            <element signature="e#67453#68916#0" />
+            <element signature="e#68957#69603#0" />
+            <element signature="e#69935#70003#0" />
+            <element signature="e#70108#70504#0" />
+            <element signature="e#70547#78951#0" />
+            <element signature="e#78986#80098#0" />
+            <element signature="e#80136#81047#0" />
+            <element signature="e#92140#92701#0" />
+            <element signature="e#92891#92906#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+            <element signature="e#1004#1216#0" />
+            <element signature="e#1850#2386#0" />
           </folding>
         </state>
       </provider>
