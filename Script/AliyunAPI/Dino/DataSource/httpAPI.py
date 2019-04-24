@@ -1496,6 +1496,8 @@ class DailyQQMul:
         self.mid20Vol = []
         self.width20 = []
 
+        self.bollN = 20
+        self.bollVolN = 10
         self.ma = []
         self.nList = [5, 10, 60, 144]
         self.colList = None
@@ -1767,6 +1769,7 @@ class DailyQQMul:
         """
         计算布林三轨
         :param n:
+        :param nVol:
         :return:
         """
         '''
@@ -1974,6 +1977,55 @@ class DailyQQMul:
                     self.dailyKline[maName] = 0
             except KeyError or IndexError:
                 self.dailyKline[maName] = 0
+
+    def _calLimitBollAndDayMA(self):
+        """
+        为了提高执行效率，
+        一次循环计算Limit、Boll和DayMA。
+
+        https://blog.csdn.net/weixin_37426504/article/details/81669829
+        https://bbs.pinggu.org/thread-3631776-1-1.html
+
+        进度记录
+        1、刚复制完Boll
+        2、考虑结合60、144，一次性计算，只记录60以后的内容，144不足的话，考虑根据实际长度处理
+        3、考虑拼接成一个Dataframe，然后一次性截取合并
+        # 将数据按照交易日期从远到近排序
+        input_data = input_data.sort_values(by='交易日期',ascending=1)
+
+        Pandas dataframe数据处理方法速度比较
+        https://blog.csdn.net/weixin_37426504/article/details/81669829
+
+        """
+
+        # 读取数据
+        data = pd.read_csv('C:/Users/Administrator/Desktop/rb000.csv', encoding='gbk')
+        data = data.iloc[::, :7]
+        data.columns = ['time', 'oepn', 'high', 'low', 'close', 'amt', 'opi']
+        # 处理数据
+        data['mid'] = data['close'].rolling(26).mean()
+        data['tmp2'] = data['close'].rolling(20).std()
+        data['top'] = data['mid'] + 2 * data['tmp2']
+        data['bottom'] = data['mid'] - 2 * data['tmp2']
+        # data.tail()
+
+        self.dailyKline.sort_values(by='date', ascending=1)
+        """
+        计算MA
+        """
+        for i in self.nList:
+            maName = 'ma' + str(i)
+            VolSMA= pd.Series(self.dailyKline['close']).rolling(window=5).mean().dropna()
+            self.dailyKline[maName] = VolSMA
+        """
+        计算布林带
+        """
+        factor = 1.026
+        p1 = 1.00 / factor
+        p2 = 2.00 / factor
+        p3 = 2.58 / factor
+
+        pass
 
     def _calPosition(self):
         """

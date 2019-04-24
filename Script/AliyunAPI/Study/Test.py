@@ -1,5 +1,4 @@
-import time
+import pandas as pd
 
-a = time.strptime('2017/7/6', '%Y/%m/%d')
-b = time.strftime('%Y%m%d', a)
-print(b)
+VolSMA5=pd.Series(volume).rolling(window=5).mean().dropna()
+VolSMA10=pd.Series(volume).rolling(window=10).mean().dropna()
