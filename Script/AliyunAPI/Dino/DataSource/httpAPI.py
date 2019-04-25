@@ -1853,12 +1853,7 @@ class DailyQQMul:
         # print(self.mid20)
         # print(boll)
         pass
-        # def average(a0, a1):
-        #     return round((a0 + a1) / 2, 2)
-        # print(len(self.dailyKline['close']))
-        # print(len(self.mid20))
-        # print(len(self.upperOut20))
-        # print(len(self.mid20Vol))
+
         try:
             if len(self.dailyKline['close']):
                 self.dailyKline['upperOut20'] = self.upperOut20
