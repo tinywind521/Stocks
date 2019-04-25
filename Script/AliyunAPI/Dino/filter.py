@@ -42,11 +42,11 @@ def dailySingleDataCapture(objTemp):
     while True:
         try:
             data.updateDailyKLine()
+            # data.updateDailyKLineDB()
             break
         except ValueError:
             print(code, 'time sleep...')
             time.sleep(60)
-
 
 def dailySingleDataCaptureTu(objTemp):
     """
@@ -73,12 +73,11 @@ def dailySingleDataCaptureTu(objTemp):
             time.sleep(60)
 
 
-
 class StockFilter:
     """
     筛选过滤器
     """
-    def __init__(self, codeList, colList):
+    def __init__(self, codeList, colList=None):
         self.codeList = codeList
         self.colList = colList
         self.code = None
@@ -115,6 +114,5 @@ if __name__ == '__main__':
     debug = 0
     value = getCodeListAndColList()
     print(value['codeList'])
-    print(value['colList'])
-    data = StockFilter(value['codeList'], value['colList'])
+    data = StockFilter(value['codeList'])
     data.getDailyDataMul()
