@@ -2,7 +2,6 @@ from multiprocessing.dummy import Pool as ThreadPool
 from Dino.DataSource.httpAPI import DataSourceQQ as QQ
 from Dino.DataSource.httpAPI import DailyQQMul as QQMul
 from Dino.DataSource.httpAPI import DataTuShare as Tu
-from Dino.DataSource.httpAPI import DataTuShareMul as TuMul
 
 import time
 import sys
@@ -24,20 +23,36 @@ def view_bar(num, total, codeIn=''):
     rate = num / total
     rate_num = rate * 100
     flow = int(rate_num)
-    r = '\r[%s%s] %2.2f%% %d/%d %s' % ("|"*flow, " "*(100-flow), rate_num, num, total, codeIn,)
+    r = ('\r[%s%s] %2.2f%% %d/%d %s' % ("|"*flow, " "*(100-flow), rate_num, num, total, codeIn,)) + \
+        str(time.strftime("%H:%M:%S", time.localtime()))
     sys.stdout.write(r)
     sys.stdout.flush()
 
-def dailySingleDataCapture(objTemp):
+"""
+Daily分析处理
+"""
+def dailyFilter(temp):
+    code = temp['code']
+    dailyKline = dailySingleDataCapture(code)
+    filter_LimitInDays(code, dailyKline)
+
+def filter_LimitInDays(code, dailyKline, dayLength=40):
+    temp = dailyKline[:dayLength]
+    result = temp[temp.limit ==1]
+    if not result.empty:
+        result.to_csv('d:/data/' + code + '.csv')
+    return None
+
+def dailySingleDataCapture(code):
     """
     多线程处理
     DataTuShareMul
-    :param codeTemp: objTemp = [{'code': k, 'obj': self.tu} for k in realList]
+    :param temp codeList = [{'code': k} for k in realList]
     :return:
     """
-    code = objTemp['code']
     # print(code)
     data = QQMul(code)
+    sleepTime = 10
     # obj.updateDailyKLine(colList, code)
     while True:
         try:
@@ -46,31 +61,8 @@ def dailySingleDataCapture(objTemp):
             break
         except ValueError:
             print(code, 'time sleep...')
-            time.sleep(60)
-
-def dailySingleDataCaptureTu(objTemp):
-    """
-    多线程处理
-    DataTuShareMul
-    :param codeTemp: objTemp = [{'code': k, 'obj': self.tu} for k in realList]
-    :return:
-    """
-    obj = objTemp['obj']
-    code = objTemp['code']
-    colList = objTemp['colList']
-    try:
-        code = obj.setCode(code)
-    except:
-        return
-    # obj.updateDailyKLine(colList, code)
-    # print(code)
-    while True:
-        try:
-            obj.updateDailyKLine(colList, code)
-            break
-        except ValueError:
-            print(code, 'time sleep...')
-            time.sleep(60)
+            time.sleep(sleepTime)
+    return data.dailyKline
 
 
 class StockFilter:
@@ -81,8 +73,6 @@ class StockFilter:
         self.codeList = codeList
         self.colList = colList
         self.code = None
-        # self.tu = TuMul()
-        # self.obj = QQ()
         """
         多线程设定
         """
@@ -100,9 +90,9 @@ class StockFilter:
             view_bar(i + realLength, length)
             pool = ThreadPool(realLength)
             # objTemp = [{'code': k, 'colList': self.colList, 'obj': self.obj} for k in realList]
-            objTemp = [{'code': k} for k in realList]
+            codeList = [{'code': k} for k in realList]
             # print(objTemp)
-            pool.map(dailySingleDataCapture, objTemp)
+            pool.map(dailyFilter, codeList)
             pool.close()
             pool.join()
 
@@ -113,6 +103,8 @@ class StockFilter:
 if __name__ == '__main__':
     debug = 0
     value = getCodeListAndColList()
-    print(value['codeList'])
+    # print(value['codeList'])
+    print(time.strftime("%H:%M:%S", time.localtime()))
     data = StockFilter(value['codeList'])
     data.getDailyDataMul()
+    print(time.strftime("%H:%M:%S", time.localtime()))
