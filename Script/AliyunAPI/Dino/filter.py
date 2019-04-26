@@ -34,9 +34,17 @@ Daily分析处理
 def dailyFilter(temp):
     code = temp['code']
     dailyKline = dailySingleDataCapture(code)
-    filter_LimitInDays(code, dailyKline)
+    filter001_LimitInDays(code, dailyKline)
 
-def filter_LimitInDays(code, dailyKline, dayLength=40):
+def filter001_LimitInDays(code, dailyKline, dayLength=40):
+    """
+    增加一个No. 作为后续计算间距用参数
+    筛选dayLength内的Limit
+    :param code:
+    :param dailyKline:
+    :param dayLength:
+    :return:
+    """
     temp = dailyKline[:dayLength]
     result = temp[temp.limit ==1]
     if not result.empty:
