@@ -33,22 +33,29 @@ Daily分析处理
 """
 def dailyFilter(temp):
     code = temp['code']
-    dailyKline = dailySingleDataCapture(code)
-    filter001_LimitInDays(code, dailyKline)
+    result = dailySingleDataCapture(code)
+    filter001_LimitInDays(code, result)
 
-def filter001_LimitInDays(code, dailyKline, dayLength=40):
+def filter001_LimitInDays(code, data, dayLength=40):
     """
-    增加一个No. 作为后续计算间距用参数
     筛选dayLength内的Limit
     :param code:
     :param dailyKline:
     :param dayLength:
     :return:
     """
-    temp = dailyKline[:dayLength]
+    temp = data.dailyKline[:dayLength]
     result = temp[temp.limit ==1]
     if not result.empty:
-        result.to_csv('d:/data/' + code + '.csv')
+        data.setDayLengthForHours(result.index[0] + 1)
+        # result.index[0] + 1，表示日期比序号多一天
+        data.updateHourKLine()
+        while True:
+            try:
+                data.kLine60F.to_csv('d:/data/' + code + '.csv')
+                break
+            except PermissionError:
+                input('The file is open...please close it!!!')
     return None
 
 def dailySingleDataCapture(code):
@@ -70,7 +77,7 @@ def dailySingleDataCapture(code):
         except ValueError:
             print(code, 'time sleep...')
             time.sleep(sleepTime)
-    return data.dailyKline
+    return data
 
 
 class StockFilter:
@@ -113,6 +120,8 @@ if __name__ == '__main__':
     value = getCodeListAndColList()
     # print(value['codeList'])
     print(time.strftime("%H:%M:%S", time.localtime()))
+    value['codeList'] = ['000004']
     data = StockFilter(value['codeList'])
     data.getDailyDataMul()
+    print()
     print(time.strftime("%H:%M:%S", time.localtime()))

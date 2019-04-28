@@ -1050,7 +1050,7 @@ class DataSourceQQ:
 
 
 class DailyQQMul:
-    def __init__(self, code, length=500, allLength=500):
+    def __init__(self, code, length=500, allLength=500, dailyExHours=4):
         """
         :param code: 无前后缀的代码
         :param length: 需要返回的数据长度
@@ -1093,6 +1093,11 @@ class DailyQQMul:
         self.allLength = allLength
         self.dailyKline = None
 
+        self.dailyExHours = dailyExHours
+        self.DayLengthForHours = 40 * self.dailyExHours
+        self.realHourLength = 160
+        self.minHourLength = 160
+
         self.bollN = 20
         self.bollVolN = 10
         self.ma = []
@@ -1111,6 +1116,18 @@ class DailyQQMul:
         self.connection = create_engine('mysql+pymysql://root:star2249@localhost:3306/stocks?charset=utf8')
         self.sDB = MySQL(self.stocks_config)
         self._get_DateTime()
+
+    def setDayLengthForHours(self, DayLength=40):
+        """
+        保证有足够的长度计算MA
+        :param DayLength:
+        :return:
+        """
+        self.realHourLength = DayLength * self.dailyExHours
+        if DayLength * self.dailyExHours <=self.minHourLength:
+            self.DayLengthForHours = self.minHourLength
+        else:
+            self.DayLengthForHours = self.realHourLength
 
     def _realtime(self, timeType):
         """
@@ -1141,16 +1158,15 @@ class DailyQQMul:
         else:
             raise ValueError('Invalid timetype:', timeType)
 
-        allLength = str(self.allLength)
-
         host = 'http://web.ifzq.gtimg.cn/appstock/app/kline/'
         path = add_Kline
-        query = 'param=' + self.codeF + timeValue + allLength
-        url = host + path + '?' + query
-        # if __name__ == '__main__':
-        #     print(url)
-        content = self._req(url, 0.05)
         if timeType == 'day':
+            allLength = str(self.allLength)
+            query = 'param=' + self.codeF + timeValue + allLength
+            url = host + path + '?' + query
+            # if __name__ == '__main__':
+            #     print(url)
+            content = self._req(url, 0.05)
             try:
                 result = []
                 all_dict = json.loads(content)
@@ -1183,6 +1199,12 @@ class DailyQQMul:
                 self.dailyKline = None
 
         elif timeType == '60':
+            allLength = str(self.DayLengthForHours)
+            query = 'param=' + self.codeF + timeValue + allLength
+            url = host + path + '?' + query
+            # if __name__ == '__main__':
+            #     print(url)
+            content = self._req(url, 0.05)
             try:
                 result = []
                 all_dict = json.loads(content)
@@ -1250,7 +1272,7 @@ class DailyQQMul:
         self.tableName = self.codeF
         self._realtime('day')
         self._calLimit()
-        self._calBollAndDayMA()
+        self._calDayBollAndMA()
         if (not self.dailyKline.empty) and (not self.colList):
             self.colList = list(self.dailyKline.columns)
             for i in ['date']:
@@ -1266,7 +1288,7 @@ class DailyQQMul:
         为calPosition计算表头列表
         '''
         # self.dailyKline.to_csv('d:/' + self.tableName + '.csv')
-        self._calTrend()
+        self._calDailyTrend()
         # self.dailyKline.to_csv('d:/' + self.tableName + '.csv')
         pass
 
@@ -1294,7 +1316,7 @@ class DailyQQMul:
         else:
             self._realtime('day')
             self._calLimit()
-            self._calBollAndDayMA()
+            self._calDayBollAndMA()
             if (not self.dailyKline.empty) and (not self.colList):
                 self.colList = list(self.dailyKline.columns)
                 for i in ['date']:
@@ -1305,10 +1327,36 @@ class DailyQQMul:
             '''
             为calPosition计算表头列表
             '''
-            self._calTrend()
+            self._calDailyTrend()
             self._saveDailyKLine()
             if __name__ == '__main__':
                 print('saving...')
+        pass
+
+    def updateHourKLine(self):
+        """
+               更新各项指标，若数据库存在，则直接加载数据库。
+               针对start_date需要优化，判断数据库的max(trade_date)
+               :return:
+               """
+        self.tableName = self.codeF
+        self.colList = None
+        self._realtime('60')
+        self._calHourBollAndMA()
+        self.kLine60F = self.kLine60F[0:self.realHourLength]
+        if (not self.kLine60F.empty) and (not self.colList):
+            self.colList = list(self.kLine60F.columns)
+            for i in ['time']:
+                try:
+                    self.colList.remove(i)
+                except ValueError:
+                    pass
+        '''
+        为calPosition计算表头列表
+        '''
+        # self.kLine60F.to_csv('d:/' + self.tableName + 'Hours.csv')
+        self._calHourTrend()
+        # self.kLine60F.to_csv('d:/' + self.tableName + 'Hours.csv')
         pass
 
     def _saveDailyKLine(self):
@@ -1348,7 +1396,7 @@ class DailyQQMul:
             self.dailyKline['limited'] = 0
             pass
 
-    def _calBollPosition(self):
+    def _calDayBollPosition(self):
         """
         计算布林三轨位置
         :return:
@@ -1392,7 +1440,51 @@ class DailyQQMul:
             self.dailyKline['bollPisClose'] = 0
             self.dailyKline['bollPisMa60'] = 0
 
-    def _calBollAndDayMA(self):
+    def _calHourBollPosition(self):
+        """
+        计算布林三轨位置
+        :return:
+        """
+        try:
+            if len(self.kLine60F['close']):
+                bollOpenResult = []
+                bollCloseResult = []
+                bollMa60Result = []
+                for i in range(len(self.kLine60F['open'])):
+                    hourData = self.kLine60F[i:(i + 1)]
+                    hourDict = {col: hourData[col].tolist() for col in hourData.columns}
+                    # print('dailyData', dailyDict)
+                    openList = [hourDict['open'][0], hourDict['upper20'][0],
+                                hourDict['upperMid20'][0], hourDict['mid20'][0],
+                                hourDict['lowerMid20'][0], hourDict['lower20'][0],
+                                hourDict['upperOut20'][0], hourDict['lowerOut20'][0]]
+                    closeList = [hourDict['close'][0], hourDict['upper20'][0],
+                                 hourDict['upperMid20'][0], hourDict['mid20'][0],
+                                 hourDict['lowerMid20'][0], hourDict['lower20'][0],
+                                 hourDict['upperOut20'][0], hourDict['lowerOut20'][0]]
+                    ma60List = [hourDict['ma60'][0], hourDict['upper20'][0],
+                                 hourDict['upperMid20'][0], hourDict['mid20'][0],
+                                 hourDict['lowerMid20'][0], hourDict['lower20'][0],
+                                 hourDict['upperOut20'][0], hourDict['lowerOut20'][0]]
+                    openResult = bollJudge(openList)
+                    closeResult = bollJudge(closeList)
+                    ma60Result = bollJudge(ma60List)
+                    bollOpenResult.append(openResult)
+                    bollCloseResult.append(closeResult)
+                    bollMa60Result.append(ma60Result)
+                self.kLine60F['bollPisOpen'] = bollOpenResult
+                self.kLine60F['bollPisClose'] = bollCloseResult
+                self.kLine60F['bollPisMa60'] = bollMa60Result
+            else:
+                self.kLine60F['bollPisOpen'] = 0
+                self.kLine60F['bollPisClose'] = 0
+                self.kLine60F['bollPisMa60'] = 0
+        except KeyError or IndexError:
+            self.kLine60F['bollPisOpen'] = 0
+            self.kLine60F['bollPisClose'] = 0
+            self.kLine60F['bollPisMa60'] = 0
+
+    def _calDayBollAndMA(self):
         """
         为了提高执行效率，
         一次循环计算Limit、Boll和DayMA。
@@ -1486,16 +1578,8 @@ class DailyQQMul:
         boll20_result = pd.concat(boll20List, axis=1, join='outer')
         # print(boll20_result)
         self.dailyKline = self.dailyKline.join(boll20_result)
-        # self.dailyKline = self.dailyKline.join(boll20_upperOut)
-        # self.dailyKline = self.dailyKline.join(boll20_upper)
-        # self.dailyKline = self.dailyKline.join(boll20_upperMid)
-        # self.dailyKline = self.dailyKline.join(boll20_mid)
-        # self.dailyKline = self.dailyKline.join(boll20_lowerMid)
-        # self.dailyKline = self.dailyKline.join(boll20_lower)
-        # self.dailyKline = self.dailyKline.join(boll20_lowerOut)
-        # self.dailyKline = self.dailyKline.join(boll20_width)
 
-        self._calBollPosition()
+        self._calDayBollPosition()
 
         self.dailyKline = self.dailyKline.join(boll20_upperVol)
         self.dailyKline = self.dailyKline.join(boll20_midVol)
@@ -1503,7 +1587,110 @@ class DailyQQMul:
         self.dailyKline = self.dailyKline.sort_values(by='date', ascending=0)
         pass
 
-    def _calTrend(self):
+    def _calHourBollAndMA(self):
+        """
+        为了提高执行效率，
+        一次循环计算Limit、Boll和DayMA。
+
+        https://blog.csdn.net/weixin_37426504/article/details/81669829
+        https://bbs.pinggu.org/thread-3631776-1-1.html
+
+        # 将数据按照交易日期从远到近排序
+        input_data = input_data.sort_values(by='交易日期',ascending=1)
+
+        Pandas dataframe数据处理方法速度比较
+        https://blog.csdn.net/weixin_37426504/article/details/81669829
+
+        DataFrame拼接
+        https://blog.csdn.net/qq_41853758/article/details/83280104
+
+        """
+
+        self.kLine60F = self.kLine60F.sort_values(by='time', ascending=1)
+        # print(self.kLine60F)
+        """
+        计算MA
+        """
+        """
+        计算MA
+        DataFrame.rolling(window, min_periods=None, center=False, win_type=None, on=None, axis=0, closed=None)
+        pd.Series(self.dailyKline['close']).rolling(window=i).mean().dropna()
+        window： 
+            也可以省略不写。表示时间窗的大小，注意有两种形式（int or offset）。
+            如果使用int，则数值表示计算统计量的观测值的数量即向前几个数据。
+            如果是offset类型，表示时间窗的大小。offset详解 
+        min_periods：
+            每个窗口最少包含的观测值数量，小于这个值的窗口结果为NA。
+            值可以是int，默认None。offset情况下，默认为1。 
+        center: 
+            把窗口的标签设置为居中。布尔型，默认False，居右 
+        win_type: 
+            窗口的类型。截取窗的各种函数。字符串类型，默认为None。各种类型 
+        on: 
+            可选参数。对于dataframe而言，指定要计算滚动窗口的列。值为列名。 
+        axis: 
+            int、字符串，默认为0，即对列进行计算 
+        closed：
+            定义区间的开闭，支持int类型的window。
+            对于offset类型默认是左开右闭的即默认为right。
+            可以根据情况指定为left both等。
+        .dropna()
+        """
+        for i in self.nList:
+            maName = 'ma' + str(i)
+            VolSMA= pd.Series(round((self.kLine60F['close'].rolling(window=i).mean()), 2), name=maName)
+            self.kLine60F = self.kLine60F.join(VolSMA)
+        """
+        计算布林带
+        """
+        """
+        计算布林带
+            ma = pd.Series(np.round(data['Close'].rolling(ndays).mean(), 2), name='MA%s'%ndays)  # 计算nday均线
+            # pandas.std() 默认是除以n-1 的，即是无偏的，如果想和numpy.std() 一样有偏，需要加上参数ddof=0
+            # 此处添加ddof的原因是wind和yahoo的计算均采用的有偏值进行的计算
+            std = pd.Series(np.round(data['Close'].rolling(ndays).std(ddof=0), 2))  # 计算nday标准差，有偏
+            b1 = ma + (2 * std)  # 此处的2就是Standard Deviations
+            B1 = pd.Series(b1, name='UpperBollingerBand')
+            data = data.join(ma)  # 上边不写name 这里报错
+            data = data.join(B1)
+        """
+        factor = 1.026
+        p1 = 1.00 / factor
+        p2 = 2.00 / factor
+        p3 = 2.58 / factor
+
+        boll20_mid = pd.Series(round((self.kLine60F['close'].rolling(window=self.bollN).mean()), 2), name='mid20')
+        std = pd.Series(self.kLine60F['close'].rolling(self.bollN).std(ddof=0))
+        boll20_midVol = pd.Series(round((self.kLine60F['vol'].rolling(window=self.bollVolN).mean()), 2), name='mid20Vol')
+        stdVol = pd.Series(self.kLine60F['vol'].rolling(self.bollVolN).std(ddof=0))
+
+        boll20_upperOut = pd.Series(round(boll20_mid + p3 * std, 2), name='upperOut20')
+        boll20_upper = pd.Series(round(boll20_mid + p2 * std, 2), name='upper20')
+        boll20_upperMid = pd.Series(round(boll20_mid + p1 * std, 2), name='upperMid20')
+        boll20_lowerMid = pd.Series(round(boll20_mid - p1 * std, 2), name='lowerMid20')
+        boll20_lower = pd.Series(round(boll20_mid - p2 * std,2 ), name='lower20')
+        boll20_lowerOut = pd.Series(round(boll20_mid - p3 * std, 2), name='lowerOut20')
+        width = 100 * (boll20_upper - boll20_lower) / boll20_mid
+        boll20_width = pd.Series(round(width, 2), name='width20')
+        boll20_upperVol = pd.Series(round(boll20_midVol + p2 * stdVol, 2), name='upper20Vol')
+
+        boll20List = [boll20_upperOut, boll20_upper, boll20_upperMid,
+                      boll20_mid,
+                      boll20_lowerMid, boll20_lower, boll20_lowerOut,
+                      boll20_width]
+        boll20_result = pd.concat(boll20List, axis=1, join='outer')
+        # print(boll20_result)
+        self.kLine60F = self.kLine60F.join(boll20_result)
+
+        self._calHourBollPosition()
+
+        self.kLine60F = self.kLine60F.join(boll20_upperVol)
+        self.kLine60F = self.kLine60F.join(boll20_midVol)
+
+        self.kLine60F = self.kLine60F.sort_values(by='time', ascending=0)
+        pass
+
+    def _calDailyTrend(self):
         """
         针对mid20、width20、ma60、ma144的趋势进行量化分析（平/升/降，开口/收口/走平）
         :return:
@@ -1528,6 +1715,29 @@ class DailyQQMul:
             self.dailyKline['width20tr'] = 0
             self.dailyKline['ma60tr'] = 0
             self.dailyKline['ma144tr'] = 0
+
+    def _calHourTrend(self):
+        """
+        针对mid20、width20、ma60、ma144的趋势进行量化分析（平/升/降，开口/收口/走平）
+        :return:
+        """
+        frame_1 = self.kLine60F[:-1].reset_index()[self.colList]
+        frame_2 = self.kLine60F[1:].reset_index()[self.colList]
+        result = (frame_1 - frame_2)
+        try:
+            self.kLine60F['upper20tr'] = result.apply(lambda x: trendJudgeMA(x.upper20), axis=1)
+            self.kLine60F['mid20tr'] = result.apply(lambda x: trendJudgeMA(x.mid20), axis=1)
+            self.kLine60F['lower20tr'] = result.apply(lambda x: trendJudgeMA(x.lower20), axis=1)
+            self.kLine60F['width20tr'] = result.apply(lambda x: trendJudgeWidth(x.width20), axis=1)
+            self.kLine60F['ma60tr'] = result.apply(lambda x: trendJudgeMA(x.ma60), axis=1)
+            self.kLine60F['ma144tr'] = result.apply(lambda x: trendJudgeMA(x.ma144), axis=1)
+        except ValueError:
+            self.kLine60F['upper20tr'] = 0
+            self.kLine60F['mid20tr'] = 0
+            self.kLine60F['lower20tr'] = 0
+            self.kLine60F['width20tr'] = 0
+            self.kLine60F['ma60tr'] = 0
+            self.kLine60F['ma144tr'] = 0
 
     def _get_DateTime(self):
         """
