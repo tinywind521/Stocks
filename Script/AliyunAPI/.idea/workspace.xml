@@ -14,7 +14,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3">
+            <state relative-caret-position="2562">
               <caret line="1486" selection-start-line="1486" selection-end-line="1486" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -70,11 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dino/filter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1223">
-              <caret line="126" column="40" lean-forward="true" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="41" />
+            <state relative-caret-position="1869">
+              <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="41" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
                 <element signature="e#276#573#0" />
@@ -85,11 +85,38 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Study/TensorFlow/temp.py" />
+        <option value="$PROJECT_DIR$/Study/TensorFlow/Test.py" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="370" />
@@ -122,6 +149,17 @@
               <item name="Dino" type="462c0819:PsiDirectoryNode" />
               <item name="DataSource" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
+              <item name="Study" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
+              <item name="Study" type="462c0819:PsiDirectoryNode" />
+              <item name="TensorFlow" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -130,8 +168,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/app-1.6.5/GitHubDesktop.exe" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/GitHubDesktop.exe" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\Resource\Stocks\Script\AliyunAPI\Study\TensorFlow" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -160,7 +203,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14993395" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -174,7 +216,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -182,9 +224,22 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Study/TensorFlow/temp.py" />
+    <entry file="file://$PROJECT_DIR$/Study/SourceTest.py" />
+    <entry file="file://$PROJECT_DIR$/Study/Study.py" />
+    <entry file="file://$PROJECT_DIR$/Study/DrawPython.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Study/updateENV.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
+        <state relative-caret-position="2562">
           <caret line="1486" selection-start-line="1486" selection-end-line="1486" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -241,13 +296,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dino/filter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1223">
-          <caret line="126" column="40" lean-forward="true" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="41" />
+        <state relative-caret-position="1869">
+          <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="41" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
             <element signature="e#276#573#0" />
             <element signature="e#616#891#0" />
             <element signature="e#1711#2166#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3679">
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/level_differ.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-693">
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hkex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1213">
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_60F.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-226" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-189">
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_write_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Witch_Ver0.00.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3964">
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
