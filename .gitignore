@@ -2,8 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.xml
-.xml
+
 
 # C extensions
 *.so
@@ -100,13 +99,4 @@ ENV/
 /site
 
 # mypy
-*.xml
-.mypy_cache/
-*.xml
-Script/AliyunAPI/.idea/workspace.xml
-*.xml
-Script/AliyunAPI/.idea/AliyunAPI.iml
-*.iml
-*.xml
-Script/AliyunAPI/.idea/workspace.xml
-*.xml
+
