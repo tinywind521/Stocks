@@ -2,10 +2,14 @@ from multiprocessing.dummy import Pool as ThreadPool
 from Dino.DataSource.httpAPI import DataSourceQQ as QQ
 from Dino.DataSource.httpAPI import DailyQQMul as QQMul
 from Dino.DataSource.httpAPI import DataTuShare as Tu
+from Dino.DataSource.filter import functions
 
 import time
 import sys
 
+"""
+常规函数
+"""
 def getCodeListAndColList():
     value = {'codeList':[], 'colList':[]}
     data = Tu()
@@ -18,6 +22,7 @@ def getCodeListAndColList():
     value['codeList'] = codeList
     value['colList'] = colList
     return value
+
 
 def view_bar(num, total, codeIn=''):
     rate = num / total
@@ -35,6 +40,8 @@ def dailyFilter(temp):
     code = temp['code']
     result = dailySingleDataCapture(code)
     filter001_LimitInDays(code, result)
+    filter002_(code, result)
+
 
 def filter001_LimitInDays(code, data, dayLength=40):
     """
@@ -57,6 +64,14 @@ def filter001_LimitInDays(code, data, dayLength=40):
             except PermissionError:
                 input('The file is open...please close it!!!')
     return None
+
+
+def filter002_(code, data):
+    print(code)
+    temp = data.kLine60F
+    functions.getPeak(temp)
+    pass
+
 
 def dailySingleDataCapture(code):
     """

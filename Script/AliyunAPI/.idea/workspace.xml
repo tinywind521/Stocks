@@ -14,84 +14,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2562">
-              <caret line="1486" selection-start-line="1486" selection-end-line="1486" />
+            <state relative-caret-position="31122">
+              <caret line="1494" column="31" selection-start-line="1494" selection-start-column="31" selection-end-line="1494" selection-end-column="31" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#304#500#0" />
-                <element signature="e#531#1476#0" />
-                <element signature="e#1503#1597#0" />
-                <element signature="e#1627#1715#0" />
-                <element signature="e#1747#1844#0" />
-                <element signature="e#1869#20335#0" />
-                <element signature="e#2362#3562#0" />
-                <element signature="e#3611#3637#0" />
-                <element signature="e#3670#3980#0" />
-                <element signature="e#4023#4663#0" />
-                <element signature="e#4713#5413#0" />
-                <element signature="e#5455#6188#0" />
-                <element signature="e#6232#7658#0" />
-                <element signature="e#7699#8345#0" />
-                <element signature="e#8386#8815#0" />
-                <element signature="e#8850#9246#0" />
-                <element signature="e#9289#17693#0" />
-                <element signature="e#17725#18837#0" />
-                <element signature="e#18875#19735#0" />
-                <element signature="e#19774#20335#0" />
-                <element signature="e#20362#40592#0" />
-                <element signature="e#20521#21536#0" />
-                <element signature="e#21573#21695#0" />
-                <element signature="e#21730#23191#0" />
-                <element signature="e#23231#26240#0" />
-                <element signature="e#26285#30351#0" />
-                <element signature="e#30401#31501#0" />
-                <element signature="e#31544#38319#0" />
-                <element signature="e#38353#39455#0" />
-                <element signature="e#39490#40592#0" />
-                <element signature="e#42935#43264#0" />
-                <element signature="e#43309#47975#0" />
-                <element signature="e#48025#49125#0" />
-                <element signature="e#49167#50271#0" />
-                <element signature="e#50315#51631#0" />
-                <element signature="e#51672#52500#0" />
-                <element signature="e#52541#53202#0" />
-                <element signature="e#53243#53367#0" />
-                <element signature="e#53402#53761#0" />
-                <element signature="e#53806#56173#0" />
-                <element signature="e#56219#58534#0" />
-                <element signature="e#58576#62805#0" />
-                <element signature="e#62848#67042#0" />
-                <element signature="e#67082#68324#0" />
-                <element signature="e#68363#69483#0" />
-                <element signature="e#69522#70083#0" />
-                <element signature="e#70273#70288#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/filter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1869">
-              <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#52#0" expanded="true" />
-                <element signature="e#276#573#0" />
-                <element signature="e#616#891#0" />
-                <element signature="e#1711#2166#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
+        <entry file="file://$PROJECT_DIR$/Dino/filter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="168">
+              <caret line="101" column="47" selection-start-line="101" selection-start-column="47" selection-end-line="101" selection-end-column="47" />
               <folding>
-                <element signature="e#0#23#0" expanded="true" />
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dino/DataSource/filter/functions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Study/TrendLine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+              <folding>
+                <element signature="e#24#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,6 +75,10 @@
       <list>
         <option value="$PROJECT_DIR$/Study/TensorFlow/temp.py" />
         <option value="$PROJECT_DIR$/Study/TensorFlow/Test.py" />
+        <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
+        <option value="$PROJECT_DIR$/Study/TrendLine.py" />
+        <option value="$PROJECT_DIR$/Dino/DataSource/filter/functions.py" />
+        <option value="$PROJECT_DIR$/Dino/filter.py" />
       </list>
     </option>
   </component>
@@ -148,6 +112,13 @@
               <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
               <item name="Dino" type="462c0819:PsiDirectoryNode" />
               <item name="DataSource" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
+              <item name="Dino" type="462c0819:PsiDirectoryNode" />
+              <item name="DataSource" type="462c0819:PsiDirectoryNode" />
+              <item name="filter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
@@ -188,6 +159,78 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Python.functions">
+    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AliyunAPI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Study/TensorFlow" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Study/TensorFlow/Test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="filter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AliyunAPI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Dino" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dino/filter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="functions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AliyunAPI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Dino/DataSource/filter" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dino/DataSource/filter/functions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.functions" />
+        <item itemvalue="Python.filter" />
+        <item itemvalue="Python.Test" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -203,20 +246,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14993395" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14993395" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32956153" />
+      <window_info anchor="bottom" x="226" y="184" width="1227" height="508" id="Run" order="2" sideWeight="0.4993395" type="FLOATING" weight="0.49222064" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5006605" side_tool="true" weight="0.2970297" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -237,76 +281,6 @@
     <entry file="file://$PROJECT_DIR$/Study/updateENV.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2562">
-          <caret line="1486" selection-start-line="1486" selection-end-line="1486" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#304#500#0" />
-            <element signature="e#531#1476#0" />
-            <element signature="e#1503#1597#0" />
-            <element signature="e#1627#1715#0" />
-            <element signature="e#1747#1844#0" />
-            <element signature="e#1869#20335#0" />
-            <element signature="e#2362#3562#0" />
-            <element signature="e#3611#3637#0" />
-            <element signature="e#3670#3980#0" />
-            <element signature="e#4023#4663#0" />
-            <element signature="e#4713#5413#0" />
-            <element signature="e#5455#6188#0" />
-            <element signature="e#6232#7658#0" />
-            <element signature="e#7699#8345#0" />
-            <element signature="e#8386#8815#0" />
-            <element signature="e#8850#9246#0" />
-            <element signature="e#9289#17693#0" />
-            <element signature="e#17725#18837#0" />
-            <element signature="e#18875#19735#0" />
-            <element signature="e#19774#20335#0" />
-            <element signature="e#20362#40592#0" />
-            <element signature="e#20521#21536#0" />
-            <element signature="e#21573#21695#0" />
-            <element signature="e#21730#23191#0" />
-            <element signature="e#23231#26240#0" />
-            <element signature="e#26285#30351#0" />
-            <element signature="e#30401#31501#0" />
-            <element signature="e#31544#38319#0" />
-            <element signature="e#38353#39455#0" />
-            <element signature="e#39490#40592#0" />
-            <element signature="e#42935#43264#0" />
-            <element signature="e#43309#47975#0" />
-            <element signature="e#48025#49125#0" />
-            <element signature="e#49167#50271#0" />
-            <element signature="e#50315#51631#0" />
-            <element signature="e#51672#52500#0" />
-            <element signature="e#52541#53202#0" />
-            <element signature="e#53243#53367#0" />
-            <element signature="e#53402#53761#0" />
-            <element signature="e#53806#56173#0" />
-            <element signature="e#56219#58534#0" />
-            <element signature="e#58576#62805#0" />
-            <element signature="e#62848#67042#0" />
-            <element signature="e#67082#68324#0" />
-            <element signature="e#68363#69483#0" />
-            <element signature="e#69522#70083#0" />
-            <element signature="e#70273#70288#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1869">
-          <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-            <element signature="e#276#573#0" />
-            <element signature="e#616#891#0" />
-            <element signature="e#1711#2166#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3679">
@@ -316,16 +290,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/3.py" />
     <entry file="file://$PROJECT_DIR$/level_differ.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-693">
@@ -344,30 +309,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/get_60F.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-226" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-189">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_write_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/get_60F.py" />
+    <entry file="file://$PROJECT_DIR$/file_list.py" />
+    <entry file="file://$PROJECT_DIR$/file_write_all.py" />
     <entry file="file://$PROJECT_DIR$/Witch_Ver0.00.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3964">
@@ -386,12 +330,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/_impl/keras/backend.py" />
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/_impl/__init__.py" />
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <folding>
+            <element signature="e#860#898#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/backend/__init__.py" />
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/engine/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/pywrap_tensorflow.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10725">
+          <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="279">
+          <caret line="19" column="36" lean-forward="true" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/function.py" />
+    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/__future__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="678">
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31122">
+          <caret line="1494" column="31" selection-start-line="1494" selection-start-column="31" selection-end-line="1494" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#304#500#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/DataSource/filter/functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Study/TrendLine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#24#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="101" column="47" selection-start-line="101" selection-start-column="47" selection-end-line="101" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>

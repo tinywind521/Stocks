@@ -22,6 +22,7 @@ def judgeLimit(pre_close, close):
     else:
         return 0
 
+
 def bollJudge(bollList):
     if bollList[3] == 0 or bollList[0] == 0:
         # boll is None
@@ -62,6 +63,7 @@ def bollJudge(bollList):
     else:
         return numpy.nan
 
+
 def trendJudgeMA(m):
     if m > 0.01:
         return 1
@@ -69,6 +71,7 @@ def trendJudgeMA(m):
         return -1
     else:
         return 0
+
 
 def trendJudgeWidth(m):
     if m > 1:
@@ -78,10 +81,12 @@ def trendJudgeWidth(m):
     else:
         return 0
 
+
 def dateTransfer(dateIn):
     a = time.strptime(dateIn, '%Y-%m-%d')
     dateOut = time.strftime('%Y%m%d', a)
     return dateOut
+
 
 class DataTuShare:
     """
@@ -1343,7 +1348,10 @@ class DailyQQMul:
         self.colList = None
         self._realtime('60')
         self._calHourBollAndMA()
+
+        # 截取需要计算分析的部分。
         self.kLine60F = self.kLine60F[0:self.realHourLength]
+
         if (not self.kLine60F.empty) and (not self.colList):
             self.colList = list(self.kLine60F.columns)
             for i in ['time']:
