@@ -40,7 +40,7 @@ def dailyFilter(temp):
     code = temp['code']
     result = dailySingleDataCapture(code)
     filter001_LimitInDays(code, result)
-    filter002_(code, result)
+    # filter002_(code, result)
 
 
 def filter001_LimitInDays(code, data, dayLength=40):
