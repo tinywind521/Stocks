@@ -1,5 +1,7 @@
 import tensorflow as tf
 import numpy as np
+# cudnn, cuda, keras,
+# https://blog.csdn.net/qq_34106574/article/details/80691105
 
 # 使用 NumPy 生成假数据(phony data), 总共 100 个点.
 x_data = np.float32(np.random.rand(2, 100)) # 随机输入
