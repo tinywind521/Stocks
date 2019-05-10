@@ -3,7 +3,7 @@ import numpy as np
 # cudnn, cuda, keras,
 # https://blog.csdn.net/qq_34106574/article/details/80691105
 #
-# conda config –add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+# conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
 
 # conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 # conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/

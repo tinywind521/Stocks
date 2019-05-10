@@ -92,8 +92,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+            <state relative-caret-position="168">
+              <caret line="8" column="86" lean-forward="true" selection-start-line="8" selection-start-column="86" selection-end-line="8" selection-end-column="86" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -160,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -201,6 +200,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -355,10 +355,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14963119" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14927346" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -465,13 +464,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/imp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="241" selection-start-line="241" selection-end-line="241" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/imp.py" />
     <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/site-packages/tensorflow/python/pywrap_tensorflow_internal.py" />
     <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/site-packages/tensorflow/python/pywrap_tensorflow.py" />
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
@@ -529,6 +522,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Dino/DataSource/filter/functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -553,20 +556,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+        <state relative-caret-position="168">
+          <caret line="8" column="86" lean-forward="true" selection-start-line="8" selection-start-column="86" selection-end-line="8" selection-end-column="86" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
