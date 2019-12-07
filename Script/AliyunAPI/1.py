@@ -1,7 +1,9 @@
 import time
 
+
 def _int32(x):
     return int(0xFFFFFFFF & x)
+
 
 class MT19937:
     def __init__(self, seed):
@@ -25,6 +27,7 @@ class MT19937:
             self.mt[i] = y ^ self.mt[(i + 397) % 624] >> 1
             if y % 2 != 0:
                 self.mt[i] = self.mt[i] ^ 0x9908b0df
+
 
 start = time.perf_counter()
 for i in range(1000):

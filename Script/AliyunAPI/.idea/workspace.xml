@@ -2,145 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c066a86b-e3a4-4405-8cde-fd408816edc7" name="Default Changelist" comment="" />
-    <ignored path="$PROJECT_DIR$/venv/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2211">
-              <caret line="1748" selection-start-line="1748" selection-end-line="1748" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#304#500#0" />
-                <element signature="e#532#1477#0" />
-                <element signature="e#1505#1599#0" />
-                <element signature="e#1630#1718#0" />
-                <element signature="e#1751#1848#0" />
-                <element signature="e#1874#20340#0" />
-                <element signature="e#2367#3567#0" />
-                <element signature="e#3616#3642#0" />
-                <element signature="e#3675#3985#0" />
-                <element signature="e#4028#4668#0" />
-                <element signature="e#4718#5418#0" />
-                <element signature="e#5460#6193#0" />
-                <element signature="e#6237#7663#0" />
-                <element signature="e#7704#8350#0" />
-                <element signature="e#8391#8820#0" />
-                <element signature="e#8855#9251#0" />
-                <element signature="e#9294#17698#0" />
-                <element signature="e#17730#18842#0" />
-                <element signature="e#18880#19740#0" />
-                <element signature="e#19779#20340#0" />
-                <element signature="e#20367#40597#0" />
-                <element signature="e#20526#21541#0" />
-                <element signature="e#21578#21700#0" />
-                <element signature="e#21735#23196#0" />
-                <element signature="e#23236#26245#0" />
-                <element signature="e#26290#30356#0" />
-                <element signature="e#30406#31506#0" />
-                <element signature="e#31549#38324#0" />
-                <element signature="e#38358#39460#0" />
-                <element signature="e#39495#40597#0" />
-                <element signature="e#40699#42880#0" />
-                <element signature="e#42940#43269#0" />
-                <element signature="e#43314#47980#0" />
-                <element signature="e#48030#49130#0" />
-                <element signature="e#50320#51636#0" />
-                <element signature="e#52571#53232#0" />
-                <element signature="e#53273#53397#0" />
-                <element signature="e#53432#53791#0" />
-                <element signature="e#53836#56203#0" />
-                <element signature="e#56249#58564#0" />
-                <element signature="e#58606#62835#0" />
-                <element signature="e#59246#60108#1" />
-                <element signature="e#60384#60952#1" />
-                <element signature="e#62878#67072#0" />
-                <element signature="e#67112#68354#0" />
-                <element signature="e#68393#69513#0" />
-                <element signature="e#69552#70113#0" />
-                <element signature="e#70303#70318#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/filter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1212">
-              <caret line="49" column="22" lean-forward="true" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#52#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dino/DataSource/filter/functions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Study/TrendLine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-              <folding>
-                <element signature="e#24#45#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="e#79#784#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Study/CalPi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -153,78 +18,22 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Study/TensorFlow/temp.py" />
-        <option value="$PROJECT_DIR$/Dino/DataSource/httpAPI.py" />
-        <option value="$PROJECT_DIR$/Study/TrendLine.py" />
-        <option value="$PROJECT_DIR$/Dino/DataSource/filter/functions.py" />
-        <option value="$PROJECT_DIR$/Dino/filter.py" />
-        <option value="$PROJECT_DIR$/Study/TensorFlow/Test.py" />
-        <option value="$PROJECT_DIR$/1.py" />
-        <option value="$PROJECT_DIR$/Study/CalPi.py" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="370" />
     <option name="y" value="15" />
     <option name="width" value="1540" />
     <option name="height" value="900" />
   </component>
+  <component name="ProjectId" id="1Udn4UagmtttcvxL0SDNFCt8hn1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="Dino" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="Dino" type="462c0819:PsiDirectoryNode" />
-              <item name="DataSource" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="Dino" type="462c0819:PsiDirectoryNode" />
-              <item name="DataSource" type="462c0819:PsiDirectoryNode" />
-              <item name="filter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="Study" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AliyunAPI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AliyunAPI" type="462c0819:PsiDirectoryNode" />
-              <item name="Study" type="462c0819:PsiDirectoryNode" />
-              <item name="TensorFlow" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/GitHubDesktop.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -232,19 +41,7 @@
       <recent name="Z:\Resource\Stocks\Script\AliyunAPI\Study\TensorFlow" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.CalPi">
+  <component name="RunManager" selected="Python.httpAPI">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -308,27 +105,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="filter" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="AliyunAPI" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Dino" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dino/filter.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="httpAPI" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -350,15 +126,48 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="updateENV" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AliyunAPI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Study" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Study/updateENV.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.httpAPI" />
+        <item itemvalue="Python.updateENV" />
         <item itemvalue="Python.CalPi" />
         <item itemvalue="Python.1" />
         <item itemvalue="Python.Test" />
-        <item itemvalue="Python.filter" />
-        <item itemvalue="Python.httpAPI" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -373,234 +182,36 @@
     </task>
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14927346" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32956153" />
-      <window_info anchor="bottom" x="664" y="107" width="851" height="518" id="Run" order="2" sideWeight="0.4993395" type="FLOATING" weight="0.49222064" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5006605" side_tool="true" weight="0.29420084" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Study/TensorFlow/temp.py" />
-    <entry file="file://$PROJECT_DIR$/Study/SourceTest.py" />
-    <entry file="file://$PROJECT_DIR$/Study/Study.py" />
-    <entry file="file://$PROJECT_DIR$/Study/updateENV.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dailyAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3679">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.py" />
-    <entry file="file://$PROJECT_DIR$/level_differ.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-693">
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hkex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1213">
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/get_60F.py" />
-    <entry file="file://$PROJECT_DIR$/file_list.py" />
-    <entry file="file://$PROJECT_DIR$/file_write_all.py" />
-    <entry file="file://$PROJECT_DIR$/Witch_Ver0.00.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3964">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/测试_iWenCai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/_impl/keras/backend.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/_impl/__init__.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/__init__.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/backend/__init__.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/keras/engine/__init__.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/python/pywrap_tensorflow.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/site-packages/tensorflow/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/function.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda3/Lib/__future__.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda370/Lib/turtle.py" />
-    <entry file="file://$PROJECT_DIR$/Study/DrawPython.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/imp.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/site-packages/tensorflow/python/pywrap_tensorflow_internal.py" />
-    <entry file="file://Z:/ProgramFiles/Anaconda37/Lib/site-packages/tensorflow/python/pywrap_tensorflow.py" />
-    <entry file="file://$PROJECT_DIR$/2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-945">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/filter/functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Study/TensorFlow/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Study/TrendLine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="e#24#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#79#784#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/DataSource/httpAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2211">
-          <caret line="1748" selection-start-line="1748" selection-end-line="1748" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#304#500#0" />
-            <element signature="e#532#1477#0" />
-            <element signature="e#1505#1599#0" />
-            <element signature="e#1630#1718#0" />
-            <element signature="e#1751#1848#0" />
-            <element signature="e#1874#20340#0" />
-            <element signature="e#2367#3567#0" />
-            <element signature="e#3616#3642#0" />
-            <element signature="e#3675#3985#0" />
-            <element signature="e#4028#4668#0" />
-            <element signature="e#4718#5418#0" />
-            <element signature="e#5460#6193#0" />
-            <element signature="e#6237#7663#0" />
-            <element signature="e#7704#8350#0" />
-            <element signature="e#8391#8820#0" />
-            <element signature="e#8855#9251#0" />
-            <element signature="e#9294#17698#0" />
-            <element signature="e#17730#18842#0" />
-            <element signature="e#18880#19740#0" />
-            <element signature="e#19779#20340#0" />
-            <element signature="e#20367#40597#0" />
-            <element signature="e#20526#21541#0" />
-            <element signature="e#21578#21700#0" />
-            <element signature="e#21735#23196#0" />
-            <element signature="e#23236#26245#0" />
-            <element signature="e#26290#30356#0" />
-            <element signature="e#30406#31506#0" />
-            <element signature="e#31549#38324#0" />
-            <element signature="e#38358#39460#0" />
-            <element signature="e#39495#40597#0" />
-            <element signature="e#40699#42880#0" />
-            <element signature="e#42940#43269#0" />
-            <element signature="e#43314#47980#0" />
-            <element signature="e#48030#49130#0" />
-            <element signature="e#50320#51636#0" />
-            <element signature="e#52571#53232#0" />
-            <element signature="e#53273#53397#0" />
-            <element signature="e#53432#53791#0" />
-            <element signature="e#53836#56203#0" />
-            <element signature="e#56249#58564#0" />
-            <element signature="e#58606#62835#0" />
-            <element signature="e#59246#60108#1" />
-            <element signature="e#60384#60952#1" />
-            <element signature="e#62878#67072#0" />
-            <element signature="e#67112#68354#0" />
-            <element signature="e#68393#69513#0" />
-            <element signature="e#69552#70113#0" />
-            <element signature="e#70303#70318#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dino/filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1212">
-          <caret line="49" column="22" lean-forward="true" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Study/CalPi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state x="549" y="166" key="FileChooserDialogImpl" timestamp="1575695195897">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1575695195897" />
+    <state width="845" height="484" key="GridCell.Tab.0.bottom" timestamp="1575697987889">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="845" height="484" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1575697987889" />
+    <state width="845" height="484" key="GridCell.Tab.0.center" timestamp="1575697987874">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="845" height="484" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1575697987874" />
+    <state width="845" height="484" key="GridCell.Tab.0.left" timestamp="1575697987874">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="845" height="484" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1575697987874" />
+    <state width="845" height="484" key="GridCell.Tab.0.right" timestamp="1575697987889">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="845" height="484" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1575697987889" />
+    <state x="497" y="44" key="SettingsEditor" timestamp="1575697731203">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="497" y="44" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1575697731203" />
   </component>
 </project>

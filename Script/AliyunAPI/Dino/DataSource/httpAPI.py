@@ -12,6 +12,9 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from Dino.DataSource.MySQL import MySQL
 
+# conda update conda
+# conda update --all
+
 
 # public functions
 def judgeLimit(pre_close, close):
@@ -1767,8 +1770,8 @@ class DailyQQMul:
 
 if __name__ == '__main__':
     debug = 1
-    # code = '300773'
-    code = '000004'
+    code = '300773'
+    # code = '000004'
     data = DataTuShare()
     stockList = data.getList()
     print('List get!')
