@@ -18,17 +18,10 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="370" />
-    <option name="y" value="15" />
-    <option name="width" value="1540" />
-    <option name="height" value="900" />
-  </component>
   <component name="ProjectId" id="1Udn4UagmtttcvxL0SDNFCt8hn1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -41,7 +34,7 @@
       <recent name="Z:\Resource\Stocks\Script\AliyunAPI\Study\TensorFlow" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.httpAPI">
+  <component name="RunManager" selected="Python.filter">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -84,7 +77,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AliyunAPI" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -92,11 +85,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Study/TensorFlow" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Dino" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Study/TensorFlow/Test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dino/filter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -149,11 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.filter" />
         <item itemvalue="Python.httpAPI" />
         <item itemvalue="Python.updateENV" />
         <item itemvalue="Python.CalPi" />
         <item itemvalue="Python.1" />
-        <item itemvalue="Python.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -169,6 +162,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -187,31 +181,5 @@
       <path value="$PROJECT_DIR$/../.." />
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="549" y="166" key="FileChooserDialogImpl" timestamp="1575695195897">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1575695195897" />
-    <state width="845" height="484" key="GridCell.Tab.0.bottom" timestamp="1575697987889">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="845" height="484" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1575697987889" />
-    <state width="845" height="484" key="GridCell.Tab.0.center" timestamp="1575697987874">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="845" height="484" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1575697987874" />
-    <state width="845" height="484" key="GridCell.Tab.0.left" timestamp="1575697987874">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="845" height="484" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1575697987874" />
-    <state width="845" height="484" key="GridCell.Tab.0.right" timestamp="1575697987889">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="845" height="484" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1575697987889" />
-    <state x="497" y="44" key="SettingsEditor" timestamp="1575697731203">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="497" y="44" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1575697731203" />
   </component>
 </project>

@@ -111,7 +111,7 @@ class DataTuShare:
     http://qt.gtimg.cn/q=bkqtRank_A_sh,bkqtRank_A_sz
     """
 
-    def __init__(self, token = '6910bc790677ae86aa121ed1747c14cf91d06a509be70dc72de0019f'):
+    def __init__(self, token = 'a16b999beda0f658533efa22a3dc9e0fda86746ba19f6644a95aa602'):
         self.token = token
         # token由https://tushare.pro/提供
         self.set_token = ts.set_token(self.token)

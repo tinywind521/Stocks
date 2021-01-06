@@ -37,5 +37,3 @@ for i in range(1000):
     print('\r{:04} / 1000 \t {:.3f}'.format(i, dur), end='')
     # print('\r{:04} / 1000 \t {:.3f} \t {}'.format(i,dur,a.extract_number()),end='')
     time.sleep(0.201)
-
-

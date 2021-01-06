@@ -10,18 +10,20 @@ import sys
 """
 常规函数
 """
+
+
 def getCodeListAndColList():
-    value = {'codeList':[], 'colList':[]}
-    data = Tu()
-    codeList = data.getList()
+    DataValue = {'codeList': [], 'colList': []}
+    DataTuShare = Tu()
+    codeList = DataTuShare.getList()
     print('List get!')
-    data.setCode(codeList[0])
-    data.getDailyKLine()
-    data.updateDailyKLine()
-    colList = data.colList
-    value['codeList'] = codeList
-    value['colList'] = colList
-    return value
+    DataTuShare.setCode(codeList[0])
+    DataTuShare.getDailyKLine()
+    DataTuShare.updateDailyKLine()
+    colList = DataTuShare.colList
+    DataValue['codeList'] = codeList
+    DataValue['colList'] = colList
+    return DataValue
 
 
 def view_bar(num, total, codeIn=''):
@@ -36,6 +38,8 @@ def view_bar(num, total, codeIn=''):
 """
 Daily分析处理
 """
+
+
 def dailyFilter(temp):
     code = temp['code']
     result = dailySingleDataCapture(code)
@@ -52,7 +56,7 @@ def filter001_LimitInDays(code, data, dayLength=40):
     :return:
     """
     temp = data.dailyKline[:dayLength]
-    result = temp[temp.limit ==1]
+    result = temp[temp.limit == 1]
     if not result.empty:
         data.setDayLengthForHours(result.index[0] + 1)
         # result.index[0] + 1，表示日期比序号多一天
